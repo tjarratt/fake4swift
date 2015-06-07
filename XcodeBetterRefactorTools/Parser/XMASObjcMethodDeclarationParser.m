@@ -1,10 +1,11 @@
 #import "XMASObjcMethodDeclarationParser.h"
+#import "XMASObjcSelector.h"
 #import <ClangKit/ClangKit.h>
 
 @implementation XMASObjcMethodDeclarationParser
 
 - (NSArray *)parseMethodDeclarationsFromTokens:(NSArray *)tokens {
-    NSMutableArray *methodDeclTokens = [NSMutableArray array];
+    NSMutableArray *methodDeclarations = [NSMutableArray array];
 
     CKToken *token;
     for (NSUInteger i = 0; i < tokens.count; ++i) {
@@ -23,17 +24,17 @@
         }
         ++i;
 
-        token = tokens[i];
-        [methodDeclTokens addObject:token];
-
-        // continue until we are outside the method declaration
-        while ([self isMethodDeclarationToken:token] && i < tokens.count) {
+        NSMutableArray *methodDeclTokens = [NSMutableArray array];
+        while (i < tokens.count && [self isMethodDeclarationToken:tokens[i]]) {
+            [methodDeclTokens addObject:tokens[i]];
             ++i;
-            token = tokens[i];
         }
+
+        XMASObjcSelector *selector = [[XMASObjcSelector alloc] initWithTokens:methodDeclTokens];
+        [methodDeclarations addObject:selector];
     }
 
-    return methodDeclTokens;
+    return methodDeclarations;
 }
 
 #pragma mark - Private

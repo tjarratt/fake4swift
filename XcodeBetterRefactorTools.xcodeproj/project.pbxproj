@@ -14,11 +14,14 @@
 		969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
 		96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB4E4216227C4E00743C95 /* XMASXcode.m */; };
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
-		F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy ClangKit framework */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy ClangKit framework */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */; };
 		F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */; };
 		F70E1FBB1B24377800D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */; };
 		F70E1FC11B243AF000D971E6 /* methodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */; };
+		F70E1FC41B24D96800D971E6 /* XMASObjcSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */; };
+		F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */; };
+		F70E1FC81B24DFA100D971E6 /* XMASObjcSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */; };
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
@@ -180,6 +183,9 @@
 		F70E1FB81B24377300D971E6 /* XMASObjcMethodDeclarationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcMethodDeclarationParser.h; sourceTree = "<group>"; };
 		F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
 		F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = methodDeclaration.m; sourceTree = "<group>"; };
+		F70E1FC21B24D96800D971E6 /* XMASObjcSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcSelector.h; sourceTree = "<group>"; };
+		F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcSelector.m; sourceTree = "<group>"; };
+		F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcSelectorSpec.mm; sourceTree = "<group>"; };
 		F7BA62281B223369005B99AF /* Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BA622B1B223369005B99AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BA622F1B223369005B99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */,
+				F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -304,6 +311,8 @@
 			children = (
 				F70E1FB81B24377300D971E6 /* XMASObjcMethodDeclarationParser.h */,
 				F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */,
+				F70E1FC21B24D96800D971E6 /* XMASObjcSelector.h */,
+				F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -578,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				960FA0A2160584AC00923A87 /* XMASBetterRefactorTools.m in Sources */,
+				F70E1FC41B24D96800D971E6 /* XMASObjcSelector.m in Sources */,
 				969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */,
 				96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */,
 				F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
@@ -591,6 +601,8 @@
 			files = (
 				F70E1FBB1B24377800D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
 				F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */,
+				F70E1FC81B24DFA100D971E6 /* XMASObjcSelector.m in Sources */,
+				F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */,
 				F7BA62301B223369005B99AF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

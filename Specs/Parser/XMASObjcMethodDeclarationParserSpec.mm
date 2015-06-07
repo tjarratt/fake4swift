@@ -2,6 +2,7 @@
 #import <ClangKit/ClangKit.h>
 
 #import "XMASObjcMethodDeclarationParser.h"
+#import "XMASObjcSelector.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -26,6 +27,12 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
         it(@"should have exactly two method declarations", ^{
             methodDeclarations.count should equal(2);
+
+            XMASObjcSelector *objcSelector = methodDeclarations.firstObject;
+            objcSelector.selectorString should equal(@"flashMessage:");
+
+            objcSelector = methodDeclarations.lastObject;
+            objcSelector.selectorString should equal(@"hideMessage");
         });
     });
 });
