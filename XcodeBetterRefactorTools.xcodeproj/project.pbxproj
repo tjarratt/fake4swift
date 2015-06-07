@@ -13,6 +13,12 @@
 		961B3EC916B65E94001A27ED /* XMASAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 961B3EC816B65E94001A27ED /* XMASAlert.m */; };
 		969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
 		96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB4E4216227C4E00743C95 /* XMASXcode.m */; };
+		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
+		F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy ClangKit framework */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */; };
+		F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */; };
+		F70E1FBB1B24377800D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */; };
+		F70E1FC11B243AF000D971E6 /* methodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */; };
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
@@ -121,6 +127,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F70B5EE61B2435E900AA32BB /* Copy ClangKit framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy ClangKit framework */,
+			);
+			name = "Copy ClangKit framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F70E1FC01B243ADE00D971E6 /* Copy Fixtures */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F70E1FC11B243AF000D971E6 /* methodDeclaration.m in Copy Fixtures */,
+			);
+			name = "Copy Fixtures";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F76B9B6B1B23F2F90028AC9A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +176,10 @@
 		969FAA5116224F4700E48B0A /* XMASEditMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASEditMenu.m; sourceTree = "<group>"; };
 		96DB4E4116227C4E00743C95 /* XMASXcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASXcode.h; sourceTree = "<group>"; };
 		96DB4E4216227C4E00743C95 /* XMASXcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcode.m; sourceTree = "<group>"; };
+		F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationParserSpec.mm; sourceTree = "<group>"; };
+		F70E1FB81B24377300D971E6 /* XMASObjcMethodDeclarationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcMethodDeclarationParser.h; sourceTree = "<group>"; };
+		F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
+		F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = methodDeclaration.m; sourceTree = "<group>"; };
 		F7BA62281B223369005B99AF /* Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BA622B1B223369005B99AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BA622F1B223369005B99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -170,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */,
 				F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +259,7 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
+				F70E1FB51B24372100D971E6 /* Parser */,
 				960FA0A0160584AC00923A87 /* XMASBetterRefactorTools.h */,
 				960FA0A1160584AC00923A87 /* XMASBetterRefactorTools.m */,
 				96DB4E4116227C4E00743C95 /* XMASXcode.h */,
@@ -257,9 +291,36 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		F70E1FA81B24371800D971E6 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		F70E1FB51B24372100D971E6 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				F70E1FB81B24377300D971E6 /* XMASObjcMethodDeclarationParser.h */,
+				F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		F70E1FBC1B24382000D971E6 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		F7BA62291B223369005B99AF /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				F70E1FBC1B24382000D971E6 /* Fixtures */,
+				F70E1FA81B24371800D971E6 /* Parser */,
 				F7BA62741B22BFBE005B99AF /* Actions */,
 				F7BA622A1B223369005B99AF /* Supporting Files */,
 			);
@@ -355,7 +416,8 @@
 			buildPhases = (
 				F7BA62241B223369005B99AF /* Sources */,
 				F7BA62251B223369005B99AF /* Frameworks */,
-				F7BA62261B223369005B99AF /* Resources */,
+				F70B5EE61B2435E900AA32BB /* Copy ClangKit framework */,
+				F70E1FC01B243ADE00D971E6 /* Copy Fixtures */,
 			);
 			buildRules = (
 			);
@@ -493,16 +555,6 @@
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXResourcesBuildPhase section */
-		F7BA62261B223369005B99AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXShellScriptBuildPhase section */
 		F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -528,6 +580,7 @@
 				960FA0A2160584AC00923A87 /* XMASBetterRefactorTools.m in Sources */,
 				969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */,
 				96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */,
+				F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
 				961B3EC916B65E94001A27ED /* XMASAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +589,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70E1FBB1B24377800D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
+				F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */,
 				F7BA62301B223369005B99AF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,12 +780,15 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Externals/Cedar/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Externals/Cedar/**",
+					"$(PROJECT_DIR)/Externals",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -770,12 +828,15 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Externals/Cedar/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/Externals/Cedar/**",
+					"$(PROJECT_DIR)/Externals",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;

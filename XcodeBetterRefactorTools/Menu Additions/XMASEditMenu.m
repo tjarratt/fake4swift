@@ -30,7 +30,7 @@
 - (void)refactorCurrentMethodAction:(id)sender {
     [XMASAlert flashMessage:@"SUP"];
 
-    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/XcodeBetterRefactorTools/XMASAlert.m"];
+    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/XcodeBetterRefactorTools/XMASBetterRefactorTools.m"];
     NSLog(@"================> %@", translationUnit.tokens);
 }
 
