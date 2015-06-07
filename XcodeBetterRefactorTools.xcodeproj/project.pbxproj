@@ -13,6 +13,8 @@
 		961B3EC916B65E94001A27ED /* XMASAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 961B3EC816B65E94001A27ED /* XMASAlert.m */; };
 		969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
 		96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB4E4216227C4E00743C95 /* XMASXcode.m */; };
+		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
 		F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BA625A1B2233D0005B99AF /* Cedar.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +120,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F76B9B6B1B23F2F90028AC9A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		960FA08F1605819F00923A87 /* XcodeBetterRefactorTools.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeBetterRefactorTools.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		960FA0921605819F00923A87 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +152,7 @@
 		F7BA622B1B223369005B99AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BA622F1B223369005B99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cedar.xcodeproj; path = Cedar/Cedar.xcodeproj; sourceTree = "<group>"; };
+		F7E491F61B23EBC400BE3A61 /* ClangKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ClangKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */,
 				960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */,
 				960FA0931605819F00923A87 /* CoreFoundation.framework in Frameworks */,
 			);
@@ -261,6 +278,7 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
 				F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */,
 			);
 			path = Externals;
@@ -318,6 +336,8 @@
 			buildPhases = (
 				960FA08B1605819F00923A87 /* Sources */,
 				960FA08C1605819F00923A87 /* Frameworks */,
+				F76B9B6B1B23F2F90028AC9A /* CopyFiles */,
+				F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */,
 			);
 			buildRules = (
 			);
@@ -483,6 +503,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Rewrite ClangKit runtime search path";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -change \"@executable_path/../Frameworks/ClangKit.framework/Versions/A/ClangKit\" \"@loader_path/../Frameworks/ClangKit.framework/Versions/A/ClangKit\" \"$INSTALL_DIR/$EXECUTABLE_PATH\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		960FA08B1605819F00923A87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -572,6 +609,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = "$(HOME)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/**",
+				);
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -585,7 +626,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = /Developer;
+				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = xcplugin;
@@ -605,6 +646,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = "$(HOME)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/**",
+				);
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -618,7 +663,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = /Developer;
+				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = xcplugin;

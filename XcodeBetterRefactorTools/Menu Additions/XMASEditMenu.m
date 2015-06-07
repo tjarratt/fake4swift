@@ -1,6 +1,7 @@
 #import "XMASEditMenu.h"
 #import "XMASXcode.h"
 #import "XMASAlert.h"
+#import <ClangKit/ClangKit.h>
 
 @implementation XMASEditMenu
 
@@ -28,6 +29,9 @@
 
 - (void)refactorCurrentMethodAction:(id)sender {
     [XMASAlert flashMessage:@"SUP"];
+
+    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/XcodeBetterRefactorTools/XMASAlert.m"];
+    NSLog(@"================> %@", translationUnit.tokens);
 }
 
 @end
