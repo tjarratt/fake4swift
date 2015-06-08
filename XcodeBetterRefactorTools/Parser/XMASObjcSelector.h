@@ -9,5 +9,6 @@
 
 - (NSArray *)parameters;
 - (NSString *)selectorString;
+- (NSString *)returnType;
 
 @end

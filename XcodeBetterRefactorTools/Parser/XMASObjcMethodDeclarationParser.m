@@ -14,16 +14,6 @@
             continue;
         }
 
-        // continue reading until we have the return type
-        while (i < tokens.count) {
-            token = tokens[i];
-            if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@")"]) {
-                break;
-            }
-            ++i;
-        }
-        ++i;
-
         // retrieve all of the tokens that make up the method declaration
         NSMutableArray *methodDeclTokens = [NSMutableArray array];
         while (i < tokens.count && [self isValidTokenInsideMethodDeclaration:tokens[i]]) {

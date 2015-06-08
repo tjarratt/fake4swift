@@ -1,9 +1,13 @@
 #import "XMASObjcSelector.h"
 #import "XMASObjcSelectorParameter.h"
+#import "XMASObjcTypeParser.h"
 
 @interface XMASObjcSelector ()
+
 @property (nonatomic) NSArray *selectorComponents;
 @property (nonatomic) NSArray *parameters;
+@property (nonatomic) NSString *returnType;
+
 @end
 
 @implementation XMASObjcSelector
@@ -25,13 +29,30 @@
     }
 }
 
+- (NSString *)returnType {
+    return _returnType;
+}
+
 #pragma mark - Private
 
 - (void)parseSelectorComponentsFromTokens:(NSArray *)tokens {
     NSMutableArray *selectorComponents = [NSMutableArray array];
     NSMutableArray *parameters = [NSMutableArray array];
 
+    NSArray *returnTypeTokens = [NSMutableArray array];
+    XMASObjcTypeParser *typeParser = [[XMASObjcTypeParser alloc] init];
+    NSUInteger lastTokenParsed = 0;
     for (NSUInteger i = 0; i < tokens.count; ++i) {
+        CKToken *token = tokens[i];
+        if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@")"]) {
+            returnTypeTokens = [tokens subarrayWithRange:NSMakeRange(0, i)];
+            lastTokenParsed = i;
+            break;
+        }
+    }
+    self.returnType = [typeParser parseTypeFromTokens:returnTypeTokens];
+
+    for (NSUInteger i = lastTokenParsed; i < tokens.count; ++i) {
         CKToken *token = tokens[i];
         if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@"("]) {
             NSString *paramType = [tokens[++i] spelling];

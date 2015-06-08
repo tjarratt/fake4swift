@@ -37,26 +37,38 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the first method declaration", ^{
-            __block XMASObjcSelectorParameter *param;
+            __block XMASObjcSelector *selector;
 
             beforeEach(^{
-                param = [[[methodDeclarations firstObject] parameters] firstObject];
+                selector = methodDeclarations.firstObject;
             });
 
-            it(@"should only have a single parameter", ^{
-                [[[methodDeclarations firstObject] parameters] count] should equal(1);
+            it(@"should have the correct return type", ^{
+                selector.returnType should equal(@"void");
             });
 
-            it(@"should have the correct parameter type", ^{
-                param.type should equal(@"NSString *");
-            });
+            describe(@"parameters", ^{
+                __block XMASObjcSelectorParameter *param;
 
-            it(@"should have the correct name", ^{
-                param.localName should equal(@"message");
+                beforeEach(^{
+                    param = selector.parameters.firstObject;
+                });
+
+                it(@"should only have a single parameter", ^{
+                    selector.parameters.count should equal(1);
+                });
+
+                it(@"should have the correct parameter type", ^{
+                    param.type should equal(@"NSString *");
+                });
+
+                it(@"should have the correct name", ^{
+                    param.localName should equal(@"message");
+                });
             });
         });
 
-        describe(@"the first method declaration", ^{
+        describe(@"the second method declaration", ^{
             __block XMASObjcSelector *selector;
 
             beforeEach(^{
@@ -65,6 +77,10 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should not have any parameters", ^{
                 selector.parameters should be_empty;
+            });
+
+            it(@"should have the correct return type", ^{
+                selector.returnType should equal(@"NSString *");
             });
         });
     });

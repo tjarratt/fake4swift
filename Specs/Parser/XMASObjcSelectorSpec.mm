@@ -10,46 +10,66 @@ SPEC_BEGIN(XMASObjcSelectorSpec)
 
 describe(@"XMASObjcSelector", ^{
     __block XMASObjcSelector *subject;
+    __block CKToken *instanceMethod;
+    __block CKToken *returnType;
+    __block CKToken *colon;
+    __block CKToken *openParen;
+    __block CKToken *closeParen;
+    __block CKToken *star;
+
+    beforeEach(^{
+        instanceMethod = nice_fake_for([CKToken class]);
+        instanceMethod stub_method(@selector(spelling)).and_return(@"-");
+        instanceMethod stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+
+        returnType = nice_fake_for([CKToken class]);
+        returnType stub_method(@selector(spelling)).and_return(@"void");
+        returnType stub_method(@selector(kind)).and_return(CKTokenKindKeyword);
+
+        colon = nice_fake_for([CKToken class]);
+        colon stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+
+        openParen = nice_fake_for([CKToken class]);
+        openParen stub_method(@selector(spelling)).and_return(@"(");
+        openParen stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+
+        star = nice_fake_for([CKToken class]);
+        star stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+        star stub_method(@selector(spelling)).and_return(@"*");
+
+        closeParen = nice_fake_for([CKToken class]);
+        closeParen stub_method(@selector(spelling)).and_return(@")");
+        closeParen stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+    });
 
     describe(@"a selector with no args", ^{
         beforeEach(^{
-            CKToken *token = nice_fake_for([CKToken class]);
-            token stub_method(@selector(spelling)).and_return(@"initWithNothing");
-            token stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+            CKToken *selectorName = nice_fake_for([CKToken class]);
+            selectorName stub_method(@selector(spelling)).and_return(@"initWithNothing");
+            selectorName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
-            subject = [[XMASObjcSelector alloc] initWithTokens:@[token]];
+            subject = [[XMASObjcSelector alloc] initWithTokens:@[instanceMethod, openParen, returnType, closeParen, selectorName]];
         });
 
-        it(@"should create the correct selector from its token", ^{
+        it(@"should create the correct selector from its tokens", ^{
             subject.selectorString should equal(@"initWithNothing");
             subject.parameters should be_empty();
         });
+
+        it(@"should have the correct return type", ^{
+            subject.returnType should equal(@"void");
+        });
     });
 
-    describe(@"a selector with several args", ^{
+    describe(@"a selector with several args and a return type", ^{
         beforeEach(^{
-            CKToken *firstSelectorPieceToken = nice_fake_for([CKToken class]);
-            firstSelectorPieceToken stub_method(@selector(spelling)).and_return(@"initWithThis");
-            firstSelectorPieceToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+            CKToken *firstSelectorPiece = nice_fake_for([CKToken class]);
+            firstSelectorPiece stub_method(@selector(spelling)).and_return(@"initWithThis");
+            firstSelectorPiece stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
-            CKToken *colonToken = nice_fake_for([CKToken class]);
-            colonToken stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
-
-            CKToken *openParenToken = nice_fake_for([CKToken class]);
-            openParenToken stub_method(@selector(spelling)).and_return(@"(");
-            openParenToken stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
-
-            CKToken *firstParamTypeToken = nice_fake_for([CKToken class]);
-            firstParamTypeToken stub_method(@selector(spelling)).and_return(@"NSString");
-            firstParamTypeToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *starToken = nice_fake_for([CKToken class]);
-            starToken stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
-            starToken stub_method(@selector(spelling)).and_return(@"*");
-
-            CKToken *closeParenToken = nice_fake_for([CKToken class]);
-            closeParenToken stub_method(@selector(spelling)).and_return(@")");
-            closeParenToken stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+            CKToken *firstParamType = nice_fake_for([CKToken class]);
+            firstParamType stub_method(@selector(spelling)).and_return(@"NSString");
+            firstParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
             CKToken *firstVariableName = nice_fake_for([CKToken class]);
             firstVariableName stub_method(@selector(spelling)).and_return(@"firstThing");
@@ -59,19 +79,20 @@ describe(@"XMASObjcSelector", ^{
             secondSelectorPieceToken stub_method(@selector(spelling)).and_return(@"andThat");
             secondSelectorPieceToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
-            CKToken *secondParamTypeToken = nice_fake_for([CKToken class]);
-            secondParamTypeToken stub_method(@selector(spelling)).and_return(@"MyClassName");
-            secondParamTypeToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+            CKToken *secondParamType = nice_fake_for([CKToken class]);
+            secondParamType stub_method(@selector(spelling)).and_return(@"MyClassName");
+            secondParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
             CKToken *secondVariableName = nice_fake_for([CKToken class]);
             secondVariableName stub_method(@selector(spelling)).and_return(@"secondThing");
             secondVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
 
             NSArray *tokens = @[
-                                firstSelectorPieceToken, colonToken,
-                                openParenToken, firstParamTypeToken, starToken, closeParenToken, firstVariableName,
-                                secondSelectorPieceToken, colonToken,
-                                openParenToken, secondParamTypeToken, closeParenToken, secondVariableName
+                                instanceMethod, openParen, returnType, closeParen,
+                                firstSelectorPiece, colon,
+                                openParen, firstParamType, star, closeParen, firstVariableName,
+                                secondSelectorPieceToken, colon,
+                                openParen, secondParamType, closeParen, secondVariableName
                                 ];
             subject = [[XMASObjcSelector alloc] initWithTokens:tokens];
         });
