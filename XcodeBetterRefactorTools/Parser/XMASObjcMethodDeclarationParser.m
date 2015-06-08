@@ -14,7 +14,7 @@
             continue;
         }
 
-        // continue until we have the return type
+        // continue reading until we have the return type
         while (i < tokens.count) {
             token = tokens[i];
             if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@")"]) {
@@ -24,8 +24,9 @@
         }
         ++i;
 
+        // retrieve all of the tokens that make up the method declaration
         NSMutableArray *methodDeclTokens = [NSMutableArray array];
-        while (i < tokens.count && [self isMethodDeclarationToken:tokens[i]]) {
+        while (i < tokens.count && [self isValidTokenInsideMethodDeclaration:tokens[i]]) {
             [methodDeclTokens addObject:tokens[i]];
             ++i;
         }
@@ -44,6 +45,18 @@
     BOOL isInstanceMethod = token.cursor.kind == CKCursorKindObjCInstanceMethodDecl;
 
     return isInstanceMethod || isClassMethod;
+}
+
+- (BOOL)isValidTokenInsideMethodDeclaration:(CKToken *)token {
+    if ([self isMethodDeclarationToken:token]) {
+        return YES;
+    }
+
+    BOOL isParameterDeclaration = token.cursor.kind == CKCursorKindParmDecl;
+    BOOL isTypeDeclaration = token.cursor.kind == CKCursorKindTypeRef;
+    BOOL isObjcClassDeclaration = token.cursor.kind == CKCursorKindObjCClassRef;
+
+    return isParameterDeclaration || isTypeDeclaration || isObjcClassDeclaration;
 }
 
 @end

@@ -22,6 +22,8 @@
 		F70E1FC41B24D96800D971E6 /* XMASObjcSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */; };
 		F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */; };
 		F70E1FC81B24DFA100D971E6 /* XMASObjcSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */; };
+		F70E1FCB1B24F07300D971E6 /* XMASObjcSelectorParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FCA1B24F07300D971E6 /* XMASObjcSelectorParameter.m */; };
+		F70E1FCC1B24F07900D971E6 /* XMASObjcSelectorParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FCA1B24F07300D971E6 /* XMASObjcSelectorParameter.m */; };
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
@@ -186,6 +188,8 @@
 		F70E1FC21B24D96800D971E6 /* XMASObjcSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcSelector.h; sourceTree = "<group>"; };
 		F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcSelector.m; sourceTree = "<group>"; };
 		F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcSelectorSpec.mm; sourceTree = "<group>"; };
+		F70E1FC91B24F07300D971E6 /* XMASObjcSelectorParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcSelectorParameter.h; sourceTree = "<group>"; };
+		F70E1FCA1B24F07300D971E6 /* XMASObjcSelectorParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcSelectorParameter.m; sourceTree = "<group>"; };
 		F7BA62281B223369005B99AF /* Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BA622B1B223369005B99AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BA622F1B223369005B99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				F70E1FB91B24377300D971E6 /* XMASObjcMethodDeclarationParser.m */,
 				F70E1FC21B24D96800D971E6 /* XMASObjcSelector.h */,
 				F70E1FC31B24D96800D971E6 /* XMASObjcSelector.m */,
+				F70E1FC91B24F07300D971E6 /* XMASObjcSelectorParameter.h */,
+				F70E1FCA1B24F07300D971E6 /* XMASObjcSelectorParameter.m */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 				969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */,
 				96DB4E4316227C4E00743C95 /* XMASXcode.m in Sources */,
 				F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
+				F70E1FCB1B24F07300D971E6 /* XMASObjcSelectorParameter.m in Sources */,
 				961B3EC916B65E94001A27ED /* XMASAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +611,7 @@
 				F70E1FC81B24DFA100D971E6 /* XMASObjcSelector.m in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */,
 				F7BA62301B223369005B99AF /* main.m in Sources */,
+				F70E1FCC1B24F07900D971E6 /* XMASObjcSelectorParameter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,10 +674,11 @@
 		960FA09E160581A000923A87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -703,10 +712,11 @@
 		960FA09F160581A000923A87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;

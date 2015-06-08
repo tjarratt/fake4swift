@@ -1,7 +1,8 @@
 #import "XMASObjcSelector.h"
+#import "XMASObjcSelectorParameter.h"
 
 @interface XMASObjcSelector ()
-@property (nonatomic) NSArray *selectorPieces;
+@property (nonatomic) NSArray *selectorComponents;
 @property (nonatomic) NSArray *parameters;
 @end
 
@@ -9,7 +10,7 @@
 
 - (instancetype)initWithTokens:(NSArray *)tokens {
     if (self = [super init]) {
-        [self parseSelectorPiecesFromTokens:tokens];
+        [self parseSelectorComponentsFromTokens:tokens];
     }
 
     return self;
@@ -17,42 +18,52 @@
 
 - (NSString *)selectorString {
     if (self.parameters.count == 0) {
-        return self.selectorPieces.firstObject;
+        return self.selectorComponents.firstObject;
     }
     else {
-        return [[self.selectorPieces componentsJoinedByString:@":"] stringByAppendingString:@":"];
+        return [[self.selectorComponents componentsJoinedByString:@":"] stringByAppendingString:@":"];
     }
 }
 
 #pragma mark - Private
 
-- (void)parseSelectorPiecesFromTokens:(NSArray *)tokens {
-    NSMutableArray *selectorPieces = [NSMutableArray array];
+- (void)parseSelectorComponentsFromTokens:(NSArray *)tokens {
+    NSMutableArray *selectorComponents = [NSMutableArray array];
     NSMutableArray *parameters = [NSMutableArray array];
 
-    BOOL parsingParam = NO;
-    for (CKToken *token in tokens) {
-        if (token.kind == CKTokenKindPunctuation) {
-            if ([token.spelling isEqualToString:@"("]) {
-                parsingParam = YES;
-                continue;
-            } else if ([token.spelling isEqualToString:@")"]) {
-                parsingParam = NO;
-                continue;
+    for (NSUInteger i = 0; i < tokens.count; ++i) {
+        CKToken *token = tokens[i];
+        if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@"("]) {
+            NSString *paramType = [tokens[++i] spelling];
+            CKToken *followingToken = tokens[i+1];
+            if (followingToken.kind == CKTokenKindPunctuation && [followingToken.spelling isEqualToString:@"*"]) {
+                paramType = [paramType stringByAppendingString:@" *"];
+                ++i;
             }
-        }
 
-        if (parsingParam) {
-            [parameters addObject:@""];
+            // keep reading until we are past the declaration
+            BOOL parsingParam = YES;
+            for (CKToken *nextToken = tokens[++i]; parsingParam && i < tokens.count; nextToken = tokens[++i]) {
+                BOOL isPunctuation = nextToken.kind == CKTokenKindPunctuation;
+                BOOL isClosingParen = [nextToken.spelling isEqualToString:@")"];
+                if (isPunctuation && isClosingParen) {
+                    parsingParam = NO;
+                }
+            }
+
+            CKToken *variableNameToken = tokens[i];
+            XMASObjcSelectorParameter *param = [[XMASObjcSelectorParameter alloc] initWithType:paramType
+                                                                                     localName:variableNameToken.spelling];
+            [parameters addObject:param];
             continue;
         }
 
         if (token.kind == CKTokenKindIdentifier) {
-            [selectorPieces addObject:token.spelling];
+            [selectorComponents addObject:token.spelling];
         }
     }
 
-    self.selectorPieces = selectorPieces;
+    self.selectorComponents = selectorComponents;
     self.parameters = parameters;
 }
 

@@ -2,9 +2,8 @@
 
 @class XMASEditMenu;
 
-@interface XMASBetterRefactorTools : NSObject {
-    XMASEditMenu *_editMenu;
-}
+@interface XMASBetterRefactorTools : NSObject 
 
 + (void)pluginDidLoad:(NSBundle *)plugin;
+
 @end

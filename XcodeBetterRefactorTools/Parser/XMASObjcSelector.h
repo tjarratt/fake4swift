@@ -7,6 +7,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTokens:(NSArray *)tokens;
 
+- (NSArray *)parameters;
 - (NSString *)selectorString;
 
 @end

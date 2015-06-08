@@ -14,7 +14,7 @@
 #pragma mark - Menu items
 
 - (NSMenuItem *)refactorCurrentMethodItem {
-    NSMenuItem *item = [[[NSMenuItem alloc] init] autorelease];
+    NSMenuItem *item = [[NSMenuItem alloc] init];
     item.title = @"Refactor Current Method";
     item.target = self;
     item.action = @selector(refactorCurrentMethodAction:);
@@ -30,7 +30,7 @@
 - (void)refactorCurrentMethodAction:(id)sender {
     [XMASAlert flashMessage:@"SUP"];
 
-    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/XcodeBetterRefactorTools/XMASBetterRefactorTools.m"];
+    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/Specs/Fixtures/methodDeclaration.m"];
     NSLog(@"================> %@", translationUnit.tokens);
 }
 

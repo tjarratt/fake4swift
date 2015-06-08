@@ -7,8 +7,6 @@
 
 @implementation XMASBetterRefactorTools
 
-@synthesize editMenu = _editMenu;
-
 + (void)pluginDidLoad:(NSBundle *)plugin {
     static id sharedPlugin = nil;
     static dispatch_once_t onceToken;
@@ -32,7 +30,6 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.editMenu = nil;
-    [super dealloc];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
@@ -41,7 +38,7 @@
          name:NSApplicationDidFinishLaunchingNotification
          object:NSApp];
 
-    self.editMenu = [[[XMASEditMenu alloc] init] autorelease];
+    self.editMenu = [[XMASEditMenu alloc] init];
     [self.editMenu attach];
 }
 @end

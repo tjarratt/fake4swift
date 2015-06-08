@@ -3,6 +3,7 @@
 
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcSelector.h"
+#import "XMASObjcSelectorParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -33,6 +34,38 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             objcSelector = methodDeclarations.lastObject;
             objcSelector.selectorString should equal(@"hideMessage");
+        });
+
+        describe(@"the first method declaration", ^{
+            __block XMASObjcSelectorParameter *param;
+
+            beforeEach(^{
+                param = [[[methodDeclarations firstObject] parameters] firstObject];
+            });
+
+            it(@"should only have a single parameter", ^{
+                [[[methodDeclarations firstObject] parameters] count] should equal(1);
+            });
+
+            it(@"should have the correct parameter type", ^{
+                param.type should equal(@"NSString *");
+            });
+
+            it(@"should have the correct name", ^{
+                param.localName should equal(@"message");
+            });
+        });
+
+        describe(@"the first method declaration", ^{
+            __block XMASObjcSelector *selector;
+
+            beforeEach(^{
+                selector = [methodDeclarations objectAtIndex:1];
+            });
+
+            it(@"should not have any parameters", ^{
+                selector.parameters should be_empty;
+            });
         });
     });
 });
