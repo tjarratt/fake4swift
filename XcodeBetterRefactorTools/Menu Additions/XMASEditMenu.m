@@ -1,7 +1,8 @@
 #import "XMASEditMenu.h"
 #import "XMASXcode.h"
+#import "XMASRefactorMethodAction.h"
 #import "XMASAlert.h"
-#import <ClangKit/ClangKit.h>
+#import "XMASObjcMethodDeclarationParser.h"
 
 @implementation XMASEditMenu
 
@@ -28,10 +29,13 @@
 #pragma mark - Menu Actions
 
 - (void)refactorCurrentMethodAction:(id)sender {
-    [XMASAlert flashMessage:@"SUP"];
-
-    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:@"/Users/tjarratt/git/xcode-christmas-in-july/Specs/Fixtures/methodDeclaration.m"];
-    NSLog(@"================> %@", translationUnit.tokens);
+    id editor = [XMASXcode currentEditor];
+    XMASAlert *alerter = [[XMASAlert alloc] init];
+    XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
+    XMASRefactorMethodAction *refactorAction = [[XMASRefactorMethodAction alloc] initWithEditor:editor
+                                                                                        alerter:alerter
+                                                                               methodDeclParser:methodDeclParser];
+    [refactorAction refactorMethodUnderCursor];
 }
 
 @end

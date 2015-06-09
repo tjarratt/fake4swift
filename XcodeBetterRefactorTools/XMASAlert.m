@@ -9,7 +9,7 @@
 @end
 
 @implementation XMASAlert
-+ (void)flashMessage:(NSString *)message {
+- (void)flashMessage:(NSString *)message {
     id alertPanel =
         [[NSClassFromString(@"DVTBezelAlertPanel") alloc] initWithIcon:nil
                                                                message:message
