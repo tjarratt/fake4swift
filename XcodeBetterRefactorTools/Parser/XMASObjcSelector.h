@@ -10,5 +10,6 @@
 - (NSArray *)parameters;
 - (NSString *)selectorString;
 - (NSString *)returnType;
+- (NSRange)range;
 
 @end

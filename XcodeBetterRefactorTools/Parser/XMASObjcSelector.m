@@ -7,6 +7,7 @@
 @property (nonatomic) NSArray *selectorComponents;
 @property (nonatomic) NSArray *parameters;
 @property (nonatomic) NSString *returnType;
+@property (nonatomic, assign) NSRange range;
 
 @end
 
@@ -15,6 +16,9 @@
 - (instancetype)initWithTokens:(NSArray *)tokens {
     if (self = [super init]) {
         [self parseSelectorComponentsFromTokens:tokens];
+        NSRange start = [tokens.firstObject range];
+        NSRange end = [tokens.lastObject range];
+        self.range = NSMakeRange(start.location, end.location + end.length - start.location);
     }
 
     return self;

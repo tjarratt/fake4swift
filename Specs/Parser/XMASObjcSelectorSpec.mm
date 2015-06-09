@@ -21,6 +21,7 @@ describe(@"XMASObjcSelector", ^{
         instanceMethod = nice_fake_for([CKToken class]);
         instanceMethod stub_method(@selector(spelling)).and_return(@"-");
         instanceMethod stub_method(@selector(kind)).and_return(CKTokenKindPunctuation);
+        instanceMethod stub_method(@selector(range)).and_return(NSMakeRange(10, 20));
 
         returnType = nice_fake_for([CKToken class]);
         returnType stub_method(@selector(spelling)).and_return(@"void");
@@ -47,6 +48,7 @@ describe(@"XMASObjcSelector", ^{
             CKToken *selectorName = nice_fake_for([CKToken class]);
             selectorName stub_method(@selector(spelling)).and_return(@"initWithNothing");
             selectorName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+            selectorName stub_method(@selector(range)).and_return(NSMakeRange(50, 20));
 
             subject = [[XMASObjcSelector alloc] initWithTokens:@[instanceMethod, openParen, returnType, closeParen, selectorName]];
         });
@@ -58,6 +60,10 @@ describe(@"XMASObjcSelector", ^{
 
         it(@"should have the correct return type", ^{
             subject.returnType should equal(@"void");
+        });
+
+        it(@"should have the correct range for its tokens", ^{
+            subject.range should equal(NSMakeRange(10, 60));
         });
     });
 
@@ -86,6 +92,7 @@ describe(@"XMASObjcSelector", ^{
             CKToken *secondVariableName = nice_fake_for([CKToken class]);
             secondVariableName stub_method(@selector(spelling)).and_return(@"secondThing");
             secondVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+            secondVariableName stub_method(@selector(range)).and_return(NSMakeRange(100, 11));
 
             NSArray *tokens = @[
                                 instanceMethod, openParen, returnType, closeParen,
@@ -103,6 +110,10 @@ describe(@"XMASObjcSelector", ^{
 
         it(@"should have the correct number of parameters", ^{
             subject.parameters.count should equal(2);
+        });
+
+        it(@"should have the correct range for its tokens", ^{
+            subject.range should equal(NSMakeRange(10, 101));
         });
 
         describe(@"the first parameter", ^{

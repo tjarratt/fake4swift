@@ -47,6 +47,10 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
                 selector.returnType should equal(@"void");
             });
 
+            it(@"should have the correct range for its tokens", ^{
+                selector.range should equal(NSMakeRange(28, 40));
+            });
+
             describe(@"parameters", ^{
                 __block XMASObjcSelectorParameter *param;
 
@@ -77,6 +81,10 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should not have any parameters", ^{
                 selector.parameters should be_empty;
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                selector.range should equal(NSMakeRange(543, 25));
             });
 
             it(@"should have the correct return type", ^{
