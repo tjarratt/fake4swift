@@ -19,7 +19,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
 
         it(@"should have a method declaration for each method", ^{
-            NSArray *expectedMethods = @[@"flashMessage:", @"hideMessage", @"flashMessage:", @"hideMessage"];
+            NSArray *expectedMethods = @[@"flashMessage:", @"hideMessage", @"flashMessage:", @"hideMessage", @"tap:"];
             [methodDeclarations valueForKey:@"selectorString"] should equal(expectedMethods);
         });
 
@@ -132,6 +132,26 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should have the correct return type", ^{
                 selector.returnType should equal(@"NSString *");
+            });
+        });
+
+        describe(@"the fifth method declaration", ^{
+            __block XMASObjcSelector *selector;
+
+            beforeEach(^{
+                selector = [methodDeclarations objectAtIndex:4];
+            });
+
+            it(@"should have one parameter", ^{
+                selector.parameters.count should equal(1);
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                selector.range should equal(NSMakeRange(726, 26));
+            });
+
+            it(@"should have the correct return type", ^{
+                selector.returnType should equal(@"IBAction");
             });
         });
     });
