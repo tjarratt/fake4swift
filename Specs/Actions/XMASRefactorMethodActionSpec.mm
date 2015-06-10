@@ -5,6 +5,7 @@
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcSelector.h"
+#import "WindowProvider.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,13 +18,16 @@ describe(@"XMASRefactorMethodAction", ^{
     __block XMASAlert *alerter;
     __block XMASObjcMethodDeclarationParser *methodDeclParser;
     __block NSRange cursorRange;
+    __block WindowProvider *windowProvider;
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
         editor = nice_fake_for(@protocol(XCP(IDESourceCodeEditor)));
+        windowProvider = nice_fake_for([WindowProvider class]);
         methodDeclParser = nice_fake_for([XMASObjcMethodDeclarationParser class]);
         subject = [[XMASRefactorMethodAction alloc] initWithEditor:editor
                                                            alerter:alerter
+                                                    windowProvider:windowProvider
                                                   methodDeclParser:methodDeclParser];
     });
 
@@ -57,12 +61,21 @@ describe(@"XMASRefactorMethodAction", ^{
     });
 
     describe(@"when the cursor is inside of a method declaration", ^{
+        __block NSWindow *fakeWindow;
+
         beforeEach(^{
+            fakeWindow = nice_fake_for([NSWindow class]);
+            windowProvider stub_method(@selector(provideInstance)).and_return(fakeWindow);
+
             cursorRange = NSMakeRange(10, 1);
         });
 
         it(@"should show the selector of the current method under the cursor", ^{
             alerter should have_received(@selector(flashMessage:)).with(@"initWithThis:andThat:");
+        });
+
+        it(@"should present its window", ^{
+            fakeWindow should have_received(@selector(makeKeyAndOrderFront:)).with(NSApp);
         });
     });
 

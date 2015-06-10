@@ -35,6 +35,9 @@
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
 		F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BA625A1B2233D0005B99AF /* Cedar.framework */; };
 		F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */; };
+		F7F09FE51B2819C200727AD7 /* WindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F09FE41B2819C200727AD7 /* WindowProvider.m */; };
+		F7F09FE61B2819C200727AD7 /* WindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F09FE41B2819C200727AD7 /* WindowProvider.m */; };
+		F7F09FF41B281A1F00727AD7 /* WindowProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7F09FF31B281A1F00727AD7 /* WindowProviderSpec.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +211,9 @@
 		F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cedar.xcodeproj; path = Cedar/Cedar.xcodeproj; sourceTree = "<group>"; };
 		F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionSpec.mm; sourceTree = "<group>"; };
 		F7E491F61B23EBC400BE3A61 /* ClangKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ClangKit.framework; sourceTree = "<group>"; };
+		F7F09FE31B2819C200727AD7 /* WindowProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowProvider.h; sourceTree = "<group>"; };
+		F7F09FE41B2819C200727AD7 /* WindowProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowProvider.m; sourceTree = "<group>"; };
+		F7F09FF31B281A1F00727AD7 /* WindowProviderSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WindowProviderSpec.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +253,8 @@
 			children = (
 				F74BBB4E1B273D760092AED9 /* XMASRefactorMethodAction.h */,
 				F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */,
+				F7F09FE31B2819C200727AD7 /* WindowProvider.h */,
+				F7F09FE41B2819C200727AD7 /* WindowProvider.m */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -401,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */,
+				F7F09FF31B281A1F00727AD7 /* WindowProviderSpec.mm */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -619,6 +628,7 @@
 				F70E1FBA1B24377300D971E6 /* XMASObjcMethodDeclarationParser.m in Sources */,
 				F73511A81B25599900104F8C /* XMASObjcTypeParser.m in Sources */,
 				F70E1FCB1B24F07300D971E6 /* XMASObjcSelectorParameter.m in Sources */,
+				F7F09FE51B2819C200727AD7 /* WindowProvider.m in Sources */,
 				961B3EC916B65E94001A27ED /* XMASAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -636,7 +646,9 @@
 				F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */,
 				F73511A91B25599900104F8C /* XMASObjcTypeParser.m in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */,
+				F7F09FF41B281A1F00727AD7 /* WindowProviderSpec.mm in Sources */,
 				F7BA62301B223369005B99AF /* main.m in Sources */,
+				F7F09FE61B2819C200727AD7 /* WindowProvider.m in Sources */,
 				F70E1FCC1B24F07900D971E6 /* XMASObjcSelectorParameter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
