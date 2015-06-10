@@ -1,3 +1,12 @@
+#import <Foundation/Foundation.h>
+
+@interface XMASAlert ()
+
+- (void)flashMessage:(NSString *)message;
+- (NSString *)hideMessage;
+
+@end
+
 
 @implementation XMASAlert
 
@@ -11,7 +20,6 @@
 }
 
 + (NSString *)hideMessage {
-    // not implemented
     return nil;
 }
 

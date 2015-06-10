@@ -33,8 +33,9 @@
 - (BOOL)isMethodDeclarationToken:(CKToken *)token {
     BOOL isClassMethod = token.cursor.kind == CKCursorKindObjCClassMethodDecl;
     BOOL isInstanceMethod = token.cursor.kind == CKCursorKindObjCInstanceMethodDecl;
+    BOOL isSemicolon = token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@";"];
 
-    return isInstanceMethod || isClassMethod;
+    return (isInstanceMethod || isClassMethod) && !isSemicolon;
 }
 
 - (BOOL)isValidTokenInsideMethodDeclaration:(CKToken *)token {
