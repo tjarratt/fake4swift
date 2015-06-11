@@ -9,6 +9,7 @@
 
 - (NSArray *)parameters;
 - (NSString *)selectorString;
+- (NSArray *)components;
 - (NSString *)returnType;
 - (NSRange)range;
 

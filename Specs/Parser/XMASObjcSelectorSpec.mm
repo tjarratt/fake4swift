@@ -65,6 +65,10 @@ describe(@"XMASObjcSelector", ^{
         it(@"should have the correct range for its tokens", ^{
             subject.range should equal(NSMakeRange(10, 60));
         });
+
+        it(@"should have a single component", ^{
+            subject.components should equal(@[@"initWithNothing"]);
+        });
     });
 
     describe(@"a selector with several args and a return type", ^{
@@ -114,6 +118,10 @@ describe(@"XMASObjcSelector", ^{
 
         it(@"should have the correct range for its tokens", ^{
             subject.range should equal(NSMakeRange(10, 101));
+        });
+
+        it(@"should have a component for each part of the selector", ^{
+            subject.components should equal(@[@"initWithThis", @"andThat"]);
         });
 
         describe(@"the first parameter", ^{

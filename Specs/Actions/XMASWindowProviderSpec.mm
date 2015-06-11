@@ -26,12 +26,6 @@ describe(@"XMASWindowProvider", ^{
         CGRectGetHeight(window.frame) should be_greater_than(0);
         CGRectGetHeight(window.frame) should be_greater_than(0);
     });
-
-    it(@"should center the window's frame in the middle of the screen", ^{
-        NSWindow *window = subject.provideInstance;
-        CGRectGetMidX(window.frame) should be_close_to(CGRectGetMidX([[NSScreen mainScreen] frame]));
-        CGRectGetMidY(window.frame) should be_close_to(CGRectGetMidY([[NSScreen mainScreen] frame]));
-    });
 });
 
 SPEC_END

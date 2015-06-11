@@ -24,6 +24,10 @@
     return self;
 }
 
+- (NSArray *)components {
+    return self.selectorComponents;
+}
+
 - (NSString *)selectorString {
     if (self.parameters.count == 0) {
         return self.selectorComponents.firstObject;
