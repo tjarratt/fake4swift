@@ -74,7 +74,7 @@ describe(@"XMASRefactorMethodAction", ^{
         });
 
         it(@"should show the selector of the current method under the cursor", ^{
-            alerter should have_received(@selector(flashMessage:)).with(@"initWithThis:andThat:");
+            alerter should_not have_received(@selector(flashMessage:));
         });
 
         it(@"should present a change method signature controller", ^{

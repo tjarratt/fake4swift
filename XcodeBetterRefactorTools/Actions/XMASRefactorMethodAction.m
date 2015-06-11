@@ -52,7 +52,6 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
         return;
     }
 
-    [self.alerter flashMessage:selectedMethod.selectorString];
     XMASChangeMethodSignatureController *controller = [self.controllerProvider provideInstance];
     [controller refactorMethod:selectedMethod inFile:currentFilePath];
 }
