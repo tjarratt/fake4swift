@@ -5,14 +5,15 @@
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcSelector.h"
-#import "WindowProvider.h"
+#import "XMASChangeMethodSignatureControllerProvider.h"
+#import "XMASChangeMethodSignatureController.h"
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
 
 @interface XMASRefactorMethodAction ()
 @property (nonatomic) id currentEditor;
 @property (nonatomic) XMASAlert *alerter;
-@property (nonatomic) WindowProvider *windowProvider;
+@property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclParser;
 @end
 
@@ -20,12 +21,12 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 - (instancetype)initWithEditor:(id)editor
                        alerter:(XMASAlert *)alerter
-                windowProvider:(WindowProvider *)windowProvider
+            controllerProvider:(XMASChangeMethodSignatureControllerProvider *)controllerProvider
               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser {
     if (self = [super init]) {
         self.alerter = alerter;
         self.currentEditor = editor;
-        self.windowProvider = windowProvider;
+        self.controllerProvider = controllerProvider;
         self.methodDeclParser = methodDeclParser;
     }
 
@@ -34,7 +35,8 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 - (void)refactorMethodUnderCursor {
     NSUInteger cursorLocation = [self cursorLocation];
-    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:[self currentSourceCodeFilePath]];
+    NSString *currentFilePath = [self currentSourceCodeFilePath];
+    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:currentFilePath];
     NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:translationUnit.tokens];
 
     XMASObjcSelector *selectedMethod;
@@ -51,8 +53,8 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     }
 
     [self.alerter flashMessage:selectedMethod.selectorString];
-    NSWindow *window = [self.windowProvider provideInstance];
-    [window makeKeyAndOrderFront:NSApp];
+    XMASChangeMethodSignatureController *controller = [self.controllerProvider provideInstance];
+    [controller refactorMethod:selectedMethod inFile:currentFilePath];
 }
 
 #pragma mark - editor helpers

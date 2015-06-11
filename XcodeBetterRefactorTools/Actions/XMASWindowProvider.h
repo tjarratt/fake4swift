@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-@interface WindowProvider : NSObject
+@interface XMASWindowProvider : NSObject
 
 - (NSWindow *)provideInstance;
 

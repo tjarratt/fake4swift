@@ -3,6 +3,8 @@
 #import "XMASRefactorMethodAction.h"
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
+#import "XMASChangeMethodSignatureControllerProvider.h"
+#import "XMASWindowProvider.h"
 
 @implementation XMASEditMenu
 
@@ -32,8 +34,11 @@
     id editor = [XMASXcode currentEditor];
     XMASAlert *alerter = [[XMASAlert alloc] init];
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
+    XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
+    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider];
     XMASRefactorMethodAction *refactorAction = [[XMASRefactorMethodAction alloc] initWithEditor:editor
                                                                                         alerter:alerter
+                                                                             controllerProvider:controllerProvider
                                                                                methodDeclParser:methodDeclParser];
     [refactorAction refactorMethodUnderCursor];
 }

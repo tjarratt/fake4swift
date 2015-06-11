@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
 @class XMASAlert;
-@class WindowProvider;
 @class XMASObjcMethodDeclarationParser;
+@class XMASChangeMethodSignatureControllerProvider;
 
 extern NSString * const noMethodSelected;
 
@@ -12,7 +12,7 @@ extern NSString * const noMethodSelected;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithEditor:(id)editor
                        alerter:(XMASAlert *)alerter
-                windowProvider:(WindowProvider *)windowProvider
+            controllerProvider:(XMASChangeMethodSignatureControllerProvider *)contollerProvider
               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
 
 - (void)refactorMethodUnderCursor;

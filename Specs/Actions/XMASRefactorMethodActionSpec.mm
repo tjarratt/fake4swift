@@ -5,7 +5,8 @@
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcSelector.h"
-#import "WindowProvider.h"
+#import "XMASChangeMethodSignatureController.h"
+#import "XMASChangeMethodSignatureControllerProvider.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -18,18 +19,20 @@ describe(@"XMASRefactorMethodAction", ^{
     __block XMASAlert *alerter;
     __block XMASObjcMethodDeclarationParser *methodDeclParser;
     __block NSRange cursorRange;
-    __block WindowProvider *windowProvider;
+    __block XMASChangeMethodSignatureControllerProvider *controllerProvider;
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
         editor = nice_fake_for(@protocol(XCP(IDESourceCodeEditor)));
-        windowProvider = nice_fake_for([WindowProvider class]);
+        controllerProvider = nice_fake_for([XMASChangeMethodSignatureControllerProvider class]);
         methodDeclParser = nice_fake_for([XMASObjcMethodDeclarationParser class]);
         subject = [[XMASRefactorMethodAction alloc] initWithEditor:editor
                                                            alerter:alerter
-                                                    windowProvider:windowProvider
+                                                controllerProvider:controllerProvider
                                                   methodDeclParser:methodDeclParser];
     });
+
+    __block XMASObjcSelector *selector;
 
     subjectAction(^{
         NSURL *fileURL = [[NSURL alloc] initWithString:@"file:///tmp/fixture.swift"];
@@ -45,7 +48,7 @@ describe(@"XMASRefactorMethodAction", ^{
             .with(@"/tmp/fixture.swift")
             .and_return(translationUnit);
 
-        XMASObjcSelector *selector = nice_fake_for([XMASObjcSelector class]);
+        selector = nice_fake_for([XMASObjcSelector class]);
         selector stub_method(@selector(range)).and_return(NSMakeRange(5, 15));
         selector stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
         NSArray *methodDeclarations = @[selector];
@@ -61,11 +64,11 @@ describe(@"XMASRefactorMethodAction", ^{
     });
 
     describe(@"when the cursor is inside of a method declaration", ^{
-        __block NSWindow *fakeWindow;
+        __block XMASChangeMethodSignatureController *controller;
 
         beforeEach(^{
-            fakeWindow = nice_fake_for([NSWindow class]);
-            windowProvider stub_method(@selector(provideInstance)).and_return(fakeWindow);
+            controller = nice_fake_for([XMASChangeMethodSignatureController class]);
+            controllerProvider stub_method(@selector(provideInstance)).and_return(controller);
 
             cursorRange = NSMakeRange(10, 1);
         });
@@ -74,8 +77,10 @@ describe(@"XMASRefactorMethodAction", ^{
             alerter should have_received(@selector(flashMessage:)).with(@"initWithThis:andThat:");
         });
 
-        it(@"should present its window", ^{
-            fakeWindow should have_received(@selector(makeKeyAndOrderFront:)).with(NSApp);
+        it(@"should present a change method signature controller", ^{
+            controller should have_received(@selector(refactorMethod:inFile:))
+            .with(selector)
+            .and_with(@"/tmp/fixture.swift");
         });
     });
 
