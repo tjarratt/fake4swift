@@ -1,5 +1,6 @@
 #import "XMASBetterRefactorTools.h"
 #import "XMASEditMenu.h"
+#import "XMASRefactorMethodActionProvider.h"
 
 @interface XMASBetterRefactorTools ()
 @property (nonatomic, retain) XMASEditMenu *editMenu;
@@ -38,7 +39,8 @@
          name:NSApplicationDidFinishLaunchingNotification
          object:NSApp];
 
-    self.editMenu = [[XMASEditMenu alloc] init];
+    XMASRefactorMethodActionProvider *actionProvider = [[XMASRefactorMethodActionProvider alloc] init];
+    self.editMenu = [[XMASEditMenu alloc] initWithRefactorMethodActionProvider:actionProvider];
     [self.editMenu attach];
 }
 @end

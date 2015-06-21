@@ -2,8 +2,6 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASWindowProvider.h"
 
-static XMASChangeMethodSignatureController *controller;
-
 @interface XMASChangeMethodSignatureControllerProvider ()
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @end
@@ -18,14 +16,9 @@ static XMASChangeMethodSignatureController *controller;
     return self;
 }
 
-- (XMASChangeMethodSignatureController *)provideInstance
-{
-    if (!controller) {
-        NSWindow *window = self.windowProvider.provideInstance;
-        controller = [[XMASChangeMethodSignatureController alloc] initWithWindow:window];
-    }
-
-    return controller;
+- (XMASChangeMethodSignatureController *)provideInstanceWithDelegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate {
+    return [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:self.windowProvider
+                                                                      delegate:delegate];
 }
 
 @end

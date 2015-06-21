@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "XMASChangeMethodSignatureController.h"
 
 @class XMASAlert;
 @class XMASObjcMethodDeclarationParser;
@@ -6,7 +7,7 @@
 
 extern NSString * const noMethodSelected;
 
-@interface XMASRefactorMethodAction : NSObject
+@interface XMASRefactorMethodAction : NSObject <XMASChangeMethodSignatureControllerDelegate>
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -16,6 +17,8 @@ extern NSString * const noMethodSelected;
               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
 
 - (void)refactorMethodUnderCursor;
+
+@property (nonatomic, readonly) XMASChangeMethodSignatureController *controller;
 
 
 @end

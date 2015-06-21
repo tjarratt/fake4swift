@@ -68,9 +68,14 @@ describe(@"XMASRefactorMethodAction", ^{
 
         beforeEach(^{
             controller = nice_fake_for([XMASChangeMethodSignatureController class]);
-            controllerProvider stub_method(@selector(provideInstance)).and_return(controller);
+            controllerProvider stub_method(@selector(provideInstanceWithDelegate:)).and_return(controller);
 
             cursorRange = NSMakeRange(10, 1);
+        });
+
+        it(@"should make itself the delegate of the controller", ^{
+            controllerProvider should have_received(@selector(provideInstanceWithDelegate:))
+                .with(subject);
         });
 
         it(@"should show the selector of the current method under the cursor", ^{
@@ -79,8 +84,28 @@ describe(@"XMASRefactorMethodAction", ^{
 
         it(@"should present a change method signature controller", ^{
             controller should have_received(@selector(refactorMethod:inFile:))
-            .with(selector)
-            .and_with(@"/tmp/fixture.swift");
+                .with(selector)
+                .and_with(@"/tmp/fixture.swift");
+        });
+
+        describe(@"as a <XMASChangeMethodSignatureControllerDelegate>", ^{
+            beforeEach(^{
+                [subject refactorMethodUnderCursor];
+            });
+
+            it(@"should hold a reference to the controller", ^{
+                subject.controller should be_same_instance_as(controller);
+            });
+
+            describe(@"when the controller will go away", ^{
+                afterEach(^{
+                    [subject controllerWillDisappear:controller];
+                    subject.controller should be_nil;
+                });
+
+                it(@"should no longer have a reference to its controller", ^{
+                });
+            });
         });
     });
 

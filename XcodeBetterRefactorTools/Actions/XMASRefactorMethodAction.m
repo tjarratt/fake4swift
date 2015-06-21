@@ -10,11 +10,14 @@
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
 
-@interface XMASRefactorMethodAction ()
+@interface XMASRefactorMethodAction () <XMASChangeMethodSignatureControllerDelegate>
 @property (nonatomic) id currentEditor;
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclParser;
+
+@property (nonatomic) XMASChangeMethodSignatureController *controller;
+
 @end
 
 @implementation XMASRefactorMethodAction
@@ -52,8 +55,14 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
         return;
     }
 
-    XMASChangeMethodSignatureController *controller = [self.controllerProvider provideInstance];
-    [controller refactorMethod:selectedMethod inFile:currentFilePath];
+    self.controller = [self.controllerProvider provideInstanceWithDelegate:self];
+    [self.controller refactorMethod:selectedMethod inFile:currentFilePath];
+}
+
+#pragma mark - <XMASChangeMethodSignatureControllerDelegate>
+
+- (void)controllerWillDisappear:(XMASChangeMethodSignatureController *)controller {
+    self.controller = nil;
 }
 
 #pragma mark - editor helpers

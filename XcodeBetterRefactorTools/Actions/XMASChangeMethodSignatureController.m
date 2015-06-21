@@ -1,12 +1,16 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASObjcSelectorParameter.h"
+#import "XMASWindowProvider.h"
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
 @interface XMASChangeMethodSignatureController () <NSTableViewDataSource, NSTableViewDelegate>
 
-@property (nonatomic, weak) NSWindow *window;
+@property (nonatomic, strong) NSWindow *window;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
+
+@property (nonatomic) XMASWindowProvider *windowProvider;
+@property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 
 @property (nonatomic) XMASObjcSelector *method;
 @property (nonatomic) NSString *filePath;
@@ -15,9 +19,12 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 @implementation XMASChangeMethodSignatureController
 
-- (instancetype)initWithWindow:(NSWindow *)window {
-    if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]]) {
-        self.window = window;
+- (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
+                              delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate {
+    NSBundle *bundleForClass = [NSBundle bundleForClass:[self class]];
+    if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:bundleForClass]) {
+        self.windowProvider = windowProvider;
+        self.delegate = delegate;
     }
 
     return self;
@@ -25,9 +32,25 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 - (void)refactorMethod:(XMASObjcSelector *)method inFile:(NSString *)filePath
 {
+    if (self.window == nil) {
+        self.window = [self.windowProvider provideInstance];
+        self.window.delegate = self;
+        self.window.releasedWhenClosed = NO; // UGH HACK
+    }
+
     self.method = method;
     self.filePath = filePath;
+
     self.window.contentView = self.view;
+}
+
+#pragma mark - <NSWindowDelegate>
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    self.window.delegate = nil;
+    self.window = nil;
+    [self.delegate controllerWillDisappear:self];
 }
 
 #pragma mark - NSViewController
@@ -38,7 +61,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
-    [self.window makeKeyAndOrderFront:NSApp];
+     [self.window makeKeyAndOrderFront:NSApp];
 }
 
 #pragma mark - <NSTableViewDataSource>

@@ -17,10 +17,6 @@ describe(@"XMASWindowProvider", ^{
         subject.provideInstance should be_instance_of([NSWindow class]);
     });
 
-    it(@"should only provide a single instance", ^{
-        subject.provideInstance should be_same_instance_as(subject.provideInstance);
-    });
-
     it(@"should give the window a reasonable size", ^{
         NSWindow *window = subject.provideInstance;
         CGRectGetHeight(window.frame) should be_greater_than(0);

@@ -11,31 +11,31 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerProviderSpec)
 describe(@"XMASChangeMethodSignatureControllerProvider", ^{
     __block XMASChangeMethodSignatureControllerProvider *subject;
     __block XMASWindowProvider *windowProvider;
-    NSWindow *window = nice_fake_for([NSWindow class]);
+    windowProvider = nice_fake_for([XMASWindowProvider class]);
 
     beforeEach(^{
-        windowProvider = nice_fake_for([XMASWindowProvider class]);
-        windowProvider stub_method(@selector(provideInstance)).and_return(window);
         subject = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider];
     });
 
     describe(@"-provideInstance", ^{
         __block XMASChangeMethodSignatureController *controller;
+        __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
         beforeEach(^{
-            controller = subject.provideInstance;
+            delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
+            controller = [subject provideInstanceWithDelegate:delegate];
         });
 
         it(@"should provide a change method signature controller", ^{
             controller should be_instance_of([XMASChangeMethodSignatureController class]);
         });
 
-        it(@"should pass an NSWindow to its controller", ^{
-            controller.window should be_same_instance_as(window);
+        it(@"should pass its delegate to the controller", ^{
+            controller.delegate should be_same_instance_as(delegate);
         });
 
-        it(@"should only provide a single instance", ^{
-            controller should be_same_instance_as(subject.provideInstance);
+        it(@"should pass an NSWindow provider to its controller", ^{
+            controller.windowProvider should be_same_instance_as(windowProvider);
         });
     });
 });

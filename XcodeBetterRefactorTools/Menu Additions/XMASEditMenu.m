@@ -5,8 +5,21 @@
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASWindowProvider.h"
+#import "XMASRefactorMethodActionProvider.h"
+
+@interface XMASEditMenu ()
+@property (nonatomic) XMASRefactorMethodActionProvider *actionProvider;
+@end
 
 @implementation XMASEditMenu
+
+- (instancetype)initWithRefactorMethodActionProvider:(XMASRefactorMethodActionProvider *)actionProvider {
+    if (self = [super init]) {
+        self.actionProvider = actionProvider;
+    }
+
+    return self;
+}
 
 - (void)attach {
     NSMenu *editMenu = [XMASXcode menuWithTitle:@"Edit"];
@@ -36,11 +49,14 @@
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
     XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider];
-    XMASRefactorMethodAction *refactorAction = [[XMASRefactorMethodAction alloc] initWithEditor:editor
-                                                                                        alerter:alerter
-                                                                             controllerProvider:controllerProvider
-                                                                               methodDeclParser:methodDeclParser];
+
+    XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
+                                                                                       alerter:alerter
+                                                                            controllerProvider:controllerProvider
+                                                                              methodDeclParser:methodDeclParser];
+
     [refactorAction refactorMethodUnderCursor];
 }
+
 
 @end

@@ -2,6 +2,7 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASObjcSelector.h"
 #import "XMASObjcSelectorParameter.h"
+#import "XMASWindowProvider.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -10,11 +11,21 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerSpec)
 
 describe(@"XMASChangeMethodSignatureController", ^{
     __block NSWindow *window;
+    __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
+    __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
-        window = nice_fake_for([NSWindow class]);
-        subject = [[XMASChangeMethodSignatureController alloc] initWithWindow:window];
+        window = [[NSWindow alloc] init];
+        spy_on(window);
+
+        windowProvider = nice_fake_for([XMASWindowProvider class]);
+        windowProvider stub_method(@selector(provideInstance)).and_return(window);
+
+        delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
+
+        subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
+                                                                             delegate:delegate];
     });
 
     describe(@"-refactorMethod:inFile:", ^{
@@ -41,6 +52,41 @@ describe(@"XMASChangeMethodSignatureController", ^{
             method stub_method(@selector(parameters)).and_return(parameters);
             filepath = @"/tmp/imagine.all.the.people";
             [subject refactorMethod:method inFile:filepath];
+        });
+
+        it(@"should ask for a window from its window provider", ^{
+            windowProvider should have_received(@selector(provideInstance));
+        });
+
+        it(@"should not release the window when it is closed", ^{
+            window should have_received(@selector(setReleasedWhenClosed:)).with(NO);
+        });
+
+        describe(@"as a <NSWindowDelegate>", ^{
+            it(@"should be the delegate of its window", ^{
+                window should have_received(@selector(setDelegate:)).with(subject);
+            });
+
+            describe(@"when the window closes", ^{
+                beforeEach(^{
+                    [window close];
+                });
+
+                it(@"should notify its delegate that it will disappear", ^{
+                    delegate should have_received(@selector(controllerWillDisappear:)).with(subject);
+                });
+            });
+        });
+
+        describe(@"when the refactor action is invoked again", ^{
+            beforeEach(^{
+                [windowProvider reset_sent_messages];
+                [subject refactorMethod:method inFile:filepath];
+            });
+
+            it(@"should not ask for another window", ^{
+                windowProvider should_not have_received(@selector(provideInstance));
+            });
         });
 
         describe(@"after the view loads", ^{
