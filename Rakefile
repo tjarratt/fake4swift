@@ -23,18 +23,11 @@ end
 
 desc "Build & install"
 task :install => :clean do
-  system_or_exit <<-BASH, output_file("build")
-    xcodebuild
-      -project #{PROJECT_NAME}.xcodeproj
-      -configuration #{CONFIGURATION}
-      build
-  BASH
-
   system_or_exit <<-BASH, output_file("install")
     xcodebuild
       -project #{PROJECT_NAME}.xcodeproj
       -configuration #{CONFIGURATION}
-      install
+      build install
   BASH
 end
 
