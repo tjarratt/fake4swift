@@ -6,8 +6,15 @@
 
 @interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate>
 
-@property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, weak, readonly) NSTableView *tableView;
+@property (nonatomic, weak, readonly) NSButton *addComponentButton;
+@property (nonatomic, weak, readonly) NSButton *removeComponentButton;
+@property (nonatomic, weak, readonly) NSButton *raiseComponentButton;
+@property (nonatomic, weak, readonly) NSButton *lowerComponentButton;
+@property (nonatomic, weak, readonly) NSButton *cancelButton;
+@property (nonatomic, weak, readonly) NSButton *refactorButton;
+
+@property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider

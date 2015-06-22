@@ -6,6 +6,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="XMASChangeMethodSignatureController">
             <connections>
+                <outlet property="addComponentButton" destination="xK7-ya-L3N" id="cjL-Ub-w6M"/>
+                <outlet property="cancelButton" destination="0yg-fK-Hgs" id="DkY-0J-Jhz"/>
+                <outlet property="lowerComponentButton" destination="PUR-qd-rOH" id="UzD-Ub-gK0"/>
+                <outlet property="raiseComponentButton" destination="BTM-Xd-lSr" id="lbc-yz-aZE"/>
+                <outlet property="refactorButton" destination="jJb-Xj-hSE" id="2Kv-qu-OyT"/>
+                <outlet property="removeComponentButton" destination="O8e-TK-dIk" id="zG2-mt-zBA"/>
                 <outlet property="tableView" destination="pWs-6Y-ztg" id="my6-fO-upP"/>
                 <outlet property="view" destination="c22-O7-iKe" id="bwu-5L-Mz2"/>
             </connections>
@@ -16,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="waD-No-LNc">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="waD-No-LNc" userLabel="tableview">
+                    <rect key="frame" x="0.0" y="50" width="480" height="222"/>
                     <clipView key="contentView" id="qzr-KE-okC">
                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,14 +149,80 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="plm-bO-BKK" userLabel="Buttons Container">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="50"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xK7-ya-L3N" userLabel="Add Button">
+                            <rect key="frame" x="10" y="15" width="22" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="+" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pia-Pf-5Te">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O8e-TK-dIk" userLabel="Remove button">
+                            <rect key="frame" x="37" y="15" width="20" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="-" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PNe-cC-nZM">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTM-Xd-lSr">
+                            <rect key="frame" x="65" y="15" width="26" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="▲" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efg-7d-ZvE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-qd-rOH">
+                            <rect key="frame" x="99" y="15" width="26" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="▼" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I1H-v0-9WB">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yg-fK-Hgs">
+                            <rect key="frame" x="341" y="15" width="52" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="cancel" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="INB-HD-Cny">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jJb-Xj-hSE">
+                            <rect key="frame" x="401" y="15" width="59" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="refactor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xD-14-mNS">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="controlContent"/>
+                            </buttonCell>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="PUR-qd-rOH" firstAttribute="centerY" secondItem="BTM-Xd-lSr" secondAttribute="centerY" id="4Nf-ZC-Q1c"/>
+                        <constraint firstItem="0yg-fK-Hgs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PUR-qd-rOH" secondAttribute="trailing" constant="216" id="6Dq-oY-Wlt"/>
+                        <constraint firstItem="PUR-qd-rOH" firstAttribute="leading" secondItem="BTM-Xd-lSr" secondAttribute="trailing" constant="8" id="8XK-q7-oTp"/>
+                        <constraint firstItem="xK7-ya-L3N" firstAttribute="leading" secondItem="plm-bO-BKK" secondAttribute="leading" constant="10" id="Djz-4Q-136"/>
+                        <constraint firstItem="O8e-TK-dIk" firstAttribute="centerY" secondItem="BTM-Xd-lSr" secondAttribute="centerY" id="Fv0-LZ-xMF"/>
+                        <constraint firstItem="0yg-fK-Hgs" firstAttribute="centerY" secondItem="jJb-Xj-hSE" secondAttribute="centerY" id="JLg-ci-A7Y"/>
+                        <constraint firstItem="BTM-Xd-lSr" firstAttribute="leading" secondItem="O8e-TK-dIk" secondAttribute="trailing" constant="8" id="QxN-xf-y1D"/>
+                        <constraint firstItem="O8e-TK-dIk" firstAttribute="leading" secondItem="xK7-ya-L3N" secondAttribute="trailing" constant="5" id="SXE-4q-lEo"/>
+                        <constraint firstItem="xK7-ya-L3N" firstAttribute="centerY" secondItem="O8e-TK-dIk" secondAttribute="centerY" id="cfO-3U-ZC5"/>
+                        <constraint firstAttribute="height" constant="50" id="m7e-Di-Obu"/>
+                        <constraint firstAttribute="trailing" secondItem="jJb-Xj-hSE" secondAttribute="trailing" constant="20" id="mio-pA-8po"/>
+                        <constraint firstAttribute="centerY" secondItem="xK7-ya-L3N" secondAttribute="centerY" id="ohm-pf-XqM"/>
+                        <constraint firstItem="jJb-Xj-hSE" firstAttribute="leading" secondItem="0yg-fK-Hgs" secondAttribute="trailing" constant="8" id="vSq-hp-8JE"/>
+                        <constraint firstAttribute="centerY" secondItem="jJb-Xj-hSE" secondAttribute="centerY" id="wAa-Sg-lDw"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="waD-No-LNc" secondAttribute="trailing" id="8Lg-WF-bXJ"/>
+                <constraint firstItem="plm-bO-BKK" firstAttribute="top" secondItem="waD-No-LNc" secondAttribute="bottom" id="ALj-bg-e24"/>
                 <constraint firstItem="waD-No-LNc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="HWr-RQ-Cl1"/>
-                <constraint firstAttribute="bottom" secondItem="waD-No-LNc" secondAttribute="bottom" id="M1z-Z5-vF0"/>
+                <constraint firstAttribute="bottom" secondItem="plm-bO-BKK" secondAttribute="bottom" id="iII-9L-0eM"/>
                 <constraint firstItem="waD-No-LNc" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="n6Q-L0-i3f"/>
+                <constraint firstItem="plm-bO-BKK" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="qbq-TR-eBQ"/>
+                <constraint firstAttribute="trailing" secondItem="plm-bO-BKK" secondAttribute="trailing" id="s5R-xg-zAO"/>
             </constraints>
-            <point key="canvasLocation" x="67" y="202"/>
+            <point key="canvasLocation" x="22" y="151"/>
         </customView>
     </objects>
 </document>

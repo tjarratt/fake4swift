@@ -8,6 +8,12 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 @property (nonatomic, strong) NSWindow *window;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
+@property (nonatomic, weak) IBOutlet NSButton *addComponentButton;
+@property (nonatomic, weak) IBOutlet NSButton *removeComponentButton;
+@property (nonatomic, weak) IBOutlet NSButton *raiseComponentButton;
+@property (nonatomic, weak) IBOutlet NSButton *lowerComponentButton;
+@property (nonatomic, weak) IBOutlet NSButton *cancelButton;
+@property (nonatomic, weak) IBOutlet NSButton *refactorButton;
 
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
