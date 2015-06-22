@@ -178,6 +178,19 @@ describe(@"XMASChangeMethodSignatureController", ^{
             });
         });
     });
+
+    describe(@"hitting the cancel button", ^{
+        beforeEach(^{
+            subject.view should_not be_nil;
+            [subject refactorMethod:nil inFile:nil];
+
+            [subject.cancelButton performClick:nil];
+        });
+
+        it(@"should close the window", ^{
+            window should have_received(@selector(close));
+        });
+    });
 });
 
 SPEC_END

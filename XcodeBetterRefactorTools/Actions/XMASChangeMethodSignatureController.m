@@ -50,6 +50,32 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.window.contentView = self.view;
 }
 
+#pragma mark - IBActions
+
+- (IBAction)didTapCancel:(id)sender {
+    [self.window close];
+}
+
+- (IBAction)didTapRefactor:(id)sender {
+    NSLog(@"================> %@", @"REFACTORD");
+}
+
+- (IBAction)didTapAdd:(id)sender {
+
+}
+
+- (IBAction)didTapRemove:(id)sender {
+
+}
+
+- (IBAction)didTapMoveUp:(id)sender {
+
+}
+
+- (IBAction)didTapMoveDown:(id)sender {
+
+}
+
 #pragma mark - <NSWindowDelegate>
 
 - (void)windowWillClose:(NSNotification *)notification

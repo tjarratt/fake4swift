@@ -156,43 +156,61 @@
                             <rect key="frame" x="10" y="15" width="22" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="+" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pia-Pf-5Te">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapAdd:" target="-2" id="FOa-6X-y9v"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O8e-TK-dIk" userLabel="Remove button">
                             <rect key="frame" x="37" y="15" width="20" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="-" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PNe-cC-nZM">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapRemove:" target="-2" id="hVf-0y-Cgo"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTM-Xd-lSr">
                             <rect key="frame" x="65" y="15" width="26" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="▲" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efg-7d-ZvE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapMoveUp:" target="-2" id="PWY-Qf-Ibm"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-qd-rOH">
                             <rect key="frame" x="99" y="15" width="26" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="▼" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I1H-v0-9WB">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapMoveDown:" target="-2" id="B2t-8n-OzA"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yg-fK-Hgs">
                             <rect key="frame" x="341" y="15" width="52" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="cancel" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="INB-HD-Cny">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapCancel:" target="-2" id="6Nx-2C-Je8"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jJb-Xj-hSE">
                             <rect key="frame" x="401" y="15" width="59" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="refactor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xD-14-mNS">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="controlContent"/>
+                                <font key="font" metaFont="cellTitle"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="didTapRefactor:" target="-2" id="DtG-rd-tQ1"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
