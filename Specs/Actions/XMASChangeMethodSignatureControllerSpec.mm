@@ -108,6 +108,44 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     subject.tableView.numberOfColumns should equal(3);
                 });
 
+                describe(@"clicking the 'add component' button", ^{
+                    beforeEach(^{
+                        [subject.addComponentButton performClick:nil];
+                    });
+
+                    it(@"should add another row to the tableview", ^{
+                        subject.tableView.numberOfRows should equal(4);
+                    });
+
+                    // this works in production, but doesn't seem to work here
+                    // Things I've tried -> spinning the run loop
+                    xit(@"should move focus to the selector textfield for the fourth row", ^{
+                        NSTextField *textField = (id)[subject.tableView viewAtColumn:0 row:3 makeIfNecessary:NO];
+                        textField should be_instance_of([NSTextField class]);
+                        window.firstResponder should be_same_instance_as(textField);
+                    });
+                });
+
+                describe(@"clicking the 'remove component' button", ^{
+                    beforeEach(^{
+                        NSIndexSet *secondRowIndex = [[NSIndexSet alloc] initWithIndex:1];
+                        [subject.tableView selectRowIndexes:secondRowIndex byExtendingSelection:NO];
+                        [subject.removeComponentButton performClick:nil];
+                    });
+
+                    it(@"should only have two rows", ^{
+                        subject.tableView.numberOfRows should equal(2);
+                    });
+
+                    it(@"should only have removed the row at index 1", ^{
+                        NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:NO];
+                        firstSelector.stringValue should equal(@"initWith");
+
+                        NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:NO];
+                        secondSelector.stringValue should equal(@"andThat");
+                    });
+                });
+
                 describe(@"the first row", ^{
                     it(@"should have the correct cell contents", ^{
                         NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
@@ -179,7 +217,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
         });
     });
 
-    describe(@"hitting the cancel button", ^{
+    describe(@"clicking the cancel button", ^{
         beforeEach(^{
             subject.view should_not be_nil;
             [subject refactorMethod:nil inFile:nil];

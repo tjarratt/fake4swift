@@ -20,6 +20,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 @property (nonatomic) XMASObjcSelector *method;
 @property (nonatomic) NSString *filePath;
+@property (nonatomic) NSMutableArray *selectorComponents;
 
 @end
 
@@ -47,6 +48,15 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.method = method;
     self.filePath = filePath;
 
+    self.selectorComponents = [[NSMutableArray alloc] initWithCapacity:self.method.components.count];
+    for (NSUInteger i = 0; i < self.method.components.count; ++i) {
+        NSString *componentName = self.method.components[i];
+        XMASObjcSelectorParameter *parameter = self.method.parameters[i];
+
+        NSMutableArray *selectorComponent = [NSMutableArray arrayWithObjects:componentName, parameter.type, parameter.localName, nil];
+        [self.selectorComponents addObject:selectorComponent];
+    }
+
     self.window.contentView = self.view;
 }
 
@@ -61,11 +71,18 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (IBAction)didTapAdd:(id)sender {
+    [self.selectorComponents addObject:[NSMutableArray arrayWithObjects:@"", @"", @"", nil]];
+    [self.tableView reloadData];
 
+    NSInteger row = (NSInteger)(self.selectorComponents.count - 1);
+    NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:row makeIfNecessary:YES];
+    [textField becomeFirstResponder];
 }
 
 - (IBAction)didTapRemove:(id)sender {
-
+    NSInteger selectedRow = self.tableView.selectedRow;
+    [self.selectorComponents removeObjectAtIndex:(NSUInteger)selectedRow];
+    [self.tableView reloadData];
 }
 
 - (IBAction)didTapMoveUp:(id)sender {
@@ -103,7 +120,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return (NSInteger)self.method.components.count;
+    return (NSInteger)self.selectorComponents.count;
 }
 
 #pragma mark - <NSTableViewDelegate>
@@ -115,13 +132,11 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     }
 
     if ([tableColumn.identifier isEqualToString:@"selector"]) {
-        textField.stringValue = self.method.components[(NSUInteger)row];
+        textField.stringValue = self.selectorComponents[(NSUInteger) row][0];
     } else if ([tableColumn.identifier isEqualToString:@"parameterType"]) {
-        XMASObjcSelectorParameter *param = self.method.parameters[(NSUInteger)row];
-        textField.stringValue = param.type;
+        textField.stringValue = self.selectorComponents[(NSUInteger) row][1];
     } else {
-        XMASObjcSelectorParameter *param = self.method.parameters[(NSUInteger)row];
-        textField.stringValue = param.localName;
+        textField.stringValue = self.selectorComponents[(NSUInteger) row][2];
     }
 
     return textField;

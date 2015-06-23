@@ -98,12 +98,9 @@ describe(@"XMASRefactorMethodAction", ^{
             });
 
             describe(@"when the controller will go away", ^{
-                afterEach(^{
+                it(@"should no longer have a reference to its controller", ^{
                     [subject controllerWillDisappear:controller];
                     subject.controller should be_nil;
-                });
-
-                it(@"should no longer have a reference to its controller", ^{
                 });
             });
         });
