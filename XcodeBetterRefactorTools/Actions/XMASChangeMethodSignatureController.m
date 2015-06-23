@@ -119,6 +119,9 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
+    self.raiseComponentButton.enabled = NO;
+    self.lowerComponentButton.enabled = NO;
+
      [self.window makeKeyAndOrderFront:NSApp];
 }
 
@@ -149,6 +152,12 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     }
 
     return textField;
+}
+
+-(void)tableViewSelectionDidChange:(NSNotification *)notification {
+    NSInteger selectedRow = self.tableView.selectedRow;
+    self.lowerComponentButton.enabled = selectedRow >= 0 && selectedRow < (self.selectorComponents.count - 1);
+    self.raiseComponentButton.enabled = selectedRow > 0 && selectedRow <= (self.selectorComponents.count - 1);
 }
 
 @end

@@ -100,6 +100,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     subject.tableView.dataSource should be_same_instance_as(subject);
                 });
 
+                it(@"should not allow multiple selection", ^{
+                    subject.tableView.allowsMultipleSelection should be_falsy;
+                });
+
                 it(@"should have one row for each segment of the selector", ^{
                     subject.tableView.numberOfRows should equal(3);
                 });
@@ -147,6 +151,66 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                             NSTextField *thirdSelector = (id)[subject.tableView viewAtColumn:0 row:2 makeIfNecessary:YES];
                             thirdSelector.stringValue should equal(@"this");
+                        });
+                    });
+                });
+
+                describe(@"the raise component button", ^{
+                    context(@"before a row is selected", ^{
+                        it(@"should be disabled", ^{
+                            subject.raiseComponentButton.enabled should be_falsy;
+                        });
+
+                        context(@"after a row that can be raised is selected", ^{
+                            beforeEach(^{
+                                NSIndexSet *firstRow = [[NSIndexSet alloc] initWithIndex:2];
+                                [subject.tableView selectRowIndexes:firstRow byExtendingSelection:NO];
+                            });
+
+                            it(@"should enable the button", ^{
+                                subject.raiseComponentButton.enabled should be_truthy;
+                            });
+                        });
+
+                        context(@"when the first row is selected", ^{
+                            beforeEach(^{
+                                NSIndexSet *lastRow = [[NSIndexSet alloc] initWithIndex:0];
+                                [subject.tableView selectRowIndexes:lastRow byExtendingSelection:NO];
+                            });
+
+                            it(@"should disable the button", ^{
+                                subject.raiseComponentButton.enabled should be_falsy;
+                            });
+                        });
+                    });
+                });
+
+                describe(@"the lower component button", ^{
+                    context(@"before a row is selected", ^{
+                        it(@"should be disabled", ^{
+                            subject.lowerComponentButton.enabled should be_falsy;
+                        });
+
+                        context(@"after a row that can be lowered is selected", ^{
+                            beforeEach(^{
+                                NSIndexSet *lastRow = [[NSIndexSet alloc] initWithIndex:0];
+                                [subject.tableView selectRowIndexes:lastRow byExtendingSelection:NO];
+                            });
+
+                            it(@"should enable the button", ^{
+                                subject.lowerComponentButton.enabled should be_truthy;
+                            });
+                        });
+
+                        context(@"when the last row is selected", ^{
+                            beforeEach(^{
+                                NSIndexSet *lastRow = [[NSIndexSet alloc] initWithIndex:2];
+                                [subject.tableView selectRowIndexes:lastRow byExtendingSelection:NO];
+                            });
+
+                            it(@"should disable the button", ^{
+                                subject.lowerComponentButton.enabled should be_falsy;
+                            });
                         });
                     });
                 });
