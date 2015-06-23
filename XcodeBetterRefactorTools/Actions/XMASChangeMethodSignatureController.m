@@ -71,16 +71,25 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (IBAction)didTapAdd:(id)sender {
-    [self.selectorComponents addObject:[NSMutableArray arrayWithObjects:@"", @"", @"", nil]];
+    NSInteger selectedRow = self.tableView.selectedRow + 1;
+    if (selectedRow == 0) {
+        selectedRow = (NSInteger)self.selectorComponents.count;
+    }
+
+    NSMutableArray *emptyRow = [NSMutableArray arrayWithObjects:@"", @"", @"", nil];
+    [self.selectorComponents insertObject:emptyRow atIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
 
-    NSInteger row = (NSInteger)(self.selectorComponents.count - 1);
-    NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:row makeIfNecessary:YES];
+    NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
     [textField becomeFirstResponder];
 }
 
 - (IBAction)didTapRemove:(id)sender {
     NSInteger selectedRow = self.tableView.selectedRow;
+    if (selectedRow == -1) {
+        return;
+    }
+
     [self.selectorComponents removeObjectAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
 }

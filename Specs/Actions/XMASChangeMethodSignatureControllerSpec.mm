@@ -109,40 +109,73 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 });
 
                 describe(@"clicking the 'add component' button", ^{
-                    beforeEach(^{
-                        [subject.addComponentButton performClick:nil];
+                    context(@"when no rows are selected", ^{
+                        beforeEach(^{
+                            [subject.addComponentButton performClick:nil];
+                        });
+
+                        it(@"should add another row to the tableview", ^{
+                            subject.tableView.numberOfRows should equal(4);
+                        });
+
+                        // this works in production, but doesn't seem to work here
+                        // Things I've tried -> spinning the run loop
+                        xit(@"should move focus to the selector textfield for the fourth row", ^{
+                            NSTextField *textField = (id)[subject.tableView viewAtColumn:0 row:3 makeIfNecessary:NO];
+                            textField should be_instance_of([NSTextField class]);
+                            window.firstResponder should be_same_instance_as(textField);
+                        });
                     });
 
-                    it(@"should add another row to the tableview", ^{
-                        subject.tableView.numberOfRows should equal(4);
-                    });
+                    context(@"when a row is selected", ^{
+                        beforeEach(^{
+                            NSIndexSet *firstRowIndex = [[NSIndexSet alloc] initWithIndex:0];
+                            [subject.tableView selectRowIndexes:firstRowIndex byExtendingSelection:NO];
+                            [subject.addComponentButton performClick:nil];
+                        });
 
-                    // this works in production, but doesn't seem to work here
-                    // Things I've tried -> spinning the run loop
-                    xit(@"should move focus to the selector textfield for the fourth row", ^{
-                        NSTextField *textField = (id)[subject.tableView viewAtColumn:0 row:3 makeIfNecessary:NO];
-                        textField should be_instance_of([NSTextField class]);
-                        window.firstResponder should be_same_instance_as(textField);
+                        it(@"should add another row to the tableview", ^{
+                            subject.tableView.numberOfRows should equal(4);
+                        });
+
+                        it(@"should insert the new row between the first and second rows", ^{
+                            NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
+                            firstSelector.stringValue should equal(@"initWith");
+
+                            NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
+                            secondSelector.stringValue should equal(@"");
+
+                            NSTextField *thirdSelector = (id)[subject.tableView viewAtColumn:0 row:2 makeIfNecessary:YES];
+                            thirdSelector.stringValue should equal(@"this");
+                        });
                     });
                 });
 
                 describe(@"clicking the 'remove component' button", ^{
-                    beforeEach(^{
-                        NSIndexSet *secondRowIndex = [[NSIndexSet alloc] initWithIndex:1];
-                        [subject.tableView selectRowIndexes:secondRowIndex byExtendingSelection:NO];
-                        [subject.removeComponentButton performClick:nil];
+                    context(@"when a row is selected", ^{
+                        beforeEach(^{
+                            NSIndexSet *secondRowIndex = [[NSIndexSet alloc] initWithIndex:1];
+                            [subject.tableView selectRowIndexes:secondRowIndex byExtendingSelection:NO];
+                            [subject.removeComponentButton performClick:nil];
+                        });
+
+                        it(@"should only have two rows", ^{
+                            subject.tableView.numberOfRows should equal(2);
+                        });
+
+                        it(@"should only have removed the row at index 1", ^{
+                            NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:NO];
+                            firstSelector.stringValue should equal(@"initWith");
+
+                            NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:NO];
+                            secondSelector.stringValue should equal(@"andThat");
+                        });
                     });
 
-                    it(@"should only have two rows", ^{
-                        subject.tableView.numberOfRows should equal(2);
-                    });
-
-                    it(@"should only have removed the row at index 1", ^{
-                        NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:NO];
-                        firstSelector.stringValue should equal(@"initWith");
-
-                        NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:NO];
-                        secondSelector.stringValue should equal(@"andThat");
+                    context(@"when no row is selected", ^{
+                        it(@"should not crash", ^{
+                            ^{ [subject.removeComponentButton performClick:nil]; } should_not raise_exception;
+                        });
                     });
                 });
 
