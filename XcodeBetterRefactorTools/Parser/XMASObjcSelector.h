@@ -13,4 +13,8 @@
 - (NSString *)returnType;
 - (NSRange)range;
 
+- (instancetype)deleteComponentAtIndex:(NSUInteger)index;
+- (instancetype)insertComponentAtIndex:(NSUInteger)index;
+- (instancetype)swapComponentAtIndex:(NSUInteger)index withComponentAtIndex:(NSUInteger)otherIndex;
+
 @end

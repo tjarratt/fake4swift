@@ -24,6 +24,21 @@
     return self;
 }
 
+- (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
+                                parameters:(NSArray *)parameters
+                                returnType:(NSString *)returnType
+                                     range:(NSRange)range
+{
+    if (self = [super init]) {
+        self.selectorComponents = selectorComponents;
+        self.parameters = parameters;
+        self.returnType = returnType;
+        self.range = range;
+    }
+
+    return self;
+}
+
 - (NSArray *)components {
     return self.selectorComponents;
 }
@@ -39,6 +54,73 @@
 
 - (NSString *)returnType {
     return _returnType;
+}
+
+- (instancetype)deleteComponentAtIndex:(NSUInteger)index {
+    NSMutableArray *components = [self.selectorComponents mutableCopy];
+    NSMutableArray *parameters = [self.parameters mutableCopy];
+    [components removeObjectAtIndex:index];
+    [parameters removeObjectAtIndex:index];
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+                                                     parameters:parameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
+}
+
+- (instancetype)insertComponentAtIndex:(NSUInteger)index {
+    NSMutableArray *components = [self.selectorComponents mutableCopy];
+    NSMutableArray *parameters = [self.parameters mutableCopy];
+
+    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:@"" localName:@""];
+    [components insertObject:@"" atIndex:index];
+    [parameters insertObject:newParameter atIndex:index];
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+                                                     parameters:parameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
+}
+
+- (instancetype)swapComponentAtIndex:(NSUInteger)index withComponentAtIndex:(NSUInteger)otherIndex {
+    NSMutableArray *components = [self.selectorComponents mutableCopy];
+    [components exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
+
+    NSMutableArray *parameters = [self.parameters mutableCopy];
+    [parameters exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
+    if (index == 0) {
+        NSString *firstName = components[otherIndex];
+        if ([firstName hasPrefix:@"initWith"]) {
+            components[otherIndex] = [firstName substringFromIndex:8];
+
+            NSString *firstComponent = components[index];
+            if ([firstComponent hasPrefix:@"and"]) {
+                firstComponent = [firstComponent substringFromIndex:3];
+                components[otherIndex] = [@"and" stringByAppendingString:components[otherIndex]];
+            }
+
+            components[index] = [@"initWith" stringByAppendingString:firstComponent];
+        }
+    }
+    if (otherIndex == 0) {
+        NSString *firstName = components[index];
+        if ([firstName hasPrefix:@"initWith"]) {
+            components[index] = [firstName substringFromIndex:8];
+
+            NSString *firstComponent = components[otherIndex];
+            if ([firstComponent hasPrefix:@"and"]) {
+                firstComponent = [firstComponent substringFromIndex:3];
+                components[index] = [@"and" stringByAppendingString:components[index]];
+            }
+
+            components[otherIndex] = [@"initWith" stringByAppendingString:firstComponent];
+        }
+    }
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+                                                     parameters:parameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
 }
 
 #pragma mark - Private

@@ -71,41 +71,45 @@ describe(@"XMASObjcSelector", ^{
         });
     });
 
-    describe(@"a selector with several args and a return type", ^{
+    void(^createSelectorWithSeveralParameters)() = ^void() {
+        CKToken *firstSelectorPiece = nice_fake_for([CKToken class]);
+        firstSelectorPiece stub_method(@selector(spelling)).and_return(@"initWithThis");
+        firstSelectorPiece stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+
+        CKToken *firstParamType = nice_fake_for([CKToken class]);
+        firstParamType stub_method(@selector(spelling)).and_return(@"NSString");
+        firstParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+
+        CKToken *firstVariableName = nice_fake_for([CKToken class]);
+        firstVariableName stub_method(@selector(spelling)).and_return(@"firstThing");
+        firstVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+
+        CKToken *secondSelectorPieceToken = nice_fake_for([CKToken class]);
+        secondSelectorPieceToken stub_method(@selector(spelling)).and_return(@"andThat");
+        secondSelectorPieceToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+
+        CKToken *secondParamType = nice_fake_for([CKToken class]);
+        secondParamType stub_method(@selector(spelling)).and_return(@"MyClassName");
+        secondParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+
+        CKToken *secondVariableName = nice_fake_for([CKToken class]);
+        secondVariableName stub_method(@selector(spelling)).and_return(@"secondThing");
+        secondVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+        secondVariableName stub_method(@selector(range)).and_return(NSMakeRange(100, 11));
+
+        NSArray *tokens = @[
+                            instanceMethod, openParen, returnType, closeParen,
+                            firstSelectorPiece, colon,
+                            openParen, firstParamType, star, closeParen, firstVariableName,
+                            secondSelectorPieceToken, colon,
+                            openParen, secondParamType, closeParen, secondVariableName
+                            ];
+        subject = [[XMASObjcSelector alloc] initWithTokens:tokens];
+    };
+
+    describe(@"a selector with several parameters and a non-void return type", ^{
         beforeEach(^{
-            CKToken *firstSelectorPiece = nice_fake_for([CKToken class]);
-            firstSelectorPiece stub_method(@selector(spelling)).and_return(@"initWithThis");
-            firstSelectorPiece stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *firstParamType = nice_fake_for([CKToken class]);
-            firstParamType stub_method(@selector(spelling)).and_return(@"NSString");
-            firstParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *firstVariableName = nice_fake_for([CKToken class]);
-            firstVariableName stub_method(@selector(spelling)).and_return(@"firstThing");
-            firstVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *secondSelectorPieceToken = nice_fake_for([CKToken class]);
-            secondSelectorPieceToken stub_method(@selector(spelling)).and_return(@"andThat");
-            secondSelectorPieceToken stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *secondParamType = nice_fake_for([CKToken class]);
-            secondParamType stub_method(@selector(spelling)).and_return(@"MyClassName");
-            secondParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-
-            CKToken *secondVariableName = nice_fake_for([CKToken class]);
-            secondVariableName stub_method(@selector(spelling)).and_return(@"secondThing");
-            secondVariableName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
-            secondVariableName stub_method(@selector(range)).and_return(NSMakeRange(100, 11));
-
-            NSArray *tokens = @[
-                                instanceMethod, openParen, returnType, closeParen,
-                                firstSelectorPiece, colon,
-                                openParen, firstParamType, star, closeParen, firstVariableName,
-                                secondSelectorPieceToken, colon,
-                                openParen, secondParamType, closeParen, secondVariableName
-                                ];
-            subject = [[XMASObjcSelector alloc] initWithTokens:tokens];
+            createSelectorWithSeveralParameters();
         });
 
         it(@"should create the correct selector from its token", ^{
@@ -155,6 +159,238 @@ describe(@"XMASObjcSelector", ^{
 
             it(@"should have the correct local name", ^{
                 param.localName should equal(@"secondThing");
+            });
+        });
+    });
+
+    describe(@"creating a new selector", ^{
+        __block XMASObjcSelector *newSelector;
+
+        beforeEach(^{
+            createSelectorWithSeveralParameters();
+        });
+
+        context(@"by deleting a component", ^{
+            beforeEach(^{
+                newSelector = [subject deleteComponentAtIndex:1];
+            });
+
+            it(@"should create the correct selector from its token", ^{
+                newSelector.selectorString should equal(@"initWithThis:");
+            });
+
+            it(@"should have the correct number of parameters", ^{
+                newSelector.parameters.count should equal(1);
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                newSelector.range should equal(NSMakeRange(10, 101));
+            });
+
+            it(@"should have a component for each part of the selector", ^{
+                newSelector.components should equal(@[@"initWithThis"]);
+            });
+
+            describe(@"the first parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters.firstObject;
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"NSString *");
+                });
+                
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"firstThing");
+                });
+            });
+        });
+
+        context(@"by adding a component", ^{
+            beforeEach(^{
+                newSelector = [subject insertComponentAtIndex:1];
+            });
+
+            it(@"should create the correct selector from its token", ^{
+                newSelector.selectorString should equal(@"initWithThis::andThat:");
+            });
+
+            it(@"should have the correct number of parameters", ^{
+                newSelector.parameters.count should equal(3);
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                newSelector.range should equal(NSMakeRange(10, 101));
+            });
+
+            it(@"should have a component for each part of the selector", ^{
+                newSelector.components should equal(@[@"initWithThis", @"", @"andThat"]);
+            });
+
+            describe(@"the first parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters.firstObject;
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"NSString *");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"firstThing");
+                });
+            });
+
+            describe(@"the second parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[1];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"");
+                });
+            });
+
+            describe(@"the third parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[2];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"MyClassName");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"secondThing");
+                });
+            });
+        });
+
+        context(@"by swapping two componenets", ^{
+            beforeEach(^{
+                newSelector = [subject swapComponentAtIndex:0 withComponentAtIndex:1];
+            });
+
+            it(@"should create the correct selector from its token", ^{
+                newSelector.selectorString should equal(@"initWithThat:andThis:");
+            });
+
+            it(@"should have the correct number of parameters", ^{
+                newSelector.parameters.count should equal(2);
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                newSelector.range should equal(NSMakeRange(10, 101));
+            });
+
+            it(@"should have a component for each part of the selector", ^{
+                newSelector.components should equal(@[@"initWithThat", @"andThis"]);
+            });
+
+            describe(@"the first parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[0];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"MyClassName");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"secondThing");
+                });
+            });
+
+            describe(@"the second parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[1];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"NSString *");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"firstThing");
+                });
+            });
+        });
+
+        context(@"by swapping two componenets", ^{
+            beforeEach(^{
+                newSelector = [subject swapComponentAtIndex:1 withComponentAtIndex:0];
+            });
+
+            it(@"should create the correct selector from its token", ^{
+                newSelector.selectorString should equal(@"initWithThat:andThis:");
+            });
+
+            it(@"should have the correct number of parameters", ^{
+                newSelector.parameters.count should equal(2);
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                newSelector.range should equal(NSMakeRange(10, 101));
+            });
+
+            it(@"should have a component for each part of the selector", ^{
+                newSelector.components should equal(@[@"initWithThat", @"andThis"]);
+            });
+
+            describe(@"the first parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[0];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"MyClassName");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"secondThing");
+                });
+            });
+
+            describe(@"the second parameter", ^{
+                __block XMASObjcSelectorParameter *param;
+
+                beforeEach(^{
+                    param = newSelector.parameters[1];
+                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                });
+
+                it(@"should have the correct type", ^{
+                    param.type should equal(@"NSString *");
+                });
+
+                it(@"should have the correct local name", ^{
+                    param.localName should equal(@"firstThing");
+                });
             });
         });
     });
