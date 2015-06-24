@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "XMASObjcSelector.h"
 
+@class XMASObjcSelector;
 @class XMASWindowProvider;
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
@@ -16,6 +17,8 @@
 
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
+@property (nonatomic, readonly) XMASObjcSelector *method;
+
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate;

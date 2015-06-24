@@ -164,12 +164,34 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                         context(@"after a row that can be raised is selected", ^{
                             beforeEach(^{
-                                NSIndexSet *firstRow = [[NSIndexSet alloc] initWithIndex:2];
-                                [subject.tableView selectRowIndexes:firstRow byExtendingSelection:NO];
+                                NSIndexSet *lastRow = [[NSIndexSet alloc] initWithIndex:2];
+                                [subject.tableView selectRowIndexes:lastRow byExtendingSelection:NO];
                             });
 
                             it(@"should enable the button", ^{
                                 subject.raiseComponentButton.enabled should be_truthy;
+                            });
+
+                            describe(@"and the button is tapped", ^{
+                                __block XMASObjcSelector *spiedMethod;
+
+                                beforeEach(^{
+                                    spy_on(subject.method);
+                                    spiedMethod = subject.method;
+
+                                    spy_on(subject.tableView);
+
+                                    [subject.raiseComponentButton performClick:nil];
+                                });
+
+                                it(@"should swap the selected component with the one below it", ^{
+                                    spiedMethod should have_received(@selector(swapComponentAtIndex:withComponentAtIndex:))
+                                    .with(2, 1);
+                                });
+
+                                it(@"should tell its tableview to reload, so it can become aware of this change", ^{
+                                    subject.tableView should have_received(@selector(reloadData));
+                                });
                             });
                         });
 
@@ -200,6 +222,28 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                             it(@"should enable the button", ^{
                                 subject.lowerComponentButton.enabled should be_truthy;
+                            });
+
+                            describe(@"and the button is tapped", ^{
+                                __block XMASObjcSelector *spiedMethod;
+
+                                beforeEach(^{
+                                    spy_on(subject.method);
+                                    spiedMethod = subject.method;
+
+                                    spy_on(subject.tableView);
+
+                                    [subject.lowerComponentButton performClick:nil];
+                                });
+
+                                it(@"should swap the selected component with the one below it", ^{
+                                    spiedMethod should have_received(@selector(swapComponentAtIndex:withComponentAtIndex:))
+                                        .with(0, 1);
+                                });
+
+                                it(@"should tell its tableview to reload, so it can become aware of this change", ^{
+                                    subject.tableView should have_received(@selector(reloadData));
+                                });
                             });
                         });
 

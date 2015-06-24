@@ -66,7 +66,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
         selectedRow = (NSInteger)self.method.components.count;
     }
 
-    self.method = [self.method insertComponentAtIndex:selectedRow];
+    self.method = [self.method insertComponentAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
 
     NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
@@ -79,16 +79,20 @@ static NSString * const tableViewColumnRowIdentifier = @"";
         return;
     }
 
-    self.method = [self.method deleteComponentAtIndex:selectedRow];
+    self.method = [self.method deleteComponentAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
 }
 
 - (IBAction)didTapMoveUp:(id)sender {
-
+    NSUInteger selectedRow = (NSUInteger)self.tableView.selectedRow;
+    self.method = [self.method swapComponentAtIndex:selectedRow withComponentAtIndex:selectedRow - 1];
+    [self.tableView reloadData];
 }
 
 - (IBAction)didTapMoveDown:(id)sender {
-
+    NSUInteger selectedRow = (NSUInteger)self.tableView.selectedRow;
+    self.method = [self.method swapComponentAtIndex:selectedRow withComponentAtIndex:selectedRow + 1];
+    [self.tableView reloadData];
 }
 
 #pragma mark - <NSWindowDelegate>
