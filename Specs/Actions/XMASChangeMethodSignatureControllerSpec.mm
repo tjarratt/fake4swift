@@ -16,8 +16,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
-        window = [[NSWindow alloc] init];
-        spy_on(window);
+        window = nice_fake_for([NSWindow class]);
 
         windowProvider = nice_fake_for([XMASWindowProvider class]);
         windowProvider stub_method(@selector(provideInstance)).and_return(window);
@@ -33,9 +32,6 @@ describe(@"XMASChangeMethodSignatureController", ^{
         __block NSString *filepath;
 
         beforeEach(^{
-            method = nice_fake_for([XMASObjcSelector class]);
-            method stub_method(@selector(components)).and_return(@[@"initWith", @"this", @"andThat"]);
-
             XMASObjcSelectorParameter *firstParam = nice_fake_for([XMASObjcSelectorParameter class]);
             firstParam stub_method(@selector(type)).and_return(@"id");
             firstParam stub_method(@selector(localName)).and_return(@"something");
@@ -48,8 +44,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
             thirdParam stub_method(@selector(type)).and_return(@"NSInteger");
             thirdParam stub_method(@selector(localName)).and_return(@"_thatThing");
 
+            NSArray *components = @[@"initWith", @"this", @"andThat"];
             NSArray *parameters = @[firstParam, secondParam, thirdParam];
-            method stub_method(@selector(parameters)).and_return(parameters);
+            method = [[XMASObjcSelector alloc] initWithSelectorComponents:components
+                                                               parameters:parameters
+                                                               returnType:@"nil"
+                                                                    range:NSMakeRange(0, 0)];
+
             filepath = @"/tmp/imagine.all.the.people";
             [subject refactorMethod:method inFile:filepath];
         });
@@ -69,7 +70,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
             describe(@"when the window closes", ^{
                 beforeEach(^{
-                    [window close];
+                    [subject windowWillClose:nil];
                 });
 
                 it(@"should notify its delegate that it will disappear", ^{
@@ -228,10 +229,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                         });
 
                         it(@"should only have removed the row at index 1", ^{
-                            NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:NO];
+                            NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
                             firstSelector.stringValue should equal(@"initWith");
 
-                            NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:NO];
+                            NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
                             secondSelector.stringValue should equal(@"andThat");
                         });
                     });

@@ -6,6 +6,10 @@
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTokens:(NSArray *)tokens;
+- (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
+                                parameters:(NSArray *)parameters
+                                returnType:(NSString *)returnType
+                                     range:(NSRange)range;
 
 - (NSArray *)parameters;
 - (NSString *)selectorString;
