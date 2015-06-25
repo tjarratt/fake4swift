@@ -192,6 +192,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                 it(@"should tell its tableview to reload, so it can become aware of this change", ^{
                                     subject.tableView should have_received(@selector(reloadData));
                                 });
+
+                                it(@"should move the selection to the upper row", ^{
+                                    subject.tableView.selectedRow should equal(1);
+                                });
                             });
                         });
 
@@ -216,8 +220,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                         context(@"after a row that can be lowered is selected", ^{
                             beforeEach(^{
-                                NSIndexSet *lastRow = [[NSIndexSet alloc] initWithIndex:0];
-                                [subject.tableView selectRowIndexes:lastRow byExtendingSelection:NO];
+                                NSIndexSet *firstRow = [[NSIndexSet alloc] initWithIndex:0];
+                                [subject.tableView selectRowIndexes:firstRow byExtendingSelection:NO];
                             });
 
                             it(@"should enable the button", ^{
@@ -243,6 +247,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                                 it(@"should tell its tableview to reload, so it can become aware of this change", ^{
                                     subject.tableView should have_received(@selector(reloadData));
+                                });
+
+                                it(@"should move the selection to the lower row", ^{
+                                    subject.tableView.selectedRow should equal(1);
                                 });
                             });
                         });

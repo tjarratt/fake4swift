@@ -87,12 +87,16 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     NSUInteger selectedRow = (NSUInteger)self.tableView.selectedRow;
     self.method = [self.method swapComponentAtIndex:selectedRow withComponentAtIndex:selectedRow - 1];
     [self.tableView reloadData];
+
+    [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow - 1)] byExtendingSelection:NO];
 }
 
 - (IBAction)didTapMoveDown:(id)sender {
     NSUInteger selectedRow = (NSUInteger)self.tableView.selectedRow;
     self.method = [self.method swapComponentAtIndex:selectedRow withComponentAtIndex:selectedRow + 1];
     [self.tableView reloadData];
+
+    [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow + 1)] byExtendingSelection:NO];
 }
 
 #pragma mark - <NSWindowDelegate>
