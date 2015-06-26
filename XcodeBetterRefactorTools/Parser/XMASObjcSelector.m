@@ -1,6 +1,7 @@
 #import "XMASObjcSelector.h"
 #import "XMASObjcSelectorParameter.h"
 #import "XMASObjcTypeParser.h"
+#import "XMASComponentSwapper.h"
 
 @interface XMASObjcSelector ()
 
@@ -8,6 +9,7 @@
 @property (nonatomic) NSArray *parameters;
 @property (nonatomic) NSString *returnType;
 @property (nonatomic, assign) NSRange range;
+@property (nonatomic) XMASComponentSwapper *componentSwapper;
 
 @end
 
@@ -19,6 +21,7 @@
         NSRange start = [tokens.firstObject range];
         NSRange end = [tokens.lastObject range];
         self.range = NSMakeRange(start.location, end.location + end.length - start.location);
+        self.componentSwapper = [[XMASComponentSwapper alloc] init];
     }
 
     return self;
@@ -34,6 +37,7 @@
         self.parameters = parameters;
         self.returnType = returnType;
         self.range = range;
+        self.componentSwapper = [[XMASComponentSwapper alloc] init];
     }
 
     return self;
@@ -84,38 +88,14 @@
 
 - (instancetype)swapComponentAtIndex:(NSUInteger)index withComponentAtIndex:(NSUInteger)otherIndex {
     NSMutableArray *components = [self.selectorComponents mutableCopy];
-    [components exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
+
+    XMASComponentPair *componentPair = [self.componentSwapper swapComponent:components[index]
+                                                              withComponent:components[otherIndex]];
+    components[index] = componentPair.first;
+    components[otherIndex] = componentPair.second;
 
     NSMutableArray *parameters = [self.parameters mutableCopy];
     [parameters exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
-    if (index == 0) {
-        NSString *firstName = components[otherIndex];
-        if ([firstName hasPrefix:@"initWith"]) {
-            components[otherIndex] = [firstName substringFromIndex:8];
-
-            NSString *firstComponent = components[index];
-            if ([firstComponent hasPrefix:@"and"]) {
-                firstComponent = [firstComponent substringFromIndex:3];
-                components[otherIndex] = [@"and" stringByAppendingString:components[otherIndex]];
-            }
-
-            components[index] = [@"initWith" stringByAppendingString:firstComponent];
-        }
-    }
-    if (otherIndex == 0) {
-        NSString *firstName = components[index];
-        if ([firstName hasPrefix:@"initWith"]) {
-            components[index] = [firstName substringFromIndex:8];
-
-            NSString *firstComponent = components[otherIndex];
-            if ([firstComponent hasPrefix:@"and"]) {
-                firstComponent = [firstComponent substringFromIndex:3];
-                components[index] = [@"and" stringByAppendingString:components[index]];
-            }
-
-            components[otherIndex] = [@"initWith" stringByAppendingString:firstComponent];
-        }
-    }
 
     return [[XMASObjcSelector alloc] initWithSelectorComponents:components
                                                      parameters:parameters

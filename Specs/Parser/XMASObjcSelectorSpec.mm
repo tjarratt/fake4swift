@@ -338,7 +338,7 @@ describe(@"XMASObjcSelector", ^{
             });
         });
 
-        context(@"by swapping two componenets", ^{
+        context(@"by swapping two components", ^{
             beforeEach(^{
                 newSelector = [subject swapComponentAtIndex:1 withComponentAtIndex:0];
             });
