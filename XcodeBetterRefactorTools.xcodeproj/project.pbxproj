@@ -282,15 +282,8 @@
 		9608A8FD1622755B00763892 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				F7B550781B294B79006E59F9 /* XMASChangeMethodSignatureController.h */,
-				F7B550791B294B79006E59F9 /* XMASChangeMethodSignatureController.m */,
-				F757C6201B29603800274BD9 /* XMASChangeMethodSignatureController.xib */,
-				F7B5507C1B294BA8006E59F9 /* XMASChangeMethodSignatureControllerProvider.h */,
-				F7B5507D1B294BA8006E59F9 /* XMASChangeMethodSignatureControllerProvider.m */,
 				F74BBB4E1B273D760092AED9 /* XMASRefactorMethodAction.h */,
 				F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */,
-				F7F09FE31B2819C200727AD7 /* XMASWindowProvider.h */,
-				F7F09FE41B2819C200727AD7 /* XMASWindowProvider.m */,
 				F798375E1B365D44000F1EBD /* XMASRefactorMethodActionProvider.h */,
 				F798375F1B365D44000F1EBD /* XMASRefactorMethodActionProvider.m */,
 			);
@@ -330,6 +323,7 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
+				F75BABD31B3D362F0056E8F0 /* UI */,
 				9608A8FD1622755B00763892 /* Actions */,
 				9608A8FB1622754500763892 /* Menu Additions */,
 				96A20EE516B61CA200B39B2A /* Other */,
@@ -396,6 +390,20 @@
 				F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		F75BABD31B3D362F0056E8F0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F7B550781B294B79006E59F9 /* XMASChangeMethodSignatureController.h */,
+				F7B550791B294B79006E59F9 /* XMASChangeMethodSignatureController.m */,
+				F757C6201B29603800274BD9 /* XMASChangeMethodSignatureController.xib */,
+				F7B5507C1B294BA8006E59F9 /* XMASChangeMethodSignatureControllerProvider.h */,
+				F7B5507D1B294BA8006E59F9 /* XMASChangeMethodSignatureControllerProvider.m */,
+				F7F09FE31B2819C200727AD7 /* XMASWindowProvider.h */,
+				F7F09FE41B2819C200727AD7 /* XMASWindowProvider.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		F798374F1B365C8F000F1EBD /* Menu Additions */ = {

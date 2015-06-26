@@ -44,7 +44,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
             thirdParam stub_method(@selector(type)).and_return(@"NSInteger");
             thirdParam stub_method(@selector(localName)).and_return(@"_thatThing");
 
-            NSArray *components = @[@"initWith", @"this", @"andThat"];
+            NSArray *components = @[@"initWithSomething", @"this", @"andThat"];
             NSArray *parameters = @[firstParam, secondParam, thirdParam];
             method = [[XMASObjcSelector alloc] initWithSelectorComponents:components
                                                                parameters:parameters
@@ -145,7 +145,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                         it(@"should insert the new row between the first and second rows", ^{
                             NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
-                            firstSelector.stringValue should equal(@"initWith");
+                            firstSelector.stringValue should equal(@"initWithSomething");
 
                             NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
                             secondSelector.stringValue should equal(@"");
@@ -186,7 +186,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                                 it(@"should swap the selected component with the one below it", ^{
                                     spiedMethod should have_received(@selector(swapComponentAtIndex:withComponentAtIndex:))
-                                    .with(2, 1);
+                                        .with(2, 1);
                                 });
 
                                 it(@"should tell its tableview to reload, so it can become aware of this change", ^{
@@ -282,7 +282,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                         it(@"should only have removed the row at index 1", ^{
                             NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
-                            firstSelector.stringValue should equal(@"initWith");
+                            firstSelector.stringValue should equal(@"initWithSomething");
 
                             NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
                             secondSelector.stringValue should equal(@"andThat");
@@ -300,7 +300,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     it(@"should have the correct cell contents", ^{
                         NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
                         NSTextField *firstRowFirstColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:firstColumn row:0];
-                        firstRowFirstColumn.stringValue should equal(@"initWith");
+                        firstRowFirstColumn.stringValue should equal(@"initWithSomething");
 
                         NSTableColumn *secondColumn = subject.tableView.tableColumns[1];
                         NSTextField *firstRowSecondColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:secondColumn row:0];

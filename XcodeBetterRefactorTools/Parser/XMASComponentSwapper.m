@@ -20,10 +20,10 @@
     pair.second = firstName;
 
 
-    if ([firstName hasPrefix:@"initWith"]) {
+    if ([firstName hasPrefix:@"initWith"] && firstName.length > 8) {
         pair.second = [self downcaseFirstLetterOfString:[firstName substringFromIndex:8]];
 
-        if ([secondName hasPrefix:@"and"]) {
+        if ([secondName hasPrefix:@"and"] && secondName.length > 3) {
             pair.first = [pair.first substringFromIndex:3];
             pair.second = [@"and" stringByAppendingString:[self upcaseFirstLetterOfString:pair.second]];
         }
@@ -31,10 +31,10 @@
         pair.first = [@"initWith" stringByAppendingString:[self upcaseFirstLetterOfString:pair.first]];
     }
 
-    if ([secondName hasPrefix:@"initWith"]) {
+    if ([secondName hasPrefix:@"initWith"] && secondName.length > 8) {
         pair.first = [self downcaseFirstLetterOfString:[secondName substringFromIndex:8]];
 
-        if ([firstName hasPrefix:@"and"]) {
+        if ([firstName hasPrefix:@"and"] && firstName.length > 3) {
             pair.second = [pair.second substringFromIndex:3];
             pair.first = [@"and" stringByAppendingString:[self upcaseFirstLetterOfString:pair.first]];
         }

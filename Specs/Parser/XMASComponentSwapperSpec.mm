@@ -36,6 +36,12 @@ describe(@"XMASComponentSwapper", ^{
         pair.first should equal(@"andServiceManager");
         pair.second should equal(@"initWithDelegate");
     });
+
+    it(@"should handle strangely named selector components", ^{
+        XMASComponentPair *pair = [subject swapComponent:@"initWith" withComponent:@"and"];
+        pair.first should equal(@"and");
+        pair.second should equal(@"initWith");
+    });
 });
 
 SPEC_END
