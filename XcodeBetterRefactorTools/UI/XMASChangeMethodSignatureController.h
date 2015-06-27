@@ -14,6 +14,7 @@
 @property (nonatomic, weak, readonly) NSButton *lowerComponentButton;
 @property (nonatomic, weak, readonly) NSButton *cancelButton;
 @property (nonatomic, weak, readonly) NSButton *refactorButton;
+@property (nonatomic, weak, readonly) NSTextField *previewTextField;
 
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;

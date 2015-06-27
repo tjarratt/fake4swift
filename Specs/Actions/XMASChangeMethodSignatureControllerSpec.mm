@@ -48,7 +48,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
             NSArray *parameters = @[firstParam, secondParam, thirdParam];
             method = [[XMASObjcSelector alloc] initWithSelectorComponents:components
                                                                parameters:parameters
-                                                               returnType:@"nil"
+                                                               returnType:@"instancetype"
                                                                     range:NSMakeRange(0, 0)];
 
             filepath = @"/tmp/imagine.all.the.people";
@@ -93,6 +93,20 @@ describe(@"XMASChangeMethodSignatureController", ^{
         describe(@"after the view loads", ^{
             beforeEach(^{
                 subject.view should_not be_nil;
+            });
+
+            it(@"should make the window key and visible", ^{
+                window should have_received(@selector(makeKeyAndOrderFront:)).with(NSApp);
+            });
+
+            it(@"should set its view on the window", ^{
+                window should have_received(@selector(setContentView:)).with(subject.view);
+            });
+
+            describe(@"the preview area", ^{
+                it(@"should initially include the original method", ^{
+                    subject.previewTextField.stringValue should equal(@"- (instancetype)initWithSomething:(id)something this:(NSString *)thisThingy andThat:(NSInteger)_thatThing");
+                });
             });
 
             describe(@"its tableview", ^{
@@ -196,6 +210,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                 it(@"should move the selection to the upper row", ^{
                                     subject.tableView.selectedRow should equal(1);
                                 });
+
+                                it(@"should initially include the original method", ^{
+                                    subject.previewTextField.stringValue should equal(@"- (instancetype)initWithSomething:(id)something andThat:(NSInteger)_thatThing this:(NSString *)thisThingy");
+                                });
                             });
                         });
 
@@ -252,6 +270,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                 it(@"should move the selection to the lower row", ^{
                                     subject.tableView.selectedRow should equal(1);
                                 });
+
+                                it(@"should update the preview", ^{
+                                    subject.previewTextField.stringValue should equal(@"- (instancetype)initWithThis:(NSString *)thisThingy something:(id)something andThat:(NSInteger)_thatThing");
+                                });
                             });
                         });
 
@@ -286,6 +308,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                             NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
                             secondSelector.stringValue should equal(@"andThat");
+                        });
+
+                        it(@"should update the preview", ^{
+                            subject.previewTextField.stringValue should equal(@"- (instancetype)initWithSomething:(id)something andThat:(NSInteger)_thatThing");
                         });
                     });
 

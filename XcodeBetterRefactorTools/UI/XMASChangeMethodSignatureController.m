@@ -14,6 +14,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic, weak) IBOutlet NSButton *lowerComponentButton;
 @property (nonatomic, weak) IBOutlet NSButton *cancelButton;
 @property (nonatomic, weak) IBOutlet NSButton *refactorButton;
+@property (nonatomic, weak) IBOutlet NSTextField *previewTextField;
 
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
@@ -71,6 +72,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
     [textField becomeFirstResponder];
+
+    self.previewTextField.stringValue = [self previewFromCurrentSelector];
 }
 
 - (IBAction)didTapRemove:(id)sender {
@@ -81,6 +84,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     self.method = [self.method deleteComponentAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
+
+    self.previewTextField.stringValue = [self previewFromCurrentSelector];
 }
 
 - (IBAction)didTapMoveUp:(id)sender {
@@ -89,6 +94,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
 
     [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow - 1)] byExtendingSelection:NO];
+
+    self.previewTextField.stringValue = [self previewFromCurrentSelector];
 }
 
 - (IBAction)didTapMoveDown:(id)sender {
@@ -97,6 +104,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
 
     [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow + 1)] byExtendingSelection:NO];
+
+    self.previewTextField.stringValue = [self previewFromCurrentSelector];
 }
 
 #pragma mark - <NSWindowDelegate>
@@ -119,7 +128,9 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.raiseComponentButton.enabled = NO;
     self.lowerComponentButton.enabled = NO;
 
-     [self.window makeKeyAndOrderFront:NSApp];
+    self.previewTextField.stringValue = [self previewFromCurrentSelector];
+
+    [self.window makeKeyAndOrderFront:NSApp];
 }
 
 #pragma mark - <NSTableViewDataSource>
@@ -157,6 +168,20 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     NSInteger selectedRow = self.tableView.selectedRow;
     self.lowerComponentButton.enabled = selectedRow >= 0 && selectedRow < (self.method.components.count - 1);
     self.raiseComponentButton.enabled = selectedRow > 0 && selectedRow <= (self.method.components.count - 1);
+}
+
+#pragma mark - Private
+
+- (NSString *)previewFromCurrentSelector {
+    NSMutableArray *pieces = [[NSMutableArray alloc] initWithCapacity:self.method.components.count];
+    for (NSUInteger i = 0; i < self.method.components.count; ++i) {
+        NSString *componentName = self.method.components[i];
+        XMASObjcSelectorParameter *param = self.method.parameters[i];
+
+        [pieces addObject:[NSString stringWithFormat:@"%@:(%@)%@", componentName, param.type, param.localName]];
+    }
+
+    return [NSString stringWithFormat:@"- (%@)%@", self.method.returnType, [pieces componentsJoinedByString:@" "]];
 }
 
 @end
