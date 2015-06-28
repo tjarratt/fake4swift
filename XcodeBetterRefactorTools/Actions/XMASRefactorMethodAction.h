@@ -17,6 +17,7 @@ extern NSString * const noMethodSelected;
               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
 
 - (void)refactorMethodUnderCursor;
+- (void)safelyRefactorMethodUnderCursor;
 
 @property (nonatomic, readonly) XMASChangeMethodSignatureController *controller;
 

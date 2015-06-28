@@ -119,6 +119,25 @@ describe(@"XMASRefactorMethodAction", ^{
             alerter should have_received(@selector(flashMessage:)).with(noMethodSelected);
         });
     });
+
+    describe(@"-safelyRefactorMethod", ^{
+        __block XMASChangeMethodSignatureController<CedarDouble> *controller;
+
+        beforeEach(^{
+            controller = nice_fake_for([XMASChangeMethodSignatureController class]);
+            controllerProvider stub_method(@selector(provideInstanceWithDelegate:)).and_return(controller);
+
+            controller stub_method(@selector(refactorMethod:inFile:)).and_raise_exception();
+        });
+
+        it(@"should capture the exception", ^{
+            ^{ [subject safelyRefactorMethodUnderCursor]; } should_not raise_exception();
+        });
+
+        it(@"should tell the user something bad happened", ^{
+            alerter should have_received(@selector(flashMessage:));
+        });
+    });
 });
 
 SPEC_END

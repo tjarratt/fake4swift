@@ -51,11 +51,11 @@
     XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider];
 
     XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
-                                                                                       alerter:alerter
-                                                                            controllerProvider:controllerProvider
-                                                                              methodDeclParser:methodDeclParser];
+                                                                                      alerter:alerter
+                                                                           controllerProvider:controllerProvider
+                                                                             methodDeclParser:methodDeclParser];
 
-    [refactorAction refactorMethodUnderCursor];
+    [refactorAction safelyRefactorMethodUnderCursor];
 }
 
 

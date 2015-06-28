@@ -36,6 +36,17 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     return self;
 }
 
+- (void)safelyRefactorMethodUnderCursor {
+    @try {
+        [self refactorMethodUnderCursor];
+    }
+    @catch (NSException *exception) {
+        [self.alerter flashMessage:@"Aww shucks. Something bad happened."];
+        NSLog(@"================> something bad happened while performing the refactor method action");
+        NSLog(@"================> %@", [exception description]);
+    }
+}
+
 - (void)refactorMethodUnderCursor {
     NSUInteger cursorLocation = [self cursorLocation];
     NSString *currentFilePath = [self currentSourceCodeFilePath];
