@@ -22,18 +22,20 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 @implementation XMASRefactorMethodAction
 
-- (instancetype)initWithEditor:(id)editor
-                       alerter:(XMASAlert *)alerter
-            controllerProvider:(XMASChangeMethodSignatureControllerProvider *)controllerProvider
-              methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser {
+- (instancetype)initWithAlerter:(XMASAlert *)alerter
+             controllerProvider:(XMASChangeMethodSignatureControllerProvider *)controllerProvider
+               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser {
     if (self = [super init]) {
         self.alerter = alerter;
-        self.currentEditor = editor;
         self.controllerProvider = controllerProvider;
         self.methodDeclParser = methodDeclParser;
     }
 
     return self;
+}
+
+- (void)setupWithEditor:(id)editor {
+    self.currentEditor = editor;
 }
 
 - (void)safelyRefactorMethodUnderCursor {

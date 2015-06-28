@@ -41,12 +41,17 @@ describe(@"XMASRefactorMethodActionProvider", ^{
             action should be_instance_of([XMASRefactorMethodAction class]);
         });
 
+        it(@"should configure the RefactorMethodAction with the editor", ^{
+            action.currentEditor should be_same_instance_as(editor);
+        });
+
         it(@"should have a singleton reference to its refactor action", ^{
             XMASRefactorMethodAction *anotherAction = [subject provideInstanceWithEditor:editor
                                                                                           alerter:alerter
                                                                                controllerProvider:controllerProvider
                                                                                  methodDeclParser:methodDeclParser];
             anotherAction should be_same_instance_as(action);
+            anotherAction.currentEditor should be_same_instance_as(editor);
         });
     });
 });

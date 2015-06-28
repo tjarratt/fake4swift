@@ -14,13 +14,15 @@ static XMASRefactorMethodAction *action;
                                        methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser
 {
     if (action != nil) {
+        [action setupWithEditor:editor];
         return action;
     }
     
-    action = [[XMASRefactorMethodAction alloc] initWithEditor:editor
-                                                      alerter:alerter
-                                           controllerProvider:controllerProvider
-                                             methodDeclParser:methodDeclParser];
+    action = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter
+                                            controllerProvider:controllerProvider
+                                              methodDeclParser:methodDeclParser];
+
+    [action setupWithEditor:editor];
 
     return action;
 }

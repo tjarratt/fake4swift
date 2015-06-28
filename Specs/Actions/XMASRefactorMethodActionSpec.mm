@@ -26,10 +26,10 @@ describe(@"XMASRefactorMethodAction", ^{
         editor = nice_fake_for(@protocol(XCP(IDESourceCodeEditor)));
         controllerProvider = nice_fake_for([XMASChangeMethodSignatureControllerProvider class]);
         methodDeclParser = nice_fake_for([XMASObjcMethodDeclarationParser class]);
-        subject = [[XMASRefactorMethodAction alloc] initWithEditor:editor
-                                                           alerter:alerter
-                                                controllerProvider:controllerProvider
-                                                  methodDeclParser:methodDeclParser];
+        subject = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter
+                                                 controllerProvider:controllerProvider
+                                                   methodDeclParser:methodDeclParser];
+        [subject setupWithEditor:editor];
     });
 
     __block XMASObjcSelector *selector;

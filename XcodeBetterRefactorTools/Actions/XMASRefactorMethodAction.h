@@ -11,15 +11,17 @@ extern NSString * const noMethodSelected;
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithEditor:(id)editor
-                       alerter:(XMASAlert *)alerter
-            controllerProvider:(XMASChangeMethodSignatureControllerProvider *)contollerProvider
-              methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAlerter:(XMASAlert *)alerter
+             controllerProvider:(XMASChangeMethodSignatureControllerProvider *)contollerProvider
+               methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
+
+- (void)setupWithEditor:(id)editor;
 
 - (void)refactorMethodUnderCursor;
 - (void)safelyRefactorMethodUnderCursor;
 
 @property (nonatomic, readonly) XMASChangeMethodSignatureController *controller;
+@property (nonatomic, readonly) id currentEditor;
 
 
 @end
