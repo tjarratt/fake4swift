@@ -5,7 +5,7 @@
 @class XMASWindowProvider;
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
-@interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate>
+@interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate>
 
 @property (nonatomic, weak, readonly) NSTableView *tableView;
 @property (nonatomic, weak, readonly) NSButton *addComponentButton;

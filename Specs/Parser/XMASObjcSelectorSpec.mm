@@ -393,6 +393,36 @@ describe(@"XMASObjcSelector", ^{
                 });
             });
         });
+
+        context(@"by changing the name of a selector component", ^{
+            beforeEach(^{
+                newSelector = [subject changeSelectorNameAtIndex:0 to:@"butts"];
+            });
+
+            it(@"should yield a new copy with the selector name changed at the provided index", ^{
+                newSelector.selectorString should equal(@"butts:andThat:");
+            });
+        });
+
+        context(@"by changing the type of a parameter", ^{
+            beforeEach(^{
+                newSelector = [subject changeParameterTypeAtIndex:0 to:@"Butts *"];
+            });
+
+            it(@"should yield a new copy with the selector name changed at the provided index", ^{
+                [newSelector.parameters[0] type] should equal(@"Butts *");
+            });
+        });
+
+        context(@"by changing the local name of an argument", ^{
+            beforeEach(^{
+                newSelector = [subject changeParameterLocalNameAtIndex:0 to:@"butts"];
+            });
+
+            it(@"should yield a new copy with the selector name changed at the provided index", ^{
+                [newSelector.parameters[0] localName] should equal(@"butts");
+            });
+        });
     });
 });
 

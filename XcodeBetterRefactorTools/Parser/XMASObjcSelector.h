@@ -21,4 +21,8 @@
 - (instancetype)insertComponentAtIndex:(NSUInteger)index;
 - (instancetype)swapComponentAtIndex:(NSUInteger)index withComponentAtIndex:(NSUInteger)otherIndex;
 
+- (instancetype)changeSelectorNameAtIndex:(NSUInteger)index to:(NSString *)newType;
+- (instancetype)changeParameterTypeAtIndex:(NSUInteger)index to:(NSString *)newType;
+- (instancetype)changeParameterLocalNameAtIndex:(NSUInteger)index to:(NSString *)newName;
+
 @end

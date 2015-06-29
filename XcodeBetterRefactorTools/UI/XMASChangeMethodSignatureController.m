@@ -71,6 +71,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
 
     NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
+    textField.delegate = self;
     [textField becomeFirstResponder];
 
     self.previewTextField.stringValue = [self previewFromCurrentSelector];
@@ -149,6 +150,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     NSTextField *textField = [tableView makeViewWithIdentifier:tableViewColumnRowIdentifier owner:self];
     if (!textField) {
         textField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)];
+        textField.delegate = self;
     }
 
     if ([tableColumn.identifier isEqualToString:@"selector"]) {
@@ -168,6 +170,32 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     NSInteger selectedRow = self.tableView.selectedRow;
     self.lowerComponentButton.enabled = selectedRow >= 0 && selectedRow < (self.method.components.count - 1);
     self.raiseComponentButton.enabled = selectedRow > 0 && selectedRow <= (self.method.components.count - 1);
+}
+
+#pragma mark - <NSTextfieldDelegate>
+
+- (void)controlTextDidChange:(NSNotification *)notification {
+    for (NSUInteger row = 0; row < self.method.components.count; ++row) {
+        for (NSUInteger column = 0; column < 3; ++column) {
+            NSTextField *textField = (id)[self.tableView viewAtColumn:(NSInteger)column row:(NSInteger)row makeIfNecessary:YES];
+            if (textField == notification.object) {
+                switch (column) {
+                    case 0:
+                        self.method = [self.method changeSelectorNameAtIndex:row to:textField.stringValue];
+                        break;
+                    case 1:
+                        self.method = [self.method changeParameterTypeAtIndex:row to:textField.stringValue];
+                        break;
+                    case 2:
+                        self.method = [self.method changeParameterLocalNameAtIndex:row to:textField.stringValue];
+                        break;
+                }
+
+                self.previewTextField.stringValue = [self previewFromCurrentSelector];
+                return;
+            }
+        }
+    }
 }
 
 #pragma mark - Private

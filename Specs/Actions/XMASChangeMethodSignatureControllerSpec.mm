@@ -63,6 +63,23 @@ describe(@"XMASChangeMethodSignatureController", ^{
             window should have_received(@selector(setReleasedWhenClosed:)).with(NO);
         });
 
+        describe(@"as a <NSTextFieldDelegate>", ^{
+            beforeEach(^{
+                subject.view should_not be_nil;
+
+                NSTextField *firstTextField = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
+                firstTextField.stringValue = @"whoops";
+
+                NSNotification *notification = fake_for([NSNotification class]);
+                notification stub_method(@selector(object)).and_return(firstTextField);
+                [subject controlTextDidChange:notification];
+            });
+
+            it(@"should update the preview as the user types", ^{
+                subject.previewTextField.stringValue should equal(@"- (instancetype)whoops:(id)something this:(NSString *)thisThingy andThat:(NSInteger)_thatThing");
+            });
+        });
+
         describe(@"as a <NSWindowDelegate>", ^{
             it(@"should be the delegate of its window", ^{
                 window should have_received(@selector(setDelegate:)).with(subject);

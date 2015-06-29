@@ -103,6 +103,40 @@
                                                           range:self.range];
 }
 
+- (instancetype)changeSelectorNameAtIndex:(NSUInteger)index to:(NSString *)newType {
+    NSMutableArray *components = [[self selectorComponents] mutableCopy];
+    components[index] = newType;
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+                                                     parameters:self.parameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
+}
+
+- (instancetype)changeParameterTypeAtIndex:(NSUInteger)index to:(NSString *)newType {
+    NSMutableArray *newParameters = [[self parameters] mutableCopy];
+    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:newType localName:[self.parameters[index] localName]];
+    newParameters[index] = newParameter;
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:self.components
+                                                     parameters:newParameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
+}
+
+- (instancetype)changeParameterLocalNameAtIndex:(NSUInteger)index to:(NSString *)newName {
+    NSMutableArray *newParameters = [[self parameters] mutableCopy];
+    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:[self.parameters[index] type] localName:newName];
+    newParameters[index] = newParameter;
+
+    return [[XMASObjcSelector alloc] initWithSelectorComponents:self.components
+                                                     parameters:newParameters
+                                                     returnType:self.returnType
+                                                          range:self.range];
+}
+
+
+
 #pragma mark - Private
 
 - (void)parseSelectorComponentsFromTokens:(NSArray *)tokens {
