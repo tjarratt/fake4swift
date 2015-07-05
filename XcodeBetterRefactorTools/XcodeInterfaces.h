@@ -34,8 +34,11 @@
 - (XC(DVTFilePath))representingFilePath;
 @end
 
+@protocol XCP(IDEWorkspace);
 @protocol XCP(IDEWorkspaceDocument)
+- (XC(IDEWorkspace))workspace;
 - (NSArray *)recentEditorDocumentURLs;
+- (id)sdefSupport_fileReferences;
 @end
 
 @protocol XCP(IDEWorkspaceTabController)
@@ -105,3 +108,72 @@
 - (long long)_currentOneBasedLineNumber; // this selector was renamed at some unknown point
 - (long long)_currentOneBasedLineNubmer; // this typo definitely existed prior to xcode 6
 @end
+
+#pragma mark - Symbols
+
+@protocol XCP(DVTSourceCodeSymbolKind)
++ (id)containerSymbolKind;
++ (id)globalSymbolKind;
++ (id)callableSymbolKind;
++ (id)memberSymbolKind;
++ (id)memberContainerSymbolKind;
++ (id)categorySymbolKind;
++ (id)classMethodSymbolKind;
++ (id)classSymbolKind;
++ (id)enumSymbolKind;
++ (id)enumConstantSymbolKind;
++ (id)fieldSymbolKind;
++ (id)functionSymbolKind;
++ (id)instanceMethodSymbolKind;
++ (id)instanceVariableSymbolKind;
++ (id)classVariableSymbolKind;
++ (id)macroSymbolKind;
++ (id)parameterSymbolKind;
++ (id)propertySymbolKind;
++ (id)protocolSymbolKind;
++ (id)structSymbolKind;
++ (id)typedefSymbolKind;
++ (id)unionSymbolKind;
++ (id)localVariableSymbolKind;
++ (id)globalVariableSymbolKind;
++ (id)ibActionMethodSymbolKind;
++ (id)ibOutletSymbolKind;
++ (id)ibOutletVariableSymbolKind;
++ (id)ibOutletPropertySymbolKind;
++ (id)ibOutletCollectionSymbolKind;
++ (id)ibOutletCollectionVariableSymbolKind;
++ (id)ibOutletCollectionPropertySymbolKind;
++ (id)namespaceSymbolKind;
++ (id)classTemplateSymbolKind;
++ (id)functionTemplateSymbolKind;
++ (id)instanceMethodTemplateSymbolKind;
++ (id)classMethodTemplateSymbolKind;
++ (id)sourceCodeSymbolKinds;
+@end
+
+#pragma mark - Indexes
+
+@protocol XCP(IDEIndex)
+- (NSArray *)topLevelSymbolsInFile:(NSString *)filepath;
+- (NSArray *)allSymbolsMatchingKind:(XC(DVTSourceCodeSymbolKind))symbolKind workspaceOnly:(BOOL)wonly;
+@end
+
+#pragma mark - Workspace and Projects
+
+@protocol XCP(IDEDocumentController)
++ (XC(IDEDocumentController))sharedDocumentController;
+- (NSArray *)workspaceDocuments;
+@end
+
+@protocol XCP(IDEWorkspace)
+- (XC(IDEIndex))index;
+- (NSString *)name;
+- (NSSet *)referencedContainers;
+@end
+
+@protocol XCP(IDEWorkspaceWindow)
+- (XC(IDEWorkspaceDocument))document;
++ (XC(IDEWorkspaceWindow))lastActiveWorkspaceWindow;
++ (id)lastActiveWorkspaceWindowController;
+@end
+

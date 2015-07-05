@@ -3,6 +3,8 @@
 #import "XMASObjcSelector.h"
 #import "XMASObjcSelectorParameter.h"
 #import "XMASWindowProvider.h"
+#import "XMASAlert.h"
+#import "XMASIndexedSymbolRepository.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -11,11 +13,15 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerSpec)
 
 describe(@"XMASChangeMethodSignatureController", ^{
     __block NSWindow *window;
+    __block XMASAlert *alerter;
     __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
+    __block XMASIndexedSymbolRepository *indexedSymbolRepository;
     __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
+        alerter = nice_fake_for([XMASAlert class]);
+
         window = nice_fake_for([NSWindow class]);
 
         windowProvider = nice_fake_for([XMASWindowProvider class]);
@@ -23,8 +29,12 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
 
+        indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
+
         subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
-                                                                             delegate:delegate];
+                                                                             delegate:delegate
+                                                                              alerter:alerter
+                                                              indexedSymbolRepository:indexedSymbolRepository];
     });
 
     describe(@"-refactorMethod:inFile:", ^{
@@ -420,6 +430,26 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         it(@"should close the window", ^{
             window should have_received(@selector(close));
+        });
+    });
+
+    describe(@"tapping the refactor button", ^{
+        __block XMASObjcSelector *selector;
+        beforeEach(^{
+            selector = fake_for([XMASObjcSelector class]);
+            indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
+                .with(selector)
+                .and_return(@[@"something", @"goes", @"here"]);
+
+            subject.view should_not be_nil;
+            [subject refactorMethod:selector inFile:nil];
+
+            [subject.refactorButton performClick:nil];
+        });
+
+        it(@"should present a count of the number of matching instances of the old selector", ^{
+            alerter should have_received(@selector(flashMessage:))
+                .with(@"Found 3 instances to replace");
         });
     });
 });

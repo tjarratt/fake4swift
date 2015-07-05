@@ -1,6 +1,10 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASObjcSelectorParameter.h"
 #import "XMASWindowProvider.h"
+#import "XMASXcode.h"
+#import "XcodeInterfaces.h"
+#import "XMASAlert.h"
+#import "XMASIndexedSymbolRepository.h"
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
@@ -16,9 +20,12 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic, weak) IBOutlet NSButton *refactorButton;
 @property (nonatomic, weak) IBOutlet NSTextField *previewTextField;
 
+@property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
+@property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 
+@property (nonatomic) XMASObjcSelector *originalMethod;
 @property (nonatomic) XMASObjcSelector *method;
 @property (nonatomic) NSString *filePath;
 
@@ -27,10 +34,14 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @implementation XMASChangeMethodSignatureController
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
-                              delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate {
+                              delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
+                               alerter:(XMASAlert *)alerter
+               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository {
     NSBundle *bundleForClass = [NSBundle bundleForClass:[self class]];
     if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:bundleForClass]) {
+        self.alerter = alerter;
         self.windowProvider = windowProvider;
+        self.indexedSymbolRepository = indexedSymbolRepository;
         self.delegate = delegate;
     }
 
@@ -46,6 +57,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     }
 
     self.method = method;
+    self.originalMethod = method;
     self.filePath = filePath;
 
     self.window.contentView = self.view;
@@ -58,7 +70,9 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (IBAction)didTapRefactor:(id)sender {
-    NSLog(@"================> %@", @"REFACTORD");
+    NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
+
+    [self.alerter flashMessage:[NSString stringWithFormat:@"Found %lu instances to replace", symbols.count]];
 }
 
 - (IBAction)didTapAdd:(id)sender {

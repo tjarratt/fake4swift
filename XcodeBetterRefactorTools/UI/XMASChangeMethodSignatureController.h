@@ -1,8 +1,10 @@
 #import <Cocoa/Cocoa.h>
 #import "XMASObjcSelector.h"
 
+@class XMASAlert;
 @class XMASObjcSelector;
 @class XMASWindowProvider;
+@class XMASIndexedSymbolRepository;
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
 @interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate>
@@ -17,12 +19,16 @@
 @property (nonatomic, weak, readonly) NSTextField *previewTextField;
 
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
+@property (nonatomic, readonly) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
 @property (nonatomic, readonly) XMASObjcSelector *method;
+@property (nonatomic, readonly) XMASAlert *alerter;
 
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
-                              delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate;
+                              delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
+                               alerter:(XMASAlert *)alerter
+               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository;
 - (void)refactorMethod:(XMASObjcSelector *)method inFile:(NSString *)filePath;
 
 @end

@@ -6,6 +6,7 @@
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASWindowProvider.h"
 #import "XMASRefactorMethodActionProvider.h"
+#import "XMASIndexedSymbolRepository.h"
 
 @interface XMASEditMenu ()
 @property (nonatomic) XMASRefactorMethodActionProvider *actionProvider;
@@ -48,7 +49,8 @@
     XMASAlert *alerter = [[XMASAlert alloc] init];
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
-    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider];
+    XMASIndexedSymbolRepository *indexedSymbolRepository = [[XMASIndexedSymbolRepository alloc] init];
+    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider alerter:alerter indexedSymbolRepository:indexedSymbolRepository];
 
     XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
                                                                                       alerter:alerter

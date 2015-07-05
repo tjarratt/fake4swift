@@ -39,4 +39,23 @@
     return nil;
 }
 
++ (XC(IDEDocumentController))sharedDocumentController {
+    return [NSClassFromString(@"IDEDocumentController") sharedDocumentController];
+}
+
++ (XC(IDEIndex))indexForCurrentWorkspace {
+    XC(IDEWorkspaceWindow) workspaceWindow;
+    Class workspaceClass = NSClassFromString(@"IDEWorkspaceWindow");
+
+    if ([workspaceClass respondsToSelector:(@selector(lastActiveWorkspaceWindow))]) {
+        workspaceWindow = [workspaceClass lastActiveWorkspaceWindow];
+    } else if ([workspaceClass respondsToSelector:@selector(lastActiveWorkspaceWindowController)]) {
+        workspaceWindow = [[workspaceClass lastActiveWorkspaceWindowController] valueForKey:@"window"];
+    }
+
+    XC(IDEWorkspaceDocument) workspaceDocument = [workspaceWindow document];
+    XC(IDEWorkspace) currentWorkspace = [workspaceDocument workspace];
+    return [currentWorkspace index];
+}
+
 @end

@@ -6,8 +6,12 @@
 @end
 
 @interface XMASXcode (Workspace)
+
++ (id)currentEditor;
 + (XC(IDEWorkspaceWindowController))currentWorkspaceController;
 + (XC(Workspace))currentWorkspace;
-+ (id)currentEditor;
 + (NSURL *)currentSourceCodeDocumentFileURL;
++ (XC(IDEDocumentController))sharedDocumentController;
++ (XC(IDEIndex))indexForCurrentWorkspace;
+
 @end
