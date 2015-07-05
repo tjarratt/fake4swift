@@ -6,7 +6,7 @@
 
 - (NSArray *)callExpressionsMatchingSelector:(XMASObjcSelector *)selector {
     XC(IDEIndex) index = [XMASXcode indexForCurrentWorkspace];
-    id callableKind = [NSClassFromString(@"DVTSourceCodeSymbolKind") instanceMethodSymbolKind];
+    id callableKind = [XMASXcode instanceMethodSymbolKind];
 
     NSString *selectorToReplace = selector.selectorString;
     NSMutableArray *results = [[NSMutableArray alloc] init];
