@@ -158,6 +158,14 @@
 - (NSArray *)allSymbolsMatchingKind:(XC(DVTSourceCodeSymbolKind))symbolKind workspaceOnly:(BOOL)wonly;
 @end
 
+@protocol XCP(IDEIndexSymbol)
+- (NSString *)name;
+- (XC(IDEIndexSymbol))containerSymbol;
+- (NSString *)file;
+- (NSUInteger)lineNumber;
+- (NSUInteger)column;
+@end
+
 #pragma mark - Workspace and Projects
 
 @protocol XCP(IDEDocumentController)

@@ -1,7 +1,8 @@
 #import <Cedar/Cedar.h>
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASXcode.h"
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -16,14 +17,14 @@ describe(@"XMASIndexedSymbolRepository", ^{
     });
 
     describe(@"-callExpressionsMatchingSelector:", ^{
-        __block XMASObjcSelector *selector;
+        __block XMASObjcMethodDeclaration *selector;
         __block id<XMASXcode_IDEIndex> fakeIndex;
         __block id fakeSymbolKind;
         NSDictionary *expectedResult = @{@"name": @"method:"};
         NSArray *allSymbols = @[expectedResult, @{@"name": @"not:the:method:"}];
 
         beforeEach(^{
-            selector = nice_fake_for([XMASObjcSelector class]);
+            selector = nice_fake_for([XMASObjcMethodDeclaration class]);
             selector stub_method(@selector(selectorString)).and_return(@"method:");
             fakeIndex = nice_fake_for(@protocol(XMASXcode_IDEIndex));
             fakeSymbolKind = [[NSObject alloc] init];

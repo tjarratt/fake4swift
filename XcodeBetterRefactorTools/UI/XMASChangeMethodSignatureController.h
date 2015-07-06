@@ -1,8 +1,8 @@
 #import <Cocoa/Cocoa.h>
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 
 @class XMASAlert;
-@class XMASObjcSelector;
+@class XMASObjcMethodDeclaration;
 @class XMASWindowProvider;
 @class XMASIndexedSymbolRepository;
 @protocol XMASChangeMethodSignatureControllerDelegate;
@@ -21,7 +21,7 @@
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, readonly) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
-@property (nonatomic, readonly) XMASObjcSelector *method;
+@property (nonatomic, readonly) XMASObjcMethodDeclaration *method;
 @property (nonatomic, readonly) XMASAlert *alerter;
 
 
@@ -29,7 +29,7 @@
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository;
-- (void)refactorMethod:(XMASObjcSelector *)method inFile:(NSString *)filePath;
+- (void)refactorMethod:(XMASObjcMethodDeclaration *)method inFile:(NSString *)filePath;
 
 @end
 

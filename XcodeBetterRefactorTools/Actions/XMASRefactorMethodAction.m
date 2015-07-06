@@ -4,7 +4,7 @@
 #import "XcodeInterfaces.h"
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASChangeMethodSignatureController.h"
 
@@ -55,8 +55,8 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:currentFilePath];
     NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:translationUnit.tokens];
 
-    XMASObjcSelector *selectedMethod;
-    for (XMASObjcSelector *selector in selectors) {
+    XMASObjcMethodDeclaration *selectedMethod;
+    for (XMASObjcMethodDeclaration *selector in selectors) {
         if (cursorLocation > selector.range.location && cursorLocation < selector.range.location + selector.range.length) {
             selectedMethod = selector;
             break;

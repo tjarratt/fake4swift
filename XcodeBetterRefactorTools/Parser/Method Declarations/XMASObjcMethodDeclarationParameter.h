@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface XMASObjcSelectorParameter : NSObject
+@interface XMASObjcMethodDeclarationParameter : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

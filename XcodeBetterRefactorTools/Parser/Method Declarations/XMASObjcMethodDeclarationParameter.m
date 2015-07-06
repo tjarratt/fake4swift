@@ -1,11 +1,11 @@
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 
-@interface XMASObjcSelectorParameter ()
+@interface XMASObjcMethodDeclarationParameter ()
 @property (nonatomic) NSString *type;
 @property (nonatomic) NSString *localName;
 @end
 
-@implementation XMASObjcSelectorParameter
+@implementation XMASObjcMethodDeclarationParameter
 
 - (instancetype)initWithType:(NSString *)type localName:(NSString *)localName {
     if (self = [super init]) {

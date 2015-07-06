@@ -2,8 +2,8 @@
 #import <ClangKit/ClangKit.h>
 
 #import "XMASObjcMethodDeclarationParser.h"
-#import "XMASObjcSelector.h"
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -24,7 +24,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the first method declaration", ^{
-            __block XMASObjcSelector *selector;
+            __block XMASObjcMethodDeclaration *selector;
 
             beforeEach(^{
                 selector = methodDeclarations[0];
@@ -39,7 +39,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             });
 
             describe(@"parameters", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = selector.parameters.firstObject;
@@ -60,7 +60,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the second method declaration", ^{
-            __block XMASObjcSelector *selector;
+            __block XMASObjcMethodDeclaration *selector;
 
             beforeEach(^{
                 selector = [methodDeclarations objectAtIndex:1];
@@ -80,7 +80,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the third method declaration", ^{
-            __block XMASObjcSelector *selector;
+            __block XMASObjcMethodDeclaration *selector;
 
             beforeEach(^{
                 selector = methodDeclarations[2];
@@ -95,7 +95,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             });
 
             describe(@"parameters", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = selector.parameters.firstObject;
@@ -116,7 +116,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the fourth method declaration", ^{
-            __block XMASObjcSelector *selector;
+            __block XMASObjcMethodDeclaration *selector;
 
             beforeEach(^{
                 selector = [methodDeclarations objectAtIndex:3];
@@ -136,7 +136,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         });
 
         describe(@"the fifth method declaration", ^{
-            __block XMASObjcSelector *selector;
+            __block XMASObjcMethodDeclaration *selector;
 
             beforeEach(^{
                 selector = [methodDeclarations objectAtIndex:4];

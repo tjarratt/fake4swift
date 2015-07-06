@@ -1,5 +1,5 @@
 #import "XMASObjcMethodDeclarationParser.h"
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 #import <ClangKit/ClangKit.h>
 
 @implementation XMASObjcMethodDeclarationParser
@@ -21,7 +21,7 @@
             ++i;
         }
 
-        XMASObjcSelector *selector = [[XMASObjcSelector alloc] initWithTokens:methodDeclTokens];
+        XMASObjcMethodDeclaration *selector = [[XMASObjcMethodDeclaration alloc] initWithTokens:methodDeclTokens];
         [methodDeclarations addObject:selector];
     }
 

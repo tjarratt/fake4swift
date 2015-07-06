@@ -1,5 +1,5 @@
 #import "XMASChangeMethodSignatureController.h"
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASWindowProvider.h"
 #import "XMASXcode.h"
 #import "XcodeInterfaces.h"
@@ -25,8 +25,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 
-@property (nonatomic) XMASObjcSelector *originalMethod;
-@property (nonatomic) XMASObjcSelector *method;
+@property (nonatomic) XMASObjcMethodDeclaration *originalMethod;
+@property (nonatomic) XMASObjcMethodDeclaration *method;
 @property (nonatomic) NSString *filePath;
 
 @end
@@ -48,7 +48,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     return self;
 }
 
-- (void)refactorMethod:(XMASObjcSelector *)method inFile:(NSString *)filePath
+- (void)refactorMethod:(XMASObjcMethodDeclaration *)method inFile:(NSString *)filePath
 {
     if (self.window == nil) {
         self.window = [self.windowProvider provideInstance];
@@ -71,8 +71,14 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 - (IBAction)didTapRefactor:(id)sender {
     NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
+    NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
+    [self.alerter flashMessage:message];
 
-    [self.alerter flashMessage:[NSString stringWithFormat:@"Found %lu instances to replace", symbols.count]];
+    for (XC(IDEIndexSymbol) symbol in symbols) {
+        [self.indexedSymbolRepository changeCallsite:symbol
+                                          fromMethod:self.originalMethod
+                                         toNewMethod:self.method];
+    }
 }
 
 - (IBAction)didTapAdd:(id)sender {
@@ -170,10 +176,10 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     if ([tableColumn.identifier isEqualToString:@"selector"]) {
         textField.stringValue = self.method.components[(NSUInteger)row];
     } else if ([tableColumn.identifier isEqualToString:@"parameterType"]) {
-        XMASObjcSelectorParameter *param = self.method.parameters[(NSUInteger)row];
+        XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
         textField.stringValue = param.type;
     } else {
-        XMASObjcSelectorParameter *param = self.method.parameters[(NSUInteger)row];
+        XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
         textField.stringValue = param.localName;
     }
 
@@ -218,7 +224,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     NSMutableArray *pieces = [[NSMutableArray alloc] initWithCapacity:self.method.components.count];
     for (NSUInteger i = 0; i < self.method.components.count; ++i) {
         NSString *componentName = self.method.components[i];
-        XMASObjcSelectorParameter *param = self.method.parameters[i];
+        XMASObjcMethodDeclarationParameter *param = self.method.parameters[i];
 
         [pieces addObject:[NSString stringWithFormat:@"%@:(%@)%@", componentName, param.type, param.localName]];
     }

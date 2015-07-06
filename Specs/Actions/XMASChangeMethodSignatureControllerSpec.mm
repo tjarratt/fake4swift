@@ -1,7 +1,7 @@
 #import <Cedar/Cedar.h>
 #import "XMASChangeMethodSignatureController.h"
-#import "XMASObjcSelector.h"
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASWindowProvider.h"
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
@@ -38,25 +38,25 @@ describe(@"XMASChangeMethodSignatureController", ^{
     });
 
     describe(@"-refactorMethod:inFile:", ^{
-        __block XMASObjcSelector *method;
+        __block XMASObjcMethodDeclaration *method;
         __block NSString *filepath;
 
         beforeEach(^{
-            XMASObjcSelectorParameter *firstParam = nice_fake_for([XMASObjcSelectorParameter class]);
+            XMASObjcMethodDeclarationParameter *firstParam = nice_fake_for([XMASObjcMethodDeclarationParameter class]);
             firstParam stub_method(@selector(type)).and_return(@"id");
             firstParam stub_method(@selector(localName)).and_return(@"something");
 
-            XMASObjcSelectorParameter *secondParam = nice_fake_for([XMASObjcSelectorParameter class]);
+            XMASObjcMethodDeclarationParameter *secondParam = nice_fake_for([XMASObjcMethodDeclarationParameter class]);
             secondParam stub_method(@selector(type)).and_return(@"NSString *");
             secondParam stub_method(@selector(localName)).and_return(@"thisThingy");
 
-            XMASObjcSelectorParameter *thirdParam = nice_fake_for([XMASObjcSelectorParameter class]);
+            XMASObjcMethodDeclarationParameter *thirdParam = nice_fake_for([XMASObjcMethodDeclarationParameter class]);
             thirdParam stub_method(@selector(type)).and_return(@"NSInteger");
             thirdParam stub_method(@selector(localName)).and_return(@"_thatThing");
 
             NSArray *components = @[@"initWithSomething", @"this", @"andThat"];
             NSArray *parameters = @[firstParam, secondParam, thirdParam];
-            method = [[XMASObjcSelector alloc] initWithSelectorComponents:components
+            method = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                                parameters:parameters
                                                                returnType:@"instancetype"
                                                                     range:NSMakeRange(0, 0)];
@@ -214,7 +214,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             });
 
                             describe(@"and the button is tapped", ^{
-                                __block XMASObjcSelector *spiedMethod;
+                                __block XMASObjcMethodDeclaration *spiedMethod;
 
                                 beforeEach(^{
                                     spy_on(subject.method);
@@ -274,7 +274,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             });
 
                             describe(@"and the button is tapped", ^{
-                                __block XMASObjcSelector *spiedMethod;
+                                __block XMASObjcMethodDeclaration *spiedMethod;
 
                                 beforeEach(^{
                                     spy_on(subject.method);
@@ -434,22 +434,33 @@ describe(@"XMASChangeMethodSignatureController", ^{
     });
 
     describe(@"tapping the refactor button", ^{
-        __block XMASObjcSelector *selector;
+        __block XMASObjcMethodDeclaration *methodToRefactor;
         beforeEach(^{
-            selector = fake_for([XMASObjcSelector class]);
+            methodToRefactor = fake_for([XMASObjcMethodDeclaration class]);
+            methodToRefactor stub_method(@selector(selectorString)).and_return(@"method:to:refactor:");
+
             indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
-                .with(selector)
+                .with(methodToRefactor)
                 .and_return(@[@"something", @"goes", @"here"]);
 
             subject.view should_not be_nil;
-            [subject refactorMethod:selector inFile:nil];
+            [subject refactorMethod:methodToRefactor inFile:nil];
 
             [subject.refactorButton performClick:nil];
         });
 
         it(@"should present a count of the number of matching instances of the old selector", ^{
             alerter should have_received(@selector(flashMessage:))
-                .with(@"Found 3 instances to replace");
+                .with(@"Changing 3 call sites of method:to:refactor:");
+        });
+
+        it(@"should ask its repository to change each call site", ^{
+            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                .with(@"something", methodToRefactor, subject.method);
+            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                .with(@"goes", methodToRefactor, subject.method);
+            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                .with(@"here", methodToRefactor, subject.method);
         });
     });
 });

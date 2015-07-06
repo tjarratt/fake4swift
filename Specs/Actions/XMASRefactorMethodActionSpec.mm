@@ -4,7 +4,7 @@
 #import "XcodeInterfaces.h"
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 
@@ -32,7 +32,7 @@ describe(@"XMASRefactorMethodAction", ^{
         [subject setupWithEditor:editor];
     });
 
-    __block XMASObjcSelector *selector;
+    __block XMASObjcMethodDeclaration *selector;
 
     subjectAction(^{
         NSURL *fileURL = [[NSURL alloc] initWithString:@"file:///tmp/fixture.swift"];
@@ -48,7 +48,7 @@ describe(@"XMASRefactorMethodAction", ^{
             .with(@"/tmp/fixture.swift")
             .and_return(translationUnit);
 
-        selector = nice_fake_for([XMASObjcSelector class]);
+        selector = nice_fake_for([XMASObjcMethodDeclaration class]);
         selector stub_method(@selector(range)).and_return(NSMakeRange(5, 15));
         selector stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
         NSArray *methodDeclarations = @[selector];

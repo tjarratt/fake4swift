@@ -1,10 +1,16 @@
 #import "XMASIndexedSymbolRepository.h"
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 #import "XMASXcode.h"
 
 @implementation XMASIndexedSymbolRepository
 
-- (NSArray *)callExpressionsMatchingSelector:(XMASObjcSelector *)selector {
+- (void)changeCallsite:(XC(IDEIndexSymbol))callsite
+            fromMethod:(XMASObjcMethodDeclaration *)oldSelector
+           toNewMethod:(XMASObjcMethodDeclaration *)newSelector {
+    
+}
+
+- (NSArray *)callExpressionsMatchingSelector:(XMASObjcMethodDeclaration *)selector {
     XC(IDEIndex) index = [XMASXcode indexForCurrentWorkspace];
     id callableKind = [XMASXcode instanceMethodSymbolKind];
 

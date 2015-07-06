@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <ClangKit/ClangKit.h>
 
-@interface XMASObjcSelector : NSObject
+@interface XMASObjcMethodDeclaration : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

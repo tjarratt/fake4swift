@@ -1,9 +1,9 @@
-#import "XMASObjcSelector.h"
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcTypeParser.h"
 #import "XMASComponentSwapper.h"
 
-@interface XMASObjcSelector ()
+@interface XMASObjcMethodDeclaration ()
 
 @property (nonatomic) NSArray *selectorComponents;
 @property (nonatomic) NSArray *parameters;
@@ -13,7 +13,7 @@
 
 @end
 
-@implementation XMASObjcSelector
+@implementation XMASObjcMethodDeclaration
 
 - (instancetype)initWithTokens:(NSArray *)tokens {
     if (self = [super init]) {
@@ -66,7 +66,7 @@
     [components removeObjectAtIndex:index];
     [parameters removeObjectAtIndex:index];
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                      parameters:parameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -76,11 +76,11 @@
     NSMutableArray *components = [self.selectorComponents mutableCopy];
     NSMutableArray *parameters = [self.parameters mutableCopy];
 
-    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:@"" localName:@""];
+    XMASObjcMethodDeclarationParameter *newParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"" localName:@""];
     [components insertObject:@"" atIndex:index];
     [parameters insertObject:newParameter atIndex:index];
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                      parameters:parameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -97,7 +97,7 @@
     NSMutableArray *parameters = [self.parameters mutableCopy];
     [parameters exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                      parameters:parameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -107,7 +107,7 @@
     NSMutableArray *components = [[self selectorComponents] mutableCopy];
     components[index] = newType;
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                      parameters:self.parameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -115,10 +115,10 @@
 
 - (instancetype)changeParameterTypeAtIndex:(NSUInteger)index to:(NSString *)newType {
     NSMutableArray *newParameters = [[self parameters] mutableCopy];
-    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:newType localName:[self.parameters[index] localName]];
+    XMASObjcMethodDeclarationParameter *newParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:newType localName:[self.parameters[index] localName]];
     newParameters[index] = newParameter;
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:self.components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:self.components
                                                      parameters:newParameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -126,10 +126,10 @@
 
 - (instancetype)changeParameterLocalNameAtIndex:(NSUInteger)index to:(NSString *)newName {
     NSMutableArray *newParameters = [[self parameters] mutableCopy];
-    XMASObjcSelectorParameter *newParameter = [[XMASObjcSelectorParameter alloc] initWithType:[self.parameters[index] type] localName:newName];
+    XMASObjcMethodDeclarationParameter *newParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:[self.parameters[index] type] localName:newName];
     newParameters[index] = newParameter;
 
-    return [[XMASObjcSelector alloc] initWithSelectorComponents:self.components
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:self.components
                                                      parameters:newParameters
                                                      returnType:self.returnType
                                                           range:self.range];
@@ -177,7 +177,7 @@
             }
 
             CKToken *variableNameToken = tokens[i];
-            XMASObjcSelectorParameter *param = [[XMASObjcSelectorParameter alloc] initWithType:paramType
+            XMASObjcMethodDeclarationParameter *param = [[XMASObjcMethodDeclarationParameter alloc] initWithType:paramType
                                                                                      localName:variableNameToken.spelling];
             [parameters addObject:param];
             continue;

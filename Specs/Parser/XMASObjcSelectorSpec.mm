@@ -1,15 +1,15 @@
 #import <Cedar/Cedar.h>
-#import "XMASObjcSelector.h"
+#import "XMASObjcMethodDeclaration.h"
 #import <ClangKit/ClangKit.h>
-#import "XMASObjcSelectorParameter.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(XMASObjcSelectorSpec)
+SPEC_BEGIN(XMASObjcMethodDeclarationSpec)
 
-describe(@"XMASObjcSelector", ^{
-    __block XMASObjcSelector *subject;
+describe(@"XMASObjcMethodDeclaration", ^{
+    __block XMASObjcMethodDeclaration *subject;
     __block CKToken *instanceMethod;
     __block CKToken *returnType;
     __block CKToken *colon;
@@ -50,7 +50,7 @@ describe(@"XMASObjcSelector", ^{
             selectorName stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
             selectorName stub_method(@selector(range)).and_return(NSMakeRange(50, 20));
 
-            subject = [[XMASObjcSelector alloc] initWithTokens:@[instanceMethod, openParen, returnType, closeParen, selectorName]];
+            subject = [[XMASObjcMethodDeclaration alloc] initWithTokens:@[instanceMethod, openParen, returnType, closeParen, selectorName]];
         });
 
         it(@"should create the correct selector from its tokens", ^{
@@ -104,7 +104,7 @@ describe(@"XMASObjcSelector", ^{
                             secondSelectorPieceToken, colon,
                             openParen, secondParamType, closeParen, secondVariableName
                             ];
-        subject = [[XMASObjcSelector alloc] initWithTokens:tokens];
+        subject = [[XMASObjcMethodDeclaration alloc] initWithTokens:tokens];
     };
 
     describe(@"a selector with several parameters and a non-void return type", ^{
@@ -129,11 +129,11 @@ describe(@"XMASObjcSelector", ^{
         });
 
         describe(@"the first parameter", ^{
-            __block XMASObjcSelectorParameter *param;
+            __block XMASObjcMethodDeclarationParameter *param;
 
             beforeEach(^{
                 param = subject.parameters.firstObject;
-                param should be_instance_of([XMASObjcSelectorParameter class]);
+                param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
             });
 
             it(@"should have the correct type", ^{
@@ -146,11 +146,11 @@ describe(@"XMASObjcSelector", ^{
         });
 
         describe(@"the second parameter", ^{
-            __block XMASObjcSelectorParameter *param;
+            __block XMASObjcMethodDeclarationParameter *param;
 
             beforeEach(^{
                 param = subject.parameters[1];
-                param should be_instance_of([XMASObjcSelectorParameter class]);
+                param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
             });
 
             it(@"should have the correct type", ^{
@@ -164,7 +164,7 @@ describe(@"XMASObjcSelector", ^{
     });
 
     describe(@"creating a new selector", ^{
-        __block XMASObjcSelector *newSelector;
+        __block XMASObjcMethodDeclaration *newSelector;
 
         beforeEach(^{
             createSelectorWithSeveralParameters();
@@ -192,11 +192,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the first parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters.firstObject;
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -231,11 +231,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the first parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters.firstObject;
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -248,11 +248,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the second parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[1];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -265,11 +265,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the third parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[2];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -304,11 +304,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the first parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[0];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -321,11 +321,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the second parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[1];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -360,11 +360,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the first parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[0];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
@@ -377,11 +377,11 @@ describe(@"XMASObjcSelector", ^{
             });
 
             describe(@"the second parameter", ^{
-                __block XMASObjcSelectorParameter *param;
+                __block XMASObjcMethodDeclarationParameter *param;
 
                 beforeEach(^{
                     param = newSelector.parameters[1];
-                    param should be_instance_of([XMASObjcSelectorParameter class]);
+                    param should be_instance_of([XMASObjcMethodDeclarationParameter class]);
                 });
 
                 it(@"should have the correct type", ^{
