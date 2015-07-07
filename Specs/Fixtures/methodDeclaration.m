@@ -15,7 +15,7 @@
                                                                            message:message
                                                                       parentWindow:nil
                                                                           duration:2.0];
-                                                            [alertPanel orderFront:nil];
+    [alertPanel orderFront:nil];
     [alertPanel release];
 }
 
