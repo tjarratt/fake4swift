@@ -17,10 +17,10 @@ describe(@"XMASObjcMethodCallparser", ^{
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
 
         NSString *selector = @"initWithIcon:message:parentWindow:duration:";
-        NSArray *methodCalls = [subject parseMethodCallsFromTokens:translationUnit.tokens matchingSelector:selector];
+        NSArray *initWithMethodCalls = [subject parseMethodCallsFromTokens:translationUnit.tokens matchingSelector:selector];
 
-        fit(@"should only find the one matching method call", ^{
-            methodCalls.count should equal(1);
+        it(@"should only find the one matching method call", ^{
+            initWithMethodCalls.count should equal(1);
         });
     });
 });

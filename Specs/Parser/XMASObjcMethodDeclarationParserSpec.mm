@@ -127,7 +127,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             });
 
             it(@"should have the correct range for its tokens", ^{
-                selector.range should equal(NSMakeRange(679, 25));
+                selector.range should equal(NSMakeRange(623, 25));
             });
 
             it(@"should have the correct return type", ^{
@@ -147,7 +147,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             });
 
             it(@"should have the correct range for its tokens", ^{
-                selector.range should equal(NSMakeRange(726, 26));
+                selector.range should equal(NSMakeRange(670, 26));
             });
 
             it(@"should have the correct return type", ^{

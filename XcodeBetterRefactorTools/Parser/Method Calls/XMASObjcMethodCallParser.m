@@ -11,7 +11,6 @@
 
     for (NSUInteger i = 0; i < count; ++i) {
         CKToken *token = tokens[i];
-        NSLog(@"================> %@ -- %ld", token, (long)token.cursor.kind);
         NSMutableArray *selectorComponents = [[NSMutableArray alloc] init];
         if (token.cursor.kind == CKCursorKindObjCMessageExpr) {
             for (; i < count; ++i) {
