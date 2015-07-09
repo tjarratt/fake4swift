@@ -1,5 +1,10 @@
 #import "XMASObjcMethodCallparser.h"
 #import <ClangKit/ClangKit.h>
+#import "XMASObjcMethodCall.h"
+
+@interface XMASObjcMethodCallParser ()
+@property (nonatomic) NSMutableArray *methodCalls;
+@end
 
 @implementation XMASObjcMethodCallParser
 
@@ -11,7 +16,10 @@
 
     for (NSUInteger i = 0; i < count; ++i) {
         CKToken *token = tokens[i];
-        NSMutableArray *selectorComponents = [[NSMutableArray alloc] init];
+        NSMutableArray *selectorComponentTokens = [[NSMutableArray alloc] init];
+        NSMutableArray *argumentStrings = [[NSMutableArray alloc] init];
+        NSMutableArray *argumentTokens = [[NSMutableArray alloc] init];
+
         if (token.cursor.kind == CKCursorKindObjCMessageExpr) {
             for (; i < count; ++i) {
                 token = tokens[i];
@@ -22,28 +30,47 @@
                     continue;
                 }
 
-                [selectorComponents addObject:token.spelling];
+                [selectorComponentTokens addObject:token];
 
                 i++;
+                NSMutableArray *currentArgumentTokens = [[NSMutableArray alloc] init];
                 for (; i < count; ++i) {
                     token = tokens[i];
+                    if ([token.spelling isEqualToString:@":"] && token.kind == CKTokenKindPunctuation) {
+                        continue;
+                    }
+
                     if ([self isEndOfMethodCallToken:token]) {
+                        NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
+                        [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
                         --i;
                         break;
                     }
 
                     if ([self isSelectorComponentToken:token]) {
+                        NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
+                        [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
                         --i;
                         break;
                     }
+
+                    [currentArgumentTokens addObject:token];
+                    [argumentTokens addObject:token];
                 }
             }
         }
 
+        NSArray *selectorComponents = [selectorComponentTokens valueForKey:@"spelling"];
         NSString *joinedComponents = [selectorComponents componentsJoinedByString:@":"];
         NSString *parsedSelector = selectorComponents.count > 1 ? [joinedComponents stringByAppendingString:@":"] : joinedComponents;
         if ([parsedSelector isEqualToString:selectorName]) {
-            [methodCalls addObject:[NSNull null]];
+            CKToken *firstToken = selectorComponentTokens.firstObject;
+            CKToken *lastToken = argumentTokens.lastObject;
+            NSRange range = NSMakeRange(firstToken.range.location, lastToken.range.location - firstToken.range.location + lastToken.range.length);
+            XMASObjcMethodCall *methodCall = [[XMASObjcMethodCall alloc] initWithSelectorComponents:selectorComponents
+                                                                                          arguments:argumentStrings
+                                                                                              range:range];
+            [methodCalls addObject:methodCall];
         }
     }
 
