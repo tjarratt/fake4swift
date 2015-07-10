@@ -17,7 +17,9 @@ describe(@"XMASObjcMethodCallParser", ^{
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
 
         NSString *selector = @"initWithIcon:message:parentWindow:duration:";
-        NSArray *initWithMethodCalls = [subject parseMethodCallsFromTokens:translationUnit.tokens matchingSelector:selector];
+        NSArray *initWithMethodCalls = [subject parseMethodCallsFromTokens:translationUnit.tokens
+                                                          matchingSelector:selector
+                                                                    inFile:fixturePath];
 
         it(@"should only find the one matching method call", ^{
             initWithMethodCalls.count should equal(1);
@@ -30,6 +32,7 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorString should equal(selector);
             methodCall.selectorComponents should equal(@[@"initWithIcon", @"message", @"parentWindow", @"duration"]);
             methodCall.arguments should equal(@[@"nil", @"message", @"nil", @"2.0"]);
+            methodCall.filePath should equal(fixturePath);
         });
     });
 });

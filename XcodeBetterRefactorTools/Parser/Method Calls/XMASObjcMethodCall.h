@@ -7,11 +7,13 @@
 
 - (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
                                  arguments:(NSArray *)arguments
+                                  filePath:(NSString *)filePath
                                      range:(NSRange)range NS_DESIGNATED_INITIALIZER;
 
-- (NSString *)selectorString;
-- (NSRange)range;
 - (NSArray *)selectorComponents;
+- (NSString *)selectorString;
+- (NSString *)filePath;
 - (NSArray *)arguments;
+- (NSRange)range;
 
 @end

@@ -3,6 +3,7 @@
 @interface XMASObjcMethodCallParser : NSObject
 
 - (NSArray *)parseMethodCallsFromTokens:(NSArray *)tokens
-                       matchingSelector:(NSString *)selectorName;
+                       matchingSelector:(NSString *)selectorName
+                                 inFile:(NSString *)filePath;
 
 @end

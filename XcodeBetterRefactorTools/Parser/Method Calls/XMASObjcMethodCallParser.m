@@ -9,7 +9,8 @@
 @implementation XMASObjcMethodCallParser
 
 - (NSArray *)parseMethodCallsFromTokens:(NSArray *)tokens
-                       matchingSelector:(NSString *)selectorName {
+                       matchingSelector:(NSString *)selectorName
+                                 inFile:(NSString *)filePath {
 
     NSMutableArray *methodCalls = [[NSMutableArray alloc] init];
     NSUInteger count = tokens.count;
@@ -69,6 +70,7 @@
             NSRange range = NSMakeRange(firstToken.range.location, lastToken.range.location - firstToken.range.location + lastToken.range.length);
             XMASObjcMethodCall *methodCall = [[XMASObjcMethodCall alloc] initWithSelectorComponents:selectorComponents
                                                                                           arguments:argumentStrings
+                                                                                           filePath:filePath
                                                                                               range:range];
             [methodCalls addObject:methodCall];
         }
