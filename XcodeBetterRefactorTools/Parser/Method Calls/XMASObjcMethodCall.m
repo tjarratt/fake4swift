@@ -2,6 +2,8 @@
 
 @interface XMASObjcMethodCall ()
 @property (nonatomic) NSArray *selectorComponents;
+@property (nonatomic) NSInteger columnNumber;
+@property (nonatomic) NSInteger lineNumber;
 @property (nonatomic) NSArray *arguments;
 @property (nonatomic) NSString *filePath;
 @property (nonatomic) NSRange range;
@@ -10,11 +12,15 @@
 @implementation XMASObjcMethodCall
 
 - (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
+                              columnNumber:(NSInteger)columnNumber
+                                lineNumber:(NSInteger)lineNumber
                                  arguments:(NSArray *)arguments
                                   filePath:(NSString *)filePath
                                      range:(NSRange)range {
     if (self = [super init]) {
         self.selectorComponents = selectorComponents;
+        self.columnNumber = columnNumber;
+        self.lineNumber = lineNumber;
         self.arguments = arguments;
         self.filePath = filePath;
         self.range = range;

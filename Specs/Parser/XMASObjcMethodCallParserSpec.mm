@@ -33,6 +33,8 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorComponents should equal(@[@"initWithIcon", @"message", @"parentWindow", @"duration"]);
             methodCall.arguments should equal(@[@"nil", @"message", @"nil", @"2.0"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.lineNumber should equal(14);
+            methodCall.columnNumber should equal(71);
         });
     });
 
@@ -57,6 +59,8 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorComponents should equal(@[@"myFoo"]);
             methodCall.arguments should equal(@[@"1"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.lineNumber should equal(28);
+            methodCall.columnNumber should equal(49);
 
             methodCall = matchingCallExpressions[1];
             methodCall should be_instance_of([XMASObjcMethodCall class]);
@@ -65,6 +69,8 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorComponents should equal(@[@"myFoo"]);
             methodCall.arguments should equal(@[@"2"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.lineNumber should equal(29);
+            methodCall.columnNumber should equal(49);
 
             methodCall = matchingCallExpressions[2];
             methodCall should be_instance_of([XMASObjcMethodCall class]);
@@ -73,6 +79,8 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorComponents should equal(@[@"myFoo"]);
             methodCall.arguments should equal(@[@"3"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.lineNumber should equal(30);
+            methodCall.columnNumber should equal(49);
 
             methodCall = matchingCallExpressions[3];
             methodCall should be_instance_of([XMASObjcMethodCall class]);
@@ -81,6 +89,8 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.selectorComponents should equal(@[@"myFoo"]);
             methodCall.arguments should equal(@[@"4"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.lineNumber should equal(31);
+            methodCall.columnNumber should equal(49);
         });
     });
 });

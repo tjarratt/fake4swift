@@ -85,6 +85,8 @@
             CKToken *lastToken = argumentTokens.lastObject;
             NSRange range = NSMakeRange(firstToken.range.location, lastToken.range.location - firstToken.range.location + lastToken.range.length);
             XMASObjcMethodCall *methodCall = [[XMASObjcMethodCall alloc] initWithSelectorComponents:selectorComponents
+                                                                                       columnNumber:firstToken.column
+                                                                                         lineNumber:firstToken.line
                                                                                           arguments:argumentStrings
                                                                                            filePath:filePath
                                                                                               range:range];
