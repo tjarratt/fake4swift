@@ -24,7 +24,7 @@
 }
 
 - (NSString *)selectorString {
-    return _selectorComponents.count > 1 ? [[_selectorComponents componentsJoinedByString:@":"] stringByAppendingString:@":"] : _selectorComponents.firstObject;
+    return _arguments.count > 0 ? [[_selectorComponents componentsJoinedByString:@":"] stringByAppendingString:@":"] : _selectorComponents.firstObject;
 }
 
 - (NSArray *)selectorComponents {

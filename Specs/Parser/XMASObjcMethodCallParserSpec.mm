@@ -35,6 +35,54 @@ describe(@"XMASObjcMethodCallParser", ^{
             methodCall.filePath should equal(fixturePath);
         });
     });
+
+    describe(@"parsing nested method calls", ^{
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"NestedCallExpressions" ofType:@"m"];
+        CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
+
+        NSString *selector = @"myFoo:";
+        NSArray *matchingCallExpressions = [subject parseMethodCallsFromTokens:translationUnit.tokens
+                                                              matchingSelector:selector
+                                                                        inFile:fixturePath];
+
+        it(@"should find all of the matching call expressions", ^{
+            matchingCallExpressions.count should equal(4);
+        });
+
+        it(@"should return an ObjcMethodCall for each call site", ^{
+            XMASObjcMethodCall *methodCall = matchingCallExpressions[0];
+            methodCall should be_instance_of([XMASObjcMethodCall class]);
+            methodCall.range should equal(NSMakeRange(861, 7));
+            methodCall.selectorString should equal(selector);
+            methodCall.selectorComponents should equal(@[@"myFoo"]);
+            methodCall.arguments should equal(@[@"1"]);
+            methodCall.filePath should equal(fixturePath);
+
+            methodCall = matchingCallExpressions[1];
+            methodCall should be_instance_of([XMASObjcMethodCall class]);
+            methodCall.range should equal(NSMakeRange(918, 7));
+            methodCall.selectorString should equal(selector);
+            methodCall.selectorComponents should equal(@[@"myFoo"]);
+            methodCall.arguments should equal(@[@"2"]);
+            methodCall.filePath should equal(fixturePath);
+
+            methodCall = matchingCallExpressions[2];
+            methodCall should be_instance_of([XMASObjcMethodCall class]);
+            methodCall.range should equal(NSMakeRange(975, 7));
+            methodCall.selectorString should equal(selector);
+            methodCall.selectorComponents should equal(@[@"myFoo"]);
+            methodCall.arguments should equal(@[@"3"]);
+            methodCall.filePath should equal(fixturePath);
+
+            methodCall = matchingCallExpressions[3];
+            methodCall should be_instance_of([XMASObjcMethodCall class]);
+            methodCall.range should equal(NSMakeRange(1032, 7));
+            methodCall.selectorString should equal(selector);
+            methodCall.selectorComponents should equal(@[@"myFoo"]);
+            methodCall.arguments should equal(@[@"4"]);
+            methodCall.filePath should equal(fixturePath);
+        });
+    });
 });
 
 SPEC_END
