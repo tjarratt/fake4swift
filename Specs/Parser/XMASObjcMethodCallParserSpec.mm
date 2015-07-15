@@ -28,17 +28,18 @@ describe(@"XMASObjcMethodCallParser", ^{
         it(@"should return an ObjcMethodCall", ^{
             XMASObjcMethodCall *methodCall = initWithMethodCalls.firstObject;
             methodCall should be_instance_of([XMASObjcMethodCall class]);
-            methodCall.range should equal(NSMakeRange(277, 281));
+            methodCall.target should equal(@"[NSClassFromString(@\"DVTBezelAlertPanel\") alloc]");
             methodCall.selectorString should equal(selector);
             methodCall.selectorComponents should equal(@[@"initWithIcon", @"message", @"parentWindow", @"duration"]);
             methodCall.arguments should equal(@[@"nil", @"message", @"nil", @"2.0"]);
             methodCall.filePath should equal(fixturePath);
+            methodCall.range should equal(NSMakeRange(277, 281));
             methodCall.lineNumber should equal(14);
             methodCall.columnNumber should equal(71);
         });
     });
 
-    describe(@"parsing nested method calls", ^{
+    xdescribe(@"parsing nested method calls", ^{
         NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"NestedCallExpressions" ofType:@"m"];
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
 

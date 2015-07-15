@@ -10,6 +10,7 @@
                                 lineNumber:(NSInteger)lineNumber
                                  arguments:(NSArray *)arguments
                                   filePath:(NSString *)filePath
+                                    target:(NSString *)target
                                      range:(NSRange)range NS_DESIGNATED_INITIALIZER;
 
 - (NSArray *)selectorComponents;
@@ -18,6 +19,7 @@
 - (NSInteger)lineNumber;
 - (NSString *)filePath;
 - (NSArray *)arguments;
+- (NSString *)target;
 - (NSRange)range;
 
 @end

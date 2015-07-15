@@ -6,6 +6,7 @@
 @property (nonatomic) NSInteger lineNumber;
 @property (nonatomic) NSArray *arguments;
 @property (nonatomic) NSString *filePath;
+@property (nonatomic) NSString *target;
 @property (nonatomic) NSRange range;
 @end
 
@@ -16,6 +17,7 @@
                                 lineNumber:(NSInteger)lineNumber
                                  arguments:(NSArray *)arguments
                                   filePath:(NSString *)filePath
+                                    target:(NSString *)target
                                      range:(NSRange)range {
     if (self = [super init]) {
         self.selectorComponents = selectorComponents;
@@ -23,6 +25,7 @@
         self.lineNumber = lineNumber;
         self.arguments = arguments;
         self.filePath = filePath;
+        self.target = target;
         self.range = range;
     }
 
@@ -43,6 +46,10 @@
 
 - (NSString *)filePath {
     return _filePath;
+}
+
+- (NSString *)target {
+    return _target;
 }
 
 - (NSRange)range  {
