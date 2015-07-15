@@ -10,16 +10,16 @@ using namespace Cedar::Doubles;
 SPEC_BEGIN(XMASObjcMethodCallParserSpec)
 
 describe(@"XMASObjcMethodCallParser", ^{
-    XMASObjcMethodCallParser *subject = [[XMASObjcMethodCallParser alloc] init];
 
     describe(@"parsing method calls from a stream of tokens", ^{
         NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"methodDeclaration" ofType:@"m"];
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
 
         NSString *selector = @"initWithIcon:message:parentWindow:duration:";
-        NSArray *initWithMethodCalls = [subject parseMethodCallsFromTokens:translationUnit.tokens
-                                                          matchingSelector:selector
-                                                                    inFile:fixturePath];
+        XMASObjcMethodCallParser *subject = [[XMASObjcMethodCallParser alloc] initWithSelectorToMatch:selector
+                                                                                           inFilePath:fixturePath
+                                                                                           withTokens:translationUnit.tokens];
+        NSArray *initWithMethodCalls = subject.matchingCallExpressions;
 
         it(@"should only find the one matching method call", ^{
             initWithMethodCalls.count should equal(1);
@@ -44,9 +44,10 @@ describe(@"XMASObjcMethodCallParser", ^{
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
 
         NSString *selector = @"myFoo:";
-        NSArray *matchingCallExpressions = [subject parseMethodCallsFromTokens:translationUnit.tokens
-                                                              matchingSelector:selector
-                                                                        inFile:fixturePath];
+        XMASObjcMethodCallParser *subject = [[XMASObjcMethodCallParser alloc] initWithSelectorToMatch:selector
+                                                                                           inFilePath:fixturePath
+                                                                                           withTokens:translationUnit.tokens];
+        NSArray *matchingCallExpressions = subject.matchingCallExpressions;
 
         it(@"should find all of the matching call expressions", ^{
             matchingCallExpressions.count should equal(4);

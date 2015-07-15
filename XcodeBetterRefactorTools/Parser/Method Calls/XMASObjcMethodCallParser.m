@@ -4,20 +4,52 @@
 #import "XMASObjcMethodCall.h"
 
 @interface XMASObjcMethodCallParser ()
-@property (nonatomic) NSMutableArray *methodCalls;
+@property (nonatomic) NSArray *matchingCallExpressions;
+@property (nonatomic) NSString *selectorToMatch;
+@property (nonatomic) NSString *filePath;
+@property (nonatomic) NSArray *tokens;
 @end
 
 @implementation XMASObjcMethodCallParser
 
-- (NSArray *)parseMethodCallsFromTokens:(NSArray *)tokens
-                       matchingSelector:(NSString *)selectorName
-                                 inFile:(NSString *)filePath {
+// ^dispatch_once in -(NSArray *)matchingCallExpressions
+// -matchingCallExpressions becomes recursive
+// do a first pass to get ALL the call expressions (test this separately)
+// foreach call expression, get the target, selector components, arguments, range and build it all up
+// then filter on call expressions matching the selector
+// (can be more intelligent here and stop when selector components no longer matches the one desired)
 
+- (instancetype)initWithSelectorToMatch:(NSString *)selector
+                             inFilePath:(NSString *)filePath
+                             withTokens:(NSArray *)tokens {
+    if (self = [super init]) {
+        self.selectorToMatch = selector;
+        self.filePath = filePath;
+        self.tokens = tokens;
+    }
+
+    return self;
+}
+
+#pragma mark - Public
+
+- (NSArray *)matchingCallExpressions {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        self.matchingCallExpressions = [self parseMatchingCallExpressions];
+    });
+
+    return _matchingCallExpressions;
+}
+
+#pragma mark - Private
+
+- (NSArray *)parseMatchingCallExpressions {
     NSMutableArray *methodCalls = [[NSMutableArray alloc] init];
-    NSUInteger count = tokens.count;
+    NSUInteger count = self.tokens.count;
 
     for (NSUInteger i = 0; i < count; ++i) {
-        CKToken *token = tokens[i];
+        CKToken *token = self.tokens[i];
         NSMutableArray *selectorComponentTokens = [[NSMutableArray alloc] init];
         NSMutableArray *argumentStrings = [[NSMutableArray alloc] init];
         NSMutableArray *argumentTokens = [[NSMutableArray alloc] init];
@@ -28,21 +60,21 @@
 
         while ([token.spelling isEqualToString:@"["] && token.kind == CKTokenKindPunctuation) {
             ++i;
-            if (i >= tokens.count) {
+            if (i >= self.tokens.count) {
                 break;
             }
 
-            token = tokens[i];
+            token = self.tokens[i];
         }
         --i;
 
-        NSInteger indexSelectorStartsAt = [self indexFollowingCallExpressionTarget:i fromTokens:tokens];
-        NSArray *targetTokens = [tokens subarrayWithRange:NSMakeRange(i, indexSelectorStartsAt - i)];
+        NSInteger indexSelectorStartsAt = [self indexFollowingCallExpressionTarget:i fromTokens:self.tokens];
+        NSArray *targetTokens = [self.tokens subarrayWithRange:NSMakeRange(i, indexSelectorStartsAt - i)];
         i = indexSelectorStartsAt;
 
-        CKToken *matchingCloseToken = [self matchingClosingTokenForCallExpressionAtIndex:i fromTokens:tokens];
+        CKToken *matchingCloseToken = [self matchingClosingTokenForCallExpressionAtIndex:i fromTokens:self.tokens];
         for (; i < count; ++i) {
-            token = tokens[i];
+            token = self.tokens[i];
             if (token == matchingCloseToken) {
                 break;
             }
@@ -55,7 +87,7 @@
             i++;
             NSMutableArray *currentArgumentTokens = [[NSMutableArray alloc] init];
             for (; i < count; ++i) {
-                token = tokens[i];
+                token = self.tokens[i];
                 if ([token.spelling isEqualToString:@":"] && token.kind == CKTokenKindPunctuation) {
                     continue;
                 }
@@ -82,7 +114,7 @@
         NSArray *selectorComponents = [selectorComponentTokens valueForKey:@"spelling"];
         NSString *joinedComponents = [selectorComponents componentsJoinedByString:@":"];
         NSString *parsedSelector = argumentTokens.count > 0 ? [joinedComponents stringByAppendingString:@":"] : joinedComponents;
-        if ([parsedSelector isEqualToString:selectorName]) {
+        if ([parsedSelector isEqualToString:self.selectorToMatch]) {
             CKToken *firstToken = selectorComponentTokens.firstObject;
             CKToken *lastToken = argumentTokens.lastObject;
             NSString *targetString = [self stringFromTargetTokens:targetTokens];
@@ -91,7 +123,7 @@
                                                                                        columnNumber:firstToken.column
                                                                                          lineNumber:firstToken.line
                                                                                           arguments:argumentStrings
-                                                                                           filePath:filePath
+                                                                                           filePath:self.filePath
                                                                                              target:targetString
                                                                                               range:range];
             [methodCalls addObject:methodCall];
@@ -100,8 +132,6 @@
 
     return methodCalls;
 }
-
-#pragma mark - Private
 
 - (BOOL)isEndOfMethodCallToken:(CKToken *)token {
     BOOL isPunctuation = token.kind == CKTokenKindPunctuation;

@@ -2,8 +2,15 @@
 
 @interface XMASObjcMethodCallParser : NSObject
 
-- (NSArray *)parseMethodCallsFromTokens:(NSArray *)tokens
-                       matchingSelector:(NSString *)selectorName
-                                 inFile:(NSString *)filePath;
+- (instancetype)initWithSelectorToMatch:(NSString *)selector
+                             inFilePath:(NSString *)filePath
+                             withTokens:(NSArray *)tokens NS_DESIGNATED_INITIALIZER;
 
+- (NSArray *)matchingCallExpressions;
+
+@end
+
+@interface XMASObjcMethodCallParser (UnavailableInitializers)
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 @end
