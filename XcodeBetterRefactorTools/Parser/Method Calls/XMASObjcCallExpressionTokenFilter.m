@@ -10,9 +10,11 @@
 #pragma mark - Private
 
 - (NSSet *)parseCallExpressionRangesFromTokens:(NSArray *)tokens
-                               startingAtIndex:(NSInteger)startIndex
-                               stoppingAtIndex:(NSInteger)stopIndex {
+                               startingAtIndex:(NSUInteger)startIndex
+                               stoppingAtIndex:(NSUInteger)stopIndex {
+
     NSMutableSet *callExpressionRanges = [[NSMutableSet alloc] init];
+    NSAssert(stopIndex <= tokens.count, @"Index to stop at MUST be less than or equal to number of tokens to parse");
 
     for (NSUInteger index = startIndex; index < stopIndex; ++index) {
         CKToken *token = tokens[index];
@@ -20,7 +22,7 @@
             continue;
         }
 
-        NSInteger indexOfClosingBracket = [self indexOfMatchingClosingTokenForCallExpressionAtIndex:index fromTokens:tokens];
+        NSUInteger indexOfClosingBracket = [self indexOfMatchingClosingTokenForCallExpressionAtIndex:index fromTokens:tokens];
         NSRange callExpressionRange = NSMakeRange(index, indexOfClosingBracket - index + 1);
         [callExpressionRanges addObject:[NSValue valueWithRange:callExpressionRange]];
 
@@ -46,9 +48,9 @@
     return NO;
 }
 
-- (NSInteger)indexOfMatchingClosingTokenForCallExpressionAtIndex:(NSInteger)index
+- (NSUInteger)indexOfMatchingClosingTokenForCallExpressionAtIndex:(NSUInteger)index
                                                       fromTokens:(NSArray *)tokens {
-    NSInteger countOfOpenBrackets = 0;
+    NSUInteger countOfOpenBrackets = 0;
     for (; index < tokens.count; ++index) {
         CKToken *token = tokens[index];
         if ([token.spelling isEqualToString:@"["]) {

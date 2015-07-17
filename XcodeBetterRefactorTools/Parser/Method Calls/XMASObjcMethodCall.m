@@ -2,8 +2,8 @@
 
 @interface XMASObjcMethodCall ()
 @property (nonatomic) NSArray *selectorComponents;
-@property (nonatomic) NSInteger columnNumber;
-@property (nonatomic) NSInteger lineNumber;
+@property (nonatomic) NSUInteger columnNumber;
+@property (nonatomic) NSUInteger lineNumber;
 @property (nonatomic) NSArray *arguments;
 @property (nonatomic) NSString *filePath;
 @property (nonatomic) NSString *target;
@@ -13,8 +13,8 @@
 @implementation XMASObjcMethodCall
 
 - (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
-                              columnNumber:(NSInteger)columnNumber
-                                lineNumber:(NSInteger)lineNumber
+                              columnNumber:(NSUInteger)columnNumber
+                                lineNumber:(NSUInteger)lineNumber
                                  arguments:(NSArray *)arguments
                                   filePath:(NSString *)filePath
                                     target:(NSString *)target
@@ -56,5 +56,26 @@
     return _range;
 }
 
+#pragma mark - <NSObject>
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"XMASCallExpression: (SEL %@) (args %@) (target %@) (line %lu) (column %lu) (range %@)", self.selectorString, self.arguments, self.target, self.lineNumber, self.columnNumber, NSStringFromRange(self.range)];
+}
+
+- (BOOL)isEqual:(id)object {
+    XMASObjcMethodCall *other = (XMASObjcMethodCall *)object;
+    if (![other isKindOfClass:[XMASObjcMethodCall class]]) {
+        return NO;
+    }
+
+    return self.range.length == other.range.length &&
+        self.range.location == other.range.location &&
+        self.lineNumber == other.lineNumber &&
+        self.columnNumber == other.columnNumber &&
+        [self.target isEqualToString:other.target] &&
+        [self.filePath isEqualToString:other.filePath] &&
+        [self.arguments isEqualToArray:other.arguments] &&
+        [self.selectorComponents isEqualToArray:other.selectorComponents];
+}
 
 @end

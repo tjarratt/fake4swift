@@ -6,8 +6,8 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
-                              columnNumber:(NSInteger)columnNumber
-                                lineNumber:(NSInteger)lineNumber
+                              columnNumber:(NSUInteger)columnNumber
+                                lineNumber:(NSUInteger)lineNumber
                                  arguments:(NSArray *)arguments
                                   filePath:(NSString *)filePath
                                     target:(NSString *)target
@@ -15,8 +15,8 @@
 
 - (NSArray *)selectorComponents;
 - (NSString *)selectorString;
-- (NSInteger)columnNumber;
-- (NSInteger)lineNumber;
+- (NSUInteger)columnNumber;
+- (NSUInteger)lineNumber;
 - (NSString *)filePath;
 - (NSArray *)arguments;
 - (NSString *)target;

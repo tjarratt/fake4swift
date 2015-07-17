@@ -48,13 +48,13 @@ describe(@"XMASObjcMethodCallParser", ^{
                 methodCall.selectorComponents should equal(@[@"initWithIcon", @"message", @"parentWindow", @"duration"]);
                 methodCall.arguments should equal(@[@"nil", @"message", @"nil", @"2.0"]);
                 methodCall.filePath should equal(methodDeclarationFixture);
-                methodCall.range should equal(NSMakeRange(277, 281));
+                methodCall.range should equal(NSMakeRange(227, 332));
                 methodCall.lineNumber should equal(14);
-                methodCall.columnNumber should equal(71);
+                methodCall.columnNumber should equal(21);
             });
         });
 
-        xcontext(@"with nested call expressions as arguments to another call expression", ^{
+        context(@"with nested call expressions as arguments to another call expression", ^{
             __block NSArray *matchingCallExpressions;
             NSString *selector = @"myFoo:";
 
@@ -68,44 +68,41 @@ describe(@"XMASObjcMethodCallParser", ^{
             });
 
             it(@"should return an ObjcMethodCall for each call site", ^{
-                XMASObjcMethodCall *methodCall = matchingCallExpressions.firstObject;
-                methodCall.range should equal(NSMakeRange(861, 7));
-                methodCall.selectorString should equal(selector);
-                methodCall.selectorComponents should equal(@[@"myFoo"]);
-                methodCall.arguments should equal(@[@"1"]);
-                methodCall.filePath should equal(nestedCallExpressionsFixture);
-                methodCall.lineNumber should equal(28);
-                methodCall.columnNumber should equal(49);
+                XMASObjcMethodCall *expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
+                                                                                                 columnNumber:44
+                                                                                                   lineNumber:28
+                                                                                                    arguments:@[@"1"]
+                                                                                                     filePath:nestedCallExpressionsFixture
+                                                                                                       target:@"Foo"
+                                                                                                        range:NSMakeRange(856, 13)];
+                matchingCallExpressions should contain(expectedCallExpr);
 
-                methodCall = matchingCallExpressions[1];
-                methodCall should be_instance_of([XMASObjcMethodCall class]);
-                methodCall.range should equal(NSMakeRange(918, 7));
-                methodCall.selectorString should equal(selector);
-                methodCall.selectorComponents should equal(@[@"myFoo"]);
-                methodCall.arguments should equal(@[@"2"]);
-                methodCall.filePath should equal(nestedCallExpressionsFixture);
-                methodCall.lineNumber should equal(29);
-                methodCall.columnNumber should equal(49);
+                expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
+                                                                             columnNumber:44
+                                                                               lineNumber:29
+                                                                                arguments:@[@"2"]
+                                                                                 filePath:nestedCallExpressionsFixture
+                                                                                   target:@"Foo"
+                                                                                    range:NSMakeRange(913, 13)];
+                matchingCallExpressions should contain(expectedCallExpr);
 
-                methodCall = matchingCallExpressions[2];
-                methodCall should be_instance_of([XMASObjcMethodCall class]);
-                methodCall.range should equal(NSMakeRange(975, 7));
-                methodCall.selectorString should equal(selector);
-                methodCall.selectorComponents should equal(@[@"myFoo"]);
-                methodCall.arguments should equal(@[@"3"]);
-                methodCall.filePath should equal(nestedCallExpressionsFixture);
-                methodCall.lineNumber should equal(30);
-                methodCall.columnNumber should equal(49);
+                expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
+                                                                             columnNumber:44
+                                                                               lineNumber:30
+                                                                                arguments:@[@"3"]
+                                                                                 filePath:nestedCallExpressionsFixture
+                                                                                   target:@"Foo"
+                                                                                    range:NSMakeRange(970, 13)];
+                matchingCallExpressions should contain(expectedCallExpr);
 
-                methodCall = matchingCallExpressions[3];
-                methodCall should be_instance_of([XMASObjcMethodCall class]);
-                methodCall.range should equal(NSMakeRange(1032, 7));
-                methodCall.selectorString should equal(selector);
-                methodCall.selectorComponents should equal(@[@"myFoo"]);
-                methodCall.arguments should equal(@[@"4"]);
-                methodCall.filePath should equal(nestedCallExpressionsFixture);
-                methodCall.lineNumber should equal(31);
-                methodCall.columnNumber should equal(49);
+                expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
+                                                                             columnNumber:44
+                                                                               lineNumber:31
+                                                                                arguments:@[@"4"]
+                                                                                 filePath:nestedCallExpressionsFixture
+                                                                                   target:@"Foo"
+                                                                                    range:NSMakeRange(1027, 13)];
+                matchingCallExpressions should contain(expectedCallExpr);
             });
         });
     });
