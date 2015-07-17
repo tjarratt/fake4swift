@@ -1,10 +1,14 @@
 #import <Foundation/Foundation.h>
 
+@class XMASObjcCallExpressionTokenFilter;
+
 @interface XMASObjcMethodCallParser : NSObject
 
-- (instancetype)initWithSelectorToMatch:(NSString *)selector
-                             inFilePath:(NSString *)filePath
-                             withTokens:(NSArray *)tokens NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCallExpressionTokenFilter:(XMASObjcCallExpressionTokenFilter *)callExpressionTokenFilter NS_DESIGNATED_INITIALIZER;
+
+- (void)setupWithSelectorToMatch:(NSString *)selector
+                        filePath:(NSString *)filePath
+                       andTokens:(NSArray *)tokens;
 
 - (NSArray *)matchingCallExpressions;
 

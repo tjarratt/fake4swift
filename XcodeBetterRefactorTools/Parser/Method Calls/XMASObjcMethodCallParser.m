@@ -2,50 +2,47 @@
 #import <ClangKit/ClangKit.h>
 #import <ClangKit/CKCursor.h>
 #import "XMASObjcMethodCall.h"
+#import "XMASObjcCallExpressionTokenFilter.h"
 
 @interface XMASObjcMethodCallParser ()
-@property (nonatomic) NSArray *matchingCallExpressions;
+
+@property (nonatomic) XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter;
+
 @property (nonatomic) NSString *selectorToMatch;
 @property (nonatomic) NSString *filePath;
 @property (nonatomic) NSArray *tokens;
+
 @end
 
 @implementation XMASObjcMethodCallParser
 
-// ^dispatch_once in -(NSArray *)matchingCallExpressions
-// -matchingCallExpressions becomes recursive
-// do a first pass to get ALL the call expressions (test this separately)
-// foreach call expression, get the target, selector components, arguments, range and build it all up
-// then filter on call expressions matching the selector
-// (can be more intelligent here and stop when selector components no longer matches the one desired)
-
-- (instancetype)initWithSelectorToMatch:(NSString *)selector
-                             inFilePath:(NSString *)filePath
-                             withTokens:(NSArray *)tokens {
+- (instancetype)initWithCallExpressionTokenFilter:(XMASObjcCallExpressionTokenFilter *)callExpressionTokenFilter {
     if (self = [super init]) {
-        self.selectorToMatch = selector;
-        self.filePath = filePath;
-        self.tokens = tokens;
+        self.callExpressionTokenFilter = callExpressionTokenFilter;
     }
 
     return self;
 }
 
+- (void)setupWithSelectorToMatch:(NSString *)selector
+                        filePath:(NSString *)filePath
+                       andTokens:(NSArray *)tokens {
+    self.selectorToMatch = selector;
+    self.filePath = filePath;
+    self.tokens = tokens;
+}
+
 #pragma mark - Public
 
 - (NSArray *)matchingCallExpressions {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.matchingCallExpressions = [self parseMatchingCallExpressions];
-    });
-
-    return _matchingCallExpressions;
+    NSSet *callExpressionRanges = [self.callExpressionTokenFilter parseCallExpressionRangesFromTokens:self.tokens];
+    return [self filterMatchingCallExpressionsFromTokensInRanges:callExpressionRanges];
 }
 
 #pragma mark - Private
 
-- (NSArray *)parseMatchingCallExpressions {
-    NSMutableArray *methodCalls = [[NSMutableArray alloc] init];
+- (NSArray *)filterMatchingCallExpressionsFromTokensInRanges:(NSSet *)callExpressionRangeSet {
+    NSMutableArray *matchingCallExpressions = [[NSMutableArray alloc] init];
     NSUInteger count = self.tokens.count;
 
     for (NSUInteger i = 0; i < count; ++i) {
@@ -126,11 +123,11 @@
                                                                                            filePath:self.filePath
                                                                                              target:targetString
                                                                                               range:range];
-            [methodCalls addObject:methodCall];
+            [matchingCallExpressions addObject:methodCall];
         }
     }
 
-    return methodCalls;
+    return matchingCallExpressions;
 }
 
 - (BOOL)isEndOfMethodCallToken:(CKToken *)token {
@@ -148,10 +145,11 @@
 }
 
 - (BOOL)isStartOfMethodCallExpression:(CKToken *)token {
-    if (token.cursor.kind == CKCursorKindObjCMessageExpr) {
-        return YES;
+    if (![token.spelling isEqualToString:@"["]) {
+        return NO;
     }
-    if (token.cursor.kind == CKCursorKindDeclStmt && [token.spelling isEqualToString:@"["]) {
+
+    if (token.cursor.kind == CKCursorKindObjCMessageExpr || token.cursor.kind == CKCursorKindDeclStmt) {
         return YES;
     }
 
