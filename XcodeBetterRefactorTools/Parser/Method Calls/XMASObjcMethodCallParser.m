@@ -59,42 +59,64 @@
             index = indexSelectorStartsAt;
 
             CKToken *matchingCloseToken = [self matchingClosingTokenForCallExpressionAtIndex:index fromTokens:callExprTokens];
-            for (; index < callExprTokens.count; ++index) {
-                token = callExprTokens[index];
-                if (token == matchingCloseToken) {
-                    break;
-                }
-                if (![self isSelectorComponentToken:token]) {
-                    continue;
-                }
+            token = callExprTokens[index];
 
+            while ([self isSelectorComponentToken:token]) {
                 [selectorComponentTokens addObject:token];
 
+                token = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
                 index++;
-                NSMutableArray *currentArgumentTokens = [[NSMutableArray alloc] init];
-                for (; index < callExprTokens.count; ++index) {
-                    token = callExprTokens[index];
-                    if ([token.spelling isEqualToString:@":"] && token.kind == CKTokenKindPunctuation) {
-                        continue;
-                    }
 
-                    if ([self isEndOfMethodCallToken:token]) {
-                        NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
-                        [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
-                        --index;
-                        break;
-                    }
-
-                    if ([self isSelectorComponentToken:token]) {
-                        NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
-                        [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
-                        --index;
-                        break;
-                    }
-
-                    [currentArgumentTokens addObject:token];
-                    [argumentTokens addObject:token];
+                if ([token.spelling isEqualToString:@":"] && token.kind == CKTokenKindPunctuation) {
+                    token = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+                    index++;
                 }
+
+                // read all of the arguments for the call expression, if any
+                NSMutableArray *currentArgumentTokens = [[NSMutableArray alloc] init];
+
+                if ([self isStartOfMethodCallExpression:token]) {
+                    NSUInteger indexOfClosingBracket = [self indexOfMatchingClosingTokenForCallExpressionAtIndex:index fromTokens:callExprTokens];
+                    NSArray *callExpressionArgumentTokens = [callExprTokens subarrayWithRange:NSMakeRange(index, indexOfClosingBracket - index)];
+
+                    index = indexOfClosingBracket;
+
+                    // FIXME: this assumes arguments have no whitespace?
+                    [argumentStrings addObject:[callExpressionArgumentTokens componentsJoinedByString:@""]];
+                    [argumentTokens addObject:callExpressionArgumentTokens];
+                } else {
+                    while (token && !(token == matchingCloseToken)) {
+                        CKToken *nextToken = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+                        BOOL nextTokenIsValidAfterSelectorComponent = [self isTokenValidToFollowSelectorComponent:nextToken];
+                        if ([self isSelectorComponentToken:token] && nextTokenIsValidAfterSelectorComponent) {
+                            NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
+
+                            // FIXME: this assumes arguments have no whitespace?
+                            [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
+                            [argumentTokens addObject:currentArgumentTokens];
+                            [currentArgumentTokens removeAllObjects];
+
+                            --index;
+                            token = callExprTokens[index];
+                            break;
+                        }
+
+                        [currentArgumentTokens addObject:token];
+
+                        token = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+                        index++;
+                    }
+
+                    if (currentArgumentTokens.count > 0) {
+                        NSArray *currentArgumentPieces = [currentArgumentTokens valueForKey:@"spelling"];
+                        // FIXME: this assumes arguments have no whitespace?
+                        [argumentStrings addObject:[currentArgumentPieces componentsJoinedByString:@""]];
+                        [argumentTokens addObject:currentArgumentTokens];
+                    }
+                }
+
+                token = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+                ++index;
             }
 
             NSArray *selectorComponents = [selectorComponentTokens valueForKey:@"spelling"];
@@ -121,12 +143,15 @@
     return matchingCallExpressions;
 }
 
-- (BOOL)isEndOfMethodCallToken:(CKToken *)token {
+- (BOOL)isTokenValidToFollowSelectorComponent:(CKToken *)token {
     BOOL isPunctuation = token.kind == CKTokenKindPunctuation;
+
     BOOL isClosingSquareBracket = [token.spelling isEqualToString:@"]"];
+    BOOL isNamedArgumentColon = [token.spelling isEqualToString:@":"];
+
     BOOL isObjcMessageExpr = token.cursor.kind == CKCursorKindObjCMessageExpr ||
                              token.cursor.kind == CKCursorKindDeclStmt;
-    return isPunctuation && isClosingSquareBracket && isObjcMessageExpr;
+    return isPunctuation && (isClosingSquareBracket || isNamedArgumentColon) && isObjcMessageExpr;
 }
 
 - (BOOL)isSelectorComponentToken:(CKToken *)token {
@@ -145,6 +170,27 @@
     }
 
     return NO;
+}
+
+// FIXME : some of these can probably just be C-funcs
+- (NSUInteger)indexOfMatchingClosingTokenForCallExpressionAtIndex:(NSUInteger)index
+                                                       fromTokens:(NSArray *)tokens {
+    NSUInteger countOfOpenBrackets = 0;
+    for (; index < tokens.count; ++index) {
+        CKToken *token = tokens[index];
+        if ([token.spelling isEqualToString:@"["]) {
+            ++countOfOpenBrackets;
+            continue;
+        } else if ([token.spelling isEqualToString:@"]"]) {
+            --countOfOpenBrackets;
+        }
+
+        if (countOfOpenBrackets == 0) {
+            return index;
+        }
+    }
+
+    return NSNotFound;
 }
 
 - (CKToken *)matchingClosingTokenForCallExpressionAtIndex:(NSUInteger)index

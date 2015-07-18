@@ -29,8 +29,9 @@
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy ClangKit framework */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */; };
-		F70E1FC11B243AF000D971E6 /* methodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */; };
+		F70E1FC11B243AF000D971E6 /* MethodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */; };
 		F70E1FC61B24DA1300D971E6 /* XMASObjcSelectorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */; };
+		F71E82A61B5974FC00BE93DC /* RefactorMethodFixture.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */; };
 		F727495F1B4901AE00BB8483 /* XMASIndexedSymbolRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASIndexedSymbolRepository.m */; };
 		F72749601B4901AE00BB8483 /* XMASIndexedSymbolRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASIndexedSymbolRepository.m */; };
 		F72BDB7C1B2961070011A17E /* XMASChangeMethodSignatureController.xib in Sources */ = {isa = PBXBuildFile; fileRef = F757C6201B29603800274BD9 /* XMASChangeMethodSignatureController.xib */; };
@@ -189,7 +190,8 @@
 			dstSubfolderSpec = 7;
 			files = (
 				F7E834281B4CEB7B006DB442 /* NestedCallExpressions.m in Copy Fixtures */,
-				F70E1FC11B243AF000D971E6 /* methodDeclaration.m in Copy Fixtures */,
+				F70E1FC11B243AF000D971E6 /* MethodDeclaration.m in Copy Fixtures */,
+				F71E82A61B5974FC00BE93DC /* RefactorMethodFixture.m in Copy Fixtures */,
 			);
 			name = "Copy Fixtures";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,8 +236,10 @@
 		F70A036E1B4A54560009B348 /* XMASXcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcode.m; sourceTree = "<group>"; };
 		F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodCallParserSpec.mm; sourceTree = "<group>"; };
 		F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationParserSpec.mm; sourceTree = "<group>"; };
-		F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = methodDeclaration.m; sourceTree = "<group>"; };
+		F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclaration.m; sourceTree = "<group>"; };
 		F70E1FC51B24DA1300D971E6 /* XMASObjcSelectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcSelectorSpec.mm; sourceTree = "<group>"; };
+		F71E82961B59748F00BE93DC /* RefactorMethodExpected.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RefactorMethodExpected.m; path = "XcodeBetterRefactorTools/Code Rewriting/RefactorMethodExpected.m"; sourceTree = SOURCE_ROOT; };
+		F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefactorMethodFixture.m; sourceTree = "<group>"; };
 		F727495D1B4901AE00BB8483 /* XMASIndexedSymbolRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASIndexedSymbolRepository.h; sourceTree = "<group>"; };
 		F727495E1B4901AE00BB8483 /* XMASIndexedSymbolRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASIndexedSymbolRepository.m; sourceTree = "<group>"; };
 		F73511A61B25599900104F8C /* XMASObjcTypeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcTypeParser.h; sourceTree = "<group>"; };
@@ -348,12 +352,13 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
-				F72749501B49016D00BB8483 /* Indexes */,
+				F71E828A1B59715500BE93DC /* Code Rewriting */,
 				9608A8FD1622755B00763892 /* Actions */,
+				F72749501B49016D00BB8483 /* Indexes */,
 				9608A8FB1622754500763892 /* Menu Additions */,
-				96A20EE516B61CA200B39B2A /* Xcode Additions */,
 				F70E1FB51B24372100D971E6 /* Parser */,
 				F75BABD31B3D362F0056E8F0 /* UI */,
+				96A20EE516B61CA200B39B2A /* Xcode Additions */,
 				960FA0A0160584AC00923A87 /* XMASBetterRefactorTools.h */,
 				960FA0A1160584AC00923A87 /* XMASBetterRefactorTools.m */,
 			);
@@ -393,6 +398,7 @@
 		F70A03511B49DC420009B348 /* Expected */ = {
 			isa = PBXGroup;
 			children = (
+				F71E82961B59748F00BE93DC /* RefactorMethodExpected.m */,
 			);
 			path = Expected;
 			sourceTree = "<group>";
@@ -453,10 +459,25 @@
 			isa = PBXGroup;
 			children = (
 				F70A03511B49DC420009B348 /* Expected */,
-				F70E1FBE1B243A7A00D971E6 /* methodDeclaration.m */,
+				F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */,
 				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
+				F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		F71E828A1B59715500BE93DC /* Code Rewriting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Code Rewriting";
+			sourceTree = "<group>";
+		};
+		F71E82A71B59758400BE93DC /* Code Rewriting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Code Rewriting";
 			sourceTree = "<group>";
 		};
 		F72749501B49016D00BB8483 /* Indexes */ = {
@@ -493,6 +514,7 @@
 		F7BA62291B223369005B99AF /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				F71E82A71B59758400BE93DC /* Code Rewriting */,
 				F70A033E1B49D06E0009B348 /* Indexes */,
 				F798374F1B365C8F000F1EBD /* Menu Additions */,
 				F70E1FBC1B24382000D971E6 /* Fixtures */,

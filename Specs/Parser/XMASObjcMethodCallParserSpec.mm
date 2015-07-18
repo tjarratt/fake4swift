@@ -14,11 +14,14 @@ describe(@"XMASObjcMethodCallParser", ^{
     __block XMASObjcMethodCallParser *subject;
     __block XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter;
 
-    NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"methodDeclaration" ofType:@"m"];
+    NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
     NSArray *methodDeclarationTokens = [[CKTranslationUnit translationUnitWithPath:methodDeclarationFixture] tokens];
 
     NSString *nestedCallExpressionsFixture = [[NSBundle mainBundle] pathForResource:@"NestedCallExpressions" ofType:@"m"];
     NSArray *nestedCallExpressionTokens = [[CKTranslationUnit translationUnitWithPath:nestedCallExpressionsFixture] tokens];
+
+    NSString *nilArgumentFixture = [[NSBundle mainBundle] pathForResource:@"RefactorMethodFixture" ofType:@"m"];
+    NSArray *nilArgumentTokens = [[CKTranslationUnit translationUnitWithPath:nilArgumentFixture] tokens];
 
     beforeEach(^{
         callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
@@ -31,7 +34,9 @@ describe(@"XMASObjcMethodCallParser", ^{
             NSString *selector = @"initWithIcon:message:parentWindow:duration:";
 
             beforeEach(^{
-                [subject setupWithSelectorToMatch:selector filePath:methodDeclarationFixture andTokens:methodDeclarationTokens];
+                [subject setupWithSelectorToMatch:selector
+                                         filePath:methodDeclarationFixture
+                                        andTokens:methodDeclarationTokens];
 
                 initWithMethodCalls = subject.matchingCallExpressions;
             });
@@ -51,6 +56,31 @@ describe(@"XMASObjcMethodCallParser", ^{
                 methodCall.range should equal(NSMakeRange(227, 332));
                 methodCall.lineNumber should equal(14);
                 methodCall.columnNumber should equal(21);
+            });
+        });
+
+        context(@"with a call expression whose arguments are sometimes nil", ^{
+            __block NSArray *matchingCallExpressions;
+            NSString *selector = @"initWithIcon:message:parentWindow:duration:";
+
+            beforeEach(^{
+                [subject setupWithSelectorToMatch:selector
+                                         filePath:nilArgumentFixture
+                                        andTokens:nilArgumentTokens];
+                matchingCallExpressions = subject.matchingCallExpressions;
+            });
+
+            it(@"should find the correct call expression", ^{
+                NSArray *components = @[@"initWithIcon", @"message", @"parentWindow", @"duration"];
+                NSArray *arguments = @[@"nil", @"message", @"nil", @"2.0"];
+                XMASObjcMethodCall *expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:components
+                                                                                                 columnNumber:21
+                                                                                                   lineNumber:4
+                                                                                                    arguments:arguments
+                                                                                                     filePath:nilArgumentFixture
+                                                                                                       target:@"[DVTBezelAlertPanel alloc]"
+                                                                                                        range:NSMakeRange(123, 244)];
+                matchingCallExpressions should equal(@[expectedCallExpr]);
             });
         });
 
