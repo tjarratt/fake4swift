@@ -5,6 +5,7 @@
 #import "XcodeInterfaces.h"
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
+#import "XMASObjcCallExpressionRewriter.h"
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
@@ -23,6 +24,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
+@property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 
 @property (nonatomic) XMASObjcMethodDeclaration *originalMethod;
@@ -36,12 +38,14 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
                                alerter:(XMASAlert *)alerter
-               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository {
+               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
+                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter {
     NSBundle *bundleForClass = [NSBundle bundleForClass:[self class]];
     if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:bundleForClass]) {
         self.alerter = alerter;
         self.windowProvider = windowProvider;
         self.indexedSymbolRepository = indexedSymbolRepository;
+        self.callExpressionRewriter = callExpressionRewriter;
         self.delegate = delegate;
     }
 
@@ -75,9 +79,9 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.alerter flashMessage:message];
 
     for (XC(IDEIndexSymbol) symbol in symbols) {
-        [self.indexedSymbolRepository changeCallsite:symbol
-                                          fromMethod:self.originalMethod
-                                         toNewMethod:self.method];
+        [self.callExpressionRewriter changeCallsite:symbol
+                                         fromMethod:self.originalMethod
+                                        toNewMethod:self.method];
     }
 }
 
@@ -127,6 +131,23 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow + 1)] byExtendingSelection:NO];
 
     self.previewTextField.stringValue = [self previewFromCurrentSelector];
+}
+
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 #pragma mark - <NSWindowDelegate>

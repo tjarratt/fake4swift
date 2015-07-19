@@ -55,7 +55,7 @@ describe(@"XMASObjcMethodCallParser", ^{
                 methodCall.filePath should equal(methodDeclarationFixture);
                 methodCall.range should equal(NSMakeRange(227, 332));
                 methodCall.lineNumber should equal(14);
-                methodCall.columnNumber should equal(21);
+                methodCall.columnNumber should equal(71);
             });
         });
 
@@ -74,7 +74,7 @@ describe(@"XMASObjcMethodCallParser", ^{
                 NSArray *components = @[@"initWithIcon", @"message", @"parentWindow", @"duration"];
                 NSArray *arguments = @[@"nil", @"message", @"nil", @"2.0"];
                 XMASObjcMethodCall *expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:components
-                                                                                                 columnNumber:21
+                                                                                                 columnNumber:49
                                                                                                    lineNumber:4
                                                                                                     arguments:arguments
                                                                                                      filePath:nilArgumentFixture
@@ -99,7 +99,7 @@ describe(@"XMASObjcMethodCallParser", ^{
 
             it(@"should return an ObjcMethodCall for each call site", ^{
                 XMASObjcMethodCall *expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
-                                                                                                 columnNumber:44
+                                                                                                 columnNumber:49
                                                                                                    lineNumber:28
                                                                                                     arguments:@[@"1"]
                                                                                                      filePath:nestedCallExpressionsFixture
@@ -108,7 +108,7 @@ describe(@"XMASObjcMethodCallParser", ^{
                 matchingCallExpressions should contain(expectedCallExpr);
 
                 expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
-                                                                             columnNumber:44
+                                                                             columnNumber:49
                                                                                lineNumber:29
                                                                                 arguments:@[@"2"]
                                                                                  filePath:nestedCallExpressionsFixture
@@ -117,7 +117,7 @@ describe(@"XMASObjcMethodCallParser", ^{
                 matchingCallExpressions should contain(expectedCallExpr);
 
                 expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
-                                                                             columnNumber:44
+                                                                             columnNumber:49
                                                                                lineNumber:30
                                                                                 arguments:@[@"3"]
                                                                                  filePath:nestedCallExpressionsFixture
@@ -126,7 +126,7 @@ describe(@"XMASObjcMethodCallParser", ^{
                 matchingCallExpressions should contain(expectedCallExpr);
 
                 expectedCallExpr = [[XMASObjcMethodCall alloc] initWithSelectorComponents:@[@"myFoo"]
-                                                                             columnNumber:44
+                                                                             columnNumber:49
                                                                                lineNumber:31
                                                                                 arguments:@[@"4"]
                                                                                  filePath:nestedCallExpressionsFixture

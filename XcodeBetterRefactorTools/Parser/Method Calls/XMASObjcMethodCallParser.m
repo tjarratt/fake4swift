@@ -123,14 +123,14 @@
             NSString *joinedComponents = [selectorComponents componentsJoinedByString:@":"];
             NSString *parsedSelector = argumentTokens.count > 0 ? [joinedComponents stringByAppendingString:@":"] : joinedComponents;
             if ([parsedSelector isEqualToString:self.selectorToMatch]) {
+                CKToken *firstSelectorToken = selectorComponentTokens.firstObject;
                 CKToken *firstToken = callExprTokens.firstObject;
                 CKToken *lastToken = callExprTokens.lastObject;
                 NSString *targetString = [self stringFromTargetTokens:targetTokens];
-
                 NSRange range = NSMakeRange(firstToken.range.location, lastToken.range.location - firstToken.range.location + lastToken.range.length);
                 XMASObjcMethodCall *methodCall = [[XMASObjcMethodCall alloc] initWithSelectorComponents:selectorComponents
-                                                                                           columnNumber:firstToken.column
-                                                                                             lineNumber:firstToken.line
+                                                                                           columnNumber:firstSelectorToken.column
+                                                                                             lineNumber:firstSelectorToken.line
                                                                                               arguments:argumentStrings
                                                                                                filePath:self.filePath
                                                                                                  target:targetString

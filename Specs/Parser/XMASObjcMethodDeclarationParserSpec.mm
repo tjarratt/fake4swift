@@ -14,7 +14,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
     XMASObjcMethodDeclarationParser *subject = [[XMASObjcMethodDeclarationParser alloc] init];
 
     describe(@"parsing a collection of tokens from ClangKit", ^{
-        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"methodDeclaration" ofType:@"m"];
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
         NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
 

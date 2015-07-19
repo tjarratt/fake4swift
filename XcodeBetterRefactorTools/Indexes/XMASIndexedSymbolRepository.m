@@ -4,12 +4,6 @@
 
 @implementation XMASIndexedSymbolRepository
 
-- (void)changeCallsite:(XC(IDEIndexSymbol))callsite
-            fromMethod:(XMASObjcMethodDeclaration *)oldSelector
-           toNewMethod:(XMASObjcMethodDeclaration *)newSelector {
-    
-}
-
 - (NSArray *)callExpressionsMatchingSelector:(XMASObjcMethodDeclaration *)selector {
     XC(IDEIndex) index = [XMASXcode indexForCurrentWorkspace];
     id callableKind = [XMASXcode instanceMethodSymbolKind];

@@ -4,6 +4,7 @@
 #import "XMASWindowProvider.h"
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
+#import "XMASObjcCallExpressionRewriter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -12,6 +13,7 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerProviderSpec)
 
 describe(@"XMASChangeMethodSignatureControllerProvider", ^{
     __block XMASChangeMethodSignatureControllerProvider *subject;
+    __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
     __block XMASIndexedSymbolRepository *indexedSymbolRepository;
     __block XMASWindowProvider *windowProvider;
     __block XMASAlert *alerter;
@@ -20,10 +22,12 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
         alerter = nice_fake_for(alerter);
         windowProvider = nice_fake_for([XMASWindowProvider class]);
         indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
+        callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
 
         subject = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                       alerter:alerter
-                                                                      indexedSymbolRepository:indexedSymbolRepository];
+                                                                      indexedSymbolRepository:indexedSymbolRepository
+                                                                       callExpressionRewriter:callExpressionRewriter];
     });
 
     describe(@"-provideInstance", ^{
@@ -53,6 +57,10 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
 
         it(@"should have an indexedSymbolRepository", ^{
             controller.indexedSymbolRepository should be_same_instance_as(indexedSymbolRepository);
+        });
+
+        it(@"should have a call expression rewriter", ^{
+            controller.callExpressionRewriter should be_same_instance_as(callExpressionRewriter);
         });
     });
 });

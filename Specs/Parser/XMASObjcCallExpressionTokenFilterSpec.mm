@@ -8,7 +8,7 @@ using namespace Cedar::Doubles;
 SPEC_BEGIN(XMASObjcCallExpressionTokenFilterSpec)
 
 describe(@"XMASObjcCallExpressionTokenFilter", ^{
-    NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"methodDeclaration" ofType:@"m"];
+    NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
     NSArray *methodDeclarationTokens = [[CKTranslationUnit translationUnitWithPath:methodDeclarationFixture] tokens];
 
     NSString *nestedCallExpressionsFixture = [[NSBundle mainBundle] pathForResource:@"NestedCallExpressions" ofType:@"m"];

@@ -3,6 +3,7 @@
 @class XMASAlert;
 @class XMASWindowProvider;
 @class XMASIndexedSymbolRepository;
+@class XMASObjcCallExpressionRewriter;
 @class XMASChangeMethodSignatureController;
 
 @protocol XMASChangeMethodSignatureControllerDelegate;
@@ -13,7 +14,8 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
-               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository NS_DESIGNATED_INITIALIZER;
+               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
+                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter NS_DESIGNATED_INITIALIZER;
 
 - (XMASChangeMethodSignatureController *)provideInstanceWithDelegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate;
 

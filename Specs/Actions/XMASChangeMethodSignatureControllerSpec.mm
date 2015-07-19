@@ -5,6 +5,7 @@
 #import "XMASWindowProvider.h"
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
+#import "XMASObjcCallExpressionRewriter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,6 +18,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
     __block XMASIndexedSymbolRepository *indexedSymbolRepository;
+    __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
     __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
@@ -30,11 +32,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
         delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
 
         indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
+        callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
 
         subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
                                                                              delegate:delegate
                                                                               alerter:alerter
-                                                              indexedSymbolRepository:indexedSymbolRepository];
+                                                              indexedSymbolRepository:indexedSymbolRepository
+                                                               callExpressionRewriter:callExpressionRewriter];
     });
 
     describe(@"-refactorMethod:inFile:", ^{
@@ -454,12 +458,12 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 .with(@"Changing 3 call sites of method:to:refactor:");
         });
 
-        it(@"should ask its repository to change each call site", ^{
-            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+        it(@"should ask its call expression rewriter to change each call site", ^{
+            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
                 .with(@"something", methodToRefactor, subject.method);
-            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
                 .with(@"goes", methodToRefactor, subject.method);
-            indexedSymbolRepository should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
                 .with(@"here", methodToRefactor, subject.method);
         });
     });
