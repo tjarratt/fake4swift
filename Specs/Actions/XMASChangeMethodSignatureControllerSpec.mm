@@ -442,29 +442,75 @@ describe(@"XMASChangeMethodSignatureController", ^{
         beforeEach(^{
             methodToRefactor = fake_for([XMASObjcMethodDeclaration class]);
             methodToRefactor stub_method(@selector(selectorString)).and_return(@"method:to:refactor:");
-
-            indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
-                .with(methodToRefactor)
-                .and_return(@[@"something", @"goes", @"here"]);
-
-            subject.view should_not be_nil;
-            [subject refactorMethod:methodToRefactor inFile:nil];
-
-            [subject.refactorButton performClick:nil];
         });
 
-        it(@"should present a count of the number of matching instances of the old selector", ^{
-            alerter should have_received(@selector(flashMessage:))
-                .with(@"Changing 3 call sites of method:to:refactor:");
+        context(@"when everything goes exactly as planned", ^{
+            beforeEach(^{
+                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
+                    .with(methodToRefactor)
+                    .and_return(@[@"something", @"goes", @"here"]);
+
+                subject.view should_not be_nil;
+                [subject refactorMethod:methodToRefactor inFile:nil];
+
+                [subject.refactorButton performClick:nil];
+            });
+
+            it(@"should present a count of the number of matching instances of the old selector", ^{
+                alerter should have_received(@selector(flashMessage:))
+                    .with(@"Changing 3 call sites of method:to:refactor:");
+            });
+
+            it(@"should ask its call expression rewriter to change each call site", ^{
+                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                    .with(@"something", methodToRefactor, subject.method);
+                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                    .with(@"goes", methodToRefactor, subject.method);
+                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                    .with(@"here", methodToRefactor, subject.method);
+            });
         });
 
-        it(@"should ask its call expression rewriter to change each call site", ^{
-            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                .with(@"something", methodToRefactor, subject.method);
-            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                .with(@"goes", methodToRefactor, subject.method);
-            callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                .with(@"here", methodToRefactor, subject.method);
+        context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
+            beforeEach(^{
+                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
+                    .and_raise_exception();
+
+                subject.view should_not be_nil;
+                [subject refactorMethod:methodToRefactor inFile:nil];
+            });
+
+            it(@"should catch the exception and not allow xcode to crash", ^{
+                ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+            });
+
+            it(@"should log the exception", ^{
+                [subject.refactorButton performClick:nil];
+                alerter should have_received(@selector(flashComfortingMessageForException:));
+            });
+        });
+
+        context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
+            beforeEach(^{
+                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
+                    .with(methodToRefactor)
+                    .and_return(@[@"something", @"goes", @"here"]);
+
+                callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))
+                    .and_raise_exception();
+
+                subject.view should_not be_nil;
+                [subject refactorMethod:methodToRefactor inFile:nil];
+            });
+
+            it(@"should catch the exception and not allow xcode to crash", ^{
+                ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+            });
+
+            it(@"should log the exception", ^{
+                [subject.refactorButton performClick:nil];
+                alerter should have_received(@selector(flashComfortingMessageForException:));
+            });
         });
     });
 });

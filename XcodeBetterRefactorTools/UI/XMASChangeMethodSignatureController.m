@@ -74,14 +74,11 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (IBAction)didTapRefactor:(id)sender {
-    NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
-    NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
-    [self.alerter flashMessage:message];
-
-    for (XC(IDEIndexSymbol) symbol in symbols) {
-        [self.callExpressionRewriter changeCallsite:symbol
-                                         fromMethod:self.originalMethod
-                                        toNewMethod:self.method];
+    @try {
+        [self didTapRefactorActionPossiblyRaisingException];
+    }
+    @catch (NSException *exception) {
+        [self.alerter flashComfortingMessageForException:exception];
     }
 }
 
@@ -251,6 +248,18 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     }
 
     return [NSString stringWithFormat:@"- (%@)%@", self.method.returnType, [pieces componentsJoinedByString:@" "]];
+}
+
+- (void)didTapRefactorActionPossiblyRaisingException {
+    NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
+    NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
+    [self.alerter flashMessage:message];
+
+    for (XC(IDEIndexSymbol) symbol in symbols) {
+        [self.callExpressionRewriter changeCallsite:symbol
+                                         fromMethod:self.originalMethod
+                                        toNewMethod:self.method];
+    }
 }
 
 @end

@@ -9,6 +9,7 @@
 @end
 
 @implementation XMASAlert
+
 - (void)flashMessage:(NSString *)message {
     id alertPanel =
         [[NSClassFromString(@"DVTBezelAlertPanel") alloc] initWithIcon:nil
@@ -17,4 +18,11 @@
                                                               duration:2.0];
     [alertPanel orderFront:nil];
 }
+
+- (void)flashComfortingMessageForException:(NSException *)exception {
+    [self flashMessage:@"Aww shucks. Something bad happened. Check Console.app"];
+    NSLog(@"================> something bad happened. Perhaps this exception will help explain it?");
+    NSLog(@"================> %@", [exception description]);
+}
+
 @end
