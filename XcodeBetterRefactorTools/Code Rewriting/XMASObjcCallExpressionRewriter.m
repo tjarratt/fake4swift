@@ -34,9 +34,9 @@
 
     // CONSIDER :: should we have a (singleton-provided) object that handles read access to tokens for a given file?
     // (this would be a good use case for a monostate, quite possibly)
-    NSArray *tokens = [[CKTranslationUnit translationUnitWithPath:callsite.file] tokens];
+    NSArray *tokens = [[CKTranslationUnit translationUnitWithPath:callsite.file.pathString] tokens];
     [self.methodCallParser setupWithSelectorToMatch:oldSelector.selectorString
-                                           filePath:callsite.file
+                                           filePath:callsite.file.pathString
                                           andTokens:tokens];
 
     NSArray *callExpressionsMatchingSelector = [self.methodCallParser matchingCallExpressions];
@@ -52,8 +52,8 @@
     }
 
     if (!callExpressionToRewrite) {
-        NSString *sadMessage = [NSString stringWithFormat:@"Aww shucks. Couldn't find '%@' at line %lu column %lu in '%@'", oldSelector.selectorString, callsite.lineNumber, callsite.column, callsite.file];
-        [self.alerter flashMessage:sadMessage];
+        NSString *sadMessage = [NSString stringWithFormat:@"Aww shucks. Couldn't find '%@' at line %lu column %lu in '%@'", oldSelector.selectorString, callsite.lineNumber, callsite.column, callsite.file.pathString];
+        [self.alerter flashMessage:sadMessage withLogging:YES];
         return;
     }
 

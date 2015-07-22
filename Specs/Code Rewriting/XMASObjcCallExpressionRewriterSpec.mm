@@ -71,7 +71,10 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
                                                                              returnType:@"void"
                                                                                   range:NSMakeRange(0, 0)];
             callsite = nice_fake_for(@protocol(XMASXcode_IDEIndexSymbol));
-            callsite stub_method(@selector(file)).and_return(tempFixturePath);
+            id fakeDVTFilePath = nice_fake_for(@protocol(XMASXcode_DVTFilePath));
+            fakeDVTFilePath stub_method(@selector(pathString)).and_return(tempFixturePath);
+
+            callsite stub_method(@selector(file)).and_return(fakeDVTFilePath);
             callsite stub_method(@selector(lineNumber)).and_return((NSUInteger)4);
             callsite stub_method(@selector(column)).and_return((NSUInteger)49);
         });
@@ -96,7 +99,10 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
             XMASObjcMethodDeclaration *unknownSelector = nice_fake_for([XMASObjcMethodDeclaration class]);
             unknownSelector stub_method(@selector(selectorString)).and_return(@"blurgle:withSpoo:andBruce:");
             id callsite = nice_fake_for(@protocol(XMASXcode_IDEIndexSymbol));
-            callsite stub_method(@selector(file)).and_return(@"/obv/fake/file.path");
+            id fakeDVTFilePath = nice_fake_for(@protocol(XMASXcode_DVTFilePath));
+            fakeDVTFilePath stub_method(@selector(pathString)).and_return(@"/obv/fake/file.path");
+
+            callsite stub_method(@selector(file)).and_return(fakeDVTFilePath);
             callsite stub_method(@selector(lineNumber)).and_return((NSUInteger)12);
             callsite stub_method(@selector(column)).and_return((NSUInteger)24);
 
@@ -104,8 +110,9 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
         });
 
         it(@"should show the user a sad alert", ^{
-            alerter should have_received(@selector(flashMessage:))
-                .with(@"Aww shucks. Couldn't find 'blurgle:withSpoo:andBruce:' at line 12 column 24 in '/obv/fake/file.path'");
+            NSString *expectedMessage = @"Aww shucks. Couldn't find 'blurgle:withSpoo:andBruce:' at line 12 column 24 in '/obv/fake/file.path'";
+            alerter should have_received(@selector(flashMessage:withLogging:))
+                .with(expectedMessage, YES);
         });
     });
 });

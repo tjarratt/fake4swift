@@ -253,7 +253,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 - (void)didTapRefactorActionPossiblyRaisingException {
     NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
     NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
-    [self.alerter flashMessage:message];
+    [self.alerter flashMessage:message withLogging:YES];
 
     for (XC(IDEIndexSymbol) symbol in symbols) {
         [self.callExpressionRewriter changeCallsite:symbol

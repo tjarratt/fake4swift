@@ -161,7 +161,7 @@
 @protocol XCP(IDEIndexSymbol)
 - (NSString *)name;
 - (XC(IDEIndexSymbol))containerSymbol;
-- (NSString *)file;
+- (XC(DVTFilePath))file;
 - (NSUInteger)lineNumber;
 - (NSUInteger)column;
 @end
