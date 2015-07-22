@@ -69,6 +69,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
             [subject refactorMethod:method inFile:filepath];
         });
 
+        it(@"should be its tableview to match the number of rows the selector has", ^{
+            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
+            CGFloat rowHeight = subject.tableView.rowHeight;
+            CGFloat tableviewHeight = headerHeight + [subject numberOfRowsInTableView:subject.tableView] * rowHeight;
+            subject.tableviewHeight.constant should equal(tableviewHeight);
+        });
+
         it(@"should ask for a window from its window provider", ^{
             windowProvider should have_received(@selector(provideInstance));
         });

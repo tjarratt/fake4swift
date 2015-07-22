@@ -14,17 +14,18 @@
                 <outlet property="refactorButton" destination="jJb-Xj-hSE" id="2Kv-qu-OyT"/>
                 <outlet property="removeComponentButton" destination="O8e-TK-dIk" id="zG2-mt-zBA"/>
                 <outlet property="tableView" destination="pWs-6Y-ztg" id="my6-fO-upP"/>
+                <outlet property="tableviewHeight" destination="RBE-H9-KRC" id="yfi-9b-ikG"/>
                 <outlet property="view" destination="c22-O7-iKe" id="bwu-5L-Mz2"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="-1" width="480" height="355"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="waD-No-LNc" userLabel="tableview">
-                    <rect key="frame" x="0.0" y="170" width="480" height="185"/>
+                    <rect key="frame" x="0.0" y="170" width="480" height="45"/>
                     <clipView key="contentView" id="qzr-KE-okC">
                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,6 +138,9 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="RBE-H9-KRC"/>
+                    </constraints>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="CVu-gH-DxN">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>

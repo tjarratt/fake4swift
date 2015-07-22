@@ -8,9 +8,10 @@
 @class XMASObjcCallExpressionRewriter;
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
-@interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate>
+@interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, weak, readonly) NSTableView *tableView;
+@property (nonatomic, weak, readonly) NSLayoutConstraint *tableviewHeight;
 @property (nonatomic, weak, readonly) NSButton *addComponentButton;
 @property (nonatomic, weak, readonly) NSButton *removeComponentButton;
 @property (nonatomic, weak, readonly) NSButton *raiseComponentButton;

@@ -9,10 +9,11 @@
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
-@interface XMASChangeMethodSignatureController () <NSTableViewDataSource, NSTableViewDelegate>
+@interface XMASChangeMethodSignatureController ()
 
 @property (nonatomic, strong) NSWindow *window;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableviewHeight;
 @property (nonatomic, weak) IBOutlet NSButton *addComponentButton;
 @property (nonatomic, weak) IBOutlet NSButton *removeComponentButton;
 @property (nonatomic, weak) IBOutlet NSButton *raiseComponentButton;
@@ -163,6 +164,11 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+
+    CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame);
+    CGFloat rowHeight = self.tableView.rowHeight;
+    CGFloat tableviewHeight = headerHeight + [self numberOfRowsInTableView:self.tableView] * rowHeight;
+    self.tableviewHeight.constant = tableviewHeight;
 
     self.raiseComponentButton.enabled = NO;
     self.lowerComponentButton.enabled = NO;
