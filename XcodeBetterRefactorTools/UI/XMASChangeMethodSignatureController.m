@@ -164,10 +164,11 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.intercellSpacing = NSMakeSize(0, 0);
 
     CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame);
     CGFloat rowHeight = self.tableView.rowHeight;
-    CGFloat tableviewHeight = headerHeight + [self numberOfRowsInTableView:self.tableView] * rowHeight;
+    CGFloat tableviewHeight = headerHeight + (1 + [self numberOfRowsInTableView:self.tableView]) * rowHeight;
     self.tableviewHeight.constant = tableviewHeight;
 
     self.raiseComponentButton.enabled = NO;

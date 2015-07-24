@@ -72,8 +72,12 @@ describe(@"XMASChangeMethodSignatureController", ^{
         it(@"should be its tableview to match the number of rows the selector has", ^{
             CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
             CGFloat rowHeight = subject.tableView.rowHeight;
-            CGFloat tableviewHeight = headerHeight + [subject numberOfRowsInTableView:subject.tableView] * rowHeight;
+            CGFloat tableviewHeight = headerHeight + (1 + [subject numberOfRowsInTableView:subject.tableView]) * rowHeight;
             subject.tableviewHeight.constant should equal(tableviewHeight);
+        });
+
+        it(@"should not have any spacing between the rows in the tableview", ^{
+            subject.tableView.intercellSpacing.height should equal(0);
         });
 
         it(@"should ask for a window from its window provider", ^{
@@ -464,8 +468,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
             });
 
             it(@"should present a count of the number of matching instances of the old selector", ^{
-                alerter should have_received(@selector(flashMessage:))
-                    .with(@"Changing 3 call sites of method:to:refactor:");
+                alerter should have_received(@selector(flashMessage:withLogging:))
+                    .with(@"Changing 3 call sites of method:to:refactor:", YES);
             });
 
             it(@"should ask its call expression rewriter to change each call site", ^{
