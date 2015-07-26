@@ -1,6 +1,7 @@
 #import <Cedar/Cedar.h>
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -14,16 +15,33 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
         subject = [[XMASObjcCallExpressionStringWriter alloc] init];
     });
 
+    __block NSArray *selectorComponents;
+    __block XMASObjcMethodDeclaration *methodDeclaration;
+    __block NSArray *args;
+    __block NSArray *parameters;
+
+    beforeEach(^{
+        selectorComponents = @[@"setupWithName", @"floatValue", @"barValue"];
+        parameters = @[
+                       [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"NSString *" localName:@"name"],
+                       [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"CGFloat" localName:@"floatValue"],
+                       [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"Bar *" localName:@"barValue"],
+                       ];
+
+        methodDeclaration = nice_fake_for([XMASObjcMethodDeclaration class]);
+        methodDeclaration stub_method(@selector(components))
+            .and_return(selectorComponents);
+        methodDeclaration stub_method(@selector(returnType)).and_return(@"void");
+        methodDeclaration stub_method(@selector(parameters))
+            .and_return(parameters);
+
+        args = @[@"nil", @"1.0f", @"[Bar myBar]"];
+    });
+
     describe(@"-callExpression:forTarget:withArgs:atColumn:", ^{
         __block NSString *callExpressionString;
 
         beforeEach(^{
-            NSArray *selectorComponents = @[@"setupWithName", @"floatValue", @"barValue"];
-            XMASObjcMethodDeclaration *methodDeclaration = nice_fake_for([XMASObjcMethodDeclaration class]);
-            methodDeclaration stub_method(@selector(components))
-                .and_return(selectorComponents);
-            NSArray *args = @[@"nil", @"1.0f", @"[Bar myBar]"];
-
             callExpressionString = [subject callExpression:methodDeclaration
                                                  forTarget:@"[Foo myFoo]"
                                                   withArgs:args
@@ -35,6 +53,21 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
                                        @"               floatValue:1.0f\n"
                                        @"                 barValue:[Bar myBar]]";
             callExpressionString should equal(expectedString);
+        });
+    });
+
+    describe(@"-formatInstanceMethodDeclaration:", ^{
+        __block NSString *instanceMethodString;
+
+        beforeEach(^{
+            instanceMethodString = [subject formatInstanceMethodDeclaration:methodDeclaration];
+        });
+
+        it(@"should construct the correct declaration for the provided instance method", ^{
+            NSString *expectedString = @"- (void)setupWithName:(NSString *)name\n"
+                                       @"           floatValue:(CGFloat)floatValue\n"
+                                       @"             barValue:(Bar *)barValue";
+            instanceMethodString should equal(expectedString);
         });
     });
 });

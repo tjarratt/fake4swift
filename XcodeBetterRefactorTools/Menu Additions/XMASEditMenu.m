@@ -62,7 +62,7 @@
                                                                                                 callExpressionParser:methodCallParser
                                                                                           callExpressionStringWriter:callExpressionStringWriter];
 
-    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider alerter:alerter indexedSymbolRepository:indexedSymbolRepository callExpressionRewriter:callExpressionRewriter];
+    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider alerter:alerter indexedSymbolRepository:indexedSymbolRepository callExpressionRewriter:callExpressionRewriter callExpressionStringWriter:callExpressionStringWriter];
 
     XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
                                                                                       alerter:alerter

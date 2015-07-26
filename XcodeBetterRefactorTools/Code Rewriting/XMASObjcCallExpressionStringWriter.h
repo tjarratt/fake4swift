@@ -7,6 +7,8 @@
 - (NSString *)callExpression:(XMASObjcMethodDeclaration *)callExpression
                    forTarget:(NSString *)target
                     withArgs:(NSArray *)args
-                    atColumn:(NSInteger)column;
+                    atColumn:(NSUInteger)column;
+
+- (NSString *)formatInstanceMethodDeclaration:(XMASObjcMethodDeclaration *)callExpression;
 
 @end

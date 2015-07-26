@@ -3,12 +3,14 @@
 #import "XMASWindowProvider.h"
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
+#import "XMASObjcCallExpressionStringWriter.h"
 
 @interface XMASChangeMethodSignatureControllerProvider ()
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
+@property (nonatomic) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
 @end
 
 @implementation XMASChangeMethodSignatureControllerProvider
@@ -16,12 +18,14 @@
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
-                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter {
+                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
+            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter{
     if (self = [super init]) {
         self.alerter = alerter;
         self.windowProvider = windowProvider;
         self.indexedSymbolRepository = indexedSymbolRepository;
         self.callExpressionRewriter = callExpressionRewriter;
+        self.callExpressionStringWriter = callExpressionStringWriter;
     }
 
     return self;
@@ -32,7 +36,8 @@
                                                                       delegate:delegate
                                                                        alerter:self.alerter
                                                        indexedSymbolRepository:self.indexedSymbolRepository
-                                                        callExpressionRewriter:self.callExpressionRewriter];
+                                                        callExpressionRewriter:self.callExpressionRewriter
+                                                    callExpressionStringWriter:self.callExpressionStringWriter];
 }
 
 @end

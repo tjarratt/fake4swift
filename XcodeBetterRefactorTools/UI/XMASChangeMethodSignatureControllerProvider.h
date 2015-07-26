@@ -4,6 +4,7 @@
 @class XMASWindowProvider;
 @class XMASIndexedSymbolRepository;
 @class XMASObjcCallExpressionRewriter;
+@class XMASObjcCallExpressionStringWriter;
 @class XMASChangeMethodSignatureController;
 
 @protocol XMASChangeMethodSignatureControllerDelegate;
@@ -15,7 +16,8 @@
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
-                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter NS_DESIGNATED_INITIALIZER;
+                callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
+            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter NS_DESIGNATED_INITIALIZER;
 
 - (XMASChangeMethodSignatureController *)provideInstanceWithDelegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate;
 
