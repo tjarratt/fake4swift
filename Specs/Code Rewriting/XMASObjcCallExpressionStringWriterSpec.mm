@@ -14,7 +14,7 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
         subject = [[XMASObjcCallExpressionStringWriter alloc] init];
     });
 
-    describe(@"-callExpression:forTarget:withArgs:", ^{
+    describe(@"-callExpression:forTarget:withArgs:atColumn:", ^{
         __block NSString *callExpressionString;
 
         beforeEach(^{
@@ -24,11 +24,17 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
                 .and_return(selectorComponents);
             NSArray *args = @[@"nil", @"1.0f", @"[Bar myBar]"];
 
-            callExpressionString = [subject callExpression:methodDeclaration forTarget:@"[Foo myFoo]" withArgs:args];
+            callExpressionString = [subject callExpression:methodDeclaration
+                                                 forTarget:@"[Foo myFoo]"
+                                                  withArgs:args
+                                                  atColumn:13];
         });
 
         it(@"should construct the correct call expression string", ^{
-            callExpressionString should equal(@"[[Foo myFoo] setupWithName:nil floatValue:1.0f barValue:[Bar myBar]]");
+            NSString *expectedString = @"[[Foo myFoo] setupWithName:nil\n"
+                                       @"               floatValue:1.0f\n"
+                                       @"                 barValue:[Bar myBar]]";
+            callExpressionString should equal(expectedString);
         });
     });
 });
