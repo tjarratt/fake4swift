@@ -79,10 +79,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
             [subject refactorMethod:method inFile:filepath];
         });
 
-        it(@"should be its tableview to match the number of rows the selector has", ^{
+        it(@"should resize its tableview to match the number of rows the selector has", ^{
             CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
             CGFloat rowHeight = subject.tableView.rowHeight;
-            CGFloat tableviewHeight = headerHeight + (1 + [subject numberOfRowsInTableView:subject.tableView]) * rowHeight;
+            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
             subject.tableviewHeight.constant should equal(tableviewHeight);
         });
 
@@ -228,6 +228,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                         it(@"should add another row to the tableview", ^{
                             subject.tableView.numberOfRows should equal(4);
+                        });
+
+                        it(@"should resize its tableview to match the number of rows the selector has", ^{
+                            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
+                            CGFloat rowHeight = subject.tableView.rowHeight;
+                            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
+                            subject.tableviewHeight.constant should equal(tableviewHeight);
                         });
 
                         it(@"should insert the new row between the first and second rows", ^{
@@ -413,6 +420,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                             NSTextField *secondSelector = (id)[subject.tableView viewAtColumn:0 row:1 makeIfNecessary:YES];
                             secondSelector.stringValue should equal(@"andThat");
+                        });
+
+                        it(@"should resize its tableview to match the number of rows the selector has", ^{
+                            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
+                            CGFloat rowHeight = subject.tableView.rowHeight;
+                            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
+                            subject.tableviewHeight.constant should equal(tableviewHeight);
                         });
 
                         it(@"should update the preview", ^{

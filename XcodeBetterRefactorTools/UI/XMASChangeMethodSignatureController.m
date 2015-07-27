@@ -95,6 +95,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     self.method = [self.method insertComponentAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
+    [self resizeTableview];
 
     NSTextField *textField = (id)[self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
     textField.delegate = self;
@@ -111,6 +112,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     self.method = [self.method deleteComponentAtIndex:(NSUInteger)selectedRow];
     [self.tableView reloadData];
+    [self resizeTableview];
 
     self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
 }
@@ -170,10 +172,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.tableView.delegate = self;
     self.tableView.intercellSpacing = NSMakeSize(0, 0);
 
-    CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame);
-    CGFloat rowHeight = self.tableView.rowHeight;
-    CGFloat tableviewHeight = headerHeight + (1 + [self numberOfRowsInTableView:self.tableView]) * rowHeight;
-    self.tableviewHeight.constant = tableviewHeight;
+    [self resizeTableview];
 
     self.raiseComponentButton.enabled = NO;
     self.lowerComponentButton.enabled = NO;
@@ -259,6 +258,16 @@ static NSString * const tableViewColumnRowIdentifier = @"";
                                          fromMethod:self.originalMethod
                                         toNewMethod:self.method];
     }
+}
+
+- (void)resizeTableview {
+    CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame);
+    CGFloat rowHeight = self.tableView.rowHeight;
+
+    NSInteger numberOfRows = [self numberOfRowsInTableView:self.tableView];
+    CGFloat tableviewHeight = headerHeight + numberOfRows * (rowHeight + 5);
+
+    self.tableviewHeight.constant = tableviewHeight;
 }
 
 @end
