@@ -39,7 +39,7 @@
                                 <tableColumns>
                                     <tableColumn identifier="selector" width="116" minWidth="40" maxWidth="1000" id="y0t-bh-z2e">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Selector Part">
-                                            <font key="font" metaFont="smallSystem"/>
+                                            <font key="font" size="11" name="HelveticaNeue"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -57,7 +57,7 @@
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bJa-Og-8X8">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="initWith:" id="jms-Me-I5Y">
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" size="13" name="Menlo-Regular"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -89,7 +89,7 @@
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WTX-51-IKt">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="NSString *" id="JPA-0h-Sqi">
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" size="13" name="Menlo-Regular"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -120,8 +120,8 @@
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1VC-a6-JLh">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" placeholderString="Name" id="mh6-Xl-eVT">
-                                                            <font key="font" metaFont="system"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="something" placeholderString="" id="mh6-Xl-eVT">
+                                                            <font key="font" size="13" name="Menlo-Regular"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>

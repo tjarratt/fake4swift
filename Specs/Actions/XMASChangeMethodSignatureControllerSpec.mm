@@ -211,6 +211,11 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             textField should be_instance_of([NSTextField class]);
                             window.firstResponder should be_same_instance_as(textField);
                         });
+
+                        it(@"should use the correct font for the textfield", ^{
+                            NSTextField *textField = (id)[subject.tableView viewAtColumn:0 row:3 makeIfNecessary:YES];
+                            textField.font should equal([NSFont fontWithName:@"Menlo" size:13.0f]);
+                        });
                     });
 
                     context(@"when a row is selected", ^{

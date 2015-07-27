@@ -100,7 +100,7 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
             unknownSelector stub_method(@selector(selectorString)).and_return(@"blurgle:withSpoo:andBruce:");
             id callsite = nice_fake_for(@protocol(XMASXcode_IDEIndexSymbol));
             id fakeDVTFilePath = nice_fake_for(@protocol(XMASXcode_DVTFilePath));
-            fakeDVTFilePath stub_method(@selector(pathString)).and_return(@"/obv/fake/file.path");
+            fakeDVTFilePath stub_method(@selector(pathString)).and_return(@"/some/obviously/fake_file.m");
 
             callsite stub_method(@selector(file)).and_return(fakeDVTFilePath);
             callsite stub_method(@selector(lineNumber)).and_return((NSUInteger)12);
@@ -110,7 +110,7 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
         });
 
         it(@"should show the user a sad alert", ^{
-            NSString *expectedMessage = @"Aww shucks. Couldn't find 'blurgle:withSpoo:andBruce:' at line 12 column 24 in '/obv/fake/file.path'";
+            NSString *expectedMessage = @"Aww shucks. Couldn't find 'blurgle:withSpoo:andBruce:' at line 12 column 24 in fake_file.m";
             alerter should have_received(@selector(flashMessage:withLogging:))
                 .with(expectedMessage, YES);
         });

@@ -199,6 +199,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     if (!textField) {
         textField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 0, 0)];
         textField.delegate = self;
+        textField.font = [NSFont fontWithName:@"Menlo" size:13.0f];
     }
 
     if ([tableColumn.identifier isEqualToString:@"selector"]) {
