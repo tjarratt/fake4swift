@@ -239,20 +239,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="120"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I2c-k9-h7P">
-                            <rect key="frame" x="-2" y="0.0" width="484" height="120"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Preview" id="mRJ-Tw-mOV">
-                                <font key="font" metaFont="system"/>
+                            <rect key="frame" x="10" y="12" width="460" height="96"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Ceci n'est pas un placeholder" id="mRJ-Tw-mOV">
+                                <font key="font" size="13" name="Menlo-Regular"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="I2c-k9-h7P" firstAttribute="top" secondItem="ph0-kD-b3k" secondAttribute="top" id="ewb-gp-VmE"/>
-                        <constraint firstAttribute="trailing" secondItem="I2c-k9-h7P" secondAttribute="trailing" id="n1G-qD-Kxc"/>
-                        <constraint firstAttribute="bottom" secondItem="I2c-k9-h7P" secondAttribute="bottom" id="oKX-uz-dju"/>
+                        <constraint firstItem="I2c-k9-h7P" firstAttribute="top" secondItem="ph0-kD-b3k" secondAttribute="top" constant="12" id="ewb-gp-VmE"/>
+                        <constraint firstAttribute="trailing" secondItem="I2c-k9-h7P" secondAttribute="trailing" constant="12" id="n1G-qD-Kxc"/>
+                        <constraint firstAttribute="bottom" secondItem="I2c-k9-h7P" secondAttribute="bottom" constant="12" id="oKX-uz-dju"/>
                         <constraint firstAttribute="height" constant="120" id="q3y-P6-02O"/>
-                        <constraint firstItem="I2c-k9-h7P" firstAttribute="leading" secondItem="ph0-kD-b3k" secondAttribute="leading" id="yod-FM-vC8"/>
+                        <constraint firstItem="I2c-k9-h7P" firstAttribute="leading" secondItem="ph0-kD-b3k" secondAttribute="leading" constant="12" id="yod-FM-vC8"/>
                     </constraints>
                 </customView>
             </subviews>
