@@ -47,6 +47,15 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                                            callExpressionStringWriter:callExpressionStringWriter];
     });
 
+    void(^itShouldResizeitsTableView)() = ^void(){
+        it(@"should resize its tableview to match the number of rows the selector has", ^{
+            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame) + 1;
+            CGFloat rowHeight = subject.tableView.rowHeight;
+            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
+            subject.tableviewHeight.constant should equal(tableviewHeight);
+        });
+    };
+
     describe(@"-refactorMethod:inFile:", ^{
         __block XMASObjcMethodDeclaration *method;
         __block NSString *filepath;
@@ -79,12 +88,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
             [subject refactorMethod:method inFile:filepath];
         });
 
-        it(@"should resize its tableview to match the number of rows the selector has", ^{
-            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
-            CGFloat rowHeight = subject.tableView.rowHeight;
-            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
-            subject.tableviewHeight.constant should equal(tableviewHeight);
-        });
+        itShouldResizeitsTableView();
 
         it(@"should not have any spacing between the rows in the tableview", ^{
             subject.tableView.intercellSpacing.height should equal(0);
@@ -235,12 +239,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             subject.tableView.numberOfRows should equal(4);
                         });
 
-                        it(@"should resize its tableview to match the number of rows the selector has", ^{
-                            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
-                            CGFloat rowHeight = subject.tableView.rowHeight;
-                            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
-                            subject.tableviewHeight.constant should equal(tableviewHeight);
-                        });
+
+                        itShouldResizeitsTableView();
 
                         it(@"should insert the new row between the first and second rows", ^{
                             NSTextField *firstSelector = (id)[subject.tableView viewAtColumn:0 row:0 makeIfNecessary:YES];
@@ -427,12 +427,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             secondSelector.stringValue should equal(@"andThat");
                         });
 
-                        it(@"should resize its tableview to match the number of rows the selector has", ^{
-                            CGFloat headerHeight = CGRectGetHeight(subject.tableView.headerView.frame);
-                            CGFloat rowHeight = subject.tableView.rowHeight;
-                            CGFloat tableviewHeight = headerHeight + ([subject numberOfRowsInTableView:subject.tableView]) * (rowHeight + 5);
-                            subject.tableviewHeight.constant should equal(tableviewHeight);
-                        });
+                        itShouldResizeitsTableView();
 
                         it(@"should update the preview", ^{
                             subject.previewTextField.stringValue should equal(@"- (hrm)removedSomeThings");

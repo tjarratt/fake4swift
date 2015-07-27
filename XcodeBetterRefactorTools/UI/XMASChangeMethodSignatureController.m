@@ -262,7 +262,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 }
 
 - (void)resizeTableview {
-    CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame);
+    CGFloat headerHeight = CGRectGetHeight(self.tableView.headerView.frame) + 1;
     CGFloat rowHeight = self.tableView.rowHeight;
 
     NSInteger numberOfRows = [self numberOfRowsInTableView:self.tableView];
