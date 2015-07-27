@@ -31,6 +31,7 @@
     [self flashMessage:@"Aww shucks. Something bad happened. Check Console.app"];
     NSLog(@"================> something bad happened. Perhaps this exception will help explain it?");
     NSLog(@"================> %@", [exception description]);
+    NSLog(@"================> %@", [exception callStackSymbols]);
 }
 
 @end

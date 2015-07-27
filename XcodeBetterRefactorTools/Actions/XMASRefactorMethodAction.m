@@ -1,12 +1,11 @@
 #import "XMASRefactorMethodAction.h"
 #import <ClangKit/ClangKit.h>
-#import <AppKit/AppKit.h>
-#import "XcodeInterfaces.h"
 #import "XMASAlert.h"
-#import "XMASObjcMethodDeclarationParser.h"
+#import "XcodeInterfaces.h"
 #import "XMASObjcMethodDeclaration.h"
-#import "XMASChangeMethodSignatureControllerProvider.h"
+#import "XMASObjcMethodDeclarationParser.h"
 #import "XMASChangeMethodSignatureController.h"
+#import "XMASChangeMethodSignatureControllerProvider.h"
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
 
@@ -43,9 +42,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
         [self refactorMethodUnderCursor];
     }
     @catch (NSException *exception) {
-        [self.alerter flashMessage:@"Aww shucks. Something bad happened."];
-        NSLog(@"================> something bad happened while performing the refactor method action");
-        NSLog(@"================> %@", [exception description]);
+        [self.alerter flashComfortingMessageForException:exception];
     }
 }
 

@@ -34,7 +34,7 @@ describe(@"XMASRefactorMethodAction", ^{
 
     __block XMASObjcMethodDeclaration *selector;
 
-    subjectAction(^{
+    void (^refactorMethodUnderCursor)() = ^void() {
         NSURL *fileURL = [[NSURL alloc] initWithString:@"file:///tmp/fixture.swift"];
         id sourceCodeDocument = nice_fake_for(@protocol(XMASXcode_IDESourceCodeDocument));
         sourceCodeDocument stub_method(@selector(fileURL)).and_return(fileURL);
@@ -60,8 +60,8 @@ describe(@"XMASRefactorMethodAction", ^{
         location stub_method(@selector(characterRange)).and_return(cursorRange);
         editor stub_method(@selector(currentSelectedDocumentLocations)).and_return(@[location]);
 
-        [subject refactorMethodUnderCursor];
-    });
+        [subject safelyRefactorMethodUnderCursor];
+    };
 
     describe(@"when the cursor is inside of a method declaration", ^{
         __block XMASChangeMethodSignatureController *controller;
@@ -71,6 +71,8 @@ describe(@"XMASRefactorMethodAction", ^{
             controllerProvider stub_method(@selector(provideInstanceWithDelegate:)).and_return(controller);
 
             cursorRange = NSMakeRange(10, 1);
+
+            refactorMethodUnderCursor();
         });
 
         it(@"should make itself the delegate of the controller", ^{
@@ -109,6 +111,7 @@ describe(@"XMASRefactorMethodAction", ^{
     describe(@"when the cursor is not inside of a method declaration", ^{
         beforeEach(^{
             cursorRange = NSMakeRange(100, 1);
+            refactorMethodUnderCursor();
         });
 
         afterEach(^{
@@ -120,22 +123,27 @@ describe(@"XMASRefactorMethodAction", ^{
         });
     });
 
-    describe(@"-safelyRefactorMethod", ^{
+    describe(@"-safelyRefactorMethod:", ^{
+        __block NSException *exception;
         __block XMASChangeMethodSignatureController<CedarDouble> *controller;
 
         beforeEach(^{
             controller = nice_fake_for([XMASChangeMethodSignatureController class]);
             controllerProvider stub_method(@selector(provideInstanceWithDelegate:)).and_return(controller);
+            cursorRange = NSMakeRange(10, 1);
 
-            controller stub_method(@selector(refactorMethod:inFile:)).and_raise_exception();
+            exception = nice_fake_for([NSException class]);
+            controller stub_method(@selector(refactorMethod:inFile:)).and_raise_exception(exception);
         });
 
         it(@"should capture the exception", ^{
-            ^{ [subject safelyRefactorMethodUnderCursor]; } should_not raise_exception();
+            ^{ refactorMethodUnderCursor(); } should_not raise_exception();
         });
 
-        it(@"should tell the user something bad happened", ^{
-            alerter should have_received(@selector(flashMessage:));
+        it(@"should alert the user that the action failed", ^{
+            refactorMethodUnderCursor();
+            alerter should have_received(@selector(flashComfortingMessageForException:))
+                .with(exception);
         });
     });
 });
