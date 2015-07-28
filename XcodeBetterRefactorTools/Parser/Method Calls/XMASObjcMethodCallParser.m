@@ -48,8 +48,6 @@
         NSArray *callExprTokens = [self.tokens subarrayWithRange:callExprRange];
 
         for (NSUInteger index = 1; index < callExprTokens.count; ++index) {
-            CKToken *token = callExprTokens[index];
-
             NSMutableArray *selectorComponentTokens = [[NSMutableArray alloc] init];
             NSMutableArray *argumentStrings = [[NSMutableArray alloc] init];
             NSMutableArray *argumentTokens = [[NSMutableArray alloc] init];
@@ -59,7 +57,7 @@
             index = indexSelectorStartsAt;
 
             CKToken *matchingCloseToken = [self matchingClosingTokenForCallExpressionAtIndex:index fromTokens:callExprTokens];
-            token = callExprTokens[index];
+            CKToken *token = callExprTokens[index];
 
             while ([self isSelectorComponentToken:token]) {
                 [selectorComponentTokens addObject:token];

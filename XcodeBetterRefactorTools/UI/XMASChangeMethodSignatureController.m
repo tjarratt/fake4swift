@@ -62,7 +62,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     if (self.window == nil) {
         self.window = [self.windowProvider provideInstance];
         self.window.delegate = self;
-        self.window.releasedWhenClosed = NO; // UGH HACK
+        self.window.releasedWhenClosed = NO; // FIXME : determine if this is actually causing a memory leak
     }
 
     self.method = method;
