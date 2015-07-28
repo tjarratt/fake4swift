@@ -108,7 +108,7 @@
                                                                               forTarget:callExpressionToRewrite.target
                                                                                withArgs:newArguments
                                                                                atColumn:callExpressionToRewrite.columnNumber];
-    NSString *refactoredFile = [oldFileContents stringByReplacingCharactersInRange:oldSelector.range
+    NSString *refactoredFile = [oldFileContents stringByReplacingCharactersInRange:callExpressionToRewrite.range
                                                                        withString:newCallExpressionString];
     [refactoredFile writeToFile:callExpressionToRewrite.filePath
                      atomically:YES
