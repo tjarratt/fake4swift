@@ -53,16 +53,22 @@
     XMASAlert *alerter = [[XMASAlert alloc] init];
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
-    XMASIndexedSymbolRepository *indexedSymbolRepository = [[XMASIndexedSymbolRepository alloc] init];
+
+    XMASIndexedSymbolRepository *indexedSymbolRepository = [[XMASIndexedSymbolRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
 
     XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
     XMASObjcCallExpressionStringWriter *callExpressionStringWriter = [[XMASObjcCallExpressionStringWriter alloc] init];
     XMASObjcMethodCallParser *methodCallParser = [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:callExpressionTokenFilter];
+
     XMASObjcCallExpressionRewriter *callExpressionRewriter = [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:alerter
                                                                                                 callExpressionParser:methodCallParser
                                                                                           callExpressionStringWriter:callExpressionStringWriter];
 
-    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider alerter:alerter indexedSymbolRepository:indexedSymbolRepository callExpressionRewriter:callExpressionRewriter callExpressionStringWriter:callExpressionStringWriter];
+    XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
+                                                                                                                                          alerter:alerter
+                                                                                                                          indexedSymbolRepository:indexedSymbolRepository
+                                                                                                                           callExpressionRewriter:callExpressionRewriter
+                                                                                                                       callExpressionStringWriter:callExpressionStringWriter];
 
     XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
                                                                                       alerter:alerter

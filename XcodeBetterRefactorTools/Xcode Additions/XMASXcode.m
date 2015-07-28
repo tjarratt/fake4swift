@@ -6,12 +6,6 @@
 }
 @end
 
-@interface XMASXcode (WorkspaceClassDump)
-- (id)editor;
-- (id)editorArea;
-- (id)lastActiveEditorContext;
-@end
-
 @implementation XMASXcode (Workspace)
 
 #pragma mark - Workspaces
@@ -69,6 +63,20 @@
 + (id)instanceMethodSymbolKind {
     Class sourceCodeSymbolClass = NSClassFromString(@"DVTSourceCodeSymbolKind");
     return sourceCodeSymbolClass ? [sourceCodeSymbolClass instanceMethodSymbolKind] : nil;
+}
+
++ (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext {
+    id maybeGeniusResultsCollection = [editorContext valueForKey:@"editorGeniusResults"];
+
+    NSDictionary *geniusResultsForAllCategories = [maybeGeniusResultsCollection valueForKey:@"geniusResults"];
+    id packagedResults = geniusResultsForAllCategories[@"Xcode.IDESourceEditor.GeniusCategory.Callers"];
+
+    NSMutableArray *geniusCallerResults = [[NSMutableArray alloc] init];
+    for (id result in packagedResults) {
+        [geniusCallerResults addObjectsFromArray:[result valueForKey:@"geniusResults"]];
+    }
+
+    return geniusCallerResults;
 }
 
 @end

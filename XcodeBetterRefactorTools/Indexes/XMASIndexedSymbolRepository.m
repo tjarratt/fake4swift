@@ -2,19 +2,28 @@
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASXcode.h"
 
+@interface XMASIndexedSymbolRepository ()
+@property (nonatomic) XC(IDEWorkspaceWindowController) workspaceWindowController;
+@end
+
 @implementation XMASIndexedSymbolRepository
 
-- (NSArray *)callExpressionsMatchingSelector:(XMASObjcMethodDeclaration *)selector {
-    XC(IDEIndex) index = [XMASXcode indexForCurrentWorkspace];
-    id callableKind = [XMASXcode instanceMethodSymbolKind];
+- (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController {
+    if (self = [super init]) {
+        self.workspaceWindowController = workspaceWindowController;
+    }
 
-    NSString *selectorToReplace = selector.selectorString;
+    return self;
+}
+
+// FIXME :: this argument is probably UNNECESSARY
+- (NSArray *)callExpressionsMatchingSelector:(XMASObjcMethodDeclaration *)selector {
+    id editorContext = [[self.workspaceWindowController editorArea] lastActiveEditorContext];
+    NSArray *geniusSourceCodeCallerResults = [XMASXcode geniusCallerResultsForEditorContext:editorContext];
+
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    NSArray *symbols = [index allSymbolsMatchingKind:callableKind workspaceOnly:YES];
-    for (id symbol in symbols) {
-        if ([selectorToReplace isEqualToString:[symbol valueForKey:@"name"]]) {
-            [results addObject:symbol];
-        }
+    for (XC(IDESourceCodeCallerGeniusResult) sourceCodeCallerResult in geniusSourceCodeCallerResults) {
+        [results addObject:[sourceCodeCallerResult calleeSymbolOccurrence]];
     }
 
     return results;

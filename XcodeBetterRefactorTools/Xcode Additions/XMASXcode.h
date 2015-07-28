@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "XcodeInterfaces.h"
 
-@interface XMASXcode : NSObject 
+@interface XMASXcode : NSObject
 + (NSMenu *)menuWithTitle:(NSString *)title;
 @end
 
@@ -18,4 +18,12 @@
 + (XC(IDEIndex))indexForCurrentWorkspace;
 + (id)instanceMethodSymbolKind;
 
++ (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext;
+
+@end
+
+@interface XMASXcode (WorkspaceClassDump)
+- (id)editor;
+- (id)editorArea;
+- (id)lastActiveEditorContext;
 @end

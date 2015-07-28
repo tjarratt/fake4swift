@@ -45,10 +45,14 @@
 - (XC(IDEWorkspaceDocument))workspaceDocument;
 @end
 
-@protocol XCP(IDEWorkspaceWindowController)
-- (XC(IDEWorkspaceTabController))activeWorkspaceTabController;
+@protocol XCP(IDEEditorArea)
+- (id)lastActiveEditorContext;
 @end
 
+@protocol XCP(IDEWorkspaceWindowController)
+- (XC(IDEEditorArea))editorArea;
+- (XC(IDEWorkspaceTabController))activeWorkspaceTabController;
+@end
 
 #pragma mark - Session launching
 
@@ -164,6 +168,14 @@
 - (XC(DVTFilePath))file;
 - (NSUInteger)lineNumber;
 - (NSUInteger)column;
+@end
+
+@protocol XCP(IDEGeniusPackagedResults)
+- (id)geniusResults;
+@end
+
+@protocol XCP(IDESourceCodeCallerGeniusResult)
+- (XC(IDEIndexSymbol))calleeSymbolOccurrence;
 @end
 
 #pragma mark - Workspace and Projects
