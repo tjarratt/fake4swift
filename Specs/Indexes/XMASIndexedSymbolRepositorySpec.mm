@@ -16,6 +16,7 @@ describe(@"XMASIndexedSymbolRepository", ^{
 
     beforeEach(^{
         spy_on([XMASXcode class]);
+        workspaceWindowController = nice_fake_for(@protocol(XCP(IDEWorkspaceWindowController)));
         subject = [[XMASIndexedSymbolRepository alloc] initWithWorkspaceWindowController:workspaceWindowController];
     });
 
@@ -24,28 +25,30 @@ describe(@"XMASIndexedSymbolRepository", ^{
     });
 
     describe(@"-callExpressionsMatchingSelector:", ^{
-        __block XMASObjcMethodDeclaration *selector;
         __block id editorArea;
         __block id editorContext;
 
-        NSDictionary *expectedResult = @{@"name": @"method:"};
-        NSArray *allSymbols = @[expectedResult, @{@"name": @"not:the:method:"}];
+        __block XC(IDESourceCodeCallerGeniusResult) geniusResult;
+        __block XC(IDEIndexSymbol) expectedResult;
 
         beforeEach(^{
-            selector = nice_fake_for([XMASObjcMethodDeclaration class]);
-            selector stub_method(@selector(selectorString)).and_return(@"method:");
+            geniusResult = nice_fake_for(@protocol(XCP(IDESourceCodeCallerGeniusResult)));
+            expectedResult = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
+            geniusResult stub_method(@selector(calleeSymbolOccurrence))
+                .and_return(expectedResult);
 
             editorContext = [[NSObject alloc] init];
             editorArea = nice_fake_for(@protocol(XCP(IDEEditorArea)));
             editorArea stub_method(@selector(lastActiveEditorContext)).and_return(editorContext);
+            workspaceWindowController stub_method(@selector(editorArea)).and_return(editorArea);
 
             [XMASXcode class] stub_method(@selector(geniusCallerResultsForEditorContext:))
                 .with(editorContext)
-                .and_return(allSymbols);
+                .and_return(@[geniusResult]);
         });
 
-        fit(@"should filter the call expressions to only those matching the selector", ^{
-            NSArray *results = [subject callExpressionsMatchingSelector:selector];
+        it(@"should filter the call expressions to only those matching the selector", ^{
+            NSArray *results = [subject callSitesOfCurrentlySelectedMethod];
             results.count should equal(1);
             results.firstObject should be_same_instance_as(expectedResult);
         });

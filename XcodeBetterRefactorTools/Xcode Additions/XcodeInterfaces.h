@@ -96,6 +96,7 @@
 @end
 
 @protocol XCP(IDEEditorContext)
+- (id)editor;
 @end
 
 @protocol XCP(IDESourceCodeDocument)

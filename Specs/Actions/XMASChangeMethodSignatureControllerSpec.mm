@@ -539,8 +539,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when everything goes exactly as planned", ^{
             beforeEach(^{
-                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
-                    .with(methodToRefactor)
+                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 subject.view should_not be_nil;
@@ -566,7 +565,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
             beforeEach(^{
-                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
+                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_raise_exception();
 
                 subject.view should_not be_nil;
@@ -585,8 +584,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
             beforeEach(^{
-                indexedSymbolRepository stub_method(@selector(callExpressionsMatchingSelector:))
-                    .with(methodToRefactor)
+                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))

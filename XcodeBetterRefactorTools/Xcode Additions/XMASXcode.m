@@ -24,8 +24,8 @@
 #pragma mark - Editors
 
 + (id)currentEditor {
-    id editorArea = [(id)self.currentWorkspaceController editorArea]; // IDEEditorArea
-    id editorContext = [editorArea lastActiveEditorContext];          // IDEEditorContext
+    XC(IDEEditorArea) editorArea = [(id)self.currentWorkspaceController editorArea]; // IDEEditorArea
+    XC(IDEEditorContext) editorContext = [editorArea lastActiveEditorContext];          // IDEEditorContext
     return [editorContext editor];                                    // IDESourceCodeEditor, Xcode3ProjectEditor or IBDocumentEditor
 }
 

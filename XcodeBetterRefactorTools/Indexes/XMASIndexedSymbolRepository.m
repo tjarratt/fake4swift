@@ -16,8 +16,7 @@
     return self;
 }
 
-// FIXME :: this argument is probably UNNECESSARY
-- (NSArray *)callExpressionsMatchingSelector:(XMASObjcMethodDeclaration *)selector {
+- (NSArray *)callSitesOfCurrentlySelectedMethod {
     id editorContext = [[self.workspaceWindowController editorArea] lastActiveEditorContext];
     NSArray *geniusSourceCodeCallerResults = [XMASXcode geniusCallerResultsForEditorContext:editorContext];
 

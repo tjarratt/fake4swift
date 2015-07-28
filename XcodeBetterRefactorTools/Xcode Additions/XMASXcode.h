@@ -21,9 +21,3 @@
 + (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext;
 
 @end
-
-@interface XMASXcode (WorkspaceClassDump)
-- (id)editor;
-- (id)editorArea;
-- (id)lastActiveEditorContext;
-@end

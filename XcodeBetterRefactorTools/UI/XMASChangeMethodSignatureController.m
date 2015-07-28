@@ -250,7 +250,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 #pragma mark - Private
 
 - (void)didTapRefactorActionPossiblyRaisingException {
-    NSArray *symbols = [self.indexedSymbolRepository callExpressionsMatchingSelector:self.originalMethod];
+    NSArray *symbols = [self.indexedSymbolRepository callSitesOfCurrentlySelectedMethod];
     NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
     [self.alerter flashMessage:message withLogging:YES];
 
