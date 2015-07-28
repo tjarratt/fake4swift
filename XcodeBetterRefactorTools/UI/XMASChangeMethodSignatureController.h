@@ -6,7 +6,8 @@
 @class XMASWindowProvider;
 @class XMASIndexedSymbolRepository;
 @class XMASObjcCallExpressionRewriter;
-@class XMASObjcCallExpressionStringWriter;
+@class XMASObjcMethodDeclarationRewriter;
+@class XMASObjcMethodDeclarationStringWriter;
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
 @interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate, NSTableViewDataSource, NSTableViewDelegate>
@@ -23,8 +24,9 @@
 
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 @property (nonatomic, readonly) XMASIndexedSymbolRepository *indexedSymbolRepository;
-@property (nonatomic, readonly) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
+@property (nonatomic, readonly) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 @property (nonatomic, readonly) XMASObjcCallExpressionRewriter *callExpressionRewriter;
+@property (nonatomic, readonly) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
 @property (nonatomic, readonly) XMASObjcMethodDeclaration *method;
 @property (nonatomic, readonly) XMASAlert *alerter;
@@ -35,7 +37,8 @@
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)objcCallExpressionRewriter
-            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter NS_DESIGNATED_INITIALIZER;
+         methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
+             methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter NS_DESIGNATED_INITIALIZER;
 
 - (void)refactorMethod:(XMASObjcMethodDeclaration *)method inFile:(NSString *)filePath;
 

@@ -1,11 +1,12 @@
 #import <Foundation/Foundation.h>
+#import "XMASChangeMethodSignatureController.h"
 
 @class XMASAlert;
 @class XMASWindowProvider;
 @class XMASIndexedSymbolRepository;
 @class XMASObjcCallExpressionRewriter;
-@class XMASObjcCallExpressionStringWriter;
-@class XMASChangeMethodSignatureController;
+@class XMASObjcMethodDeclarationRewriter;
+@class XMASObjcMethodDeclarationStringWriter;
 
 @protocol XMASChangeMethodSignatureControllerDelegate;
 
@@ -17,7 +18,8 @@
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
-            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter NS_DESIGNATED_INITIALIZER;
+         methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
+             methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter NS_DESIGNATED_INITIALIZER;
 
 - (XMASChangeMethodSignatureController *)provideInstanceWithDelegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate;
 

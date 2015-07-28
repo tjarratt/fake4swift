@@ -3,14 +3,16 @@
 #import "XMASWindowProvider.h"
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
-#import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 
 @interface XMASChangeMethodSignatureControllerProvider ()
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
-@property (nonatomic) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
+@property (nonatomic) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
+@property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 @end
 
 @implementation XMASChangeMethodSignatureControllerProvider
@@ -19,13 +21,15 @@
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
-            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter{
+         methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
+             methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter {
     if (self = [super init]) {
         self.alerter = alerter;
         self.windowProvider = windowProvider;
         self.indexedSymbolRepository = indexedSymbolRepository;
         self.callExpressionRewriter = callExpressionRewriter;
-        self.callExpressionStringWriter = callExpressionStringWriter;
+        self.methodDeclarationRewriter = methodDeclarationRewriter;
+        self.methodDeclarationStringWriter = methodDeclarationStringWriter;
     }
 
     return self;
@@ -37,7 +41,8 @@
                                                                        alerter:self.alerter
                                                        indexedSymbolRepository:self.indexedSymbolRepository
                                                         callExpressionRewriter:self.callExpressionRewriter
-                                                    callExpressionStringWriter:self.callExpressionStringWriter];
+                                                 methodDeclarationStringWriter:self.methodDeclarationStringWriter
+                                                     methodDeclarationRewriter:self.methodDeclarationRewriter];
 }
 
 @end

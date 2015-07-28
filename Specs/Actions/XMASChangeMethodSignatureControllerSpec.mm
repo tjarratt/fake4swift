@@ -6,7 +6,8 @@
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
-#import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -20,7 +21,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block XMASChangeMethodSignatureController *subject;
     __block XMASIndexedSymbolRepository *indexedSymbolRepository;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
-    __block XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
+    __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
+    __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
     __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
@@ -35,8 +37,9 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
-        callExpressionStringWriter = nice_fake_for([XMASObjcCallExpressionStringWriter class]);
-        callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+        methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
+        methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
+        methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
             .and_return(@"- (obviously)notTheCorrect:(SEL)butJustAPlaceholder");
 
         subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
@@ -44,7 +47,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                                                               alerter:alerter
                                                               indexedSymbolRepository:indexedSymbolRepository
                                                                callExpressionRewriter:callExpressionRewriter
-                                                           callExpressionStringWriter:callExpressionStringWriter];
+                                                        methodDeclarationStringWriter:methodDeclarationStringWriter
+                                                            methodDeclarationRewriter:methodDeclarationRewriter];
     });
 
     void(^itShouldResizeitsTableView)() = ^void(){
@@ -61,7 +65,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
         __block NSString *filepath;
 
         beforeEach(^{
-            callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+            methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                 .again()
                 .and_return(@"- (whoops)iAccidentallyAllTheTests");
 
@@ -112,7 +116,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 NSNotification *notification = fake_for([NSNotification class]);
                 notification stub_method(@selector(object)).and_return(firstTextField);
 
-                callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                     .again()
                     .and_return(@"- (preview)goesHere");
 
@@ -123,8 +127,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 subject.previewTextField.stringValue should equal(@"- (preview)goesHere");
             });
 
-            it(@"should collaborate with its call expression string writer", ^{
-                callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+            it(@"should collaborate with its method declaration string writer", ^{
+                methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                     .with(subject.method);
             });
         });
@@ -174,8 +178,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     subject.previewTextField.stringValue should equal(@"- (whoops)iAccidentallyAllTheTests");
                 });
 
-                it(@"should collaborate with its call expression string writer", ^{
-                    callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+                it(@"should collaborate with its method declaration string writer", ^{
+                    methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                         .with(subject.method);
                 });
             });
@@ -227,7 +231,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             NSIndexSet *firstRowIndex = [[NSIndexSet alloc] initWithIndex:0];
                             [subject.tableView selectRowIndexes:firstRowIndex byExtendingSelection:NO];
 
-                            callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                            methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                                 .again()
                                 .and_return(@"- (welp)addedMoarComponents");
 
@@ -257,8 +261,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             subject.previewTextField.stringValue should equal(@"- (welp)addedMoarComponents");
                         });
 
-                        it(@"should collaborate with its call expression string writer", ^{
-                            callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+                        it(@"should collaborate with its method declaration string writer", ^{
+                            methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                                 .with(subject.method);
                         });
                     });
@@ -289,7 +293,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                                     spy_on(subject.tableView);
 
-                                    callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                                    methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                                         .again()
                                         .and_return(@"- (awwYISS)raisingAllTheComponents");
 
@@ -313,8 +317,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                     subject.previewTextField.stringValue should equal(@"- (awwYISS)raisingAllTheComponents");
                                 });
 
-                                it(@"should collaborate with its call expression string writer", ^{
-                                    callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+                                it(@"should collaborate with its method declaration string writer", ^{
+                                    methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                                     .with(subject.method);
                                 });
                             });
@@ -358,7 +362,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
                                     spy_on(subject.tableView);
 
-                                    callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                                    methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                                         .again()
                                         .and_return(@"- (awwNAWW)loweringAllTheComponents");
 
@@ -382,8 +386,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                                     subject.previewTextField.stringValue should equal(@"- (awwNAWW)loweringAllTheComponents");
                                 });
 
-                                it(@"should collaborate with its call expression string writer", ^{
-                                    callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+                                it(@"should collaborate with its method declaration string writer", ^{
+                                    methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                                         .with(subject.method);
                                 });
                             });
@@ -408,7 +412,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             NSIndexSet *secondRowIndex = [[NSIndexSet alloc] initWithIndex:1];
                             [subject.tableView selectRowIndexes:secondRowIndex byExtendingSelection:NO];
 
-                            callExpressionStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                            methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
                                 .again()
                                 .and_return(@"- (hrm)removedSomeThings");
 
@@ -433,8 +437,8 @@ describe(@"XMASChangeMethodSignatureController", ^{
                             subject.previewTextField.stringValue should equal(@"- (hrm)removedSomeThings");
                         });
 
-                        it(@"should collaborate with its call expression string writer", ^{
-                            callExpressionStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
+                        it(@"should collaborate with its method declaration string writer", ^{
+                            methodDeclarationStringWriter should have_received(@selector(formatInstanceMethodDeclaration:))
                                 .with(subject.method);
                         });
                     });
@@ -538,12 +542,16 @@ describe(@"XMASChangeMethodSignatureController", ^{
         });
 
         context(@"when everything goes exactly as planned", ^{
+            __block NSString *filePathToRewrite;
+
             beforeEach(^{
+                filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.m";
+
                 indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 subject.view should_not be_nil;
-                [subject refactorMethod:methodToRefactor inFile:nil];
+                [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
 
                 [subject.refactorButton performClick:nil];
             });
@@ -560,6 +568,11 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     .with(@"goes", methodToRefactor, subject.method);
                 callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
                     .with(@"here", methodToRefactor, subject.method);
+            });
+
+            it(@"should ask its method declaration rewriter to change the method declaration", ^{
+                methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
+                    .with(methodToRefactor, subject.method, filePathToRewrite);
             });
         });
 

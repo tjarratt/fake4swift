@@ -11,6 +11,8 @@
 #import "XMASObjcMethodCallParser.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
 #import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 
 @interface XMASEditMenu ()
 @property (nonatomic) XMASRefactorMethodActionProvider *actionProvider;
@@ -60,6 +62,8 @@
     XMASObjcCallExpressionStringWriter *callExpressionStringWriter = [[XMASObjcCallExpressionStringWriter alloc] init];
     XMASObjcMethodCallParser *methodCallParser = [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:callExpressionTokenFilter];
 
+    XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter = [[XMASObjcMethodDeclarationStringWriter alloc] init];
+    XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter = [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:methodDeclarationStringWriter];
     XMASObjcCallExpressionRewriter *callExpressionRewriter = [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:alerter
                                                                                                 callExpressionParser:methodCallParser
                                                                                           callExpressionStringWriter:callExpressionStringWriter];
@@ -68,7 +72,8 @@
                                                                                                                                           alerter:alerter
                                                                                                                           indexedSymbolRepository:indexedSymbolRepository
                                                                                                                            callExpressionRewriter:callExpressionRewriter
-                                                                                                                       callExpressionStringWriter:callExpressionStringWriter];
+                                                                                                                    methodDeclarationStringWriter:methodDeclarationStringWriter
+                                                                                                                        methodDeclarationRewriter:methodDeclarationRewriter];
 
     XMASRefactorMethodAction *refactorAction = [self.actionProvider provideInstanceWithEditor:editor
                                                                                       alerter:alerter

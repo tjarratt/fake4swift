@@ -9,6 +9,4 @@
                     withArgs:(NSArray *)args
                     atColumn:(NSUInteger)column;
 
-- (NSString *)formatInstanceMethodDeclaration:(XMASObjcMethodDeclaration *)callExpression;
-
 @end

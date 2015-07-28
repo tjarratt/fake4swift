@@ -5,7 +5,8 @@
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
-#import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -14,7 +15,9 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerProviderSpec)
 
 describe(@"XMASChangeMethodSignatureControllerProvider", ^{
     __block XMASChangeMethodSignatureControllerProvider *subject;
-    __block XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
+
+    __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
+    __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
     __block XMASIndexedSymbolRepository *indexedSymbolRepository;
     __block XMASWindowProvider *windowProvider;
@@ -25,13 +28,15 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
         windowProvider = nice_fake_for([XMASWindowProvider class]);
         indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
-        callExpressionStringWriter = nice_fake_for([XMASObjcCallExpressionStringWriter class]);
+        methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
+        methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
 
         subject = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                       alerter:alerter
                                                                       indexedSymbolRepository:indexedSymbolRepository
                                                                        callExpressionRewriter:callExpressionRewriter
-                                                                   callExpressionStringWriter:callExpressionStringWriter];
+                                                                methodDeclarationStringWriter:methodDeclarationStringWriter
+                                                                    methodDeclarationRewriter:methodDeclarationRewriter];
     });
 
     describe(@"-provideInstance", ^{
@@ -68,7 +73,11 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
         });
 
         it(@"should have a call expression string writer", ^{
-            controller.callExpressionStringWriter should be_same_instance_as(callExpressionStringWriter);
+            controller.methodDeclarationStringWriter should be_same_instance_as(methodDeclarationStringWriter);
+        });
+
+        it(@"should have a method declaration rewriter", ^{
+            controller.methodDeclarationRewriter should be_same_instance_as(methodDeclarationRewriter);
         });
     });
 });

@@ -6,7 +6,8 @@
 #import "XMASAlert.h"
 #import "XMASIndexedSymbolRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
-#import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
@@ -27,7 +28,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASIndexedSymbolRepository *indexedSymbolRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
-@property (nonatomic) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
+@property (nonatomic) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
+@property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 @property (nonatomic, weak) id <XMASChangeMethodSignatureControllerDelegate> delegate;
 
 @property (nonatomic) XMASObjcMethodDeclaration *originalMethod;
@@ -43,15 +45,18 @@ static NSString * const tableViewColumnRowIdentifier = @"";
                                alerter:(XMASAlert *)alerter
                indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
-            callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter {
+         methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
+             methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter {
+
     NSBundle *bundleForClass = [NSBundle bundleForClass:[self class]];
     if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:bundleForClass]) {
         self.alerter = alerter;
-        self.windowProvider = windowProvider;
-        self.indexedSymbolRepository = indexedSymbolRepository;
-        self.callExpressionRewriter = callExpressionRewriter;
-        self.callExpressionStringWriter = callExpressionStringWriter;
         self.delegate = delegate;
+        self.windowProvider = windowProvider;
+        self.callExpressionRewriter = callExpressionRewriter;
+        self.indexedSymbolRepository = indexedSymbolRepository;
+        self.methodDeclarationRewriter = methodDeclarationRewriter;
+        self.methodDeclarationStringWriter = methodDeclarationStringWriter;
     }
 
     return self;
@@ -101,7 +106,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     textField.delegate = self;
     [textField becomeFirstResponder];
 
-    self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+    self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 }
 
 - (IBAction)didTapRemove:(id)sender {
@@ -114,7 +119,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
     [self resizeTableview];
 
-    self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+    self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 }
 
 - (IBAction)didTapMoveUp:(id)sender {
@@ -124,7 +129,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
     [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow - 1)] byExtendingSelection:NO];
 
-    self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+    self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 }
 
 - (IBAction)didTapMoveDown:(id)sender {
@@ -134,7 +139,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.tableView reloadData];
     [self.tableView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:(selectedRow + 1)] byExtendingSelection:NO];
 
-    self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+    self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 }
 
 #pragma mark - NSObject
@@ -177,7 +182,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.raiseComponentButton.enabled = NO;
     self.lowerComponentButton.enabled = NO;
 
-    self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+    self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 
     [self.window makeKeyAndOrderFront:NSApp];
 }
@@ -240,7 +245,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
                         break;
                 }
 
-                self.previewTextField.stringValue = [self.callExpressionStringWriter formatInstanceMethodDeclaration:self.method];
+                self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
                 return;
             }
         }
@@ -259,6 +264,10 @@ static NSString * const tableViewColumnRowIdentifier = @"";
                                          fromMethod:self.originalMethod
                                         toNewMethod:self.method];
     }
+
+    [self.methodDeclarationRewriter changeMethodDeclaration:self.originalMethod
+                                                toNewMethod:self.method
+                                                     inFile:self.filePath];
 }
 
 - (void)resizeTableview {

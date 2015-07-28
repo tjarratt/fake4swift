@@ -1,24 +1,20 @@
 #import <Cedar/Cedar.h>
-#import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASObjcMethodDeclarationStringWriter.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(XMASObjcCallExpressionStringWriterSpec)
+SPEC_BEGIN(XMASObjcMethodDeclarationStringWriterSpec)
 
-describe(@"XMASObjcCallExpressionStringWriter", ^{
-    __block XMASObjcCallExpressionStringWriter *subject;
-
-    beforeEach(^{
-        subject = [[XMASObjcCallExpressionStringWriter alloc] init];
-    });
+describe(@"XMASObjcMethodDeclarationStringWriter", ^{
+    __block XMASObjcMethodDeclarationStringWriter *subject;
 
     __block NSArray *selectorComponents;
     __block XMASObjcMethodDeclaration *methodDeclaration;
-    __block NSArray *args;
     __block NSArray *parameters;
+
 
     beforeEach(^{
         selectorComponents = @[@"setupWithName", @"floatValue", @"barValue"];
@@ -35,24 +31,21 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
         methodDeclaration stub_method(@selector(parameters))
             .and_return(parameters);
 
-        args = @[@"nil", @"1.0f", @"[Bar myBar]"];
+        subject = [[XMASObjcMethodDeclarationStringWriter alloc] init];
     });
 
-    describe(@"-callExpression:forTarget:withArgs:atColumn:", ^{
-        __block NSString *callExpressionString;
+    describe(@"-formatInstanceMethodDeclaration:", ^{
+        __block NSString *instanceMethodString;
 
         beforeEach(^{
-            callExpressionString = [subject callExpression:methodDeclaration
-                                                 forTarget:@"[Foo myFoo]"
-                                                  withArgs:args
-                                                  atColumn:13];
+            instanceMethodString = [subject formatInstanceMethodDeclaration:methodDeclaration];
         });
 
-        it(@"should construct the correct call expression string", ^{
-            NSString *expectedString = @"[[Foo myFoo] setupWithName:nil\n"
-                                       @"               floatValue:1.0f\n"
-                                       @"                 barValue:[Bar myBar]]";
-            callExpressionString should equal(expectedString);
+        it(@"should construct the correct declaration for the provided instance method", ^{
+            NSString *expectedString = @"- (void)setupWithName:(NSString *)name\n"
+            @"           floatValue:(CGFloat)floatValue\n"
+            @"             barValue:(Bar *)barValue";
+            instanceMethodString should equal(expectedString);
         });
     });
 });
