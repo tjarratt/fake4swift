@@ -6,7 +6,7 @@
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASWindowProvider.h"
 #import "XMASRefactorMethodActionProvider.h"
-#import "XMASIndexedSymbolRepository.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
 #import "XMASObjcMethodCallParser.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
@@ -56,7 +56,7 @@
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
 
-    XMASIndexedSymbolRepository *indexedSymbolRepository = [[XMASIndexedSymbolRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
+    XMASMethodOccurrencesRepository *MethodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
 
     XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
     XMASObjcCallExpressionStringWriter *callExpressionStringWriter = [[XMASObjcCallExpressionStringWriter alloc] init];
@@ -70,7 +70,7 @@
 
     XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                                                                           alerter:alerter
-                                                                                                                          indexedSymbolRepository:indexedSymbolRepository
+                                                                                                                          MethodOccurrencesRepository:MethodOccurrencesRepository
                                                                                                                            callExpressionRewriter:callExpressionRewriter
                                                                                                                     methodDeclarationStringWriter:methodDeclarationStringWriter
                                                                                                                         methodDeclarationRewriter:methodDeclarationRewriter];

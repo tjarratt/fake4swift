@@ -4,7 +4,7 @@
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASWindowProvider.h"
 #import "XMASAlert.h"
-#import "XMASIndexedSymbolRepository.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
@@ -19,7 +19,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block XMASAlert *alerter;
     __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
-    __block XMASIndexedSymbolRepository *indexedSymbolRepository;
+    __block XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
     __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
     __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
@@ -35,7 +35,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
 
-        indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
+        MethodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
         methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
         methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
@@ -45,7 +45,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
         subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
                                                                              delegate:delegate
                                                                               alerter:alerter
-                                                              indexedSymbolRepository:indexedSymbolRepository
+                                                              MethodOccurrencesRepository:MethodOccurrencesRepository
                                                                callExpressionRewriter:callExpressionRewriter
                                                         methodDeclarationStringWriter:methodDeclarationStringWriter
                                                             methodDeclarationRewriter:methodDeclarationRewriter];
@@ -547,7 +547,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
             beforeEach(^{
                 filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.m";
 
-                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 subject.view should_not be_nil;
@@ -578,7 +578,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
             beforeEach(^{
-                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_raise_exception();
 
                 subject.view should_not be_nil;
@@ -597,7 +597,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
             beforeEach(^{
-                indexedSymbolRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))

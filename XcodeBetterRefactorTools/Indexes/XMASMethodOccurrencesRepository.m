@@ -1,12 +1,12 @@
-#import "XMASIndexedSymbolRepository.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASXcode.h"
 
-@interface XMASIndexedSymbolRepository ()
+@interface XMASMethodOccurrencesRepository ()
 @property (nonatomic) XC(IDEWorkspaceWindowController) workspaceWindowController;
 @end
 
-@implementation XMASIndexedSymbolRepository
+@implementation XMASMethodOccurrencesRepository
 
 - (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController {
     if (self = [super init]) {

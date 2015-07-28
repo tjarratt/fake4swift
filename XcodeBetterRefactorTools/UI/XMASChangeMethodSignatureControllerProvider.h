@@ -3,7 +3,7 @@
 
 @class XMASAlert;
 @class XMASWindowProvider;
-@class XMASIndexedSymbolRepository;
+@class XMASMethodOccurrencesRepository;
 @class XMASObjcCallExpressionRewriter;
 @class XMASObjcMethodDeclarationRewriter;
 @class XMASObjcMethodDeclarationStringWriter;
@@ -16,7 +16,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
-               indexedSymbolRepository:(XMASIndexedSymbolRepository *)indexedSymbolRepository
+               MethodOccurrencesRepository:(XMASMethodOccurrencesRepository *)MethodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
              methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter NS_DESIGNATED_INITIALIZER;

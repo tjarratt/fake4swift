@@ -3,7 +3,7 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASWindowProvider.h"
 #import "XMASAlert.h"
-#import "XMASIndexedSymbolRepository.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcCallExpressionRewriter.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
@@ -19,21 +19,21 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
     __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
     __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
-    __block XMASIndexedSymbolRepository *indexedSymbolRepository;
+    __block XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
     __block XMASWindowProvider *windowProvider;
     __block XMASAlert *alerter;
 
     beforeEach(^{
         alerter = nice_fake_for(alerter);
         windowProvider = nice_fake_for([XMASWindowProvider class]);
-        indexedSymbolRepository = nice_fake_for([XMASIndexedSymbolRepository class]);
+        MethodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
         methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
         methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
 
         subject = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                       alerter:alerter
-                                                                      indexedSymbolRepository:indexedSymbolRepository
+                                                                      MethodOccurrencesRepository:MethodOccurrencesRepository
                                                                        callExpressionRewriter:callExpressionRewriter
                                                                 methodDeclarationStringWriter:methodDeclarationStringWriter
                                                                     methodDeclarationRewriter:methodDeclarationRewriter];
@@ -64,8 +64,8 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
             controller.alerter should be_same_instance_as(alerter);
         });
 
-        it(@"should have an indexedSymbolRepository", ^{
-            controller.indexedSymbolRepository should be_same_instance_as(indexedSymbolRepository);
+        it(@"should have an MethodOccurrencesRepository", ^{
+            controller.MethodOccurrencesRepository should be_same_instance_as(MethodOccurrencesRepository);
         });
 
         it(@"should have a call expression rewriter", ^{

@@ -3,7 +3,7 @@
 
 @class XMASObjcMethodDeclaration;
 
-@interface XMASIndexedSymbolRepository : NSObject
+@interface XMASMethodOccurrencesRepository : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController NS_DESIGNATED_INITIALIZER;

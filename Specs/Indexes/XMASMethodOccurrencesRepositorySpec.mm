@@ -1,5 +1,5 @@
 #import <Cedar/Cedar.h>
-#import "XMASIndexedSymbolRepository.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASXcode.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodDeclarationParameter.h"
@@ -8,16 +8,16 @@
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(XMASIndexedSymbolRepositorySpec)
+SPEC_BEGIN(XMASMethodOccurrencesRepositorySpec)
 
-describe(@"XMASIndexedSymbolRepository", ^{
-    __block XMASIndexedSymbolRepository *subject;
+describe(@"XMASMethodOccurrencesRepository", ^{
+    __block XMASMethodOccurrencesRepository *subject;
     __block XC(IDEWorkspaceWindowController) workspaceWindowController;
 
     beforeEach(^{
         spy_on([XMASXcode class]);
         workspaceWindowController = nice_fake_for(@protocol(XCP(IDEWorkspaceWindowController)));
-        subject = [[XMASIndexedSymbolRepository alloc] initWithWorkspaceWindowController:workspaceWindowController];
+        subject = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:workspaceWindowController];
     });
 
     afterEach(^{
