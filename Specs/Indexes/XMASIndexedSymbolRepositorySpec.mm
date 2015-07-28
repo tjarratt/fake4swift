@@ -28,14 +28,12 @@ describe(@"XMASIndexedSymbolRepository", ^{
         __block id editorArea;
         __block id editorContext;
 
-        __block XC(IDESourceCodeCallerGeniusResult) geniusResult;
+        __block NSDictionary *geniusResult;
         __block XC(IDEIndexSymbol) expectedResult;
 
         beforeEach(^{
-            geniusResult = nice_fake_for(@protocol(XCP(IDESourceCodeCallerGeniusResult)));
             expectedResult = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
-            geniusResult stub_method(@selector(calleeSymbolOccurrence))
-                .and_return(expectedResult);
+            geniusResult = @{@"calleeSymbolOccurrence" : expectedResult};
 
             editorContext = [[NSObject alloc] init];
             editorArea = nice_fake_for(@protocol(XCP(IDEEditorArea)));

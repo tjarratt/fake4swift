@@ -22,7 +22,7 @@
 
     NSMutableArray *results = [[NSMutableArray alloc] init];
     for (XC(IDESourceCodeCallerGeniusResult) sourceCodeCallerResult in geniusSourceCodeCallerResults) {
-        [results addObject:[sourceCodeCallerResult calleeSymbolOccurrence]];
+        [results addObject:[sourceCodeCallerResult valueForKey:@"calleeSymbolOccurrence"]];
     }
 
     return results;

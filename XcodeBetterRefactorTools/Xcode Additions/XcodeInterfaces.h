@@ -176,7 +176,7 @@
 @end
 
 @protocol XCP(IDESourceCodeCallerGeniusResult)
-- (XC(IDEIndexSymbol))calleeSymbolOccurrence;
+- (id)valueForKey:(NSString *)key;
 @end
 
 #pragma mark - Workspace and Projects
