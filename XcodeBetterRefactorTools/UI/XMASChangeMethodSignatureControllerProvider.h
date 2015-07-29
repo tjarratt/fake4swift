@@ -16,7 +16,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
-               MethodOccurrencesRepository:(XMASMethodOccurrencesRepository *)MethodOccurrencesRepository
+               methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
              methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter NS_DESIGNATED_INITIALIZER;

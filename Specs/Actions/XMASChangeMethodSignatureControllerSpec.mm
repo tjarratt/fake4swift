@@ -19,7 +19,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block XMASAlert *alerter;
     __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
-    __block XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
+    __block XMASMethodOccurrencesRepository *methodOccurrencesRepository;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
     __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
     __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
@@ -35,7 +35,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         delegate = nice_fake_for(@protocol(XMASChangeMethodSignatureControllerDelegate));
 
-        MethodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
+        methodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
         methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
         methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
@@ -45,7 +45,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
         subject = [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:windowProvider
                                                                              delegate:delegate
                                                                               alerter:alerter
-                                                              MethodOccurrencesRepository:MethodOccurrencesRepository
+                                                              methodOccurrencesRepository:methodOccurrencesRepository
                                                                callExpressionRewriter:callExpressionRewriter
                                                         methodDeclarationStringWriter:methodDeclarationStringWriter
                                                             methodDeclarationRewriter:methodDeclarationRewriter];
@@ -86,7 +86,9 @@ describe(@"XMASChangeMethodSignatureController", ^{
             method = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
                                                                parameters:parameters
                                                                returnType:@"instancetype"
-                                                                    range:NSMakeRange(0, 0)];
+                                                                    range:NSMakeRange(0, 0)
+                                                                        lineNumber:0
+                                                                      columnNumber:0];
 
             filepath = @"/tmp/imagine.all.the.people";
             [subject refactorMethod:method inFile:filepath];
@@ -543,11 +545,17 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when everything goes exactly as planned", ^{
             __block NSString *filePathToRewrite;
+            __block NSArray *matchingForwardDeclarations;
 
             beforeEach(^{
                 filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.m";
 
-                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                matchingForwardDeclarations = @[@"just", @"a", @"test"];
+                methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
+                    .with(methodToRefactor)
+                    .and_return(matchingForwardDeclarations);
+
+                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 subject.view should_not be_nil;
@@ -574,11 +582,25 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
                     .with(methodToRefactor, subject.method, filePathToRewrite);
             });
+
+            it(@"should find matching forward declarations of the method", ^{
+                methodOccurrencesRepository should have_received(@selector(forwardDeclarationsOfMethod:))
+                    .with(methodToRefactor);
+            });
+
+            it(@"should rewrite each forward declaration of the method", ^{
+                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                    .with(@"just", subject.method);
+                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                    .with(@"a", subject.method);
+                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                    .with(@"test", subject.method);
+            });
         });
 
         context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
             beforeEach(^{
-                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_raise_exception();
 
                 subject.view should_not be_nil;
@@ -597,7 +619,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
         context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
             beforeEach(^{
-                MethodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
                     .and_return(@[@"something", @"goes", @"here"]);
 
                 callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))

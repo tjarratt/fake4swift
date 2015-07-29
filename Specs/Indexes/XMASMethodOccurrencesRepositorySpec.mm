@@ -51,6 +51,30 @@ describe(@"XMASMethodOccurrencesRepository", ^{
             results.firstObject should be_same_instance_as(expectedResult);
         });
     });
+
+    describe(@"-forwardDeclarationsOfMethod:", ^{
+        __block NSArray *workspaceSymbols;
+        __block XC(IDEIndexSymbol) matchingIndexSymbol;
+
+        beforeEach(^{
+            matchingIndexSymbol = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
+            matchingIndexSymbol stub_method(@selector(name)).and_return(@"initWithThis:andThat:");
+
+            XC(IDEIndexSymbol) nonMatchingIndexSymbol = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
+            nonMatchingIndexSymbol stub_method(@selector(name)).and_return(@"garbage");
+
+            workspaceSymbols = @[matchingIndexSymbol, nonMatchingIndexSymbol];
+            [XMASXcode class] stub_method(@selector(callableSymbolsInWorkspace)).and_return(workspaceSymbols);
+        });
+
+        it(@"should only return matching forward declarations for the method provided", ^{
+            XMASObjcMethodDeclaration *methodDeclaration = nice_fake_for([XMASObjcMethodDeclaration class]);
+            methodDeclaration stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
+
+            NSArray *forwardDeclarations = [subject forwardDeclarationsOfMethod:methodDeclaration];
+            forwardDeclarations should equal(@[matchingIndexSymbol]);
+        });
+    });
 });
 
 SPEC_END

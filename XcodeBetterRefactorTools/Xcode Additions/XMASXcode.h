@@ -16,7 +16,10 @@
 + (XC(IDEDocumentController))sharedDocumentController;
 
 + (XC(IDEIndex))indexForCurrentWorkspace;
+
++ (id)callableSymbolKind;
 + (id)instanceMethodSymbolKind;
++ (NSArray *)callableSymbolsInWorkspace;
 
 + (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext;
 

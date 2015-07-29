@@ -56,21 +56,23 @@
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
 
-    XMASMethodOccurrencesRepository *MethodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
+    XMASMethodOccurrencesRepository *methodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
 
     XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
     XMASObjcCallExpressionStringWriter *callExpressionStringWriter = [[XMASObjcCallExpressionStringWriter alloc] init];
     XMASObjcMethodCallParser *methodCallParser = [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:callExpressionTokenFilter];
 
     XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter = [[XMASObjcMethodDeclarationStringWriter alloc] init];
-    XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter = [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:methodDeclarationStringWriter];
+    XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter = [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:methodDeclarationStringWriter
+                                                                                                                            methodDeclarationParser:methodDeclParser
+                                                                                                                                            alerter:alerter];
     XMASObjcCallExpressionRewriter *callExpressionRewriter = [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:alerter
                                                                                                 callExpressionParser:methodCallParser
                                                                                           callExpressionStringWriter:callExpressionStringWriter];
 
     XMASChangeMethodSignatureControllerProvider *controllerProvider = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                                                                           alerter:alerter
-                                                                                                                          MethodOccurrencesRepository:MethodOccurrencesRepository
+                                                                                                                          methodOccurrencesRepository:methodOccurrencesRepository
                                                                                                                            callExpressionRewriter:callExpressionRewriter
                                                                                                                     methodDeclarationStringWriter:methodDeclarationStringWriter
                                                                                                                         methodDeclarationRewriter:methodDeclarationRewriter];

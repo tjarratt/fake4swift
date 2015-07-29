@@ -38,6 +38,14 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
                 selector.range should equal(NSMakeRange(60, 40));
             });
 
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(5);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
+            });
+
             describe(@"parameters", ^{
                 __block XMASObjcMethodDeclarationParameter *param;
 
@@ -77,6 +85,14 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             it(@"should have the correct return type", ^{
                 selector.returnType should equal(@"NSString *");
             });
+
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(6);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
+            });
         });
 
         describe(@"the third method declaration", ^{
@@ -92,6 +108,14 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should have the correct range for its tokens", ^{
                 selector.range should equal(NSMakeRange(164, 40));
+            });
+
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(13);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
             });
 
             describe(@"parameters", ^{
@@ -133,6 +157,14 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             it(@"should have the correct return type", ^{
                 selector.returnType should equal(@"NSString *");
             });
+
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(22);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
+            });
         });
 
         describe(@"the fifth method declaration", ^{
@@ -152,6 +184,14 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should have the correct return type", ^{
                 selector.returnType should equal(@"IBAction");
+            });
+
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(26);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
             });
         });
     });

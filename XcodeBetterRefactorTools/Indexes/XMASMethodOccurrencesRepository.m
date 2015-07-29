@@ -1,5 +1,6 @@
 #import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcMethodDeclaration.h"
+#import "XcodeInterfaces.h"
 #import "XMASXcode.h"
 
 @interface XMASMethodOccurrencesRepository ()
@@ -26,6 +27,18 @@
     }
 
     return results;
+}
+
+- (NSArray *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration {
+    NSMutableArray *matchingSymbols = [[NSMutableArray alloc] init];
+    NSArray *callableSymbols = [XMASXcode callableSymbolsInWorkspace];
+    for (XC(IDEIndexSymbol) symbol in callableSymbols) {
+        if ([[symbol name] isEqualToString:methodDeclaration.selectorString]) {
+            [matchingSymbols addObject:symbol];
+        }
+    }
+
+    return matchingSymbols;
 }
 
 @end

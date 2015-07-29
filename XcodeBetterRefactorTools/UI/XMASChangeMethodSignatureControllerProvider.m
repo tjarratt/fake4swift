@@ -9,7 +9,7 @@
 @interface XMASChangeMethodSignatureControllerProvider ()
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
-@property (nonatomic) XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
+@property (nonatomic) XMASMethodOccurrencesRepository *methodOccurrencesRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
 @property (nonatomic) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
 @property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
@@ -19,14 +19,14 @@
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                                alerter:(XMASAlert *)alerter
-               MethodOccurrencesRepository:(XMASMethodOccurrencesRepository *)MethodOccurrencesRepository
+               methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
              methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter {
     if (self = [super init]) {
         self.alerter = alerter;
         self.windowProvider = windowProvider;
-        self.MethodOccurrencesRepository = MethodOccurrencesRepository;
+        self.methodOccurrencesRepository = methodOccurrencesRepository;
         self.callExpressionRewriter = callExpressionRewriter;
         self.methodDeclarationRewriter = methodDeclarationRewriter;
         self.methodDeclarationStringWriter = methodDeclarationStringWriter;
@@ -39,7 +39,7 @@
     return [[XMASChangeMethodSignatureController alloc] initWithWindowProvider:self.windowProvider
                                                                       delegate:delegate
                                                                        alerter:self.alerter
-                                                       MethodOccurrencesRepository:self.MethodOccurrencesRepository
+                                                       methodOccurrencesRepository:self.methodOccurrencesRepository
                                                         callExpressionRewriter:self.callExpressionRewriter
                                                  methodDeclarationStringWriter:self.methodDeclarationStringWriter
                                                      methodDeclarationRewriter:self.methodDeclarationRewriter];

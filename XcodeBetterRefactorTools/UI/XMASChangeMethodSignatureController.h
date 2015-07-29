@@ -23,7 +23,7 @@
 @property (nonatomic, weak, readonly) NSTextField *previewTextField;
 
 @property (nonatomic, weak, readonly) id <XMASChangeMethodSignatureControllerDelegate> delegate;
-@property (nonatomic, readonly) XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
+@property (nonatomic, readonly) XMASMethodOccurrencesRepository *methodOccurrencesRepository;
 @property (nonatomic, readonly) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 @property (nonatomic, readonly) XMASObjcCallExpressionRewriter *callExpressionRewriter;
 @property (nonatomic, readonly) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
@@ -35,7 +35,7 @@
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
                                alerter:(XMASAlert *)alerter
-               MethodOccurrencesRepository:(XMASMethodOccurrencesRepository *)MethodOccurrencesRepository
+               methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)objcCallExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
              methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter NS_DESIGNATED_INITIALIZER;

@@ -161,6 +161,7 @@
 @protocol XCP(IDEIndex)
 - (NSArray *)topLevelSymbolsInFile:(NSString *)filepath;
 - (NSArray *)allSymbolsMatchingKind:(XC(DVTSourceCodeSymbolKind))symbolKind workspaceOnly:(BOOL)wonly;
+- (NSArray *)allSymbolsMatchingName:(NSString *)arg1 kind:(XC(DVTSourceCodeSymbolKind))arg2;
 @end
 
 @protocol XCP(IDEIndexSymbol)

@@ -56,7 +56,9 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
             originalSelector = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:originalComponents
                                                                                   parameters:originalParams
                                                                                   returnType:@"void"
-                                                                                       range:NSMakeRange(123, 244)];
+                                                                                       range:NSMakeRange(123, 244)
+                                                                                  lineNumber:4
+                                                                                columnNumber:21];
 
             NSArray *newComponents = @[@"initWithIcon", @"message", @"parentWindow", @"duration", @"newArgument"];
             NSArray *newParams = @[
@@ -69,7 +71,9 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
             newSelector = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:newComponents
                                                                              parameters:newParams
                                                                              returnType:@"void"
-                                                                                  range:NSMakeRange(0, 0)];
+                                                                                  range:NSMakeRange(0, 0)
+                                                                             lineNumber:4
+                                                                           columnNumber:21];
             callsite = nice_fake_for(@protocol(XMASXcode_IDEIndexSymbol));
             id fakeDVTFilePath = nice_fake_for(@protocol(XMASXcode_DVTFilePath));
             fakeDVTFilePath stub_method(@selector(pathString)).and_return(tempFixturePath);

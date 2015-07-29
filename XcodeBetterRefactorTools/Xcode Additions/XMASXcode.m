@@ -60,9 +60,20 @@
     return [currentWorkspace index];
 }
 
++ (id)callableSymbolKind {
+    Class sourceCodeSymbolClass = NSClassFromString(@"DVTSourceCodeSymbolKind");
+    return sourceCodeSymbolClass ? [sourceCodeSymbolClass callableSymbolKind] : nil;
+}
+
 + (id)instanceMethodSymbolKind {
     Class sourceCodeSymbolClass = NSClassFromString(@"DVTSourceCodeSymbolKind");
     return sourceCodeSymbolClass ? [sourceCodeSymbolClass instanceMethodSymbolKind] : nil;
+}
+
++ (NSArray *)callableSymbolsInWorkspace {
+    XC(IDEIndex) xcodeSymbolIndex = [self indexForCurrentWorkspace];
+    id callableSymbolKind = [self callableSymbolKind];
+    return [xcodeSymbolIndex allSymbolsMatchingKind:callableSymbolKind workspaceOnly:YES];
 }
 
 + (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext {

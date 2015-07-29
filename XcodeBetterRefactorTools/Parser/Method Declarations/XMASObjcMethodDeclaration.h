@@ -9,13 +9,17 @@
 - (instancetype)initWithSelectorComponents:(NSArray *)selectorComponents
                                 parameters:(NSArray *)parameters
                                 returnType:(NSString *)returnType
-                                     range:(NSRange)range;
+                                     range:(NSRange)range
+                                lineNumber:(NSUInteger)lineNumber
+                              columnNumber:(NSUInteger)columnNumber;
 
 - (NSArray *)parameters;
 - (NSString *)selectorString;
 - (NSArray *)components;
 - (NSString *)returnType;
 - (NSRange)range;
+- (NSUInteger)lineNumber;
+- (NSUInteger)columnNumber;
 
 - (instancetype)deleteComponentAtIndex:(NSUInteger)index;
 - (instancetype)insertComponentAtIndex:(NSUInteger)index;

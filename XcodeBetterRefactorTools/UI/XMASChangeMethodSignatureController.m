@@ -26,7 +26,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
-@property (nonatomic) XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
+@property (nonatomic) XMASMethodOccurrencesRepository *methodOccurrencesRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
 @property (nonatomic) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
 @property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
@@ -43,7 +43,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
                                alerter:(XMASAlert *)alerter
-               MethodOccurrencesRepository:(XMASMethodOccurrencesRepository *)MethodOccurrencesRepository
+               methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
              methodDeclarationRewriter:(XMASObjcMethodDeclarationRewriter *)methodDeclarationRewriter {
@@ -54,7 +54,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
         self.delegate = delegate;
         self.windowProvider = windowProvider;
         self.callExpressionRewriter = callExpressionRewriter;
-        self.MethodOccurrencesRepository = MethodOccurrencesRepository;
+        self.methodOccurrencesRepository = methodOccurrencesRepository;
         self.methodDeclarationRewriter = methodDeclarationRewriter;
         self.methodDeclarationStringWriter = methodDeclarationStringWriter;
     }
@@ -255,7 +255,13 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 #pragma mark - Private
 
 - (void)didTapRefactorActionPossiblyRaisingException {
-    NSArray *symbols = [self.MethodOccurrencesRepository callSitesOfCurrentlySelectedMethod];
+    NSArray *forwardDeclarations = [self.methodOccurrencesRepository forwardDeclarationsOfMethod:self.originalMethod];
+    for (XC(IDEIndexSymbol) symbol in forwardDeclarations) {
+        [self.methodDeclarationRewriter changeMethodDeclarationForSymbol:symbol
+                                                                toMethod:self.method];
+    }
+
+    NSArray *symbols = [self.methodOccurrencesRepository callSitesOfCurrentlySelectedMethod];
     NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
     [self.alerter flashMessage:message withLogging:YES];
 
@@ -268,6 +274,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.methodDeclarationRewriter changeMethodDeclaration:self.originalMethod
                                                 toNewMethod:self.method
                                                      inFile:self.filePath];
+
 }
 
 - (void)resizeTableview {

@@ -1,14 +1,22 @@
 #import <Foundation/Foundation.h>
+#import "XcodeInterfaces.h"
 
+@class XMASAlert;
 @class XMASObjcMethodDeclaration;
+@class XMASObjcMethodDeclarationParser;
 @class XMASObjcMethodDeclarationStringWriter;
 
 @interface XMASObjcMethodDeclarationRewriter : NSObject
 
-- (instancetype)initWithMethodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMethodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
+                              methodDeclarationParser:(XMASObjcMethodDeclarationParser *)methodDeclarationParser
+                                              alerter:(XMASAlert *)alerter NS_DESIGNATED_INITIALIZER;
+
 - (void)changeMethodDeclaration:(XMASObjcMethodDeclaration *)oldMethodDeclaration
                     toNewMethod:(XMASObjcMethodDeclaration *)newMethodDeclaration
                          inFile:(NSString *)filePath;
+- (void)changeMethodDeclarationForSymbol:(XC(IDEIndexSymbol))symbol
+                                toMethod:(XMASObjcMethodDeclaration *)newMethodDeclaration;
 
 @end
 

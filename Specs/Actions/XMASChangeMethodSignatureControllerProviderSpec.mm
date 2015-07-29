@@ -19,21 +19,21 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
     __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
     __block XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
     __block XMASObjcCallExpressionRewriter *callExpressionRewriter;
-    __block XMASMethodOccurrencesRepository *MethodOccurrencesRepository;
+    __block XMASMethodOccurrencesRepository *methodOccurrencesRepository;
     __block XMASWindowProvider *windowProvider;
     __block XMASAlert *alerter;
 
     beforeEach(^{
         alerter = nice_fake_for(alerter);
         windowProvider = nice_fake_for([XMASWindowProvider class]);
-        MethodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
+        methodOccurrencesRepository = nice_fake_for([XMASMethodOccurrencesRepository class]);
         callExpressionRewriter = nice_fake_for([XMASObjcCallExpressionRewriter class]);
         methodDeclarationRewriter = nice_fake_for([XMASObjcMethodDeclarationRewriter class]);
         methodDeclarationStringWriter = nice_fake_for([XMASObjcMethodDeclarationStringWriter class]);
 
         subject = [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:windowProvider
                                                                                       alerter:alerter
-                                                                      MethodOccurrencesRepository:MethodOccurrencesRepository
+                                                                      methodOccurrencesRepository:methodOccurrencesRepository
                                                                        callExpressionRewriter:callExpressionRewriter
                                                                 methodDeclarationStringWriter:methodDeclarationStringWriter
                                                                     methodDeclarationRewriter:methodDeclarationRewriter];
@@ -65,7 +65,7 @@ describe(@"XMASChangeMethodSignatureControllerProvider", ^{
         });
 
         it(@"should have an MethodOccurrencesRepository", ^{
-            controller.MethodOccurrencesRepository should be_same_instance_as(MethodOccurrencesRepository);
+            controller.methodOccurrencesRepository should be_same_instance_as(methodOccurrencesRepository);
         });
 
         it(@"should have a call expression rewriter", ^{

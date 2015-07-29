@@ -10,6 +10,8 @@
 @property (nonatomic) NSString *returnType;
 @property (nonatomic, assign) NSRange range;
 @property (nonatomic) XMASComponentSwapper *componentSwapper;
+@property (nonatomic, assign) NSUInteger lineNumber;
+@property (nonatomic, assign) NSUInteger columnNumber;
 
 @end
 
@@ -17,11 +19,16 @@
 
 - (instancetype)initWithTokens:(NSArray *)tokens {
     if (self = [super init]) {
+        CKToken *firstToken = tokens.firstObject;
+        CKToken *lastToken = tokens.lastObject;
         [self parseSelectorComponentsFromTokens:tokens];
-        NSRange start = [tokens.firstObject range];
-        NSRange end = [tokens.lastObject range];
+        NSRange start = firstToken.range;
+        NSRange end = lastToken.range;
         self.range = NSMakeRange(start.location, end.location + end.length - start.location);
         self.componentSwapper = [[XMASComponentSwapper alloc] init];
+
+        self.lineNumber = firstToken.line;
+        self.columnNumber = firstToken.column;
     }
 
     return self;
@@ -31,12 +38,16 @@
                                 parameters:(NSArray *)parameters
                                 returnType:(NSString *)returnType
                                      range:(NSRange)range
+                                lineNumber:(NSUInteger)lineNumber
+                              columnNumber:(NSUInteger)columnNumber
 {
     if (self = [super init]) {
-        self.selectorComponents = selectorComponents;
+        self.range = range;
         self.parameters = parameters;
         self.returnType = returnType;
-        self.range = range;
+        self.lineNumber = lineNumber;
+        self.columnNumber = columnNumber;
+        self.selectorComponents = selectorComponents;
         self.componentSwapper = [[XMASComponentSwapper alloc] init];
     }
 
@@ -67,9 +78,11 @@
     [parameters removeObjectAtIndex:index];
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
-                                                     parameters:parameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:parameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 - (instancetype)insertComponentAtIndex:(NSUInteger)index {
@@ -81,9 +94,11 @@
     [parameters insertObject:newParameter atIndex:index];
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
-                                                     parameters:parameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:parameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 - (instancetype)swapComponentAtIndex:(NSUInteger)index withComponentAtIndex:(NSUInteger)otherIndex {
@@ -98,9 +113,11 @@
     [parameters exchangeObjectAtIndex:index withObjectAtIndex:otherIndex];
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
-                                                     parameters:parameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:parameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 - (instancetype)changeSelectorNameAtIndex:(NSUInteger)index to:(NSString *)newType {
@@ -108,9 +125,11 @@
     components[index] = newType;
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
-                                                     parameters:self.parameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:self.parameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 - (instancetype)changeParameterTypeAtIndex:(NSUInteger)index to:(NSString *)newType {
@@ -119,9 +138,11 @@
     newParameters[index] = newParameter;
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:self.components
-                                                     parameters:newParameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:newParameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 - (instancetype)changeParameterLocalNameAtIndex:(NSUInteger)index to:(NSString *)newName {
@@ -130,9 +151,11 @@
     newParameters[index] = newParameter;
 
     return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:self.components
-                                                     parameters:newParameters
-                                                     returnType:self.returnType
-                                                          range:self.range];
+                                                              parameters:newParameters
+                                                              returnType:self.returnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
 }
 
 

@@ -5,8 +5,13 @@
 
 @interface XMASMethodOccurrencesRepository : NSObject
 
-- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController NS_DESIGNATED_INITIALIZER;
-- (NSArray *)callSitesOfCurrentlySelectedMethod;
 
+- (NSArray *)callSitesOfCurrentlySelectedMethod;
+- (NSArray *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration;
+
+@end
+
+@interface XMASMethodOccurrencesRepository (UnavailableInitializers)
+- (instancetype)init NS_UNAVAILABLE;
 @end
