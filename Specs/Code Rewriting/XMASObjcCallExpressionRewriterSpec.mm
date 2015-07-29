@@ -6,6 +6,7 @@
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodCallParser.h"
 #import "XMASAlert.h"
+#import "TempFileHelper.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -35,15 +36,7 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
         __block XMASObjcMethodDeclaration *newSelector;
         __block id callsite;
 
-        NSString *pathToFixture = [[NSBundle mainBundle] pathForResource:@"RefactorMethodFixture" ofType:@"m"];
-
-        CFUUIDRef uuid = CFUUIDCreate(NULL);
-        CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
-        NSString *temporaryFileName = [NSString stringWithFormat:@"RefactorMethodFixture-%@.m", uuidStr];
-
-        NSString *tempFixturePath = [NSTemporaryDirectory() stringByAppendingString:temporaryFileName];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager copyItemAtPath:pathToFixture toPath:tempFixturePath error:nil];
+        NSString *tempFixturePath = [TempFileHelper temporaryFilePathForFixture:@"RefactorMethodFixture" ofType:@"m"];
 
         beforeEach(^{
             NSArray *originalComponents = @[@"initWithIcon", @"message", @"parentWindow", @"duration"];
