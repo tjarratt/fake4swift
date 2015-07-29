@@ -596,6 +596,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
                     .with(@"test", subject.method);
             });
+
+            it(@"should close the window", ^{
+                window should have_received(@selector(close));
+            });
         });
 
         context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{

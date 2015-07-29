@@ -274,6 +274,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     [self.methodDeclarationRewriter changeMethodDeclaration:self.originalMethod
                                                 toNewMethod:self.method
                                                      inFile:self.filePath];
+    [self.window close];
 
 }
 
