@@ -64,7 +64,7 @@ describe(@"XMASMethodOccurrencesRepository", ^{
             nonMatchingIndexSymbol stub_method(@selector(name)).and_return(@"garbage");
 
             workspaceSymbols = @[matchingIndexSymbol, nonMatchingIndexSymbol];
-            [XMASXcode class] stub_method(@selector(callableSymbolsInWorkspace)).and_return(workspaceSymbols);
+            [XMASXcode class] stub_method(@selector(instanceMethodSymbolsInWorkspace)).and_return(workspaceSymbols);
         });
 
         it(@"should only return matching forward declarations for the method provided", ^{

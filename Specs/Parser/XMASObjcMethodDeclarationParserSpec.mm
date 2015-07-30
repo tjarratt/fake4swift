@@ -13,7 +13,7 @@ SPEC_BEGIN(XMASObjcMethodDeclarationParserSpec)
 describe(@"XMASObjcMethodDeclarationParser", ^{
     XMASObjcMethodDeclarationParser *subject = [[XMASObjcMethodDeclarationParser alloc] init];
 
-    describe(@"parsing a collection of tokens from ClangKit", ^{
+    describe(@"parsing a stream of ClangKit tokens for a .m file", ^{
         NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithPath:fixturePath];
         NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
@@ -193,6 +193,22 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             it(@"should have the correct column number", ^{
                 selector.columnNumber should equal(1);
             });
+        });
+    });
+
+    describe(@"parsing a stream of ClangKit tokens for a header", ^{
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"RefactorMethodFixture" ofType:@"h"];
+        NSString *fixtureContents = [NSString stringWithContentsOfFile:fixturePath
+                                                              encoding:NSUTF8StringEncoding
+                                                                 error:nil];
+
+        CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:fixtureContents
+                                                                               language:CKLanguageObjC];
+        NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
+
+        it(@"should have a method declaration for each method", ^{
+            NSArray *expectedMethods = @[@"flashMessage:"];
+            [methodDeclarations valueForKey:@"selectorString"] should equal(expectedMethods);
         });
     });
 });

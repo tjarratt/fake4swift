@@ -70,10 +70,10 @@
     return sourceCodeSymbolClass ? [sourceCodeSymbolClass instanceMethodSymbolKind] : nil;
 }
 
-+ (NSArray *)callableSymbolsInWorkspace {
++ (NSArray *)instanceMethodSymbolsInWorkspace {
     XC(IDEIndex) xcodeSymbolIndex = [self indexForCurrentWorkspace];
-    id callableSymbolKind = [self callableSymbolKind];
-    return [xcodeSymbolIndex allSymbolsMatchingKind:callableSymbolKind workspaceOnly:YES];
+    id instanceMethodSymbolKind = [self instanceMethodSymbolKind];
+    return [xcodeSymbolIndex allSymbolsMatchingKind:instanceMethodSymbolKind workspaceOnly:YES];
 }
 
 + (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext {

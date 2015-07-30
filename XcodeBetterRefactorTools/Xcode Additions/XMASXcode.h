@@ -19,7 +19,7 @@
 
 + (id)callableSymbolKind;
 + (id)instanceMethodSymbolKind;
-+ (NSArray *)callableSymbolsInWorkspace;
++ (NSArray *)instanceMethodSymbolsInWorkspace;
 
 + (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext;
 

@@ -31,8 +31,8 @@
 
 - (NSArray *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration {
     NSMutableArray *matchingSymbols = [[NSMutableArray alloc] init];
-    NSArray *callableSymbols = [XMASXcode callableSymbolsInWorkspace];
-    for (XC(IDEIndexSymbol) symbol in callableSymbols) {
+    NSArray *instanceMethodSymbols = [XMASXcode instanceMethodSymbolsInWorkspace];
+    for (XC(IDEIndexSymbol) symbol in instanceMethodSymbols) {
         if ([[symbol name] isEqualToString:methodDeclaration.selectorString]) {
             [matchingSymbols addObject:symbol];
         }

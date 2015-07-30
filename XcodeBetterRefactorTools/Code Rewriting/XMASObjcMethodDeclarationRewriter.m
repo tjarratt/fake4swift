@@ -44,7 +44,9 @@
 - (void)changeMethodDeclarationForSymbol:(XC(IDEIndexSymbol))symbol
                                 toMethod:(XMASObjcMethodDeclaration *)newMethodDeclaration {
     NSString *fileToRewrite = symbol.file.pathString;
-    NSArray *tokens = [[CKTranslationUnit translationUnitWithPath:fileToRewrite] tokens];
+    NSArray *tokens = [[CKTranslationUnit translationUnitWithText:[NSString stringWithContentsOfFile:fileToRewrite
+                                                                                            encoding:NSUTF8StringEncoding
+                                                                                               error:nil] language:CKLanguageObjCPP] tokens];
     NSArray *methodDeclarationsInFile = [self.methodDeclarationParser parseMethodDeclarationsFromTokens:tokens];
 
     XMASObjcMethodDeclaration *methodDeclarationToRewrite;
