@@ -89,4 +89,11 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     return currentLocation.characterRange.location;
 }
 
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 @end

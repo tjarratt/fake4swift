@@ -16,4 +16,11 @@
     return self;
 }
 
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 @end

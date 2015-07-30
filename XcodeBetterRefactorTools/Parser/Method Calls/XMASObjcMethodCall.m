@@ -58,6 +58,11 @@
 
 #pragma mark - <NSObject>
 
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"XMASCallExpression: (SEL %@) (args %@) (target %@) (line %lu) (column %lu) (range %@)", self.selectorString, self.arguments, self.target, self.lineNumber, self.columnNumber, NSStringFromRange(self.range)];
 }

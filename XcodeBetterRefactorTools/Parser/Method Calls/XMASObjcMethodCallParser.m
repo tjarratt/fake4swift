@@ -39,6 +39,13 @@
     return [self filterMatchingCallExpressionsFromTokensInRanges:callExpressionRanges];
 }
 
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 #pragma mark - Private
 
 - (NSArray *)filterMatchingCallExpressionsFromTokensInRanges:(NSSet *)callExpressionRangeSet {

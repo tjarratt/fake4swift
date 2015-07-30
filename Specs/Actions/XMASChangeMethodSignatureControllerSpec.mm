@@ -142,7 +142,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
 
             describe(@"when the window closes", ^{
                 beforeEach(^{
-                    [subject windowWillClose:nil];
+                    [subject windowWillClose:nice_fake_for([NSNotification class])];
                 });
 
                 it(@"should notify its delegate that it will disappear", ^{
@@ -455,15 +455,21 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 describe(@"the first row", ^{
                     it(@"should have the correct cell contents", ^{
                         NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
-                        NSTextField *firstRowFirstColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:firstColumn row:0];
+                        NSTextField *firstRowFirstColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                  viewForTableColumn:firstColumn
+                                                                                                 row:0];
                         firstRowFirstColumn.stringValue should equal(@"initWithSomething");
 
                         NSTableColumn *secondColumn = subject.tableView.tableColumns[1];
-                        NSTextField *firstRowSecondColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:secondColumn row:0];
+                        NSTextField *firstRowSecondColumn = (id)[subject.tableView.delegate tableView:subject.tableView 
+                                                                                   viewForTableColumn:secondColumn
+                                                                                                  row:0];
                         firstRowSecondColumn.stringValue should equal(@"id");
 
                         NSTableColumn *thirdColumn = subject.tableView.tableColumns[2];
-                        NSTextField *firstRowThirdColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:thirdColumn row:0];
+                        NSTextField *firstRowThirdColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                  viewForTableColumn:thirdColumn
+                                                                                                 row:0];
                         firstRowThirdColumn.stringValue should equal(@"something");
                     });
                 });
@@ -471,15 +477,21 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 describe(@"the second row", ^{
                     it(@"should have the correct cell contents", ^{
                         NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
-                        NSTextField *secondRowFirstColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:firstColumn row:1];
+                        NSTextField *secondRowFirstColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                   viewForTableColumn:firstColumn
+                                                                                                  row:1];
                         secondRowFirstColumn.stringValue should equal(@"this");
 
                         NSTableColumn *secondColumn = subject.tableView.tableColumns[1];
-                        NSTextField *secondRowSecondColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:secondColumn row:1];
+                        NSTextField *secondRowSecondColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                    viewForTableColumn:secondColumn
+                                                                                                   row:1];
                         secondRowSecondColumn.stringValue should equal(@"NSString *");
 
                         NSTableColumn *thirdColumn = subject.tableView.tableColumns[2];
-                        NSTextField *secondRowThirdColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:thirdColumn row:1];
+                        NSTextField *secondRowThirdColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                   viewForTableColumn:thirdColumn
+                                                                                                  row:1];
                         secondRowThirdColumn.stringValue should equal(@"thisThingy");
                     });
                 });
@@ -487,15 +499,21 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 describe(@"the third row", ^{
                     it(@"should have the correct cell contents", ^{
                         NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
-                        NSTextField *thirdRowFirstColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:firstColumn row:2];
+                        NSTextField *thirdRowFirstColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                  viewForTableColumn:firstColumn
+                                                                                                 row:2];
                         thirdRowFirstColumn.stringValue should equal(@"andThat");
 
                         NSTableColumn *secondColumn = subject.tableView.tableColumns[1];
-                        NSTextField *thirdRowSecondColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:secondColumn row:2];
+                        NSTextField *thirdRowSecondColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                   viewForTableColumn:secondColumn
+                                                                                                  row:2];
                         thirdRowSecondColumn.stringValue should equal(@"NSInteger");
 
                         NSTableColumn *thirdColumn = subject.tableView.tableColumns[2];
-                        NSTextField *thirdRowThirdColumn = (id)[subject.tableView.delegate tableView:nil viewForTableColumn:thirdColumn row:2];
+                        NSTextField *thirdRowThirdColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                                  viewForTableColumn:thirdColumn
+                                                                                                 row:2];
                         thirdRowThirdColumn.stringValue should equal(@"_thatThing");
                     });
                 });
