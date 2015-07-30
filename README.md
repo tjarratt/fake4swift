@@ -15,6 +15,12 @@ BetterRefactorTools is an Xcode plugin that adds handy shortcuts for refactoring
    
    (Edit > Refactor Current Method)
 
+# Known defects
+
+* Only supports instance methods
+* May get confused when an argument is a protocol type (e.g.: `id<AnyProtocol>`)
+* Cannot find call sites of methods in all `.mm` files.
+
 # Uninstalling the plugin
 Plugin can be uninstalled by removing `XcodeBetterRefactorTools.xcplugin` from `~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins`
 
