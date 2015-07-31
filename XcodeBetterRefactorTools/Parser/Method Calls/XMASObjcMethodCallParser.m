@@ -35,7 +35,12 @@
 #pragma mark - Public
 
 - (NSArray *)matchingCallExpressions {
+    NSLog(@"================> finding call expressions in %@", self.filePath.lastPathComponent);
+
     NSSet *callExpressionRanges = [self.callExpressionTokenFilter parseCallExpressionRangesFromTokens:self.tokens];
+
+    NSLog(@"================> %@", self.tokens);
+
     return [self filterMatchingCallExpressionsFromTokensInRanges:callExpressionRanges];
 }
 
@@ -49,10 +54,17 @@
 #pragma mark - Private
 
 - (NSArray *)filterMatchingCallExpressionsFromTokensInRanges:(NSSet *)callExpressionRangeSet {
+    NSLog(@"================> found %lu call expressions in %@", callExpressionRangeSet.count, self.filePath.lastPathComponent);
+
     NSMutableArray *matchingCallExpressions = [[NSMutableArray alloc] init];
     for (NSValue *value in callExpressionRangeSet) {
         NSRange callExprRange = [value rangeValue];
         NSArray *callExprTokens = [self.tokens subarrayWithRange:callExprRange];
+
+        NSLog(@"================> ");
+        NSLog(@"================> ");
+        NSLog(@"================> tokens between (%lu, %lu) in %@", callExprRange.location, callExprRange.location + callExprRange.length, self.filePath.lastPathComponent);
+        NSLog(@"================> %@", callExprTokens);
 
         for (NSUInteger index = 1; index < callExprTokens.count; ++index) {
             NSMutableArray *selectorComponentTokens = [[NSMutableArray alloc] init];

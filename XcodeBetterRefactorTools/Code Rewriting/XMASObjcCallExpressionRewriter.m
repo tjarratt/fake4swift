@@ -34,12 +34,16 @@
 
     // CONSIDER :: should we have a (singleton-provided) object that handles read access to tokens for a given file?
     // (this would be a good use case for a monostate, quite possibly)
-    NSArray *tokens = [[CKTranslationUnit translationUnitWithPath:callsite.file.pathString] tokens];
+    NSString *fileContents = [NSString stringWithContentsOfFile:callsite.file.pathString
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:nil];
+    NSArray *tokens = [[CKTranslationUnit translationUnitWithText:fileContents language:CKLanguageObjCPP] tokens];
     [self.methodCallParser setupWithSelectorToMatch:oldSelector.selectorString
                                            filePath:callsite.file.pathString
                                           andTokens:tokens];
 
     NSArray *callExpressionsMatchingSelector = [self.methodCallParser matchingCallExpressions];
+    NSLog(@"================> found %lu call exprs matching %@ in %@", callExpressionsMatchingSelector.count, oldSelector.selectorString, callsite.file.pathString);
 
     XMASObjcMethodCall *callExpressionToRewrite;
     for (XMASObjcMethodCall *callExpression in callExpressionsMatchingSelector) {

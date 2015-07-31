@@ -2,11 +2,11 @@
 #import <ClangKit/ClangKit.h>
 #import "XMASRefactorMethodAction.h"
 #import "XcodeInterfaces.h"
-#import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
+#import "XMASAlert.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

@@ -4,7 +4,9 @@
 @implementation XMASObjcCallExpressionTokenFilter
 
 - (NSSet *)parseCallExpressionRangesFromTokens:(NSArray *)tokens {
-    return [self parseCallExpressionRangesFromTokens:tokens startingAtIndex:0 stoppingAtIndex:tokens.count];
+    return [self parseCallExpressionRangesFromTokens:tokens
+                                     startingAtIndex:0
+                                     stoppingAtIndex:tokens.count];
 }
 
 #pragma mark - Private

@@ -19,6 +19,9 @@
 		AE76356C1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE76356B1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m */; };
 		AE76356D1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE76356B1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m */; };
 		AE7635701B68283C00F85396 /* XMASObjcMethodDeclarationStringWriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE76356E1B68283C00F85396 /* XMASObjcMethodDeclarationStringWriterSpec.mm */; };
+		AEC0B0F91B6AA59800567D93 /* CedarSpecFixture.mm in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */; };
+		AEDD2DFC1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */; };
+		AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */; };
 		AEE1B5901B69456600CC8AFE /* RefactorMethodFixture.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */; };
 		AEE1B5941B6945B700CC8AFE /* TempFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */; };
 		AEE1B5961B6947B200CC8AFE /* RefactorMethodExpected.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */; };
@@ -209,6 +212,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */,
+				AEC0B0F91B6AA59800567D93 /* CedarSpecFixture.mm in Copy Fixtures */,
 				AEE1B5961B6947B200CC8AFE /* RefactorMethodExpected.h in Copy Fixtures */,
 				AEE1B5901B69456600CC8AFE /* RefactorMethodFixture.h in Copy Fixtures */,
 				AE7635691B68249C00F85396 /* RefactorMethodDeclarationExpected.m in Copy Fixtures */,
@@ -251,6 +255,9 @@
 		AE76356A1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcMethodDeclarationStringWriter.h; sourceTree = "<group>"; };
 		AE76356B1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationStringWriter.m; sourceTree = "<group>"; };
 		AE76356E1B68283C00F85396 /* XMASObjcMethodDeclarationStringWriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationStringWriterSpec.mm; sourceTree = "<group>"; };
+		AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarSpecFixture.mm; sourceTree = "<group>"; };
+		AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASXcodeTargetSearchPathResolver.h; sourceTree = "<group>"; };
+		AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcodeTargetSearchPathResolver.m; sourceTree = "<group>"; };
 		AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodFixture.h; sourceTree = "<group>"; };
 		AEE1B5921B6945B700CC8AFE /* TempFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempFileHelper.h; sourceTree = "<group>"; };
 		AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempFileHelper.m; sourceTree = "<group>"; };
@@ -468,6 +475,7 @@
 				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
 				AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */,
 				F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */,
+				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -525,6 +533,8 @@
 				F7B1D2871B5C5F7900C28AE7 /* XMASXcode.m */,
 				AE71D5B01B66F5CE00E40833 /* XMASXcodeAdditions.h */,
 				AE71D5B11B66F5CE00E40833 /* XMASXcodeAdditions.m */,
+				AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */,
+				AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -866,6 +876,7 @@
 				969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */,
 				F7B1D28A1B5C5F7900C28AE7 /* XMASXcode.m in Sources */,
 				F7D01C191B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
+				AEDD2DFC1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE07954F1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
@@ -917,6 +928,7 @@
 				AE76356D1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
 				F71E82C11B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm in Sources */,
 				F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
+				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,

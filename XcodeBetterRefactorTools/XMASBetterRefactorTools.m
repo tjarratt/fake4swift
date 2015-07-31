@@ -2,6 +2,9 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodActionProvider.h"
 
+#import "XMASXcode.h"
+#import "XcodeInterfaces.h"
+
 @interface XMASBetterRefactorTools ()
 @property (nonatomic, retain) XMASEditMenu *editMenu;
 @end
@@ -43,4 +46,5 @@
     self.editMenu = [[XMASEditMenu alloc] initWithRefactorMethodActionProvider:actionProvider];
     [self.editMenu attach];
 }
+
 @end
