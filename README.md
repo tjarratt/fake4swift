@@ -19,7 +19,7 @@ BetterRefactorTools is an Xcode plugin that adds handy shortcuts for refactoring
 
 * Only supports instance methods
 * May get confused when an argument is a protocol type (e.g.: `id<AnyProtocol>`)
-* Cannot find call sites of methods in all `.mm` files.
+* Cannot find call sites of methods in all `.mm` files. (especially Cedar specs)
 * Will rewrite **any** call site for selectors that match (e.g.: it will match any `-init` when rewriting call sites).
 * Will not rewrite any matching @selector()
 
