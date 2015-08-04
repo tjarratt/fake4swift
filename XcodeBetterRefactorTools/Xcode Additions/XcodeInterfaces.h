@@ -1,9 +1,15 @@
 #import <Foundation/Foundation.h>
 
-#pragma mark - Run contexts and destinations
-
 #define XCP(type) XMASXcode_##type
 #define XC(type) id<XMASXcode_##type>
+
+#pragma mark - Search Paths
+
+@protocol XCP(XCStringList)
+- (NSArray *)arrayRepresentation;
+@end
+
+#pragma mark - Run contexts and destinations
 
 @protocol XCP(DVTFilePath)
 - (NSString *)pathString;
