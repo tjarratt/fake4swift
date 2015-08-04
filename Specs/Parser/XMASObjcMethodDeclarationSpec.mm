@@ -75,10 +75,14 @@ describe(@"XMASObjcMethodDeclaration", ^{
         CKToken *firstSelectorPiece = nice_fake_for([CKToken class]);
         firstSelectorPiece stub_method(@selector(spelling)).and_return(@"initWithThis");
         firstSelectorPiece stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+        firstSelectorPiece stub_method(@selector(range)).and_return(NSMakeRange(0, 12));
 
         CKToken *firstParamType = nice_fake_for([CKToken class]);
         firstParamType stub_method(@selector(spelling)).and_return(@"NSString");
         firstParamType stub_method(@selector(kind)).and_return(CKTokenKindIdentifier);
+        firstParamType stub_method(@selector(range)).and_return(NSMakeRange(50, 8));
+
+        star stub_method(@selector(range)).and_return(NSMakeRange(59, 1));
 
         CKToken *firstVariableName = nice_fake_for([CKToken class]);
         firstVariableName stub_method(@selector(spelling)).and_return(@"firstThing");

@@ -182,21 +182,33 @@
     for (NSUInteger i = lastTokenParsed; i < tokens.count; ++i) {
         CKToken *token = tokens[i];
         if (token.kind == CKTokenKindPunctuation && [token.spelling isEqualToString:@"("]) {
-            NSString *paramType = [tokens[++i] spelling];
-            CKToken *followingToken = tokens[i+1];
-            if (followingToken.kind == CKTokenKindPunctuation && [followingToken.spelling isEqualToString:@"*"]) {
-                paramType = [paramType stringByAppendingString:@" *"];
-                ++i;
-            }
-
-            // keep reading until we are past the declaration
+            // keep reading until we are past the parameter
             BOOL parsingParam = YES;
+            NSMutableArray *paramTokens = [[NSMutableArray alloc] init];
             for (CKToken *nextToken = tokens[++i]; parsingParam && i < tokens.count; nextToken = tokens[++i]) {
                 BOOL isPunctuation = nextToken.kind == CKTokenKindPunctuation;
                 BOOL isClosingParen = [nextToken.spelling isEqualToString:@")"];
+
                 if (isPunctuation && isClosingParen) {
                     parsingParam = NO;
+                } else {
+                    [paramTokens addObject:nextToken];
                 }
+            }
+
+            // walk tokens, combining them and making sure to account for whitespace when the ranges don't add up perfectly
+            NSString *paramType = @"";
+            NSRange tokenRange = [paramTokens.firstObject range];
+            NSUInteger lastTokenOffset = tokenRange.location;
+            for (CKToken *parameterToken in paramTokens) {
+                if (lastTokenOffset == parameterToken.range.location) {
+                    paramType = [paramType stringByAppendingString:parameterToken.spelling];
+                } else {
+                    NSString *padding = [@"" stringByPaddingToLength:parameterToken.range.location - lastTokenOffset withString:@" " startingAtIndex:0];
+                    paramType = [NSString stringWithFormat:@"%@%@%@", paramType, padding, parameterToken.spelling];
+                }
+
+                lastTokenOffset = parameterToken.range.location + parameterToken.range.length;
             }
 
             CKToken *variableNameToken = tokens[i];

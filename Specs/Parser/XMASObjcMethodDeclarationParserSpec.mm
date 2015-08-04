@@ -19,7 +19,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
 
         it(@"should have a method declaration for each method", ^{
-            NSArray *expectedMethods = @[@"flashMessage:", @"hideMessage", @"flashMessage:", @"hideMessage", @"tap:"];
+            NSArray *expectedMethods = @[@"flashMessage:", @"hideMessage", @"flashMessage:", @"hideMessage", @"tap:", @"performAction:"];
             [methodDeclarations valueForKey:@"selectorString"] should equal(expectedMethods);
         });
 
@@ -188,6 +188,41 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should have the correct line number", ^{
                 selector.lineNumber should equal(26);
+            });
+
+            it(@"should have the correct column number", ^{
+                selector.columnNumber should equal(1);
+            });
+        });
+
+        describe(@"the sixth method declaration", ^{
+            __block XMASObjcMethodDeclaration *selector;
+
+            beforeEach(^{
+                selector = [methodDeclarations objectAtIndex:5];
+            });
+
+            it(@"should have one parameter", ^{
+                selector.parameters.count should equal(1);
+                [selector.parameters.firstObject type] should equal(@"id<Actionable>");
+
+                [selector.parameters.firstObject localName] should equal(@"action");
+            });
+
+            it(@"should have the correct selector string", ^{
+                selector.selectorString should equal(@"performAction:");
+            });
+
+            it(@"should have the correct range for its tokens", ^{
+                selector.range should equal(NSMakeRange(707, 44));
+            });
+
+            it(@"should have the correct return type", ^{
+                selector.returnType should equal(@"void");
+            });
+
+            it(@"should have the correct line number", ^{
+                selector.lineNumber should equal(30);
             });
 
             it(@"should have the correct column number", ^{
