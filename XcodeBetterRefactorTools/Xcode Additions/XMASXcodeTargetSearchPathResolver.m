@@ -2,9 +2,13 @@
 
 @implementation XMASXcodeTargetSearchPathResolver
 
-// this gives us the USER Header search paths
 - (NSArray *)effectiveHeaderSearchPathsForTarget:(id)target {
-    return [[[[[target valueForKey:@"targetBuildContext"] valueForKey:@"effectiveSearchPaths"] allValues] valueForKey:@"arrayRepresentation"] valueForKeyPath:@"@unionOfArrays.self"];
+    id targetBuildContext = [target valueForKey:@"targetBuildContext"];
+    NSDictionary * effectiveSearchPaths = [targetBuildContext valueForKey:@"effectiveSearchPaths"];
+    NSArray *searchPathValues = [effectiveSearchPaths allValues];
+
+    // get the array representation from each XCStringList and flatten the nested arrays
+    return [[searchPathValues valueForKey:@"arrayRepresentation"] valueForKeyPath:@"@unionOfArrays.self"];
 }
 
 @end
