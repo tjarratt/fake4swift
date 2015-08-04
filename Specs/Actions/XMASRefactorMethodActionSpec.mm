@@ -136,10 +136,6 @@ describe(@"XMASRefactorMethodAction", ^{
             controller stub_method(@selector(refactorMethod:inFile:)).and_raise_exception(exception);
         });
 
-        it(@"should capture the exception", ^{
-            ^{ refactorMethodUnderCursor(); } should_not raise_exception();
-        });
-
         it(@"should alert the user that the action failed", ^{
             refactorMethodUnderCursor();
             alerter should have_received(@selector(flashComfortingMessageForException:))
