@@ -27,7 +27,7 @@
     
 }
 
-- (void)performAction:(id<Actionable>)action {
+- (void)performAction:(id<NSObject>)action {
     
 }
 

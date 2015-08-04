@@ -46,9 +46,10 @@
     BOOL isParameterDeclaration = token.cursor.kind == CKCursorKindParmDecl;
     BOOL isTypeDeclaration = token.cursor.kind == CKCursorKindTypeRef;
     BOOL isObjcClassDeclaration = token.cursor.kind == CKCursorKindObjCClassRef;
+    BOOL isObjcProtocolDeclaration = token.cursor.kind == CKCursorKindObjCProtocolRef;
     BOOL isPossibleIBAction = token.cursor.kind == CKCursorKindMacroExpansion;
 
-    return isParameterDeclaration || isTypeDeclaration || isObjcClassDeclaration || isPossibleIBAction;
+    return isParameterDeclaration || isTypeDeclaration || isObjcClassDeclaration || isPossibleIBAction || isObjcProtocolDeclaration;
 }
 
 @end

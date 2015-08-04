@@ -204,7 +204,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
 
             it(@"should have one parameter", ^{
                 selector.parameters.count should equal(1);
-                [selector.parameters.firstObject type] should equal(@"id<Actionable>");
+                [selector.parameters.firstObject type] should equal(@"id<NSObject>");
 
                 [selector.parameters.firstObject localName] should equal(@"action");
             });
@@ -214,7 +214,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
             });
 
             it(@"should have the correct range for its tokens", ^{
-                selector.range should equal(NSMakeRange(707, 44));
+                selector.range should equal(NSMakeRange(707, 42));
             });
 
             it(@"should have the correct return type", ^{
