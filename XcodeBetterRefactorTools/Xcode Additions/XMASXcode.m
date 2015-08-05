@@ -21,6 +21,13 @@
     } return nil;
 }
 
+#pragma mark - Targets
+
++ (NSArray *)targetsInCurrentWorkspace {
+    XC(Workspace) workspace = [XMASXcode currentWorkspace];
+    return [workspace referencedBlueprints];
+}
+
 #pragma mark - Editors
 
 + (id)currentEditor {
@@ -29,7 +36,7 @@
     return [editorContext editor];                                    // IDESourceCodeEditor, Xcode3ProjectEditor or IBDocumentEditor
 }
 
-#pragma mark Documents
+#pragma mark - Documents
 
 + (NSURL *)currentSourceCodeDocumentFileURL {
     id currentEditor = [XMASXcode currentEditor];

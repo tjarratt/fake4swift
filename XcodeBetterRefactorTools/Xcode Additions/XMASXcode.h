@@ -12,6 +12,8 @@
 + (XC(IDEWorkspaceWindowController))currentWorkspaceController;
 + (XC(Workspace))currentWorkspace;
 
++ (NSArray *)targetsInCurrentWorkspace;
+
 + (NSURL *)currentSourceCodeDocumentFileURL;
 + (XC(IDEDocumentController))sharedDocumentController;
 

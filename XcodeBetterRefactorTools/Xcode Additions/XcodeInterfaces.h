@@ -9,11 +9,17 @@
 - (NSArray *)arrayRepresentation;
 @end
 
-#pragma mark - Run contexts and destinations
+#pragma mark - File References
 
 @protocol XCP(DVTFilePath)
 - (NSString *)pathString;
 @end
+
+@protocol XCP(Xcode3FileReference)
+- (XC(DVTFilePath))resolvedFilePath;
+@end
+
+#pragma mark - Run contexts and destinations
 
 @protocol XCP(RunContext)
 - (BOOL)isTestable;
@@ -75,7 +81,7 @@
 - (id)buildables;
 - (id)buildableProducts;
 - (id)indexableFiles;
-- (id)allBuildFileReferences;
+- (NSArray *)allBuildFileReferences;
 @end
 
 @protocol XCP(Workspace)

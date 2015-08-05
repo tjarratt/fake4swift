@@ -9,6 +9,7 @@
 #import "XMASXcode.h"
 #import <objc/runtime.h>
 #import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASTokenizer.h"
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
 
@@ -87,11 +88,11 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 //        NSLog(@"================> property dictionaries : %@", propertyDictionaries);
 
 //        NSLog(@"================> inspecting methods of macro expansion scope");
-//        Class klass = NSClassFromString(@"XCMacroExpansionScope");
-//        Method *methods = class_copyMethodList(klass, &countOfMethods);
-//        for (NSUInteger index = 0; index < countOfMethods; ++index) {
-//            NSLog(@"================> %s", sel_getName(method_getName(methods[index])));
-//        }
+        Class klass = NSClassFromString(@"Xcode3FileReference");
+        Method *methods = class_copyMethodList(klass, &countOfMethods);
+        for (NSUInteger index = 0; index < countOfMethods; ++index) {
+            NSLog(@"================> %s", sel_getName(method_getName(methods[index])));
+        }
 //        break;
 
 //        id badScope = [[NSClassFromString(@"XCMacroExpansionScope") alloc] init];
@@ -146,6 +147,13 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 - (void)refactorMethodUnderCursor {
     NSUInteger cursorLocation = [self cursorLocation];
     NSString *currentFilePath = [self currentSourceCodeFilePath];
+
+    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
+
+    NSArray *tokens = [tokenizer tokensForFilePath:currentFilePath];
+    NSLog(@"================> tokens from our brand new tokenizer :: %@", tokens);
+
     NSString *currentFileContents = [NSString stringWithContentsOfFile:currentFilePath
                                                               encoding:NSUTF8StringEncoding
                                                                  error:nil];

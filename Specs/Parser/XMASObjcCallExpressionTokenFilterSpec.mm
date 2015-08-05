@@ -41,7 +41,7 @@ describe(@"XMASObjcCallExpressionTokenFilter", ^{
                                                           encoding:NSUTF8StringEncoding
                                                                  error:nil];
 
-//        NSArray *args = @[
+        NSArray *args = @[
 //                          @"-I/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/Source/Headers",
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/Source/Headers",
 //                          @"-I/Users/pivotal/Library/Developer/Xcode/DerivedData/XcodeBetterRefactorTools-cfcizzpibplavhazstbostobarkk/Build/Intermediates/XcodeBetterRefactorTools.build/Debug/Specs.build/Specs-own-target-headers.hmap",
@@ -51,7 +51,9 @@ describe(@"XMASObjcCallExpressionTokenFilter", ^{
 //                          @"-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
 //                          @"-I/Users/pivotal/Library/Developer/Xcode/DerivedData/XcodeBetterRefactorTools-cfcizzpibplavhazstbostobarkk/Build/Intermediates/XcodeBetterRefactorTools.build/Debug/Specs.build/DerivedSources/x86_64",
 //                          @"-I/Users/pivotal/Library/Developer/Xcode/DerivedData/XcodeBetterRefactorTools-cfcizzpibplavhazstbostobarkk/Build/Intermediates/XcodeBetterRefactorTools.build/Debug/Specs.build/DerivedSources",
-//                          @"-F/Users/pivotal/Library/Developer/Xcode/DerivedData/XcodeBetterRefactorTools-cfcizzpibplavhazstbostobarkk/Build/Products/Debug",
+
+                          @"-F/Users/pivotal/Library/Developer/Xcode/DerivedData/XcodeBetterRefactorTools-cfcizzpibplavhazstbostobarkk/Build/Products/Debug",
+
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar",
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/CedarPlugin.xcplugin",
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/CodeSnippetsAndTemplates",
@@ -107,10 +109,10 @@ describe(@"XMASObjcCallExpressionTokenFilter", ^{
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/Source/Headers/Matchers/OSX",
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/Source/Headers/Matchers/Stringifiers",
 //                          @"-F/Users/pivotal/workspace/tjarratt/xcode-better-refactor-tools/Externals/Cedar/Source/Headers/Matchers/UIKit",
-//                          ];
+                          ];
         CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:fixtureContents
                                                                                language:CKLanguageObjCPP
-                                                                                   args:nil];
+                                                                                   args:args];
         NSArray *cedarSpecTokens = [translationUnit tokens];
 
         it(@"should be fine", ^{
