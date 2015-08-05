@@ -85,8 +85,12 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 }
 
 - (NSUInteger)cursorLocation {
-    XC(DVTTextDocumentLocation) currentLocation = [[self.currentEditor currentSelectedDocumentLocations] lastObject];
-    return currentLocation.characterRange.location;
+    id currentLocation = [[self.currentEditor currentSelectedDocumentLocations] lastObject];
+    if ([currentLocation respondsToSelector:@selector(characterRange)]) {
+        return [currentLocation characterRange].location;
+    }
+
+    return UINT_MAX;
 }
 
 #pragma mark - NSObject
