@@ -242,7 +242,7 @@ describe(@"XMASObjcMethodDeclarationParser", ^{
         NSArray *methodDeclarations = [subject parseMethodDeclarationsFromTokens:translationUnit.tokens];
 
         it(@"should have a method declaration for each method", ^{
-            NSArray *expectedMethods = @[@"flashMessage:"];
+            NSArray *expectedMethods = @[@"initWithThis:", @"flashMessage:"];
             [methodDeclarations valueForKey:@"selectorString"] should equal(expectedMethods);
         });
     });

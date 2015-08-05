@@ -76,8 +76,7 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
     });
 
     describe(@"changeMethodDeclarationForSymbol:toMethod:", ^{
-
-        context(@"when the method specified can be found in the file provided", ^{
+        context(@"when the method specified is a simple objc method that receives parameters", ^{
             NSString *tempFixturePath = [TempFileHelper temporaryFilePathForFixture:@"RefactorMethodFixture" ofType:@"h"];
 
             beforeEach(^{
@@ -86,7 +85,7 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
 
                 XC(IDEIndexSymbol) symbol = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
                 symbol stub_method(@selector(file)).and_return(fakeDVTFilePath);
-                symbol stub_method(@selector(lineNumber)).and_return((NSUInteger)3);
+                symbol stub_method(@selector(lineNumber)).and_return((NSUInteger)4);
                 symbol stub_method(@selector(column)).and_return((NSUInteger)1);
 
                 NSArray *selectorComponents = @[@"flashMessage", @"duration"];
@@ -98,7 +97,7 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
                                                                                                                      parameters:parameters
                                                                                                                      returnType:@"void"
                                                                                                                           range:NSMakeRange(0, 0)
-                                                                                                                     lineNumber:3
+                                                                                                                     lineNumber:4
                                                                                                                    columnNumber:1];
 
                 [subject changeMethodDeclarationForSymbol:symbol toMethod:newMethodDeclaration];
@@ -106,6 +105,46 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
 
             it(@"should change the method declaration to match the new method", ^{
                 NSString *expectedFilePath = [[NSBundle mainBundle] pathForResource:@"RefactorMethodExpected" ofType:@"h"];
+                NSString *expectedFileContents = [NSString stringWithContentsOfFile:expectedFilePath
+                                                                           encoding:NSUTF8StringEncoding
+                                                                              error:nil];
+
+                NSString *refactoredFileContents = [NSString stringWithContentsOfFile:tempFixturePath
+                                                                             encoding:NSUTF8StringEncoding
+                                                                                error:nil];
+                refactoredFileContents should equal(expectedFileContents);
+            });
+        });
+
+        context(@"when the method specified is an a designated objc initializer", ^{
+            NSString *tempFixturePath = [TempFileHelper temporaryFilePathForFixture:@"RefactorMethodFixture" ofType:@"h"];
+
+            beforeEach(^{
+                XC(DVTFilePath) fakeDVTFilePath = nice_fake_for(@protocol(XCP(DVTFilePath)));
+                fakeDVTFilePath stub_method(@selector(pathString)).and_return(tempFixturePath);
+
+                XC(IDEIndexSymbol) symbol = nice_fake_for(@protocol(XCP(IDEIndexSymbol)));
+                symbol stub_method(@selector(file)).and_return(fakeDVTFilePath);
+                symbol stub_method(@selector(lineNumber)).and_return((NSUInteger)3);
+                symbol stub_method(@selector(column)).and_return((NSUInteger)1);
+
+                NSArray *selectorComponents = @[@"initWithThis", @"andThat"];
+                NSArray *parameters = @[
+                                        [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"id" localName:@"thisThing"],
+                                        [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"id<NSObject>" localName:@"thatThing"],
+                                        ];
+                XMASObjcMethodDeclaration *newMethodDeclaration = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:selectorComponents
+                                                                                                                     parameters:parameters
+                                                                                                                     returnType:@"instancetype"
+                                                                                                                          range:NSMakeRange(0, 0)
+                                                                                                                     lineNumber:3
+                                                                                                                   columnNumber:1];
+
+                [subject changeMethodDeclarationForSymbol:symbol toMethod:newMethodDeclaration];
+            });
+
+            it(@"should change the method declaration to match the new method", ^{
+                NSString *expectedFilePath = [[NSBundle mainBundle] pathForResource:@"RefactorMethodExpected2" ofType:@"h"];
                 NSString *expectedFileContents = [NSString stringWithContentsOfFile:expectedFilePath
                                                                            encoding:NSUTF8StringEncoding
                                                                               error:nil];

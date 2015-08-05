@@ -19,6 +19,12 @@
         while (i < tokens.count && [self isValidTokenInsideMethodDeclaration:tokens[i]]) {
             [methodDeclTokens addObject:tokens[i]];
             ++i;
+
+            BOOL atParamDecl = [[tokens[i-1] cursor] kind] == CKCursorKindParmDecl;
+            BOOL followedByMacroExpansion = [[tokens[i] cursor] kind] == CKCursorKindMacroExpansion;
+            if (atParamDecl && followedByMacroExpansion) {
+                break;
+            }
         }
 
         XMASObjcMethodDeclaration *selector = [[XMASObjcMethodDeclaration alloc] initWithTokens:methodDeclTokens];
