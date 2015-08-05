@@ -182,6 +182,8 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.raiseComponentButton.enabled = NO;
     self.lowerComponentButton.enabled = NO;
 
+    self.refactorButton.bezelStyle = NSRoundedBezelStyle;
+
     self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
 
     [self.window makeKeyAndOrderFront:NSApp];

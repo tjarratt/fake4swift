@@ -408,6 +408,13 @@ describe(@"XMASChangeMethodSignatureController", ^{
                     });
                 });
 
+                describe(@"the refactor button", ^{
+                    it(@"should be the default button", ^{
+                        subject.refactorButton.bezelStyle should equal(NSRoundedBezelStyle);
+                        subject.refactorButton.keyEquivalent should equal(@"\r");
+                    });
+                });
+
                 describe(@"clicking the 'remove component' button", ^{
                     context(@"when a row is selected", ^{
                         beforeEach(^{

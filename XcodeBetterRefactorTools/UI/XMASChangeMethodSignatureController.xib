@@ -21,11 +21,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="215"/>
+            <rect key="frame" x="0.0" y="0.0" width="525" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="waD-No-LNc" userLabel="tableview">
-                    <rect key="frame" x="0.0" y="170" width="480" height="45"/>
+                    <rect key="frame" x="0.0" y="170" width="525" height="45"/>
                     <clipView key="contentView" id="qzr-KE-okC">
                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,63 +155,66 @@
                     </tableHeaderView>
                 </scrollView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="plm-bO-BKK" userLabel="Buttons Container">
-                    <rect key="frame" x="0.0" y="120" width="480" height="50"/>
+                    <rect key="frame" x="0.0" y="120" width="525" height="50"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xK7-ya-L3N" userLabel="Add Button">
-                            <rect key="frame" x="10" y="15" width="22" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="+" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pia-Pf-5Te">
+                            <rect key="frame" x="8" y="10" width="33" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="+" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pia-Pf-5Te">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapAdd:" target="-2" id="FOa-6X-y9v"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O8e-TK-dIk" userLabel="Remove button">
-                            <rect key="frame" x="37" y="15" width="20" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="-" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PNe-cC-nZM">
+                            <rect key="frame" x="42" y="10" width="30" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="-" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PNe-cC-nZM">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapRemove:" target="-2" id="hVf-0y-Cgo"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTM-Xd-lSr">
-                            <rect key="frame" x="65" y="15" width="26" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="▲" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efg-7d-ZvE">
+                            <rect key="frame" x="76" y="10" width="37" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="▲" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efg-7d-ZvE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapMoveUp:" target="-2" id="PWY-Qf-Ibm"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-qd-rOH">
-                            <rect key="frame" x="99" y="15" width="26" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="▼" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I1H-v0-9WB">
+                            <rect key="frame" x="117" y="10" width="37" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="▼" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I1H-v0-9WB">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapMoveDown:" target="-2" id="B2t-8n-OzA"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yg-fK-Hgs">
-                            <rect key="frame" x="341" y="15" width="52" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="cancel" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="INB-HD-Cny">
+                            <rect key="frame" x="366" y="10" width="65" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="cancel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="INB-HD-Cny">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapCancel:" target="-2" id="6Nx-2C-Je8"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jJb-Xj-hSE">
-                            <rect key="frame" x="401" y="15" width="59" height="19"/>
-                            <buttonCell key="cell" type="roundRect" title="refactor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xD-14-mNS">
+                            <rect key="frame" x="435" y="10" width="72" height="29"/>
+                            <buttonCell key="cell" type="bevel" title="refactor" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xD-14-mNS">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
+                                <font key="font" metaFont="system"/>
+                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapRefactor:" target="-2" id="DtG-rd-tQ1"/>
@@ -236,10 +239,10 @@
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="ph0-kD-b3k" userLabel="PreviewContainer">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="120"/>
+                    <rect key="frame" x="0.0" y="0.0" width="525" height="120"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I2c-k9-h7P">
-                            <rect key="frame" x="10" y="12" width="460" height="96"/>
+                            <rect key="frame" x="10" y="12" width="505" height="96"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Ceci n'est pas un placeholder" id="mRJ-Tw-mOV">
                                 <font key="font" size="13" name="Menlo-Regular"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -268,7 +271,7 @@
                 <constraint firstAttribute="trailing" secondItem="ph0-kD-b3k" secondAttribute="trailing" id="s74-My-8YU"/>
                 <constraint firstItem="ph0-kD-b3k" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="sav-fL-F2v"/>
             </constraints>
-            <point key="canvasLocation" x="-180" y="156.5"/>
+            <point key="canvasLocation" x="-684.5" y="137.5"/>
         </customView>
     </objects>
 </document>
