@@ -2,6 +2,7 @@
 #import "XcodeInterfaces.h"
 
 @class XMASAlert;
+@class XMASTokenizer;
 @class XMASObjcMethodCallParser;
 @class XMASObjcMethodDeclaration;
 @class XMASObjcCallExpressionStringWriter;
@@ -11,8 +12,10 @@
 @property (nonatomic, readonly) XMASObjcMethodCallParser *methodCallParser;
 
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
+                      tokenizer:(XMASTokenizer *)tokenizer
            callExpressionParser:(XMASObjcMethodCallParser *)callExpressionParser
      callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter NS_DESIGNATED_INITIALIZER;
+
 - (void)changeCallsite:(XC(IDEIndexSymbol))callsite
             fromMethod:(XMASObjcMethodDeclaration *)oldSelector
            toNewMethod:(XMASObjcMethodDeclaration *)newSelector;

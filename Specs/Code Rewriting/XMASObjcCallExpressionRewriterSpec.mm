@@ -7,6 +7,8 @@
 #import "XMASObjcMethodCallParser.h"
 #import "XMASAlert.h"
 #import "TempFileHelper.h"
+#import "XMASTokenizer.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,16 +19,22 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
     __block XMASObjcCallExpressionRewriter *subject;
 
     __block XMASAlert *alerter;
+    __block XMASTokenizer *tokenizer;
     __block XMASObjcMethodCallParser *callExpressionParser;
     __block XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter;
     __block XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
+        XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+        tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
+
         callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
         callExpressionParser = [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:callExpressionTokenFilter];
         callExpressionStringWriter = [[XMASObjcCallExpressionStringWriter alloc] init];
+
         subject = [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:alerter
+                                                                tokenizer:tokenizer
                                                      callExpressionParser:callExpressionParser
                                                callExpressionStringWriter:callExpressionStringWriter];
     });

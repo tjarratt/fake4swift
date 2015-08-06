@@ -2,6 +2,7 @@
 #import "XMASChangeMethodSignatureController.h"
 
 @class XMASAlert;
+@class XMASTokenizer;
 @class XMASObjcMethodDeclarationParser;
 @class XMASChangeMethodSignatureControllerProvider;
 
@@ -12,6 +13,7 @@ extern NSString * const noMethodSelected;
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
+                      tokenizer:(XMASTokenizer *)tokenizer
              controllerProvider:(XMASChangeMethodSignatureControllerProvider *)contollerProvider
                methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
 

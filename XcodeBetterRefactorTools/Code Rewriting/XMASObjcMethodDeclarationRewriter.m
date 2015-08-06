@@ -4,9 +4,11 @@
 #import "XMASObjcMethodDeclarationParser.h"
 #import <ClangKit/ClangKit.h>
 #import "XMASAlert.h"
+#import "XMASTokenizer.h"
 
 @interface XMASObjcMethodDeclarationRewriter ()
 @property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclarationParser;
 @property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 @end
@@ -15,9 +17,11 @@
 
 - (instancetype)initWithMethodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
                               methodDeclarationParser:(XMASObjcMethodDeclarationParser *)methodDeclarationParser
+                                            tokenizer:(XMASTokenizer *)tokenizer
                                               alerter:(XMASAlert *)alerter {
     if (self = [super init]) {
         self.alerter = alerter;
+        self.tokenizer = tokenizer;
         self.methodDeclarationStringWriter = methodDeclarationStringWriter;
         self.methodDeclarationParser = methodDeclarationParser;
     }
@@ -44,9 +48,7 @@
 - (void)changeMethodDeclarationForSymbol:(XC(IDEIndexSymbol))symbol
                                 toMethod:(XMASObjcMethodDeclaration *)newMethodDeclaration {
     NSString *fileToRewrite = symbol.file.pathString;
-    NSArray *tokens = [[CKTranslationUnit translationUnitWithText:[NSString stringWithContentsOfFile:fileToRewrite
-                                                                                            encoding:NSUTF8StringEncoding
-                                                                                               error:nil] language:CKLanguageObjCPP] tokens];
+    NSArray *tokens = [self.tokenizer tokensForFilePath:fileToRewrite];
     NSArray *methodDeclarationsInFile = [self.methodDeclarationParser parseMethodDeclarationsFromTokens:tokens];
 
     XMASObjcMethodDeclaration *methodDeclarationToRewrite;

@@ -1,5 +1,4 @@
 #import "XMASRefactorMethodAction.h"
-#import <ClangKit/ClangKit.h>
 #import "XMASAlert.h"
 #import "XcodeInterfaces.h"
 #import "XMASObjcMethodDeclaration.h"
@@ -7,8 +6,7 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASXcode.h"
-#import <objc/runtime.h>
-#import "XMASXcodeTargetSearchPathResolver.h"
+#import <objc/runtime.h> // FIXME :: this should be removed eventually
 #import "XMASTokenizer.h"
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
@@ -16,6 +14,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 @interface XMASRefactorMethodAction () <XMASChangeMethodSignatureControllerDelegate>
 @property (nonatomic) id currentEditor;
 @property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclParser;
 
@@ -26,12 +25,14 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 @implementation XMASRefactorMethodAction
 
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
+                      tokenizer:(XMASTokenizer *)tokenizer
              controllerProvider:(XMASChangeMethodSignatureControllerProvider *)controllerProvider
                methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser {
     if (self = [super init]) {
         self.alerter = alerter;
-        self.controllerProvider = controllerProvider;
+        self.tokenizer = tokenizer;
         self.methodDeclParser = methodDeclParser;
+        self.controllerProvider = controllerProvider;
     }
 
     return self;
@@ -43,8 +44,6 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 - (void)hackyGetClangArgsForBuildables {
     XC(Workspace) workspace = [XMASXcode currentWorkspace];
-
-    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
 
     for (id target in [workspace referencedBlueprints]) {
         unsigned int countOfMethods = 0;
@@ -61,7 +60,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 //        NSLog(@"================> %@", [target allBuildFileReferences]);
 
         // maybe this will give us the header search paths ???
-        NSLog(@"================> %@", [searchPathResolver effectiveHeaderSearchPathsForTarget:target]);
+//        NSLog(@"================> %@", [searchPathResolver effectiveHeaderSearchPathsForTarget:target]);
 
         // inspecting build context, trying to find -I and -F flags
         countOfMethods = 0;
@@ -148,18 +147,9 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     NSUInteger cursorLocation = [self cursorLocation];
     NSString *currentFilePath = [self currentSourceCodeFilePath];
 
-    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
-    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
-
-    NSArray *tokens = [tokenizer tokensForFilePath:currentFilePath];
+    NSArray *tokens = [self.tokenizer tokensForFilePath:currentFilePath];
     NSLog(@"================> tokens from our brand new tokenizer :: %@", tokens);
-
-    NSString *currentFileContents = [NSString stringWithContentsOfFile:currentFilePath
-                                                              encoding:NSUTF8StringEncoding
-                                                                 error:nil];
-    CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:currentFileContents
-                                                                           language:CKLanguageObjCPP];
-    NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:translationUnit.tokens];
+    NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:tokens];
 
     XMASObjcMethodDeclaration *selectedMethod;
     for (XMASObjcMethodDeclaration *selector in selectors) {

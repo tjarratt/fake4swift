@@ -3,6 +3,8 @@
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASRefactorMethodAction.h"
+#import "XMASTokenizer.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
 
 static XMASRefactorMethodAction *action;
 
@@ -17,8 +19,12 @@ static XMASRefactorMethodAction *action;
         [action setupWithEditor:editor];
         return action;
     }
+
+    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
     
     action = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter
+                                                     tokenizer:tokenizer
                                             controllerProvider:controllerProvider
                                               methodDeclParser:methodDeclParser];
 

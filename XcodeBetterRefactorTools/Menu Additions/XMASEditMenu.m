@@ -13,6 +13,8 @@
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
+#import "XMASTokenizer.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
 
 @interface XMASEditMenu ()
 @property (nonatomic) XMASRefactorMethodActionProvider *actionProvider;
@@ -53,8 +55,10 @@
 - (void)refactorCurrentMethodAction:(id)sender {
     id editor = [XMASXcode currentEditor];
     XMASAlert *alerter = [[XMASAlert alloc] init];
-    XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
+    XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
+    XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
 
     XMASMethodOccurrencesRepository *methodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
 
@@ -65,8 +69,11 @@
     XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter = [[XMASObjcMethodDeclarationStringWriter alloc] init];
     XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter = [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:methodDeclarationStringWriter
                                                                                                                             methodDeclarationParser:methodDeclParser
+                                                                                                                                          tokenizer:tokenizer
                                                                                                                                             alerter:alerter];
+
     XMASObjcCallExpressionRewriter *callExpressionRewriter = [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:alerter
+                                                                                                           tokenizer:tokenizer
                                                                                                 callExpressionParser:methodCallParser
                                                                                           callExpressionStringWriter:callExpressionStringWriter];
 

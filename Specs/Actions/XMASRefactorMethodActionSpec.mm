@@ -1,5 +1,4 @@
 #import <Cedar/Cedar.h>
-#import <ClangKit/ClangKit.h>
 #import "XMASRefactorMethodAction.h"
 #import "XcodeInterfaces.h"
 #import "XMASObjcMethodDeclarationParser.h"
@@ -7,6 +6,7 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASAlert.h"
+#import "XMASTokenizer.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,6 +17,7 @@ describe(@"XMASRefactorMethodAction", ^{
     __block XMASRefactorMethodAction *subject;
     __block id editor;
     __block XMASAlert *alerter;
+    __block XMASTokenizer *tokenizer;
     __block XMASObjcMethodDeclarationParser *methodDeclParser;
     __block NSRange cursorRange;
     __block XMASChangeMethodSignatureControllerProvider *controllerProvider;
@@ -24,15 +25,17 @@ describe(@"XMASRefactorMethodAction", ^{
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
         editor = nice_fake_for(@protocol(XCP(IDESourceCodeEditor)));
+        tokenizer = nice_fake_for([XMASTokenizer class]);
         controllerProvider = nice_fake_for([XMASChangeMethodSignatureControllerProvider class]);
         methodDeclParser = nice_fake_for([XMASObjcMethodDeclarationParser class]);
         subject = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter
+                                                          tokenizer:tokenizer
                                                  controllerProvider:controllerProvider
                                                    methodDeclParser:methodDeclParser];
         [subject setupWithEditor:editor];
     });
 
-    __block XMASObjcMethodDeclaration *selector;
+    __block XMASObjcMethodDeclaration *methodDeclaration;
 
     void (^refactorMethodUnderCursor)() = ^void() {
         NSURL *fileURL = [[NSURL alloc] initWithString:@"file:///tmp/fixture.swift"];
@@ -41,20 +44,16 @@ describe(@"XMASRefactorMethodAction", ^{
         editor stub_method(@selector(sourceCodeDocument)).and_return(sourceCodeDocument);
 
         NSArray *tokens = @[];
-        CKTranslationUnit *translationUnit = nice_fake_for([CKTranslationUnit class]);
-        translationUnit stub_method(@selector(tokens)).and_return(tokens);
-        spy_on([CKTranslationUnit class]);
-        [CKTranslationUnit class] stub_method(@selector(translationUnitWithPath:))
+        tokenizer stub_method(@selector(tokensForFilePath:))
             .with(@"/tmp/fixture.swift")
-            .and_return(translationUnit);
+            .and_return(tokens);
 
-        selector = nice_fake_for([XMASObjcMethodDeclaration class]);
-        selector stub_method(@selector(range)).and_return(NSMakeRange(5, 15));
-        selector stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
-        NSArray *methodDeclarations = @[selector];
+        methodDeclaration = nice_fake_for([XMASObjcMethodDeclaration class]);
+        methodDeclaration stub_method(@selector(range)).and_return(NSMakeRange(5, 15));
+        methodDeclaration stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
         methodDeclParser stub_method(@selector(parseMethodDeclarationsFromTokens:))
             .with(tokens)
-            .and_return(methodDeclarations);
+            .and_return(@[methodDeclaration]);
 
         id location = nice_fake_for(@protocol(XCP(DVTTextDocumentLocation)));
         location stub_method(@selector(characterRange)).and_return(cursorRange);
@@ -86,7 +85,7 @@ describe(@"XMASRefactorMethodAction", ^{
 
         it(@"should present a change method signature controller", ^{
             controller should have_received(@selector(refactorMethod:inFile:))
-                .with(selector)
+                .with(methodDeclaration)
                 .and_with(@"/tmp/fixture.swift");
         });
 
@@ -112,10 +111,6 @@ describe(@"XMASRefactorMethodAction", ^{
         beforeEach(^{
             cursorRange = NSMakeRange(100, 1);
             refactorMethodUnderCursor();
-        });
-
-        afterEach(^{
-            stop_spying_on([CKTranslationUnit class]);
         });
 
         it(@"alert the user", ^{

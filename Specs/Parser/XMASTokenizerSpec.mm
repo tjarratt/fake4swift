@@ -20,8 +20,6 @@ describe(@"XMASTokenizer", ^{
                                                                     ofType:@"h"
                                                withContainingDirectoryPath:@"Cedar.framework/Headers"];
 
-    NSArray *args = @[[@"-F" stringByAppendingString:fakeHeaderPath]];
-
     beforeEach(^{
         spy_on([XMASXcode class]);
     });
@@ -42,6 +40,7 @@ describe(@"XMASTokenizer", ^{
 
         [XMASXcode class] stub_method(@selector(targetsInCurrentWorkspace)).and_return(@[someOtherTarget, theCorrectTarget]);
 
+        NSArray *args = @[[@"-F" stringByAppendingString:fakeHeaderPath]];
         targetSearchPathResolver = nice_fake_for([XMASXcodeTargetSearchPathResolver class]);
         targetSearchPathResolver stub_method(@selector(effectiveHeaderSearchPathsForTarget:))
             .with(theCorrectTarget)

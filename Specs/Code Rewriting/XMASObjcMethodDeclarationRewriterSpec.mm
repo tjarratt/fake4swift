@@ -7,6 +7,8 @@
 #import "XcodeInterfaces.h"
 #import "TempFileHelper.h"
 #import "XMASAlert.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASTokenizer.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -21,10 +23,14 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
+        XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+        XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+
         methodDeclarationParser = [[XMASObjcMethodDeclarationParser alloc] init];
         methodDeclarationStringWriter = [[XMASObjcMethodDeclarationStringWriter alloc] init];
         subject = [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:methodDeclarationStringWriter
                                                                            methodDeclarationParser:methodDeclarationParser
+                                                                                         tokenizer:tokenizer
                                                                                            alerter:alerter];
     });
 

@@ -22,7 +22,7 @@
     for (id target in [XMASXcode targetsInCurrentWorkspace]) {
         NSArray *buildFileReferences = [target allBuildFileReferences];
         if ([[buildFileReferences valueForKeyPath:@"resolvedFilePath.pathString"] containsObject:filePath]) {
-            searchPathsForFile = [self.searchPathResolver effectiveHeaderSearchPathsForTarget:target]; // IS THIS THE RIGHT TYPE?
+            searchPathsForFile = [self.searchPathResolver effectiveHeaderSearchPathsForTarget:target];
         }
     }
 

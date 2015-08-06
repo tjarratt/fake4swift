@@ -6,14 +6,14 @@
 @end
 
 @interface FakeDVTFilePath ()
-@property (nonatomic) NSString *filePath;
+@property (nonatomic) NSString *pathString;
 @end
 
 @implementation FakeDVTFilePath
 
-- (instancetype)initWithFilePath:(NSString *)filePath {
+- (instancetype)initWithFilePath:(NSString *)pathString {
     if (self = [super init]) {
-        self.filePath = filePath;
+        self.pathString = pathString;
     }
     return self;
 }

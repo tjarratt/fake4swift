@@ -1,15 +1,16 @@
 #import "XMASObjcCallExpressionRewriter.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodCallParser.h"
-#import <ClangKit/ClangKit.h>
 #import "XcodeInterfaces.h"
 #import "XMASObjcMethodCall.h"
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcCallExpressionStringWriter.h"
+#import "XMASTokenizer.h"
 
 @interface XMASObjcCallExpressionRewriter ()
 @property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASObjcMethodCallParser *methodCallParser;
 @property (nonatomic) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
 @end
@@ -17,10 +18,12 @@
 @implementation XMASObjcCallExpressionRewriter
 
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
+                      tokenizer:(XMASTokenizer *)tokenizer
            callExpressionParser:(XMASObjcMethodCallParser *)callExpressionParser
      callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter {
     if (self = [super init]) {
         self.alerter = alerter;
+        self.tokenizer = tokenizer;
         self.methodCallParser = callExpressionParser;
         self.callExpressionStringWriter = callExpressionStringWriter;
     }
@@ -32,12 +35,7 @@
             fromMethod:(XMASObjcMethodDeclaration *)oldSelector
            toNewMethod:(XMASObjcMethodDeclaration *)newSelector {
 
-    // CONSIDER :: should we have a (singleton-provided) object that handles read access to tokens for a given file?
-    // (this would be a good use case for a monostate, quite possibly)
-    NSString *fileContents = [NSString stringWithContentsOfFile:callsite.file.pathString
-                                                       encoding:NSUTF8StringEncoding
-                                                          error:nil];
-    NSArray *tokens = [[CKTranslationUnit translationUnitWithText:fileContents language:CKLanguageObjCPP] tokens];
+    NSArray *tokens = [self.tokenizer tokensForFilePath:callsite.file.pathString];
     [self.methodCallParser setupWithSelectorToMatch:oldSelector.selectorString
                                            filePath:callsite.file.pathString
                                           andTokens:tokens];
