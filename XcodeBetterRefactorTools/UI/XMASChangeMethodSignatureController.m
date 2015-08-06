@@ -212,11 +212,15 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     if ([tableColumn.identifier isEqualToString:@"selector"]) {
         textField.stringValue = self.method.components[(NSUInteger)row];
     } else if ([tableColumn.identifier isEqualToString:@"parameterType"]) {
-        XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
-        textField.stringValue = param.type;
+        if (row < self.method.parameters.count) {
+            XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
+            textField.stringValue = param.type;
+        }
     } else {
-        XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
-        textField.stringValue = param.localName;
+        if (row < self.method.parameters.count) {
+            XMASObjcMethodDeclarationParameter *param = self.method.parameters[(NSUInteger)row];
+            textField.stringValue = param.localName;
+        }
     }
 
     return textField;

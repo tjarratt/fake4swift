@@ -548,6 +548,63 @@ describe(@"XMASChangeMethodSignatureController", ^{
         });
     });
 
+    describe(@"refactoring a method with no parameters", ^{
+        __block XMASObjcMethodDeclaration *method;
+        __block NSString *filepath;
+
+        beforeEach(^{
+            NSArray *components = @[@"viewDidLoad"];
+            method = [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:components
+                                                                        parameters:@[]
+                                                                        returnType:@"void"
+                                                                             range:NSMakeRange(0, 0)
+                                                                        lineNumber:0
+                                                                      columnNumber:0];
+
+            filepath = @"/tmp/imagine.all.the.people";
+            [subject refactorMethod:method inFile:filepath];
+        });
+
+        itShouldResizeitsTableView();
+
+        describe(@"its tableview", ^{
+            it(@"should have a datasource and delegate", ^{
+                subject.tableView.delegate should be_same_instance_as(subject);
+                subject.tableView.dataSource should be_same_instance_as(subject);
+            });
+
+            it(@"should have one row", ^{
+                subject.tableView.numberOfRows should equal(1);
+            });
+
+            it(@"should have three columns", ^{
+                subject.tableView.numberOfColumns should equal(3);
+            });
+
+            describe(@"the first row", ^{
+                it(@"should have the correct cell contents", ^{
+                    NSTableColumn *firstColumn = subject.tableView.tableColumns.firstObject;
+                    NSTextField *firstRowFirstColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                              viewForTableColumn:firstColumn
+                                                                                             row:0];
+                    firstRowFirstColumn.stringValue should equal(@"viewDidLoad");
+
+                    NSTableColumn *secondColumn = subject.tableView.tableColumns[1];
+                    NSTextField *firstRowSecondColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                               viewForTableColumn:secondColumn
+                                                                                              row:0];
+                    firstRowSecondColumn.stringValue should equal(@"");
+
+                    NSTableColumn *thirdColumn = subject.tableView.tableColumns[2];
+                    NSTextField *firstRowThirdColumn = (id)[subject.tableView.delegate tableView:subject.tableView
+                                                                              viewForTableColumn:thirdColumn
+                                                                                             row:0];
+                    firstRowThirdColumn.stringValue should equal(@"");
+                });
+            });
+        });
+    });
+
     describe(@"clicking the cancel button", ^{
         beforeEach(^{
             subject.view should_not be_nil;
