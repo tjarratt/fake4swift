@@ -35,17 +35,53 @@ describe(@"XMASObjcMethodDeclarationStringWriter", ^{
     });
 
     describe(@"-formatInstanceMethodDeclaration:", ^{
-        __block NSString *instanceMethodString;
-
-        beforeEach(^{
-            instanceMethodString = [subject formatInstanceMethodDeclaration:methodDeclaration];
-        });
-
         it(@"should construct the correct declaration for the provided instance method", ^{
+            NSString *result = [subject formatInstanceMethodDeclaration:methodDeclaration];
+
             NSString *expectedString = @"- (void)setupWithName:(NSString *)name\n"
             @"           floatValue:(CGFloat)floatValue\n"
             @"             barValue:(Bar *)barValue";
-            instanceMethodString should equal(expectedString);
+            result should equal(expectedString);
+        });
+
+        it(@"should construct the correct declaration for a method with empty parameter values", ^{
+            XMASObjcMethodDeclarationParameter *emptyParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"" localName:@""];
+            methodDeclaration stub_method(@selector(components)).again().and_return(@[@"setupWithName"]);
+            methodDeclaration stub_method(@selector(parameters)).again().and_return(@[emptyParameter]);
+
+            NSString *result = [subject formatInstanceMethodDeclaration:methodDeclaration];
+
+            result should equal(@"- (void)setupWithName");
+        });
+
+        it(@"should construct the correct declaration for a method without any parameters at all", ^{
+            XMASObjcMethodDeclarationParameter *emptyParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:nil localName:nil];
+            methodDeclaration stub_method(@selector(components)).again().and_return(@[@"setupWithName"]);
+            methodDeclaration stub_method(@selector(parameters)).again().and_return(@[emptyParameter]);
+
+            NSString *result = [subject formatInstanceMethodDeclaration:methodDeclaration];
+
+            result should equal(@"- (void)setupWithName");
+        });
+
+        it(@"should construct the correct declaration for a method with a parameter type but no local name", ^{
+            XMASObjcMethodDeclarationParameter *emptyParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:@"NSString *" localName:nil];
+            methodDeclaration stub_method(@selector(components)).again().and_return(@[@"setupWithName"]);
+            methodDeclaration stub_method(@selector(parameters)).again().and_return(@[emptyParameter]);
+
+            NSString *result = [subject formatInstanceMethodDeclaration:methodDeclaration];
+
+            result should equal(@"- (void)setupWithName:(NSString *)");
+        });
+
+        it(@"should construct the correct declaration for a method with a local name but no parameter type", ^{
+            XMASObjcMethodDeclarationParameter *emptyParameter = [[XMASObjcMethodDeclarationParameter alloc] initWithType:nil localName:@"name"];
+            methodDeclaration stub_method(@selector(components)).again().and_return(@[@"setupWithName"]);
+            methodDeclaration stub_method(@selector(parameters)).again().and_return(@[emptyParameter]);
+
+            NSString *result = [subject formatInstanceMethodDeclaration:methodDeclaration];
+
+            result should equal(@"- (void)setupWithName:()name");
         });
     });
 });

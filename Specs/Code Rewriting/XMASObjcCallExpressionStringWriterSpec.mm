@@ -39,20 +39,28 @@ describe(@"XMASObjcCallExpressionStringWriter", ^{
     });
 
     describe(@"-callExpression:forTarget:withArgs:atColumn:", ^{
-        __block NSString *callExpressionString;
-
-        beforeEach(^{
-            callExpressionString = [subject callExpression:methodDeclaration
-                                                 forTarget:@"[Foo myFoo]"
-                                                  withArgs:args
-                                                  atColumn:13];
+        it(@"should construct the correct string for a method with parameters", ^{
+            NSString *callExpressionString = [subject callExpression:methodDeclaration
+                                                           forTarget:@"[Foo myFoo]"
+                                                            withArgs:args
+                                                            atColumn:13];
+            NSString *expectedString = @"[[Foo myFoo] setupWithName:nil\n"
+            @"               floatValue:1.0f\n"
+            @"                 barValue:[Bar myBar]]";
+            callExpressionString should equal(expectedString);
         });
 
-        it(@"should construct the correct call expression string", ^{
-            NSString *expectedString = @"[[Foo myFoo] setupWithName:nil\n"
-                                       @"               floatValue:1.0f\n"
-                                       @"                 barValue:[Bar myBar]]";
-            callExpressionString should equal(expectedString);
+        it(@"should construct the correct string with a method without parameters", ^{
+            methodDeclaration stub_method(@selector(components)).again().and_return(@[@"setupWithName"]);
+            methodDeclaration stub_method(@selector(parameters)).again().and_return(@[]);
+
+            NSString *result = [subject callExpression:methodDeclaration
+                                             forTarget:@"subject"
+                                              withArgs:@[]
+                                              atColumn:13];
+
+            NSString *expectedString = @"[subject setupWithName]";
+            result should equal(expectedString);
         });
     });
 });
