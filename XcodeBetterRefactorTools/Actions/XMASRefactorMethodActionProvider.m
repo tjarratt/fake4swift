@@ -5,6 +5,7 @@
 #import "XMASRefactorMethodAction.h"
 #import "XMASTokenizer.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASSearchPathExpander.h"
 
 static XMASRefactorMethodAction *action;
 
@@ -20,7 +21,9 @@ static XMASRefactorMethodAction *action;
         return action;
     }
 
-    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+
+    XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
+    XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
     XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
     
     action = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter

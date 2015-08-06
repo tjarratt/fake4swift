@@ -1,14 +1,40 @@
 #import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASSearchPathExpander.h"
+
+@interface XMASXcodeTargetSearchPathResolver ()
+@property (nonatomic) XMASSearchPathExpander *pathExpander;
+@end
 
 @implementation XMASXcodeTargetSearchPathResolver
 
-- (NSArray *)effectiveHeaderSearchPathsForTarget:(id)target {
-    id targetBuildContext = [target valueForKey:@"targetBuildContext"];
-    NSDictionary * effectiveSearchPaths = [targetBuildContext valueForKey:@"effectiveSearchPaths"];
-    NSArray *searchPathValues = [effectiveSearchPaths allValues];
+- (instancetype)initWithPathExpander:(XMASSearchPathExpander *)pathExpander {
+    if (self = [super init]) {
+        self.pathExpander = pathExpander;
+    }
 
-    // get the array representation from each XCStringList and flatten the nested arrays
-    return [[searchPathValues valueForKey:@"arrayRepresentation"] valueForKeyPath:@"@unionOfArrays.self"];
+    return self;
+}
+
+- (NSArray *)effectiveHeaderSearchPathsForTarget:(XC(PBXTargetBuildContext))target {
+    id targetBuildContext = [(id)target valueForKey:@"targetBuildContext"];
+    NSDictionary * effectiveSearchPaths = [targetBuildContext valueForKey:@"effectiveSearchPaths"];
+
+    NSMutableArray *paths = [NSMutableArray array];
+    for (NSString *rootPathKey in effectiveSearchPaths) {
+        NSArray *expandedSearchPaths = [self.pathExpander expandSearchPaths:effectiveSearchPaths[rootPathKey]
+                                                                forRootPath:rootPathKey];
+        [paths addObjectsFromArray:expandedSearchPaths];
+    }
+
+    return paths;
+}
+
+
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 @end

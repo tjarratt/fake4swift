@@ -15,6 +15,7 @@
 #import "XMASObjcMethodDeclarationStringWriter.h"
 #import "XMASTokenizer.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASSearchPathExpander.h"
 
 @interface XMASEditMenu ()
 @property (nonatomic) XMASRefactorMethodActionProvider *actionProvider;
@@ -57,7 +58,8 @@
     XMASAlert *alerter = [[XMASAlert alloc] init];
     XMASWindowProvider *windowProvider = [[XMASWindowProvider alloc] init];
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
-    XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] init];
+    XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
+    XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
     XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
 
     XMASMethodOccurrencesRepository *methodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
