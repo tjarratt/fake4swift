@@ -40,7 +40,7 @@ describe(@"XMASTokenizer", ^{
 
         [XMASXcode class] stub_method(@selector(targetsInCurrentWorkspace)).and_return(@[someOtherTarget, theCorrectTarget]);
 
-        NSArray *args = @[[@"-F" stringByAppendingString:fakeHeaderPath]];
+        NSArray *args = @[fakeHeaderPath];
         targetSearchPathResolver = nice_fake_for([XMASXcodeTargetSearchPathResolver class]);
         targetSearchPathResolver stub_method(@selector(effectiveHeaderSearchPathsForTarget:))
             .with(theCorrectTarget)
@@ -57,7 +57,7 @@ describe(@"XMASTokenizer", ^{
     });
 
     context(@"for Obj-C++ files with macros", ^{
-        fit(@"should return tokens for file of the given path", ^{
+        it(@"should return tokens for file of the given path", ^{
             NSArray *tokens = [subject tokensForFilePath:objcPlusPlusFixturePath];
             [tokens valueForKeyPath:@"cursor.kindSpelling"] should contain(@"ObjCImplementationDecl");
         });

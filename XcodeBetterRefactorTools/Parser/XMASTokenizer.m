@@ -19,6 +19,7 @@
 
 - (NSArray *)tokensForFilePath:(NSString *)filePath {
     NSArray *searchPathsForFile = @[];
+
     for (id target in [XMASXcode targetsInCurrentWorkspace]) {
         NSArray *buildFileReferences = [target allBuildFileReferences];
         if ([[buildFileReferences valueForKeyPath:@"resolvedFilePath.pathString"] containsObject:filePath]) {
@@ -26,14 +27,27 @@
         }
     }
 
+    NSArray *args = [self argsForClangKitFromSearchPaths:searchPathsForFile];
 
     NSString *fileContents = [NSString stringWithContentsOfFile:filePath
                                                               encoding:NSUTF8StringEncoding
                                                                  error:nil];
     CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:fileContents
                                                                            language:CKLanguageObjCPP
-                                                                               args:searchPathsForFile];
+                                                                               args:args];
     return translationUnit.tokens;
+}
+
+#pragma mark - Private
+
+- (NSArray *)argsForClangKitFromSearchPaths:(NSArray *)searchPaths {
+    NSMutableArray *args = [NSMutableArray arrayWithCapacity:searchPaths.count * 2];
+    for (NSString *path in searchPaths) {
+        [args addObject:[@"-F" stringByAppendingString:path]];
+        [args addObject:[@"-I" stringByAppendingString:path]];
+    }
+
+    return [args copy];
 }
 
 #pragma mark - NSObject
