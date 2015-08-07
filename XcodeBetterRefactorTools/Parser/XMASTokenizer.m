@@ -32,6 +32,7 @@
     NSString *fileContents = [NSString stringWithContentsOfFile:filePath
                                                               encoding:NSUTF8StringEncoding
                                                                  error:nil];
+
     CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:fileContents
                                                                            language:CKLanguageObjCPP
                                                                                args:args];
