@@ -148,7 +148,6 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     NSString *currentFilePath = [self currentSourceCodeFilePath];
 
     NSArray *tokens = [self.tokenizer tokensForFilePath:currentFilePath];
-    NSLog(@"================> tokens from our brand new tokenizer :: %@", tokens);
     NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:tokens];
 
     XMASObjcMethodDeclaration *selectedMethod;
