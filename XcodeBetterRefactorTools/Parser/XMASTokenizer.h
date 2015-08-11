@@ -4,7 +4,8 @@
 
 @interface XMASTokenizer : NSObject
 
-- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver
+                                             foo:(id)foo NS_DESIGNATED_INITIALIZER;
 
 - (NSArray *)tokensForFilePath:(NSString *)filePath;
 

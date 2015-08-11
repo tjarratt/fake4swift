@@ -24,7 +24,8 @@ static XMASRefactorMethodAction *action;
 
     XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
     XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
-    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver
+                                                                                   foo:nil];
     
     action = [[XMASRefactorMethodAction alloc] initWithAlerter:alerter
                                                      tokenizer:tokenizer

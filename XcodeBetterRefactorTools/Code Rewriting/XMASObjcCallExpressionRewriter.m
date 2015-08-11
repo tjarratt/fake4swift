@@ -40,10 +40,9 @@
                                            filePath:callsite.file.pathString
                                           andTokens:tokens];
 
-    NSArray *callExpressionsMatchingSelector = [self.methodCallParser matchingCallExpressions];
-    NSLog(@"================> found %lu call exprs matching %@ in %@", callExpressionsMatchingSelector.count, oldSelector.selectorString, callsite.file.pathString);
-
     XMASObjcMethodCall *callExpressionToRewrite;
+    NSArray *callExpressionsMatchingSelector = [self.methodCallParser matchingCallExpressions];
+
     for (XMASObjcMethodCall *callExpression in callExpressionsMatchingSelector) {
         BOOL matchingLineNumber = callExpression.lineNumber == callsite.lineNumber;
         BOOL matchingColumnNumber = callExpression.columnNumber == callsite.column;

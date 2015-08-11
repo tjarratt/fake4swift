@@ -60,7 +60,8 @@
     XMASObjcMethodDeclarationParser *methodDeclParser = [[XMASObjcMethodDeclarationParser alloc] init];
     XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
     XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
-    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver
+                                                                                   foo:nil];
 
     XMASMethodOccurrencesRepository *methodOccurrencesRepository = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
 

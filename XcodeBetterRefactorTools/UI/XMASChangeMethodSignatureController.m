@@ -269,7 +269,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
     NSArray *symbols = [self.methodOccurrencesRepository callSitesOfCurrentlySelectedMethod];
     NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
-    [self.alerter flashMessage:message withLogging:YES];
+    [self.alerter flashMessage:message withLogging:NO];
 
     for (XC(IDEIndexSymbol) symbol in symbols) {
         [self.callExpressionRewriter changeCallsite:symbol
