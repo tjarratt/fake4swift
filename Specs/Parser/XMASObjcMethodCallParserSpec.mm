@@ -1,9 +1,10 @@
 #import <Cedar/Cedar.h>
-#import <ClangKit/ClangKit.h>
-
+#import "XMASTokenizer.h"
 #import "XMASObjcMethodCallParser.h"
 #import "XMASObjcMethodCall.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
+#import "XMASSearchPathExpander.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -14,14 +15,21 @@ describe(@"XMASObjcMethodCallParser", ^{
     __block XMASObjcMethodCallParser *subject;
     __block XMASObjcCallExpressionTokenFilter *callExpressionTokenFilter;
 
+    XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
+    XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+
     NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
-    NSArray *methodDeclarationTokens = [[CKTranslationUnit translationUnitWithPath:methodDeclarationFixture] tokens];
+    NSArray *methodDeclarationTokens = [tokenizer tokensForFilePath:methodDeclarationFixture];
 
     NSString *nestedCallExpressionsFixture = [[NSBundle mainBundle] pathForResource:@"NestedCallExpressions" ofType:@"m"];
-    NSArray *nestedCallExpressionTokens = [[CKTranslationUnit translationUnitWithPath:nestedCallExpressionsFixture] tokens];
+    NSArray *nestedCallExpressionTokens = [tokenizer tokensForFilePath:nestedCallExpressionsFixture];
 
     NSString *nilArgumentFixture = [[NSBundle mainBundle] pathForResource:@"RefactorMethodFixture" ofType:@"m"];
-    NSArray *nilArgumentTokens = [[CKTranslationUnit translationUnitWithPath:nilArgumentFixture] tokens];
+    NSArray *nilArgumentTokens = [tokenizer tokensForFilePath:nilArgumentFixture];
+
+    NSString *realisticFixture = [[NSBundle mainBundle] pathForResource:@"RealisticMethodCalls" ofType:@"m"];
+    NSArray *realTokens = [tokenizer tokensForFilePath:realisticFixture];
 
     beforeEach(^{
         callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
@@ -133,6 +141,22 @@ describe(@"XMASObjcMethodCallParser", ^{
                                                                                    target:@"Foo"
                                                                                     range:NSMakeRange(1027, 13)];
                 matchingCallExpressions should contain(expectedCallExpr);
+            });
+        });
+
+        context(@"with a more realistic fixture", ^{
+            it(@"should match initializers", ^{
+                [subject setupWithSelectorToMatch:@"initWithCallExpressionTokenFilter:"
+                                         filePath:realisticFixture
+                                        andTokens:realTokens];
+                NSArray *matchingCallExpressions = subject.matchingCallExpressions;
+                matchingCallExpressions.count should equal(1);
+
+                XMASObjcMethodCall *callExpression = matchingCallExpressions.firstObject;
+                callExpression.selectorString should equal(@"initWithCallExpressionTokenFilter:");
+                callExpression.arguments should equal(@[@"callExpressionTokenFilter"]);
+                callExpression.lineNumber should equal(69);
+                callExpression.columnNumber should equal(84);
             });
         });
     });

@@ -66,14 +66,23 @@
         NSLog(@"================> tokens between (%lu, %lu) in %@", callExprRange.location, callExprRange.location + callExprRange.length, self.filePath.lastPathComponent);
         NSLog(@"================> %@", callExprTokens);
 
-        for (NSUInteger index = 1; index < callExprTokens.count; ++index) {
+        NSUInteger index = 0;
+        NSArray *targetTokens;
+        CKToken *secondToken = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+        if ([secondToken.spelling isEqualToString:@"["]) {
+            CKToken *closingTargetToken = [self matchingClosingTokenForCallExpressionAtIndex:index + 2 fromTokens:callExprTokens];
+            NSUInteger indexOfClosingBracket = [callExprTokens indexOfObject:closingTargetToken];
+            targetTokens = [callExprTokens subarrayWithRange:NSMakeRange(index+1, indexOfClosingBracket)];
+            index = indexOfClosingBracket + 1;
+        } else if (secondToken) {
+            targetTokens = @[secondToken];
+            index = 2;
+        }
+
+        for (; index < callExprTokens.count; ++index) {
             NSMutableArray *selectorComponentTokens = [[NSMutableArray alloc] init];
             NSMutableArray *argumentStrings = [[NSMutableArray alloc] init];
             NSMutableArray *argumentTokens = [[NSMutableArray alloc] init];
-
-            NSUInteger indexSelectorStartsAt = [self indexFollowingCallExpressionTarget:index fromTokens:callExprTokens];
-            NSArray *targetTokens = [callExprTokens subarrayWithRange:NSMakeRange(index, indexSelectorStartsAt - index)];
-            index = indexSelectorStartsAt;
 
             CKToken *matchingCloseToken = [self matchingClosingTokenForCallExpressionAtIndex:index fromTokens:callExprTokens];
             CKToken *token = callExprTokens[index];
@@ -102,6 +111,15 @@
                     [argumentStrings addObject:[callExpressionArgumentTokens componentsJoinedByString:@""]];
                     [argumentTokens addObject:callExpressionArgumentTokens];
                 } else {
+
+                    // try to read at least ONE argument token
+                    if (![token.spelling isEqualToString:@"]"]) {
+                        [currentArgumentTokens addObject:token];
+                        token = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
+                        index++;
+                    }
+
+                    // FIXME: this code assume arguments are never [call expressions:that receive:arguments];
                     while (token && !(token == matchingCloseToken)) {
                         CKToken *nextToken = [self safeNextTokenFollowingIndex:index fromTokens:callExprTokens];
                         BOOL nextTokenIsValidAfterSelectorComponent = [self isTokenValidToFollowSelectorComponent:nextToken];

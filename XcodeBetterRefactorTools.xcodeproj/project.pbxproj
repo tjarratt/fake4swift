@@ -93,6 +93,7 @@
 		F7D01C191B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */; };
+		F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
 		F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */; };
 		F7E834281B4CEB7B006DB442 /* NestedCallExpressions.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */; };
 		F7EA8A511B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EA8A501B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m */; };
@@ -220,6 +221,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */,
 				F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */,
 				AE0C00EA1B717AA90065C099 /* Cedar.h in Copy Fixtures */,
 				AEC0B0F91B6AA59800567D93 /* CedarSpecFixture.mm in Copy Fixtures */,
@@ -338,6 +340,7 @@
 		F7D01C111B5C603700FE62DA /* XMASObjcMethodDeclarationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcMethodDeclarationParser.h; sourceTree = "<group>"; };
 		F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
 		F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionSpec.mm; sourceTree = "<group>"; };
+		F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealisticMethodCalls.m; sourceTree = "<group>"; };
 		F7E491F61B23EBC400BE3A61 /* ClangKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ClangKit.framework; sourceTree = "<group>"; };
 		F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodExpected2.h; sourceTree = "<group>"; };
 		F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NestedCallExpressions.m; sourceTree = "<group>"; };
@@ -516,6 +519,7 @@
 				F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */,
 				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
 				AE0C00E91B717A670065C099 /* Cedar.h */,
+				F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
