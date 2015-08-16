@@ -1,17 +1,14 @@
-#import <Cocoa/Cocoa.h>
-
-@class XMASRefactorMethodActionProvider;
+#import <Foundation/Foundation.h>
+#import <Blindside/Blindside.h>
 
 @interface XMASEditMenu : NSObject
 - (void)attach;
-- (instancetype)initWithRefactorMethodActionProvider:(XMASRefactorMethodActionProvider *)actionProvider NS_DESIGNATED_INITIALIZER;
-
 - (void)refactorCurrentMethodAction:(id)sender;
+
+- (instancetype)initWithInjector:(id<BSInjector>)injector NS_DESIGNATED_INITIALIZER;
 @end
 
 @interface XMASEditMenu (UnavailableInitializers)
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
++ (instancetype)new;
+- (instancetype)init;
 @end

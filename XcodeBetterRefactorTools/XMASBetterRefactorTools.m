@@ -1,9 +1,9 @@
 #import "XMASBetterRefactorTools.h"
-#import "XMASEditMenu.h"
-#import "XMASRefactorMethodActionProvider.h"
-
+#import <Blindside/Blindside.h>
 #import "XMASXcode.h"
+#import "XMASEditMenu.h"
 #import "XcodeInterfaces.h"
+#import "RefactorToolsModule.h"
 
 @interface XMASBetterRefactorTools ()
 @property (nonatomic, retain) XMASEditMenu *editMenu;
@@ -42,8 +42,8 @@
          name:NSApplicationDidFinishLaunchingNotification
          object:NSApp];
 
-    XMASRefactorMethodActionProvider *actionProvider = [[XMASRefactorMethodActionProvider alloc] init];
-    self.editMenu = [[XMASEditMenu alloc] initWithRefactorMethodActionProvider:actionProvider];
+    id<BSInjector> injector = [Blindside injectorWithModule:[[RefactorToolsModule alloc] init]];
+    self.editMenu = [[XMASEditMenu alloc] initWithInjector:injector];
     [self.editMenu attach];
 }
 

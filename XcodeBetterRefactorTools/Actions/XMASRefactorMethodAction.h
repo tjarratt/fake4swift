@@ -22,8 +22,13 @@ extern NSString * const noMethodSelected;
 - (void)refactorMethodUnderCursor;
 - (void)safelyRefactorMethodUnderCursor;
 
-@property (nonatomic, readonly) XMASChangeMethodSignatureController *controller;
 @property (nonatomic, readonly) id currentEditor;
+@property (nonatomic, readonly) XMASAlert *alerter;
+@property (nonatomic, readonly) XMASTokenizer *tokenizer;
+@property (nonatomic, readonly) XMASObjcMethodDeclarationParser *methodDeclParser;
+@property (nonatomic, readonly) XMASChangeMethodSignatureControllerProvider *controllerProvider;
+
+@property (nonatomic, readonly) XMASChangeMethodSignatureController *controller;
 
 
 @end

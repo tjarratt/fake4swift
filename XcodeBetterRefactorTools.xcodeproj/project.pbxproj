@@ -50,6 +50,7 @@
 		F71E82C41B59F6B400BE93DC /* RefactorMethodExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */; };
 		F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
 		F72749601B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
+		F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */; };
 		F74BBB501B273D760092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
@@ -58,10 +59,8 @@
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */; };
-		F79837601B365D44000F1EBD /* XMASRefactorMethodActionProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F798375F1B365D44000F1EBD /* XMASRefactorMethodActionProvider.m */; };
-		F79837611B365D49000F1EBD /* XMASRefactorMethodActionProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F798375F1B365D44000F1EBD /* XMASRefactorMethodActionProvider.m */; };
 		F79837621B365DC2000F1EBD /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
-		F79837651B365F68000F1EBD /* XMASRefactorMethodActionProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F79837641B365F68000F1EBD /* XMASRefactorMethodActionProviderSpec.mm */; };
+		F79AAFAE1B819EF800F7D2C5 /* InjectorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */; };
 		F7B1D2881B5C5F7900C28AE7 /* XMASAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */; };
 		F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */; };
 		F7B1D28A1B5C5F7900C28AE7 /* XMASXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2871B5C5F7900C28AE7 /* XMASXcode.m */; };
@@ -94,6 +93,10 @@
 		F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */; };
 		F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
+		F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
+		F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
+		F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */; };
+		F7E0094C1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */; };
 		F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */; };
 		F7E834281B4CEB7B006DB442 /* NestedCallExpressions.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */; };
 		F7EA8A511B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EA8A501B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m */; };
@@ -103,13 +106,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		96387017161816B900BE29E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 960FA0861605819F00923A87 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96387012161815C600BE29E7;
-			remoteInfo = Clean;
-		};
 		F7BA62591B2233D0005B99AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
@@ -201,6 +197,55 @@
 			remoteGlobalIDString = AEEE1FB511DC271300029872;
 			remoteInfo = Cedar;
 		};
+		F7E0092C1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 29CAC6E4150292AD00731862;
+			remoteInfo = Blindside;
+		};
+		F7E0092E1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 29CAC7001502932000731862;
+			remoteInfo = Specs;
+		};
+		F7E009301B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 29997B471505EC0B00C12110;
+			remoteInfo = "Blindside-StaticLib";
+		};
+		F7E009321B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AE4864BD1B066F11005DB302;
+			remoteInfo = "Blindside-iOS-Framework";
+		};
+		F7E009341B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AE03FC1A1B0A57DD00013784;
+			remoteInfo = "Blindside-iOS-Framework BuildTest";
+		};
+		F7E009421B7FDA9700B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 29CAC6E3150292AD00731862;
+			remoteInfo = Blindside;
+		};
+		F7E009451B7FDAA900B9E6E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 29CAC6E3150292AD00731862;
+			remoteInfo = Blindside;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -242,6 +287,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */,
 				F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,9 +348,7 @@
 		F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASComponentSwapperSpec.mm; sourceTree = "<group>"; };
 		F761C3DA1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionTokenFilterSpec.mm; sourceTree = "<group>"; };
 		F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEditMenuSpec.mm; sourceTree = "<group>"; };
-		F798375E1B365D44000F1EBD /* XMASRefactorMethodActionProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASRefactorMethodActionProvider.h; sourceTree = "<group>"; };
-		F798375F1B365D44000F1EBD /* XMASRefactorMethodActionProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASRefactorMethodActionProvider.m; sourceTree = "<group>"; };
-		F79837641B365F68000F1EBD /* XMASRefactorMethodActionProviderSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionProviderSpec.mm; sourceTree = "<group>"; };
+		F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InjectorSpec.mm; sourceTree = "<group>"; };
 		F7B1D2831B5C5F7900C28AE7 /* XcodeInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeInterfaces.h; sourceTree = "<group>"; };
 		F7B1D2841B5C5F7900C28AE7 /* XMASAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASAlert.h; sourceTree = "<group>"; };
 		F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASAlert.m; sourceTree = "<group>"; };
@@ -341,6 +385,9 @@
 		F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
 		F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionSpec.mm; sourceTree = "<group>"; };
 		F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealisticMethodCalls.m; sourceTree = "<group>"; };
+		F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Blindside.xcodeproj; path = Blindside/Blindside.xcodeproj; sourceTree = "<group>"; };
+		F7E009491B7FDBE900B9E6E6 /* RefactorToolsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefactorToolsModule.h; sourceTree = "<group>"; };
+		F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefactorToolsModule.m; sourceTree = "<group>"; };
 		F7E491F61B23EBC400BE3A61 /* ClangKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ClangKit.framework; sourceTree = "<group>"; };
 		F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodExpected2.h; sourceTree = "<group>"; };
 		F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NestedCallExpressions.m; sourceTree = "<group>"; };
@@ -355,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */,
 				F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */,
 				960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */,
 				960FA0931605819F00923A87 /* CoreFoundation.framework in Frameworks */,
@@ -365,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */,
 				F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */,
 				F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */,
 			);
@@ -387,8 +436,6 @@
 			children = (
 				F74BBB4E1B273D760092AED9 /* XMASRefactorMethodAction.h */,
 				F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */,
-				F798375E1B365D44000F1EBD /* XMASRefactorMethodActionProvider.h */,
-				F798375F1B365D44000F1EBD /* XMASRefactorMethodActionProvider.m */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -428,6 +475,7 @@
 			children = (
 				9608A8FD1622755B00763892 /* Actions */,
 				F71E828A1B59715500BE93DC /* Code Rewriting */,
+				F7E009481B7FDBCB00B9E6E6 /* Dependencies */,
 				F72749501B49016D00BB8483 /* Indexes */,
 				9608A8FB1622754500763892 /* Menu Additions */,
 				F7D01BF81B5C5FE300FE62DA /* Parser */,
@@ -567,6 +615,14 @@
 			path = "Menu Additions";
 			sourceTree = "<group>";
 		};
+		F79AAFAC1B819ED500F7D2C5 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
 		F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,9 +644,10 @@
 		F7BA62291B223369005B99AF /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				AE810A9E1B72C2830097573C /* Fakes */,
 				F7BA62741B22BFBE005B99AF /* Actions */,
 				F71E82A71B59758400BE93DC /* Code Rewriting */,
+				F79AAFAC1B819ED500F7D2C5 /* Dependencies */,
+				AE810A9E1B72C2830097573C /* Fakes */,
 				F70E1FBC1B24382000D971E6 /* Fixtures */,
 				F70A033E1B49D06E0009B348 /* Indexes */,
 				F798374F1B365C8F000F1EBD /* Menu Additions */,
@@ -614,6 +671,7 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */,
 				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
 				F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */,
 			);
@@ -646,7 +704,6 @@
 				F7F09FF31B281A1F00727AD7 /* XMASWindowProviderSpec.mm */,
 				F7B550801B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm */,
 				F7B550821B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm */,
-				F79837641B365F68000F1EBD /* XMASRefactorMethodActionProviderSpec.mm */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -706,6 +763,27 @@
 			path = "Method Declarations";
 			sourceTree = "<group>";
 		};
+		F7E009231B7FDA8900B9E6E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */,
+				F7E0092F1B7FDA8A00B9E6E6 /* Specs */,
+				F7E009311B7FDA8A00B9E6E6 /* libBlindside-StaticLib.a */,
+				F7E009331B7FDA8A00B9E6E6 /* Blindside.framework */,
+				F7E009351B7FDA8A00B9E6E6 /* Blindside-iOS-Framework BuildTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7E009481B7FDBCB00B9E6E6 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F7E009491B7FDBE900B9E6E6 /* RefactorToolsModule.h */,
+				F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -738,7 +816,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				96387018161816B900BE29E7 /* PBXTargetDependency */,
+				F7E009461B7FDAA900B9E6E6 /* PBXTargetDependency */,
 			);
 			name = XcodeBetterRefactorTools;
 			productName = XcodeBetterRefactorTools;
@@ -757,6 +835,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */,
 				F7BA62721B2233E5005B99AF /* PBXTargetDependency */,
 			);
 			name = Specs;
@@ -789,6 +868,10 @@
 			productRefGroup = 960FA0901605819F00923A87 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = F7E009231B7FDA8900B9E6E6 /* Products */;
+					ProjectRef = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+				},
 				{
 					ProductGroup = F7BA624A1B2233D0005B99AF /* Products */;
 					ProjectRef = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
@@ -888,6 +971,41 @@
 			remoteRef = F7BA626F1B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Blindside.framework;
+			remoteRef = F7E0092C1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E0092F1B7FDA8A00B9E6E6 /* Specs */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Specs;
+			remoteRef = F7E0092E1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E009311B7FDA8A00B9E6E6 /* libBlindside-StaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libBlindside-StaticLib.a";
+			remoteRef = F7E009301B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E009331B7FDA8A00B9E6E6 /* Blindside.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Blindside.framework;
+			remoteRef = F7E009321B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E009351B7FDA8A00B9E6E6 /* Blindside-iOS-Framework BuildTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Blindside-iOS-Framework BuildTest.app";
+			remoteRef = F7E009341B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -932,11 +1050,11 @@
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE07954F1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
-				F79837601B365D44000F1EBD /* XMASRefactorMethodActionProvider.m in Sources */,
 				F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7BEDD181B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
 				AE76356C1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
 				F7EA8A511B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
+				F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */,
 				AE71D5B21B66F5CE00E40833 /* XMASXcodeAdditions.m in Sources */,
 				F70C1E5A1B5C62F600EC1801 /* XMASChangeMethodSignatureController.xib in Sources */,
 			);
@@ -964,7 +1082,6 @@
 				F7B1D28B1B5C5F7900C28AE7 /* XMASXcode.m in Sources */,
 				AE07955E1B68029D000DE4C8 /* XMASObjcMethodDeclarationRewriterSpec.mm in Sources */,
 				F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */,
-				F79837651B365F68000F1EBD /* XMASRefactorMethodActionProviderSpec.mm in Sources */,
 				AE810AAD1B72C2FA0097573C /* FakeXcodeFileReference.m in Sources */,
 				F7BEDD171B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */,
@@ -984,14 +1101,15 @@
 				F7D01C181B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE76356D1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
 				F71E82C11B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm in Sources */,
+				F79AAFAE1B819EF800F7D2C5 /* InjectorSpec.mm in Sources */,
 				AE0C00D21B7134DF0065C099 /* XMASSearchPathExpander.m in Sources */,
 				F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
-				F79837611B365D49000F1EBD /* XMASRefactorMethodActionProvider.m in Sources */,
 				F761C3DB1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm in Sources */,
+				F7E0094C1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */,
 				F7D01C141B5C603700FE62DA /* XMASComponentSwapper.m in Sources */,
 				F70C1E671B5C630800EC1801 /* XMASChangeMethodSignatureController.xib in Sources */,
 			);
@@ -1000,15 +1118,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		96387018161816B900BE29E7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96387012161815C600BE29E7 /* Clean */;
-			targetProxy = 96387017161816B900BE29E7 /* PBXContainerItemProxy */;
-		};
 		F7BA62721B2233E5005B99AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Cedar;
 			targetProxy = F7BA62711B2233E5005B99AF /* PBXContainerItemProxy */;
+		};
+		F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Blindside;
+			targetProxy = F7E009421B7FDA9700B9E6E6 /* PBXContainerItemProxy */;
+		};
+		F7E009461B7FDAA900B9E6E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Blindside;
+			targetProxy = F7E009451B7FDAA900B9E6E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1191,7 +1314,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Externals/Cedar/**",
-					"$(PROJECT_DIR)/Externals",
+					"$(PROJECT_DIR)/Externals/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1239,7 +1362,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/Externals/Cedar/**",
-					"$(PROJECT_DIR)/Externals",
+					"$(PROJECT_DIR)/Externals/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;

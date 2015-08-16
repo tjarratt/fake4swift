@@ -1,7 +1,8 @@
 #import <Cedar/Cedar.h>
+#import <Blindside/Blindside.h>
 #import "XMASEditMenu.h"
-#import "XMASRefactorMethodActionProvider.h"
 #import "XMASRefactorMethodAction.h"
+#import "RefactorToolsModule.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -10,11 +11,11 @@ SPEC_BEGIN(XMASEditMenuSpec)
 
 describe(@"XMASEditMenu", ^{
     __block XMASEditMenu *subject;
-    __block XMASRefactorMethodActionProvider *actionProvider;
+    __block id<BSInjector, BSBinder> injector;
 
     beforeEach(^{
-        actionProvider = nice_fake_for([XMASRefactorMethodActionProvider class]);
-        subject = [[XMASEditMenu alloc] initWithRefactorMethodActionProvider:actionProvider];
+        injector = (id)[Blindside injectorWithModule:[[RefactorToolsModule alloc] init]];
+        subject = [[XMASEditMenu alloc] initWithInjector:injector];
     });
 
     describe(@"-refactorCurrentMethodAction:", ^{
@@ -22,13 +23,9 @@ describe(@"XMASEditMenu", ^{
 
         beforeEach(^{
             action = nice_fake_for([XMASRefactorMethodAction class]);
-            actionProvider stub_method(@selector(provideInstanceWithEditor:alerter:controllerProvider:methodDeclParser:))
-                .and_return(action);
-            [subject refactorCurrentMethodAction:nil];
-        });
+            [injector bind:[XMASRefactorMethodAction class] toInstance:action];
 
-        it(@"should ask its provider for an XMASRefactorMethodAction", ^{
-            actionProvider should have_received(@selector(provideInstanceWithEditor:alerter:controllerProvider:methodDeclParser:));
+            [subject refactorCurrentMethodAction:nil];
         });
 
         it(@"should attempt to safely refactor the method under the cursor", ^{

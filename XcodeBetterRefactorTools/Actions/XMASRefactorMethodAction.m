@@ -11,11 +11,12 @@
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
 
 @interface XMASRefactorMethodAction () <XMASChangeMethodSignatureControllerDelegate>
+
 @property (nonatomic) id currentEditor;
 @property (nonatomic) XMASAlert *alerter;
 @property (nonatomic) XMASTokenizer *tokenizer;
-@property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclParser;
+@property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
 
 @property (nonatomic) XMASChangeMethodSignatureController *controller;
 

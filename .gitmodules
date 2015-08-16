@@ -1,3 +1,6 @@
 [submodule "Externals/Cedar"]
 	path = Externals/Cedar
 	url = https://github.com/pivotal/cedar.git
+[submodule "Externals/Blindside"]
+	path = Externals/Blindside
+	url = https://github.com/jbsf/blindside.git

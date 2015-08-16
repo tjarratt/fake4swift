@@ -9,8 +9,7 @@
 
 @implementation XMASTokenizer
 
-- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver
-                                             foo:(id)foo {
+- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver {
     if (self = [super init]) {
         self.searchPathResolver = searchPathResolver;
     }
