@@ -1,21 +1,6 @@
 #import "XMASEditMenu.h"
-#import <Blindside/Blindside.h>
-#import "XMASXcode.h"
 #import "XMASRefactorMethodAction.h"
-#import "XMASAlert.h"
-#import "XMASObjcMethodDeclarationParser.h"
-#import "XMASChangeMethodSignatureControllerProvider.h"
-#import "XMASWindowProvider.h"
-#import "XMASMethodOccurrencesRepository.h"
-#import "XMASObjcCallExpressionRewriter.h"
-#import "XMASObjcMethodCallParser.h"
-#import "XMASObjcCallExpressionTokenFilter.h"
-#import "XMASObjcCallExpressionStringWriter.h"
-#import "XMASObjcMethodDeclarationRewriter.h"
-#import "XMASObjcMethodDeclarationStringWriter.h"
-#import "XMASTokenizer.h"
-#import "XMASXcodeTargetSearchPathResolver.h"
-#import "XMASSearchPathExpander.h"
+#import "XMASXcode.h"
 
 @interface XMASEditMenu ()
 
