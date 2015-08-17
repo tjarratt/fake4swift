@@ -162,6 +162,7 @@
                             <buttonCell key="cell" type="bevel" title="+" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pia-Pf-5Te">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
+                                <string key="keyEquivalent">a</string>
                             </buttonCell>
                             <connections>
                                 <action selector="didTapAdd:" target="-2" id="FOa-6X-y9v"/>

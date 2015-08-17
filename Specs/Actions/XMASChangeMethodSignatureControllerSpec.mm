@@ -205,6 +205,10 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 });
 
                 describe(@"clicking the 'add component' button", ^{
+                    it(@"should be achievable by typing a key", ^{
+                        subject.addComponentButton.keyEquivalent should equal(@"a");
+                    });
+
                     context(@"when no rows are selected", ^{
                         beforeEach(^{
                             [subject.addComponentButton performClick:nil];
