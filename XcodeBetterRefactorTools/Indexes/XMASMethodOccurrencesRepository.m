@@ -17,7 +17,7 @@
     return self;
 }
 
-- (NSArray *)callSitesOfCurrentlySelectedMethod {
+- (NSSet *)callSitesOfCurrentlySelectedMethod {
     id editorContext = [[self.workspaceWindowController editorArea] lastActiveEditorContext];
     NSArray *geniusSourceCodeCallerResults = [XMASXcode geniusCallerResultsForEditorContext:editorContext];
 
@@ -26,10 +26,10 @@
         [results addObject:[sourceCodeCallerResult valueForKey:@"calleeSymbolOccurrence"]];
     }
 
-    return results;
+    return [NSSet setWithArray:results];
 }
 
-- (NSArray *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration {
+- (NSSet *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration {
     NSMutableArray *matchingSymbols = [[NSMutableArray alloc] init];
     NSArray *instanceMethodSymbols = [XMASXcode instanceMethodSymbolsInWorkspace];
     for (XC(IDEIndexSymbol) symbol in instanceMethodSymbols) {
@@ -38,7 +38,7 @@
         }
     }
 
-    return matchingSymbols;
+    return [NSSet setWithArray:matchingSymbols];
 }
 
 #pragma mark - NSObject

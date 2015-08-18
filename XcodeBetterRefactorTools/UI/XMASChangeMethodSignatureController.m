@@ -261,13 +261,13 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 #pragma mark - Private
 
 - (void)didTapRefactorActionPossiblyRaisingException {
-    NSArray *forwardDeclarations = [self.methodOccurrencesRepository forwardDeclarationsOfMethod:self.originalMethod];
+    NSSet *forwardDeclarations = [self.methodOccurrencesRepository forwardDeclarationsOfMethod:self.originalMethod];
     for (XC(IDEIndexSymbol) symbol in forwardDeclarations) {
         [self.methodDeclarationRewriter changeMethodDeclarationForSymbol:symbol
                                                                 toMethod:self.method];
     }
 
-    NSArray *symbols = [self.methodOccurrencesRepository callSitesOfCurrentlySelectedMethod];
+    NSSet *symbols = [self.methodOccurrencesRepository callSitesOfCurrentlySelectedMethod];
     NSString *message = [NSString stringWithFormat:@"Changing %lu call sites of %@", symbols.count, self.originalMethod.selectorString];
     [self.alerter flashMessage:message withLogging:NO];
 

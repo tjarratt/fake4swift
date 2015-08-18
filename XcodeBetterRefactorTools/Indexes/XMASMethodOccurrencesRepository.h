@@ -7,8 +7,8 @@
 
 - (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController NS_DESIGNATED_INITIALIZER;
 
-- (NSArray *)callSitesOfCurrentlySelectedMethod;
-- (NSArray *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration;
+- (NSSet *)callSitesOfCurrentlySelectedMethod;
+- (NSSet *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration;
 
 @end
 

@@ -46,9 +46,9 @@ describe(@"XMASMethodOccurrencesRepository", ^{
         });
 
         it(@"should filter the call expressions to only those matching the selector", ^{
-            NSArray *results = [subject callSitesOfCurrentlySelectedMethod];
+            NSSet *results = [subject callSitesOfCurrentlySelectedMethod];
             results.count should equal(1);
-            results.firstObject should be_same_instance_as(expectedResult);
+            results should contain(expectedResult);
         });
     });
 
@@ -71,8 +71,9 @@ describe(@"XMASMethodOccurrencesRepository", ^{
             XMASObjcMethodDeclaration *methodDeclaration = nice_fake_for([XMASObjcMethodDeclaration class]);
             methodDeclaration stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
 
-            NSArray *forwardDeclarations = [subject forwardDeclarationsOfMethod:methodDeclaration];
-            forwardDeclarations should equal(@[matchingIndexSymbol]);
+            NSSet *forwardDeclarations = [subject forwardDeclarationsOfMethod:methodDeclaration];
+            forwardDeclarations.count should equal(1);
+            forwardDeclarations should contain(matchingIndexSymbol);
         });
     });
 });
