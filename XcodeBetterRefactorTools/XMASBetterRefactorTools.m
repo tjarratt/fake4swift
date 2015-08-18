@@ -44,6 +44,13 @@
 
     id<BSInjector> injector = [Blindside injectorWithModule:[[RefactorToolsModule alloc] init]];
     self.editMenu = [[XMASEditMenu alloc] initWithInjector:injector];
+
+    // attach menus on next tick of run loop to avoid clobbering existing menu items
+    // e.g.: Jump To Instruction Pointer (https://github.com/cppforlife/CedarShortcuts/issues/19)
+    [self performSelector:@selector(attachMenus) withObject:nil afterDelay:0.0f];
+}
+
+- (void)attachMenus {
     [self.editMenu attach];
 }
 
