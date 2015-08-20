@@ -1,6 +1,6 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 
 @interface XMASEditMenu ()
 
@@ -19,7 +19,8 @@
 }
 
 - (void)attach {
-    NSMenu *editMenu = [XMASXcode menuWithTitle:@"Edit"];
+    XMASXcodeRepository *xcodeRepository = [self.injector getInstance:[XMASXcodeRepository class]];
+    NSMenu *editMenu = [xcodeRepository menuWithTitle:@"Edit"];
     [editMenu addItem:NSMenuItem.separatorItem];
     [editMenu addItem:self.refactorCurrentMethodItem];
 }

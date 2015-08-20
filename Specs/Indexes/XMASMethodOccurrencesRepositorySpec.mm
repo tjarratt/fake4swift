@@ -1,6 +1,6 @@
 #import <Cedar/Cedar.h>
 #import "XMASMethodOccurrencesRepository.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XcodeInterfaces.h"
@@ -12,16 +12,14 @@ SPEC_BEGIN(XMASMethodOccurrencesRepositorySpec)
 
 describe(@"XMASMethodOccurrencesRepository", ^{
     __block XMASMethodOccurrencesRepository *subject;
+    __block XMASXcodeRepository *xcodeRepository;
     __block XC(IDEWorkspaceWindowController) workspaceWindowController;
 
     beforeEach(^{
-        spy_on([XMASXcode class]);
+        xcodeRepository = nice_fake_for([XMASXcodeRepository class]);
         workspaceWindowController = nice_fake_for(@protocol(XCP(IDEWorkspaceWindowController)));
-        subject = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:workspaceWindowController];
-    });
-
-    afterEach(^{
-        stop_spying_on([XMASXcode class]);
+        subject = [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:workspaceWindowController
+                   xcodeRepository:xcodeRepository];
     });
 
     describe(@"-callExpressionsMatchingSelector:", ^{
@@ -40,7 +38,7 @@ describe(@"XMASMethodOccurrencesRepository", ^{
             editorArea stub_method(@selector(lastActiveEditorContext)).and_return(editorContext);
             workspaceWindowController stub_method(@selector(editorArea)).and_return(editorArea);
 
-            [XMASXcode class] stub_method(@selector(geniusCallerResultsForEditorContext:))
+            xcodeRepository stub_method(@selector(geniusCallerResultsForEditorContext:))
                 .with(editorContext)
                 .and_return(@[geniusResult]);
         });
@@ -64,7 +62,7 @@ describe(@"XMASMethodOccurrencesRepository", ^{
             nonMatchingIndexSymbol stub_method(@selector(name)).and_return(@"garbage");
 
             workspaceSymbols = @[matchingIndexSymbol, nonMatchingIndexSymbol];
-            [XMASXcode class] stub_method(@selector(instanceMethodSymbolsInWorkspace)).and_return(workspaceSymbols);
+            xcodeRepository stub_method(@selector(instanceMethodSymbolsInWorkspace)).and_return(workspaceSymbols);
         });
 
         it(@"should only return matching forward declarations for the method provided", ^{

@@ -1,7 +1,7 @@
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASWindowProvider.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XcodeInterfaces.h"
 #import "XMASAlert.h"
 #import "XMASMethodOccurrencesRepository.h"

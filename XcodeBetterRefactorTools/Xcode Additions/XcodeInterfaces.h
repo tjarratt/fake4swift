@@ -239,7 +239,6 @@
 #pragma mark - Workspace and Projects
 
 @protocol XCP(IDEDocumentController)
-+ (XC(IDEDocumentController))sharedDocumentController;
 - (NSArray *)workspaceDocuments;
 @end
 

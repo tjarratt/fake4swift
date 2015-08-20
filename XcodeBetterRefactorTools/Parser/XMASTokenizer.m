@@ -1,16 +1,19 @@
 #import "XMASTokenizer.h"
 #import <ClangKit/ClangKit.h>
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
 
 @interface XMASTokenizer ()
+@property (nonatomic) XMASXcodeRepository *xcodeRepository;
 @property (nonatomic) XMASXcodeTargetSearchPathResolver *searchPathResolver;
 @end
 
 @implementation XMASTokenizer
 
-- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver {
+- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver
+                                 xcodeRepository:(XMASXcodeRepository *)xcodeRepository {
     if (self = [super init]) {
+        self.xcodeRepository = xcodeRepository;
         self.searchPathResolver = searchPathResolver;
     }
 
@@ -20,7 +23,7 @@
 - (NSArray *)tokensForFilePath:(NSString *)filePath {
     NSArray *searchPathsForFile = @[];
 
-    for (id target in [XMASXcode targetsInCurrentWorkspace]) {
+    for (id target in [self.xcodeRepository targetsInCurrentWorkspace]) {
         NSArray *buildFileReferences = [target allBuildFileReferences];
         if ([[buildFileReferences valueForKeyPath:@"resolvedFilePath.pathString"] containsObject:filePath]) {
             searchPathsForFile = [self.searchPathResolver effectiveHeaderSearchPathsForTarget:target];

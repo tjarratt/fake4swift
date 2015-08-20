@@ -4,7 +4,7 @@
 #import "XMASRefactorMethodAction.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASAlert.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASTokenizer.h"
 #import "XMASObjcMethodDeclarationParser.h"
 
@@ -14,22 +14,18 @@ using namespace Cedar::Doubles;
 SPEC_BEGIN(InjectorSpec)
 
 describe(@"Injector", ^{
-    __block id<BSInjector> injector;
+    __block id<BSInjector, BSBinder> injector;
+    __block XMASXcodeRepository *xcodeRepository;
 
     __block id fakeEditor;
 
     beforeEach(^{
-        spy_on([XMASXcode class]);
         fakeEditor = [[NSObject alloc] init];
-        [XMASXcode class] stub_method(@selector(currentEditor)).and_return(fakeEditor);
-    });
+        xcodeRepository = nice_fake_for([XMASXcodeRepository class]);
+        xcodeRepository stub_method(@selector(currentEditor)).and_return(fakeEditor);
 
-    afterEach(^{
-        stop_spying_on([XMASXcode class]);
-    });
-
-    beforeEach(^{
-        injector = [Blindside injectorWithModule:[[RefactorToolsModule alloc] init]];
+        injector = (id)[Blindside injectorWithModule:[[RefactorToolsModule alloc] init]];
+        [injector bind:[XMASXcodeRepository class] toInstance:xcodeRepository];
     });
 
     it(@"should provide a Refactor Action", ^{
@@ -38,9 +34,7 @@ describe(@"Injector", ^{
         refactorAction.tokenizer should be_instance_of([XMASTokenizer class]);
         refactorAction.methodDeclParser should be_instance_of([XMASObjcMethodDeclarationParser class]);
         refactorAction.controllerProvider should be_instance_of([XMASChangeMethodSignatureControllerProvider class]);
-        
-
-        refactorAction.currentEditor should_not be_nil;
+        refactorAction.currentEditor should be_same_instance_as(fakeEditor);
     });
 });
 

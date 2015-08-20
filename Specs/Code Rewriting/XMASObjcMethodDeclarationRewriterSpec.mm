@@ -26,7 +26,8 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
         alerter = nice_fake_for([XMASAlert class]);
         XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
         XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
-        XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+        XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver
+                                                                           xcodeRepository:nil];
 
         methodDeclarationParser = [[XMASObjcMethodDeclarationParser alloc] init];
         methodDeclarationStringWriter = [[XMASObjcMethodDeclarationStringWriter alloc] init];

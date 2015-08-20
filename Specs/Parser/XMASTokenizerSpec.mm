@@ -2,7 +2,7 @@
 #import "XMASTokenizer.h"
 #import "TempFileHelper.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "FakeXcodeFileReference.h"
 
 using namespace Cedar::Matchers;
@@ -12,6 +12,7 @@ SPEC_BEGIN(XMASTokenizerSpec)
 
 describe(@"XMASTokenizer", ^{
     __block XMASTokenizer *subject;
+    __block XMASXcodeRepository *xcodeRepository;
     __block XMASXcodeTargetSearchPathResolver *targetSearchPathResolver;
 
     NSString *objcFixturePath = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
@@ -19,14 +20,6 @@ describe(@"XMASTokenizer", ^{
     NSString *fakeHeaderPath = [TempFileHelper temporaryFilePathForFixture:@"Cedar"
                                                                     ofType:@"h"
                                                withContainingDirectoryPath:@"Cedar.framework/Headers"];
-
-    beforeEach(^{
-        spy_on([XMASXcode class]);
-    });
-
-    afterEach(^{
-        stop_spying_on([XMASXcode class]);
-    });
 
     beforeEach(^{
         id theCorrectTarget = nice_fake_for(@protocol(XCP(Xcode3Target)));
@@ -38,7 +31,8 @@ describe(@"XMASTokenizer", ^{
         NSArray *buildFileReferences = @[objcPlusPlusFixtureFileRef, objcFixtureFileRef];
         theCorrectTarget stub_method(@selector(allBuildFileReferences)).and_return(buildFileReferences);
 
-        [XMASXcode class] stub_method(@selector(targetsInCurrentWorkspace)).and_return(@[someOtherTarget, theCorrectTarget]);
+        xcodeRepository = nice_fake_for([XMASXcodeRepository class]);
+        xcodeRepository stub_method(@selector(targetsInCurrentWorkspace)).and_return(@[someOtherTarget, theCorrectTarget]);
 
         NSArray *args = @[fakeHeaderPath];
         targetSearchPathResolver = nice_fake_for([XMASXcodeTargetSearchPathResolver class]);
@@ -46,7 +40,8 @@ describe(@"XMASTokenizer", ^{
             .with(theCorrectTarget)
             .and_return(args);
 
-        subject = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+        subject = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver
+                                                          xcodeRepository:xcodeRepository];
     });
 
     context(@"for Obj-C files without macros", ^{

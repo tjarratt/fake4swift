@@ -1,10 +1,12 @@
 #import <Foundation/Foundation.h>
 
+@class XMASXcodeRepository;
 @class XMASXcodeTargetSearchPathResolver;
 
 @interface XMASTokenizer : NSObject
 
-- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTargetSearchPathResolver:(XMASXcodeTargetSearchPathResolver *)searchPathResolver
+                                 xcodeRepository:(XMASXcodeRepository *)xcodeRepository NS_DESIGNATED_INITIALIZER;
 
 - (NSArray *)tokensForFilePath:(NSString *)filePath;
 

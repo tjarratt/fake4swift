@@ -1,6 +1,6 @@
 #import "XMASBetterRefactorTools.h"
 #import <Blindside/Blindside.h>
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASEditMenu.h"
 #import "XcodeInterfaces.h"
 #import "RefactorToolsModule.h"

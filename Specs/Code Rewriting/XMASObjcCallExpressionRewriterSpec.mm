@@ -29,7 +29,8 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
         alerter = nice_fake_for([XMASAlert class]);
         XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
         XMASXcodeTargetSearchPathResolver *searchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
-        tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
+        tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver
+                                                            xcodeRepository:nil];
 
         callExpressionTokenFilter = [[XMASObjcCallExpressionTokenFilter alloc] init];
         callExpressionParser = [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:callExpressionTokenFilter];

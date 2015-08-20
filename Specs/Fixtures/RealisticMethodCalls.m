@@ -1,5 +1,5 @@
 #import "XMASEditMenu.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParser.h"

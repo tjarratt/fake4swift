@@ -6,7 +6,7 @@
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
 #import "XMASSearchPathExpander.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
 #import "XMASObjcCallExpressionRewriter.h"
@@ -22,7 +22,8 @@ static XMASRefactorMethodAction *action;
 
 - (void)configure:(id<BSBinder>)binder {
     [binder bind:[XMASRefactorMethodAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        id editor = [XMASXcode currentEditor];
+        XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
+        id editor = [xcodeRepository currentEditor];
 
         if (action != nil) {
             [action setupWithEditor:editor];
@@ -40,7 +41,8 @@ static XMASRefactorMethodAction *action;
 
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         XMASXcodeTargetSearchPathResolver *searchPathResolver = [injector getInstance:[XMASXcodeTargetSearchPathResolver class]];
-        return [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver];
+        return [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver
+                                                       xcodeRepository:[injector getInstance:[XMASXcodeRepository class]]];
     }];
 
     [binder bind:[XMASXcodeTargetSearchPathResolver class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
@@ -58,7 +60,11 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:[XMASMethodOccurrencesRepository class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        return [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:[XMASXcode currentWorkspaceController]];
+        XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
+        XC(IDEWorkspaceWindowController) currentWorkspaceController = [xcodeRepository currentWorkspaceController];
+
+        return [[XMASMethodOccurrencesRepository alloc] initWithWorkspaceWindowController:currentWorkspaceController
+                                                                          xcodeRepository:xcodeRepository];
     }];
 
     [binder bind:[XMASObjcCallExpressionRewriter class] toBlock:^id(NSArray *args, id<BSInjector> injector) {

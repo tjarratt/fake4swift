@@ -1,20 +1,20 @@
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 
-@implementation XMASXcode
-+ (NSMenu *)menuWithTitle:(NSString *)title {
+@implementation XMASXcodeRepository
+
+#pragma mark - Menus
+
+- (NSMenu *)menuWithTitle:(NSString *)title {
     return [[[NSApp mainMenu] itemWithTitle:title] submenu];
 }
-@end
-
-@implementation XMASXcode (Workspace)
 
 #pragma mark - Workspaces
 
-+ (XC(Workspace))currentWorkspace {
+- (XC(Workspace))currentWorkspace {
     return [(id)self.currentWorkspaceController valueForKey:@"_workspace"];
 }
 
-+ (XC(IDEWorkspaceWindowController))currentWorkspaceController {
+- (XC(IDEWorkspaceWindowController))currentWorkspaceController {
     id workspaceController = [[NSApp keyWindow] windowController];
     if ([workspaceController isKindOfClass:NSClassFromString(@"IDEWorkspaceWindowController")]) {
         return workspaceController;
@@ -23,14 +23,14 @@
 
 #pragma mark - Targets
 
-+ (NSArray *)targetsInCurrentWorkspace {
-    XC(Workspace) workspace = [XMASXcode currentWorkspace];
+- (NSArray *)targetsInCurrentWorkspace {
+    XC(Workspace) workspace = [self currentWorkspace];
     return [workspace referencedBlueprints];
 }
 
 #pragma mark - Editors
 
-+ (id)currentEditor {
+- (id)currentEditor {
     XC(IDEEditorArea) editorArea = [(id)self.currentWorkspaceController editorArea]; // IDEEditorArea
     XC(IDEEditorContext) editorContext = [editorArea lastActiveEditorContext];          // IDEEditorContext
     return [editorContext editor];                                    // IDESourceCodeEditor, Xcode3ProjectEditor or IBDocumentEditor
@@ -38,21 +38,17 @@
 
 #pragma mark - Documents
 
-+ (NSURL *)currentSourceCodeDocumentFileURL {
-    id currentEditor = [XMASXcode currentEditor];
+- (NSURL *)currentSourceCodeDocumentFileURL {
+    id currentEditor = [self currentEditor];
     if ([currentEditor respondsToSelector:@selector(sourceCodeDocument)]) {
         return [[currentEditor sourceCodeDocument] fileURL];
     }
     return nil;
 }
 
-+ (XC(IDEDocumentController))sharedDocumentController {
-    return [NSClassFromString(@"IDEDocumentController") sharedDocumentController];
-}
+#pragma mark - source code indexes
 
-#pragma mark - Indexes
-
-+ (XC(IDEIndex))indexForCurrentWorkspace {
+- (XC(IDEIndex))indexForCurrentWorkspace {
     XC(IDEWorkspaceWindow) workspaceWindow;
     Class workspaceClass = NSClassFromString(@"IDEWorkspaceWindow");
 
@@ -67,23 +63,25 @@
     return [currentWorkspace index];
 }
 
-+ (id)callableSymbolKind {
+- (id)callableSymbolKind {
     Class sourceCodeSymbolClass = NSClassFromString(@"DVTSourceCodeSymbolKind");
     return sourceCodeSymbolClass ? [sourceCodeSymbolClass callableSymbolKind] : nil;
 }
 
-+ (id)instanceMethodSymbolKind {
+- (id)instanceMethodSymbolKind {
     Class sourceCodeSymbolClass = NSClassFromString(@"DVTSourceCodeSymbolKind");
     return sourceCodeSymbolClass ? [sourceCodeSymbolClass instanceMethodSymbolKind] : nil;
 }
 
-+ (NSArray *)instanceMethodSymbolsInWorkspace {
+- (NSArray *)instanceMethodSymbolsInWorkspace {
     XC(IDEIndex) xcodeSymbolIndex = [self indexForCurrentWorkspace];
     id instanceMethodSymbolKind = [self instanceMethodSymbolKind];
     return [xcodeSymbolIndex allSymbolsMatchingKind:instanceMethodSymbolKind workspaceOnly:YES];
 }
 
-+ (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext {
+#pragma mark - genius results 
+
+- (NSArray *)geniusCallerResultsForEditorContext:(id)editorContext {
     id maybeGeniusResultsCollection = [editorContext valueForKey:@"editorGeniusResults"];
 
     NSDictionary *geniusResultsForAllCategories = [maybeGeniusResultsCollection valueForKey:@"geniusResults"];

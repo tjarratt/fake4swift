@@ -17,7 +17,8 @@ describe(@"XMASObjcMethodCallParser", ^{
 
     XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
     XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
-    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver];
+    XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver
+                                xcodeRepository:nil];
 
     NSString *methodDeclarationFixture = [[NSBundle mainBundle] pathForResource:@"MethodDeclaration" ofType:@"m"];
     NSArray *methodDeclarationTokens = [tokenizer tokensForFilePath:methodDeclarationFixture];

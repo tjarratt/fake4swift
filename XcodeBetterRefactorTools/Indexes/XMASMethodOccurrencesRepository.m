@@ -1,16 +1,19 @@
 #import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XcodeInterfaces.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 
 @interface XMASMethodOccurrencesRepository ()
 @property (nonatomic) XC(IDEWorkspaceWindowController) workspaceWindowController;
+@property (nonatomic) XMASXcodeRepository *xcodeRepository;
 @end
 
 @implementation XMASMethodOccurrencesRepository
 
-- (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController {
+- (instancetype)initWithWorkspaceWindowController:(XC(IDEWorkspaceWindowController))workspaceWindowController
+                                  xcodeRepository:(XMASXcodeRepository *)xcodeRepository {
     if (self = [super init]) {
+        self.xcodeRepository = xcodeRepository;
         self.workspaceWindowController = workspaceWindowController;
     }
 
@@ -19,7 +22,7 @@
 
 - (NSSet *)callSitesOfCurrentlySelectedMethod {
     id editorContext = [[self.workspaceWindowController editorArea] lastActiveEditorContext];
-    NSArray *geniusSourceCodeCallerResults = [XMASXcode geniusCallerResultsForEditorContext:editorContext];
+    NSArray *geniusSourceCodeCallerResults = [self.xcodeRepository geniusCallerResultsForEditorContext:editorContext];
 
     NSMutableArray *results = [[NSMutableArray alloc] init];
     for (XC(IDESourceCodeCallerGeniusResult) sourceCodeCallerResult in geniusSourceCodeCallerResults) {
@@ -31,7 +34,7 @@
 
 - (NSSet *)forwardDeclarationsOfMethod:(XMASObjcMethodDeclaration *)methodDeclaration {
     NSMutableArray *matchingSymbols = [[NSMutableArray alloc] init];
-    NSArray *instanceMethodSymbols = [XMASXcode instanceMethodSymbolsInWorkspace];
+    NSArray *instanceMethodSymbols = [self.xcodeRepository instanceMethodSymbolsInWorkspace];
     for (XC(IDEIndexSymbol) symbol in instanceMethodSymbols) {
         if ([[symbol name] isEqualToString:methodDeclaration.selectorString]) {
             [matchingSymbols addObject:symbol];

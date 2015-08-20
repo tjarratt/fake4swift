@@ -5,7 +5,7 @@
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
-#import "XMASXcode.h"
+#import "XMASXcodeRepository.h"
 #import "XMASTokenizer.h"
 
 NSString * const noMethodSelected = @"No method selected. Put your cursor inside of a method declaration";
