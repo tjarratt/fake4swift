@@ -26,6 +26,7 @@ task :install => :clean do
   system_or_exit <<-BASH, output_file("install")
     xcodebuild
       -project #{PROJECT_NAME}.xcodeproj
+      -scheme #{PROJECT_NAME}
       -configuration #{CONFIGURATION}
       build install
   BASH
