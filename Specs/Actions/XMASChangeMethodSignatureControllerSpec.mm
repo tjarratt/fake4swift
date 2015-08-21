@@ -650,11 +650,6 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 [subject.refactorButton performClick:nil];
             });
 
-            it(@"should present a count of the number of matching instances of the old selector", ^{
-                alerter should have_received(@selector(flashMessage:withLogging:))
-                    .with(@"Changing 3 call sites of method:to:refactor:", NO);
-            });
-
             it(@"should ask its call expression rewriter to change each call site", ^{
                 callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
                     .with(@"something", methodToRefactor, subject.method);
