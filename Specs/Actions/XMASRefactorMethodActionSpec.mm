@@ -118,7 +118,7 @@ describe(@"XMASRefactorMethodAction", ^{
         });
     });
 
-    describe(@"-safelyRefactorMethod:", ^{
+    context(@"when an exception is raised while refactoring a method", ^{
         __block NSException *exception;
         __block XMASChangeMethodSignatureController<CedarDouble> *controller;
 
