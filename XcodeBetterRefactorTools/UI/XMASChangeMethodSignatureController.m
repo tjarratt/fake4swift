@@ -274,9 +274,13 @@ static NSString * const tableViewColumnRowIdentifier = @"";
                                         toNewMethod:self.method];
     }
 
+    NSString *implementationFile = self.filePath;
+    if ([implementationFile.pathExtension isEqualToString:@"h"]) {
+        implementationFile = [implementationFile.stringByDeletingPathExtension stringByAppendingPathExtension:@"m"];
+    }
     [self.methodDeclarationRewriter changeMethodDeclaration:self.originalMethod
                                                 toNewMethod:self.method
-                                                     inFile:self.filePath];
+                                                     inFile:implementationFile];
     [self.window close];
 
 }

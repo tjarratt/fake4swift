@@ -629,7 +629,34 @@ describe(@"XMASChangeMethodSignatureController", ^{
             methodToRefactor stub_method(@selector(selectorString)).and_return(@"method:to:refactor:");
         });
 
-        context(@"when everything goes exactly as planned", ^{
+        context(@"when the file being refactored is a .h file", ^{
+            __block NSString *filePathToRewrite;
+            __block NSArray *matchingForwardDeclarations;
+
+            beforeEach(^{
+                filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.h";
+
+                matchingForwardDeclarations = @[@"just", @"a", @"test"];
+                methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
+                    .with(methodToRefactor)
+                    .and_return(matchingForwardDeclarations);
+
+                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                    .and_return(@[@"something", @"goes", @"here"]);
+
+                subject.view should_not be_nil;
+                [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
+
+                [subject.refactorButton performClick:nil];
+            });
+
+            it(@"should also attempt to rewrite the .m file", ^{
+                methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
+                    .with(methodToRefactor, subject.method, @"/just/pretend/this/is/a/valid/file_path.m");
+            });
+        });
+
+        context(@"when the file being edited is a .m file", ^{
             __block NSString *filePathToRewrite;
             __block NSArray *matchingForwardDeclarations;
 
