@@ -63,6 +63,9 @@
 		F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */; };
 		F7B1D28A1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */; };
 		F7B1D28B1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */; };
+		F7B4B4C91B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B4B4C81B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m */; };
+		F7B4B4CA1B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B4B4C81B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m */; };
+		F7B4B4DE1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B4B4DC1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm */; };
 		F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B550801B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm */; };
 		F7B550831B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B550821B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm */; };
 		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
@@ -354,6 +357,9 @@
 		F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASAlert.m; sourceTree = "<group>"; };
 		F7B1D2861B5C5F7900C28AE7 /* XMASXcodeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASXcodeRepository.h; sourceTree = "<group>"; };
 		F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcodeRepository.m; sourceTree = "<group>"; };
+		F7B4B4C71B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcClassForwardDeclarationWriter.h; sourceTree = "<group>"; };
+		F7B4B4C81B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcClassForwardDeclarationWriter.m; sourceTree = "<group>"; };
+		F7B4B4DC1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcClassForwardDeclarationWriterSpec.mm; sourceTree = "<group>"; };
 		F7B550801B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASChangeMethodSignatureControllerProviderSpec.mm; sourceTree = "<group>"; };
 		F7B550821B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASChangeMethodSignatureControllerSpec.mm; sourceTree = "<group>"; };
 		F7BA62281B223369005B99AF /* Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -582,6 +588,8 @@
 				AE07954E1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m */,
 				AE76356A1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.h */,
 				AE76356B1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m */,
+				F7B4B4C71B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.h */,
+				F7B4B4C81B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m */,
 			);
 			path = "Code Rewriting";
 			sourceTree = "<group>";
@@ -593,6 +601,7 @@
 				F7EA8A5F1B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm */,
 				AE07955D1B68029D000DE4C8 /* XMASObjcMethodDeclarationRewriterSpec.mm */,
 				AE76356E1B68283C00F85396 /* XMASObjcMethodDeclarationStringWriterSpec.mm */,
+				F7B4B4DC1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm */,
 			);
 			path = "Code Rewriting";
 			sourceTree = "<group>";
@@ -1045,6 +1054,7 @@
 				F7B1D28A1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */,
 				F7D01C191B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
 				AE0C00E71B7175160065C099 /* XMASTokenizer.m in Sources */,
+				F7B4B4C91B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */,
 				AEDD2DFC1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
@@ -1073,6 +1083,7 @@
 				F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */,
 				F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */,
 				AE0C00E81B7176630065C099 /* XMASTokenizer.m in Sources */,
+				F7B4B4DE1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm in Sources */,
 				F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */,
 				F79837621B365DC2000F1EBD /* XMASEditMenu.m in Sources */,
 				AE0795501B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
@@ -1091,6 +1102,7 @@
 				F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */,
 				AE0C00CE1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm in Sources */,
 				F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
+				F7B4B4CA1B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */,
 				F7EA8A521B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
 				F7D01C081B5C602700FE62DA /* XMASObjcMethodCall.m in Sources */,
 				F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
