@@ -14,6 +14,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @interface XMASChangeMethodSignatureController ()
 
 @property (nonatomic, strong) NSWindow *window;
+@property (nonatomic, weak) IBOutlet NSTextField *returnTypeTextField;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableviewHeight;
 @property (nonatomic, weak) IBOutlet NSButton *addComponentButton;
@@ -75,6 +76,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
     self.filePath = filePath;
 
     self.window.contentView = self.view;
+    self.returnTypeTextField.stringValue = self.method.returnType;
 }
 
 #pragma mark - IBActions

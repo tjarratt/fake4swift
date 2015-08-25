@@ -167,12 +167,16 @@ describe(@"XMASChangeMethodSignatureController", ^{
                 subject.view should_not be_nil;
             });
 
-            it(@"should make the window key and visible", ^{
+            it(@"should make its window key and visible", ^{
                 window should have_received(@selector(makeKeyAndOrderFront:)).with(NSApp);
             });
 
             it(@"should set its view on the window", ^{
                 window should have_received(@selector(setContentView:)).with(subject.view);
+            });
+
+            it(@"should display the return type for the user to see", ^{
+                subject.returnTypeTextField.stringValue should equal(@"instancetype");
             });
 
             describe(@"the preview area", ^{
@@ -609,100 +613,21 @@ describe(@"XMASChangeMethodSignatureController", ^{
         });
     });
 
-    describe(@"clicking the cancel button", ^{
-        beforeEach(^{
-            subject.view should_not be_nil;
-            [subject refactorMethod:nil inFile:nil];
-
-            [subject.cancelButton performClick:nil];
-        });
-
-        it(@"should close the window", ^{
-            window should have_received(@selector(close));
-        });
-    });
-
-    describe(@"tapping the refactor button", ^{
+    describe(@"the cancel and refactor buttons", ^{
         __block XMASObjcMethodDeclaration *methodToRefactor;
+
         beforeEach(^{
             methodToRefactor = fake_for([XMASObjcMethodDeclaration class]);
             methodToRefactor stub_method(@selector(selectorString)).and_return(@"method:to:refactor:");
+            methodToRefactor stub_method(@selector(returnType)).and_return(@"something");
         });
 
-        context(@"when the file being refactored is a .h file", ^{
-            __block NSString *filePathToRewrite;
-            __block NSArray *matchingForwardDeclarations;
-
+        describe(@"clicking the cancel button", ^{
             beforeEach(^{
-                filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.h";
-
-                matchingForwardDeclarations = @[@"just", @"a", @"test"];
-                methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
-                    .with(methodToRefactor)
-                    .and_return(matchingForwardDeclarations);
-
-                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
-                    .and_return(@[@"something", @"goes", @"here"]);
-
                 subject.view should_not be_nil;
-                [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
+                [subject refactorMethod:methodToRefactor inFile:nil];
 
-                [subject.refactorButton performClick:nil];
-            });
-
-            it(@"should also attempt to rewrite the .m file", ^{
-                methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
-                    .with(methodToRefactor, subject.method, @"/just/pretend/this/is/a/valid/file_path.m");
-            });
-        });
-
-        context(@"when the file being edited is a .m file", ^{
-            __block NSString *filePathToRewrite;
-            __block NSArray *matchingForwardDeclarations;
-
-            beforeEach(^{
-                filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.m";
-
-                matchingForwardDeclarations = @[@"just", @"a", @"test"];
-                methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
-                    .with(methodToRefactor)
-                    .and_return(matchingForwardDeclarations);
-
-                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
-                    .and_return(@[@"something", @"goes", @"here"]);
-
-                subject.view should_not be_nil;
-                [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
-
-                [subject.refactorButton performClick:nil];
-            });
-
-            it(@"should ask its call expression rewriter to change each call site", ^{
-                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                    .with(@"something", methodToRefactor, subject.method);
-                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                    .with(@"goes", methodToRefactor, subject.method);
-                callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
-                    .with(@"here", methodToRefactor, subject.method);
-            });
-
-            it(@"should ask its method declaration rewriter to change the method declaration", ^{
-                methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
-                    .with(methodToRefactor, subject.method, filePathToRewrite);
-            });
-
-            it(@"should find matching forward declarations of the method", ^{
-                methodOccurrencesRepository should have_received(@selector(forwardDeclarationsOfMethod:))
-                    .with(methodToRefactor);
-            });
-
-            it(@"should rewrite each forward declaration of the method", ^{
-                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
-                    .with(@"just", subject.method);
-                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
-                    .with(@"a", subject.method);
-                methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
-                    .with(@"test", subject.method);
+                [subject.cancelButton performClick:nil];
             });
 
             it(@"should close the window", ^{
@@ -710,44 +635,127 @@ describe(@"XMASChangeMethodSignatureController", ^{
             });
         });
 
-        context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
-            beforeEach(^{
-                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
-                    .and_raise_exception();
+        describe(@"tapping the refactor button", ^{
+            context(@"when the file being refactored is a .h file", ^{
+                __block NSString *filePathToRewrite;
+                __block NSArray *matchingForwardDeclarations;
 
-                subject.view should_not be_nil;
-                [subject refactorMethod:methodToRefactor inFile:nil];
+                beforeEach(^{
+                    filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.h";
+
+                    matchingForwardDeclarations = @[@"just", @"a", @"test"];
+                    methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
+                        .with(methodToRefactor)
+                        .and_return(matchingForwardDeclarations);
+
+                    methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                        .and_return(@[@"something", @"goes", @"here"]);
+
+                    subject.view should_not be_nil;
+                    [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
+
+                    [subject.refactorButton performClick:nil];
+                });
+
+                it(@"should also attempt to rewrite the .m file", ^{
+                    methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
+                    .with(methodToRefactor, subject.method, @"/just/pretend/this/is/a/valid/file_path.m");
+                });
             });
 
-            it(@"should catch the exception and not allow xcode to crash", ^{
-                ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+            context(@"when the file being edited is a .m file", ^{
+                __block NSString *filePathToRewrite;
+                __block NSArray *matchingForwardDeclarations;
+
+                beforeEach(^{
+                    filePathToRewrite = @"/just/pretend/this/is/a/valid/file_path.m";
+
+                    matchingForwardDeclarations = @[@"just", @"a", @"test"];
+                    methodOccurrencesRepository stub_method(@selector(forwardDeclarationsOfMethod:))
+                        .with(methodToRefactor)
+                        .and_return(matchingForwardDeclarations);
+
+                    methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                        .and_return(@[@"something", @"goes", @"here"]);
+
+                    subject.view should_not be_nil;
+                    [subject refactorMethod:methodToRefactor inFile:filePathToRewrite];
+
+                    [subject.refactorButton performClick:nil];
+                });
+
+                it(@"should ask its call expression rewriter to change each call site", ^{
+                    callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                        .with(@"something", methodToRefactor, subject.method);
+                    callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                        .with(@"goes", methodToRefactor, subject.method);
+                    callExpressionRewriter should have_received(@selector(changeCallsite:fromMethod:toNewMethod:))
+                        .with(@"here", methodToRefactor, subject.method);
+                });
+
+                it(@"should ask its method declaration rewriter to change the method declaration", ^{
+                    methodDeclarationRewriter should have_received(@selector(changeMethodDeclaration:toNewMethod:inFile:))
+                        .with(methodToRefactor, subject.method, filePathToRewrite);
+                });
+
+                it(@"should find matching forward declarations of the method", ^{
+                    methodOccurrencesRepository should have_received(@selector(forwardDeclarationsOfMethod:))
+                        .with(methodToRefactor);
+                });
+
+                it(@"should rewrite each forward declaration of the method", ^{
+                    methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                        .with(@"just", subject.method);
+                    methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                        .with(@"a", subject.method);
+                    methodDeclarationRewriter should have_received(@selector(changeMethodDeclarationForSymbol:toMethod:))
+                        .with(@"test", subject.method);
+                });
+
+                it(@"should close the window", ^{
+                    window should have_received(@selector(close));
+                });
             });
 
-            it(@"should log the exception", ^{
-                [subject.refactorButton performClick:nil];
-                alerter should have_received(@selector(flashComfortingMessageForException:));
-            });
-        });
+            context(@"when something goes awry with the indexed symbol repository and an exception would be raised", ^{
+                beforeEach(^{
+                    methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                        .and_raise_exception();
 
-        context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
-            beforeEach(^{
-                methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
-                    .and_return(@[@"something", @"goes", @"here"]);
+                    subject.view should_not be_nil;
+                    [subject refactorMethod:methodToRefactor inFile:nil];
+                });
 
-                callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))
-                    .and_raise_exception();
+                it(@"should catch the exception and not allow xcode to crash", ^{
+                    ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+                });
 
-                subject.view should_not be_nil;
-                [subject refactorMethod:methodToRefactor inFile:nil];
-            });
-
-            it(@"should catch the exception and not allow xcode to crash", ^{
-                ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+                it(@"should log the exception", ^{
+                    [subject.refactorButton performClick:nil];
+                    alerter should have_received(@selector(flashComfortingMessageForException:));
+                });
             });
 
-            it(@"should log the exception", ^{
-                [subject.refactorButton performClick:nil];
-                alerter should have_received(@selector(flashComfortingMessageForException:));
+            context(@"when something goes awry while rewriting the callsites and an exception would be raised", ^{
+                beforeEach(^{
+                    methodOccurrencesRepository stub_method(@selector(callSitesOfCurrentlySelectedMethod))
+                        .and_return(@[@"something", @"goes", @"here"]);
+
+                    callExpressionRewriter stub_method(@selector(changeCallsite:fromMethod:toNewMethod:))
+                        .and_raise_exception();
+
+                    subject.view should_not be_nil;
+                    [subject refactorMethod:methodToRefactor inFile:nil];
+                });
+
+                it(@"should catch the exception and not allow xcode to crash", ^{
+                    ^{ [subject.refactorButton performClick:nil]; } should_not raise_exception();
+                });
+
+                it(@"should log the exception", ^{
+                    [subject.refactorButton performClick:nil];
+                    alerter should have_received(@selector(flashComfortingMessageForException:));
+                });
             });
         });
     });

@@ -12,6 +12,7 @@
 
 @interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
+@property (nonatomic, weak, readonly) NSTextField *returnTypeTextField;
 @property (nonatomic, weak, readonly) NSTableView *tableView;
 @property (nonatomic, weak, readonly) NSLayoutConstraint *tableviewHeight;
 @property (nonatomic, weak, readonly) NSButton *addComponentButton;
