@@ -37,18 +37,21 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-TO-2JM" userLabel="Return Type Value">
-                            <rect key="frame" x="92" y="8" width="115" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Return Type Value" id="rT7-Q7-1EP">
-                                <font key="font" metaFont="system"/>
+                            <rect key="frame" x="92" y="8" width="517" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Return Type Value" id="rT7-Q7-1EP">
+                                <font key="font" size="13" name="Menlo-Regular"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="v9Y-Wu-qhV"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
                         <constraint firstItem="a4I-TO-2JM" firstAttribute="top" secondItem="k2m-hO-Fnp" secondAttribute="top" constant="8" id="5zL-wr-7fG"/>
                         <constraint firstItem="XQu-Pu-lsL" firstAttribute="leading" secondItem="k2m-hO-Fnp" secondAttribute="leading" constant="8" id="DZu-KH-cXb"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a4I-TO-2JM" secondAttribute="trailing" constant="8" id="Dgt-MZ-RLr"/>
+                        <constraint firstAttribute="trailing" secondItem="a4I-TO-2JM" secondAttribute="trailing" constant="8" id="Dgt-MZ-RLr"/>
                         <constraint firstAttribute="bottom" secondItem="a4I-TO-2JM" secondAttribute="bottom" constant="8" id="DoF-gh-2xT"/>
                         <constraint firstItem="XQu-Pu-lsL" firstAttribute="top" secondItem="k2m-hO-Fnp" secondAttribute="top" constant="8" id="TqB-7m-K3r"/>
                         <constraint firstAttribute="bottom" secondItem="XQu-Pu-lsL" secondAttribute="bottom" constant="8" id="eU9-og-8Ry"/>

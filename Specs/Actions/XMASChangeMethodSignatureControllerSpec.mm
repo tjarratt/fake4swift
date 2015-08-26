@@ -108,6 +108,35 @@ describe(@"XMASChangeMethodSignatureController", ^{
             window should have_received(@selector(setReleasedWhenClosed:)).with(NO);
         });
 
+        it(@"should have set itself as the delegate of its return type textfield", ^{
+            subject.returnTypeTextField.delegate should be_same_instance_as(subject);
+        });
+
+        describe(@"when the user changes the return type of the method", ^{
+            beforeEach(^{
+                subject.view should_not be_nil;
+
+                subject.returnTypeTextField.stringValue = @"updated";
+
+                NSNotification *notification = fake_for([NSNotification class]);
+                notification stub_method(@selector(object)).and_return(subject.returnTypeTextField);
+
+                methodDeclarationStringWriter stub_method(@selector(formatInstanceMethodDeclaration:))
+                    .again()
+                    .and_return(@"- (updated)goesHere");
+
+                [subject controlTextDidChange:notification];
+            });
+
+            it(@"should update its representation of the method", ^{
+                subject.method.returnType should equal(@"updated");
+            });
+
+            it(@"should update the preview", ^{
+                subject.previewTextField.stringValue should equal(@"- (updated)goesHere");
+            });
+        });
+
         describe(@"as a <NSTextFieldDelegate>", ^{
             beforeEach(^{
                 subject.view should_not be_nil;

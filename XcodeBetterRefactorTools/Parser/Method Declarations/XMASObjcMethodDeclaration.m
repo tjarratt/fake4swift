@@ -162,7 +162,14 @@
                                                             columnNumber:self.columnNumber];
 }
 
-
+- (instancetype)changeReturnTypeTo:(NSString *)newReturnType {
+    return [[XMASObjcMethodDeclaration alloc] initWithSelectorComponents:self.components
+                                                              parameters:self.parameters
+                                                              returnType:newReturnType
+                                                                   range:self.range
+                                                              lineNumber:self.lineNumber
+                                                            columnNumber:self.columnNumber];
+}
 
 #pragma mark - Private
 

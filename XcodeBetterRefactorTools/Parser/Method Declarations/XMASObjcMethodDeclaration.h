@@ -28,5 +28,6 @@
 - (instancetype)changeSelectorNameAtIndex:(NSUInteger)index to:(NSString *)newType;
 - (instancetype)changeParameterTypeAtIndex:(NSUInteger)index to:(NSString *)newType;
 - (instancetype)changeParameterLocalNameAtIndex:(NSUInteger)index to:(NSString *)newName;
+- (instancetype)changeReturnTypeTo:(NSString *)newReturnType;
 
 @end

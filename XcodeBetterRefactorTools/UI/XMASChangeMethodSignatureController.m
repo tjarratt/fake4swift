@@ -237,6 +237,12 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 #pragma mark - <NSTextfieldDelegate>
 
 - (void)controlTextDidChange:(NSNotification *)notification {
+    if (notification.object == self.returnTypeTextField) {
+        self.method = [self.method changeReturnTypeTo:self.returnTypeTextField.stringValue];
+        self.previewTextField.stringValue = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:self.method];
+        return;
+    }
+
     for (NSUInteger row = 0; row < self.method.components.count; ++row) {
         for (NSUInteger column = 0; column < 3; ++column) {
             NSTextField *textField = (id)[self.tableView viewAtColumn:(NSInteger)column row:(NSInteger)row makeIfNecessary:YES];
