@@ -34,14 +34,15 @@
                          inFile:(NSString *)filePath {
     NSString *methodDeclString = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:newMethodDeclaration];
 
+    NSStringEncoding stringEncoding;
     NSString *oldFileContents = [NSString stringWithContentsOfFile:filePath
-                                                          encoding:NSUTF8StringEncoding
+                                                          usedEncoding:&stringEncoding
                                                              error:nil];
     NSString *newFileContents = [oldFileContents stringByReplacingCharactersInRange:oldMethodDeclaration.range
                                                                          withString:methodDeclString];
     [newFileContents writeToFile:filePath
                       atomically:YES
-                        encoding:NSUTF8StringEncoding
+                        encoding:stringEncoding
                            error:nil];
 }
 
@@ -67,8 +68,9 @@
         return;
     }
 
+    NSStringEncoding usedEncoding;
     NSString *oldFileContents = [NSString stringWithContentsOfFile:fileToRewrite
-                                                          encoding:NSUTF8StringEncoding
+                                                      usedEncoding:&usedEncoding
                                                              error:nil];
 
     NSString *methodDeclString = [self.methodDeclarationStringWriter formatInstanceMethodDeclaration:newMethodDeclaration];
@@ -76,7 +78,7 @@
                                                                         withString:methodDeclString];
     [refactoredFile writeToFile:fileToRewrite
                      atomically:YES
-                       encoding:NSUTF8StringEncoding
+                       encoding:usedEncoding
                           error:nil];
 }
 

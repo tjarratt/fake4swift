@@ -101,8 +101,9 @@
         newArguments[index] = @"nil";
     }
 
+    NSStringEncoding usedEncoding;
     NSString *oldFileContents = [NSString stringWithContentsOfFile:callExpressionToRewrite.filePath
-                                                         encoding:NSUTF8StringEncoding
+                                                      usedEncoding:&usedEncoding
                                                             error:nil];
 
     NSString *newCallExpressionString = [self.callExpressionStringWriter callExpression:newSelector
@@ -113,7 +114,7 @@
                                                                        withString:newCallExpressionString];
     [refactoredFile writeToFile:callExpressionToRewrite.filePath
                      atomically:YES
-                       encoding:NSUTF8StringEncoding
+                       encoding:usedEncoding
                           error:nil];
 }
 

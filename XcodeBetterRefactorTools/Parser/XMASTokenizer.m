@@ -33,8 +33,8 @@
     NSArray *args = [self argsForClangKitFromSearchPaths:searchPathsForFile];
 
     NSString *fileContents = [NSString stringWithContentsOfFile:filePath
-                                                              encoding:NSUTF8StringEncoding
-                                                                 error:nil];
+                                                   usedEncoding:nil
+                                                          error:nil];
 
     CKTranslationUnit *translationUnit = [CKTranslationUnit translationUnitWithText:fileContents
                                                                            language:CKLanguageObjCPP
