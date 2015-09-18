@@ -9,6 +9,6 @@
 @end
 
 @interface XMASEditMenu (UnavailableInitializers)
-+ (instancetype)new;
-- (instancetype)init;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 @end

@@ -69,7 +69,7 @@
 		F7B4B4DE1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B4B4DC1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm */; };
 		F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B550801B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm */; };
 		F7B550831B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7B550821B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm */; };
-		F7BA62301B223369005B99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.m */; };
+		F7BA62301B223369005B99AF /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7BA622F1B223369005B99AF /* main.mm */; };
 		F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BA625A1B2233D0005B99AF /* Cedar.framework */; };
 		F7BEDD161B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD101B5C5FB800A4704B /* XMASChangeMethodSignatureController.m */; };
 		F7BEDD171B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD101B5C5FB800A4704B /* XMASChangeMethodSignatureController.m */; };
@@ -158,13 +158,6 @@
 			remoteGlobalIDString = 96B5F9F6144A81A7000A6A5D;
 			remoteInfo = "Cedar iOS Host App";
 		};
-		F7BA62671B2233D0005B99AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 96B5FA11144A81A8000A6A5D;
-			remoteInfo = "Cedar iOS SenTestingKit Tests";
-		};
 		F7BA62691B2233D0005B99AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
@@ -185,13 +178,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = AE248FAA19DCD52500092C14;
 			remoteInfo = "Cedar OS X Host AppTests";
-		};
-		F7BA626F1B2233D0005B99AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AEB8818719DCD62D00F081BA;
-			remoteInfo = "Cedar OS X Failing Test Bundle";
 		};
 		F7BA62711B2233E5005B99AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -248,6 +234,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 29CAC6E3150292AD00731862;
 			remoteInfo = Blindside;
+		};
+		F7E0BFFF1BABE89B00A4A669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AE4864F81B067620005DB302;
+			remoteInfo = "Cedar-iOS-Framework";
+		};
+		F7E0C0011BABE89B00A4A669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AE03FBE91B06C33B00013784;
+			remoteInfo = "Cedar-iOS-Framework Specs";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -365,7 +365,7 @@
 		F7B550821B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASChangeMethodSignatureControllerSpec.mm; sourceTree = "<group>"; };
 		F7BA62281B223369005B99AF /* Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Specs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BA622B1B223369005B99AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7BA622F1B223369005B99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F7BA622F1B223369005B99AF /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cedar.xcodeproj; path = Cedar/Cedar.xcodeproj; sourceTree = "<group>"; };
 		F7BEDD0F1B5C5FB800A4704B /* XMASChangeMethodSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASChangeMethodSignatureController.h; sourceTree = "<group>"; };
 		F7BEDD101B5C5FB800A4704B /* XMASChangeMethodSignatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASChangeMethodSignatureController.m; sourceTree = "<group>"; };
@@ -672,7 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				F7BA622B1B223369005B99AF /* Info.plist */,
-				F7BA622F1B223369005B99AF /* main.m */,
+				F7BA622F1B223369005B99AF /* main.mm */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -697,11 +697,11 @@
 				F7BA62621B2233D0005B99AF /* Cedar iOS Specs.app */,
 				F7BA62641B2233D0005B99AF /* Cedar iOS FrameworkSpecs.app */,
 				F7BA62661B2233D0005B99AF /* Cedar iOS Host App.app */,
-				F7BA62681B2233D0005B99AF /* Cedar iOS SenTestingKit Tests.octest */,
 				F7BA626A1B2233D0005B99AF /* XCUnitAppTests.xctest */,
 				F7BA626C1B2233D0005B99AF /* Cedar OS X Host App.app */,
 				F7BA626E1B2233D0005B99AF /* Cedar OS X Host AppTests.xctest */,
-				F7BA62701B2233D0005B99AF /* Cedar OS X Failing Test Bundle.octest */,
+				F7E0C0001BABE89B00A4A669 /* Cedar.framework */,
+				F7E0C0021BABE89B00A4A669 /* Cedar-iOS-Framework Specs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -927,14 +927,14 @@
 		F7BA62621B2233D0005B99AF /* Cedar iOS Specs.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = "Cedar iOS Specs.app";
+			path = "Cedar-StaticLib Specs.app";
 			remoteRef = F7BA62611B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F7BA62641B2233D0005B99AF /* Cedar iOS FrameworkSpecs.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = "Cedar iOS FrameworkSpecs.app";
+			path = "Cedar-iOS StaticFrameworkSpecs.app";
 			remoteRef = F7BA62631B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -943,13 +943,6 @@
 			fileType = wrapper.application;
 			path = "Cedar iOS Host App.app";
 			remoteRef = F7BA62651B2233D0005B99AF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F7BA62681B2233D0005B99AF /* Cedar iOS SenTestingKit Tests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Cedar iOS SenTestingKit Tests.octest";
-			remoteRef = F7BA62671B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F7BA626A1B2233D0005B99AF /* XCUnitAppTests.xctest */ = {
@@ -971,13 +964,6 @@
 			fileType = wrapper.cfbundle;
 			path = "Cedar OS X Host AppTests.xctest";
 			remoteRef = F7BA626D1B2233D0005B99AF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F7BA62701B2233D0005B99AF /* Cedar OS X Failing Test Bundle.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Cedar OS X Failing Test Bundle.octest";
-			remoteRef = F7BA626F1B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */ = {
@@ -1013,6 +999,20 @@
 			fileType = wrapper.application;
 			path = "Blindside-iOS-Framework BuildTest.app";
 			remoteRef = F7E009341B7FDA8A00B9E6E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E0C0001BABE89B00A4A669 /* Cedar.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cedar.framework;
+			remoteRef = F7E0BFFF1BABE89B00A4A669 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7E0C0021BABE89B00A4A669 /* Cedar-iOS-Framework Specs.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Cedar-iOS-Framework Specs.app";
+			remoteRef = F7E0C0011BABE89B00A4A669 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1108,7 +1108,7 @@
 				F7EA8A521B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
 				F7D01C081B5C602700FE62DA /* XMASObjcMethodCall.m in Sources */,
 				F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
-				F7BA62301B223369005B99AF /* main.m in Sources */,
+				F7BA62301B223369005B99AF /* main.mm in Sources */,
 				F7EA8A601B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm in Sources */,
 				F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */,
 				F7D01C181B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
