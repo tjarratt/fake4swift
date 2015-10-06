@@ -56,6 +56,7 @@
 		F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */; };
 		F761C3DB1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F761C3DA1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm */; };
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */; };
 		F79837621B365DC2000F1EBD /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
@@ -109,6 +110,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F78BDE431BC3A00000AFB7D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 34E710AB1B9F85210088AB71;
+			remoteInfo = "Blindside-watchOS";
+		};
+		F78BDE451BC3A00000AFB7D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 34A18BD31B9F887200A65DB3;
+			remoteInfo = "Blindside-watchOS BuildTest";
+		};
+		F78BDE471BC3A00000AFB7D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 34A18BDF1B9F887300A65DB3;
+			remoteInfo = "Blindside-watchOS BuildTest Extension";
+		};
 		F7BA62591B2233D0005B99AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
@@ -419,6 +441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */,
 				F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */,
 				F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */,
 				F7BA62731B22BF8E005B99AF /* Cedar.framework in Frameworks */,
@@ -694,8 +717,8 @@
 				F7BA625C1B2233D0005B99AF /* Cedar OS X Specs */,
 				F7BA625E1B2233D0005B99AF /* Cedar OS X FocusedSpecs */,
 				F7BA62601B2233D0005B99AF /* libCedar-StaticLib.a */,
-				F7BA62621B2233D0005B99AF /* Cedar iOS Specs.app */,
-				F7BA62641B2233D0005B99AF /* Cedar iOS FrameworkSpecs.app */,
+				F7BA62621B2233D0005B99AF /* Cedar-StaticLib Specs.app */,
+				F7BA62641B2233D0005B99AF /* Cedar-iOS StaticFrameworkSpecs.app */,
 				F7BA62661B2233D0005B99AF /* Cedar iOS Host App.app */,
 				F7BA626A1B2233D0005B99AF /* XCUnitAppTests.xctest */,
 				F7BA626C1B2233D0005B99AF /* Cedar OS X Host App.app */,
@@ -780,6 +803,9 @@
 				F7E009311B7FDA8A00B9E6E6 /* libBlindside-StaticLib.a */,
 				F7E009331B7FDA8A00B9E6E6 /* Blindside.framework */,
 				F7E009351B7FDA8A00B9E6E6 /* Blindside-iOS-Framework BuildTest.app */,
+				F78BDE441BC3A00000AFB7D9 /* Blindside.framework */,
+				F78BDE461BC3A00000AFB7D9 /* Blindside-watchOS BuildTest.app */,
+				F78BDE481BC3A00000AFB7D9 /* Blindside-watchOS BuildTest Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -896,6 +922,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F78BDE441BC3A00000AFB7D9 /* Blindside.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Blindside.framework;
+			remoteRef = F78BDE431BC3A00000AFB7D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F78BDE461BC3A00000AFB7D9 /* Blindside-watchOS BuildTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Blindside-watchOS BuildTest.app";
+			remoteRef = F78BDE451BC3A00000AFB7D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F78BDE481BC3A00000AFB7D9 /* Blindside-watchOS BuildTest Extension.appex */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.app-extension";
+			path = "Blindside-watchOS BuildTest Extension.appex";
+			remoteRef = F78BDE471BC3A00000AFB7D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F7BA625A1B2233D0005B99AF /* Cedar.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -924,14 +971,14 @@
 			remoteRef = F7BA625F1B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F7BA62621B2233D0005B99AF /* Cedar iOS Specs.app */ = {
+		F7BA62621B2233D0005B99AF /* Cedar-StaticLib Specs.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Cedar-StaticLib Specs.app";
 			remoteRef = F7BA62611B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F7BA62641B2233D0005B99AF /* Cedar iOS FrameworkSpecs.app */ = {
+		F7BA62641B2233D0005B99AF /* Cedar-iOS StaticFrameworkSpecs.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Cedar-iOS StaticFrameworkSpecs.app";
@@ -1309,7 +1356,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1357,7 +1403,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
