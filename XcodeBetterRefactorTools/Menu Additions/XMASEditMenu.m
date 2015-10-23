@@ -48,7 +48,7 @@
     item.action = @selector(generateFakeAction:);
 
     item.keyEquivalent = @"g";
-    item.keyEquivalentModifierMask = NSCommandKeyMask & NSControlKeyMask;
+    item.keyEquivalentModifierMask = NSControlKeyMask;
     return item;
 }
 
