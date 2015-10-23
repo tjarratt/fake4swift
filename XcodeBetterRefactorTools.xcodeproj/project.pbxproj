@@ -58,6 +58,7 @@
 		F72749601B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
 		F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */; };
+		F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F74BBB501B273D760092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */; };
@@ -322,6 +323,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */,
 				F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */,
 				F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */,
 			);
@@ -1293,6 +1295,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = "$(HOME)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/**",
@@ -1311,7 +1314,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
@@ -1335,6 +1338,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = "$(HOME)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/**",
@@ -1353,7 +1357,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
