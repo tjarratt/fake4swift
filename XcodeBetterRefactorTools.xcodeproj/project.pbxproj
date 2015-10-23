@@ -43,11 +43,8 @@
 		F70C9FE31BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE21BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm */; settings = {ASSET_TAGS = (); }; };
 		F70C9FE61BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */; settings = {ASSET_TAGS = (); }; };
 		F70C9FE71BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */; settings = {ASSET_TAGS = (); }; };
-		F70C9FEA1BCA29AD00E9C019 /* XMASSelectedTextProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE91BCA29AD00E9C019 /* XMASSelectedTextProxy.m */; settings = {ASSET_TAGS = (); }; };
-		F70C9FEB1BCA29AD00E9C019 /* XMASSelectedTextProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE91BCA29AD00E9C019 /* XMASSelectedTextProxy.m */; settings = {ASSET_TAGS = (); }; };
 		F70C9FEE1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */; settings = {ASSET_TAGS = (); }; };
 		F70C9FEF1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */; settings = {ASSET_TAGS = (); }; };
-		F70CA0341BCAEBEA00E9C019 /* SourceKitten.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70CA0331BCAEBDA00E9C019 /* SourceKitten.framework */; };
 		F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */; };
 		F70E1FC11B243AF000D971E6 /* MethodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */; };
 		F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC51B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm */; };
@@ -88,6 +85,9 @@
 		F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */; };
 		F7BEDD1A1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
 		F7BEDD1B1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
+		F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */; settings = {ASSET_TAGS = (); }; };
+		F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */; settings = {ASSET_TAGS = (); }; };
+		F7C49EC91BDA19CF00DEDACF /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01C051B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C001B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m */; };
@@ -372,11 +372,8 @@
 		F70C9FE21BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASGenerateFakeActionSpec.mm; sourceTree = "<group>"; };
 		F70C9FE41BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASCurrentSourceCodeDocumentProxy.h; sourceTree = "<group>"; };
 		F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASCurrentSourceCodeDocumentProxy.m; sourceTree = "<group>"; };
-		F70C9FE81BCA29AD00E9C019 /* XMASSelectedTextProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASSelectedTextProxy.h; sourceTree = "<group>"; };
-		F70C9FE91BCA29AD00E9C019 /* XMASSelectedTextProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASSelectedTextProxy.m; sourceTree = "<group>"; };
 		F70C9FEC1BCA2E6300E9C019 /* XMASFakeProtocolPersister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASFakeProtocolPersister.h; sourceTree = "<group>"; };
 		F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASFakeProtocolPersister.m; sourceTree = "<group>"; };
-		F70CA0331BCAEBDA00E9C019 /* SourceKitten.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SourceKitten.framework; sourceTree = "<group>"; };
 		F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationParserSpec.mm; sourceTree = "<group>"; };
 		F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclaration.m; sourceTree = "<group>"; };
 		F70E1FC51B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationSpec.mm; sourceTree = "<group>"; };
@@ -415,6 +412,10 @@
 		F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASChangeMethodSignatureControllerProvider.m; sourceTree = "<group>"; };
 		F7BEDD141B5C5FB800A4704B /* XMASWindowProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASWindowProvider.h; sourceTree = "<group>"; };
 		F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASWindowProvider.m; sourceTree = "<group>"; };
+		F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XcodeBetterRefactorTools-Bridging-Header.h"; sourceTree = "<group>"; };
+		F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Specs-Bridging-Header.h"; sourceTree = "<group>"; };
+		F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedTextProxy.swift; sourceTree = "<group>"; };
+		F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SourceKittenFramework.framework; sourceTree = "<group>"; };
 		F7D01BFB1B5C601700FE62DA /* XMASObjcTypeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcTypeParser.h; sourceTree = "<group>"; };
 		F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcTypeParser.m; sourceTree = "<group>"; };
 		F7D01BFF1B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcCallExpressionTokenFilter.h; sourceTree = "<group>"; };
@@ -454,7 +455,7 @@
 				F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */,
 				960FA0931605819F00923A87 /* CoreFoundation.framework in Frameworks */,
 				F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */,
-				F70CA0341BCAEBEA00E9C019 /* SourceKitten.framework in Frameworks */,
+				F7C49EC91BDA19CF00DEDACF /* SourceKittenFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,14 +691,15 @@
 				F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */,
 				AE0C00CF1B7134DF0065C099 /* XMASSearchPathExpander.h */,
 				AE0C00D01B7134DF0065C099 /* XMASSearchPathExpander.m */,
-				F70C9FE81BCA29AD00E9C019 /* XMASSelectedTextProxy.h */,
-				F70C9FE91BCA29AD00E9C019 /* XMASSelectedTextProxy.m */,
 				AE71D5B01B66F5CE00E40833 /* XMASXcodeAdditions.h */,
 				AE71D5B11B66F5CE00E40833 /* XMASXcodeAdditions.m */,
 				F7B1D2861B5C5F7900C28AE7 /* XMASXcodeRepository.h */,
 				F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */,
 				AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */,
 				AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */,
+				F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */,
+				F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */,
+				F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -732,7 +734,7 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				F70CA0331BCAEBDA00E9C019 /* SourceKitten.framework */,
+				F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */,
 				F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */,
 				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
 				F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */,
@@ -915,6 +917,7 @@
 		960FA0861605819F00923A87 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					F7BA62271B223369005B99AF = {
@@ -1119,7 +1122,6 @@
 			files = (
 				960FA0A2160584AC00923A87 /* XMASBetterRefactorTools.m in Sources */,
 				F7BEDD161B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */,
-				F70C9FEA1BCA29AD00E9C019 /* XMASSelectedTextProxy.m in Sources */,
 				F7D01C151B5C603700FE62DA /* XMASObjcMethodDeclaration.m in Sources */,
 				F7B1D2881B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
 				AE0C00D11B7134DF0065C099 /* XMASSearchPathExpander.m in Sources */,
@@ -1140,6 +1142,7 @@
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE07954F1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
+				F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */,
 				F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7BEDD181B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
 				F70C9FEE1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
@@ -1179,6 +1182,7 @@
 				F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */,
 				AE810AAD1B72C2FA0097573C /* FakeXcodeFileReference.m in Sources */,
 				F7BEDD171B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */,
+				F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */,
 				F7D01C0A1B5C602700FE62DA /* XMASObjcMethodCallParser.m in Sources */,
 				F7F09FF41B281A1F00727AD7 /* XMASWindowProviderSpec.mm in Sources */,
@@ -1205,7 +1209,6 @@
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
-				F70C9FEB1BCA29AD00E9C019 /* XMASSelectedTextProxy.m in Sources */,
 				F70C9FEF1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
 				F761C3DB1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm in Sources */,
@@ -1278,6 +1281,7 @@
 		960FA09E160581A000923A87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -1310,6 +1314,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
@@ -1317,6 +1323,7 @@
 		960FA09F160581A000923A87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -1349,6 +1356,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;
@@ -1398,6 +1407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1435,6 +1445,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/Specs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1445,6 +1457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1475,6 +1488,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/Specs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};

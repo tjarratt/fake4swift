@@ -24,7 +24,7 @@
     NSMenu *editMenu = [xcodeRepository menuWithTitle:@"Edit"];
     [editMenu addItem:NSMenuItem.separatorItem];
     [editMenu addItem:self.refactorCurrentMethodItem];
-    [editMenu addItem:self.generateFakeForSwitchProtocolItem];
+    [editMenu addItem:self.generateFakeForSwiftProtocolItem];
 }
 
 #pragma mark - Menu items
@@ -41,7 +41,7 @@
     return item;
 }
 
-- (NSMenuItem *)generateFakeForSwitchProtocolItem {
+- (NSMenuItem *)generateFakeForSwiftProtocolItem {
     NSMenuItem *item = [[NSMenuItem alloc] init];
     item.title = @"Generate Fake Protocol";
     item.target = self;

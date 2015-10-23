@@ -1,6 +1,6 @@
 #import "XMASGenerateFakeAction.h"
 #import "XMASAlert.h"
-#import "XMASSelectedTextProxy.h"
+#import "XcodeBetterRefactorTools-Swift.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 
