@@ -1,6 +1,7 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASXcodeRepository.h"
+#import "XMASGenerateFakeAction.h"
 
 @interface XMASEditMenu ()
 
@@ -23,6 +24,7 @@
     NSMenu *editMenu = [xcodeRepository menuWithTitle:@"Edit"];
     [editMenu addItem:NSMenuItem.separatorItem];
     [editMenu addItem:self.refactorCurrentMethodItem];
+    [editMenu addItem:self.generateFakeForSwiftProtocolItem];
 }
 
 #pragma mark - Menu items
@@ -39,12 +41,29 @@
     return item;
 }
 
+- (NSMenuItem *)generateFakeForSwiftProtocolItem {
+    NSMenuItem *item = [[NSMenuItem alloc] init];
+    item.title = @"Generate Fake Protocol";
+    item.target = self;
+    item.action = @selector(generateFakeAction:);
+
+    item.keyEquivalent = @"g";
+    item.keyEquivalentModifierMask = NSControlKeyMask;
+    return item;
+}
+
 #pragma mark - Menu Actions
 
 - (void)refactorCurrentMethodAction:(id)sender {
     XMASRefactorMethodAction *refactorAction = [self.injector getInstance:[XMASRefactorMethodAction class]];
 
     [refactorAction safelyRefactorMethodUnderCursor];
+}
+
+- (void)generateFakeAction:(id)sender {
+    XMASGenerateFakeAction *generateFakeAction = [self.injector getInstance:[XMASGenerateFakeAction class]];
+
+    [generateFakeAction safelyGenerateFakeForProtocolUnderCursor];
 }
 
 #pragma mark - NSObject

@@ -7,6 +7,10 @@
 #import "XMASXcodeRepository.h"
 #import "XMASTokenizer.h"
 #import "XMASObjcMethodDeclarationParser.h"
+#import "XMASGenerateFakeAction.h"
+#import "XMASFakeProtocolPersister.h"
+#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "Specs-Swift.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -35,6 +39,14 @@ describe(@"Injector", ^{
         refactorAction.methodDeclParser should be_instance_of([XMASObjcMethodDeclarationParser class]);
         refactorAction.controllerProvider should be_instance_of([XMASChangeMethodSignatureControllerProvider class]);
         refactorAction.currentEditor should be_same_instance_as(fakeEditor);
+    });
+
+    it(@"should provide a Generate Fake Action", ^{
+        XMASGenerateFakeAction *generateFakeAction = [injector getInstance:[XMASGenerateFakeAction class]];
+        generateFakeAction.alerter should be_instance_of([XMASAlert class]);
+        generateFakeAction.selectedTextProxy should conform_to(@protocol(XMASSelectedTextProxy));
+        generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
+        generateFakeAction.sourceCodeDocumentProxy should be_instance_of([XMASCurrentSourceCodeDocumentProxy class]);
     });
 });
 

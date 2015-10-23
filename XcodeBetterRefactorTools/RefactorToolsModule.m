@@ -15,6 +15,11 @@
 #import "XMASObjcMethodCallParser.h"
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
+#import "XMASGenerateFakeAction.h"
+#import "XMASFakeProtocolPersister.h"
+#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedTextProxy.h"
+#import "SwiftCompatibilityHeader.h"
 
 static XMASRefactorMethodAction *action;
 
@@ -37,6 +42,13 @@ static XMASRefactorMethodAction *action;
 
         [action setupWithEditor:editor];
         return action;
+    }];
+
+    [binder bind:[XMASGenerateFakeAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
+        return [[XMASGenerateFakeAction alloc] initWithAlerter:[injector getInstance:[XMASAlert class]]
+                                             selectedTextProxy:[injector getInstance:@protocol(XMASSelectedTextProxy)]
+                                         fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
+                                       sourceCodeDocumentProxy:[injector getInstance:[XMASCurrentSourceCodeDocumentProxy class]]];
     }];
 
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
@@ -84,6 +96,8 @@ static XMASRefactorMethodAction *action;
     [binder bind:[XMASObjcMethodCallParser class] toBlock:^id(NSArray * args, id<BSInjector> injector) {
         return [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:[injector getInstance:[XMASObjcCallExpressionTokenFilter class]]];
     }];
+
+    [binder bind:@protocol(XMASSelectedTextProxy) toClass:[XMASSelectedSwiftProtocolProxy class]];
 }
 
 @end

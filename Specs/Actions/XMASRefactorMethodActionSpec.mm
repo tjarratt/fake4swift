@@ -52,8 +52,8 @@ describe(@"XMASRefactorMethodAction", ^{
         methodDeclaration stub_method(@selector(range)).and_return(NSMakeRange(5, 15));
         methodDeclaration stub_method(@selector(selectorString)).and_return(@"initWithThis:andThat:");
         methodDeclParser stub_method(@selector(parseMethodDeclarationsFromTokens:))
-            .with(tokens)
-            .and_return(@[methodDeclaration]);
+                .with(tokens)
+                .and_return(@[methodDeclaration]);
 
         id location = nice_fake_for(@protocol(XCP(DVTTextDocumentLocation)));
         location stub_method(@selector(characterRange)).and_return(cursorRange);

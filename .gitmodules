@@ -4,3 +4,9 @@
 [submodule "Externals/Blindside"]
 	path = Externals/Blindside
 	url = https://github.com/jbsf/blindside.git
+[submodule "Externals/SourceKitten"]
+	path = Externals/SourceKitten
+	url = https://github.com/jpsim/SourceKitten.git
+[submodule "Externals/SwiftXPC"]
+	path = Externals/SwiftXPC
+	url = https://github.com/jpsim/SwiftXPC.git
