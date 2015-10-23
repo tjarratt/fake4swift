@@ -3,6 +3,7 @@ BetterRefactorTools is an Xcode plugin that adds handy shortcuts for refactoring
 # Installation
 * `git clone https://github.com/tjarratt/Xcode-Better-Refactor-Tools.git`
 * `cd Xcode-Better-Refactor-Tools`
+* `git submodule update --init --recursive`
 * `rake install`
 
 # Features
