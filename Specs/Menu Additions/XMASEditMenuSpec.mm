@@ -3,6 +3,7 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "RefactorToolsModule.h"
+#import "XMASGenerateFakeAction.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -30,6 +31,21 @@ describe(@"XMASEditMenu", ^{
 
         it(@"should attempt to safely refactor the method under the cursor", ^{
             action should have_received(@selector(safelyRefactorMethodUnderCursor));
+        });
+    });
+
+    describe(@"-generateFakeForSwiftProtocol:", ^{
+        __block XMASGenerateFakeAction *action;
+
+        beforeEach(^{
+            action = nice_fake_for([XMASGenerateFakeAction class]);
+            [injector bind:[XMASGenerateFakeAction class] toInstance:action];
+
+            [subject generateFakeAction:nil];
+        });
+
+        it(@"should attempt to safely generate a fake for the protocol under the cursor", ^{
+            action should have_received(@selector(safelyGenerateFakeForProtocolUnderCursor));
         });
     });
 });

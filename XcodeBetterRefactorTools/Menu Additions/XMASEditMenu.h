@@ -4,6 +4,7 @@
 @interface XMASEditMenu : NSObject
 - (void)attach;
 - (void)refactorCurrentMethodAction:(id)sender;
+- (void)generateFakeAction:(id)sender;
 
 - (instancetype)initWithInjector:(id<BSInjector>)injector NS_DESIGNATED_INITIALIZER;
 @end
