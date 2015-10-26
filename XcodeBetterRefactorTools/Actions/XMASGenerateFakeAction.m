@@ -1,13 +1,14 @@
 #import "XMASGenerateFakeAction.h"
 #import "XMASAlert.h"
-#import "XcodeBetterRefactorTools-Swift.h"
+#import "SwiftCompatibilityHeader.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedTextProxy.h"
 
 
 @interface XMASGenerateFakeAction ()
 @property (nonatomic, strong) XMASAlert *alerter;
-@property (nonatomic, strong) XMASSelectedTextProxy *selectedTextProxy;
+@property (nonatomic, strong) id<XMASSelectedTextProxy> selectedTextProxy;
 @property (nonatomic, strong) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, strong) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 @end
@@ -15,7 +16,7 @@
 @implementation XMASGenerateFakeAction
 
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
-              selectedTextProxy:(XMASSelectedTextProxy *)selectedTextProxy
+              selectedTextProxy:(id <XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy{
     if (self = [super init]) {
@@ -44,7 +45,7 @@
     }
 
     NSString *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath];
-    if (!selectedProtocol) {
+    if (!selectedProtocol || [selectedProtocol isEqualToString:@""]) {
         [self.alerter flashMessage:@"put your cursor on a swift protocol to generate a fake for it"];
         return;
     }

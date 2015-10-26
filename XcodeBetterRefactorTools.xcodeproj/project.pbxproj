@@ -86,8 +86,9 @@
 		F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */; };
 		F7BEDD1A1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
 		F7BEDD1B1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
-		F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */; settings = {ASSET_TAGS = (); }; };
-		F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */; settings = {ASSET_TAGS = (); }; };
+		F7C0348F1BDDF3BF00C7DC86 /* SwiftXPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; };
+		F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift */; settings = {ASSET_TAGS = (); }; };
+		F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift */; settings = {ASSET_TAGS = (); }; };
 		F7C49EC91BDA19CF00DEDACF /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
@@ -218,6 +219,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = AEEE1FB511DC271300029872;
 			remoteInfo = Cedar;
+		};
+		F7C034891BDDF3A100C7DC86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8FE43F71A01A8AF002672BD;
+			remoteInfo = SwiftXPC;
+		};
+		F7C0348B1BDDF3A100C7DC86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8FE44021A01A8AF002672BD;
+			remoteInfo = SwiftXPCTests;
+		};
+		F7C0348D1BDDF3B800C7DC86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E8FE43F61A01A8AF002672BD;
+			remoteInfo = SwiftXPC;
 		};
 		F7E0092C1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -388,6 +410,8 @@
 		F727495D1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASMethodOccurrencesRepository.h; sourceTree = "<group>"; };
 		F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASMethodOccurrencesRepository.m; sourceTree = "<group>"; };
 		F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcTypeParserSpec.mm; sourceTree = "<group>"; };
+		F73A20BB1BDC2D54003BD1E5 /* SwiftCompatibilityHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCompatibilityHeader.h; sourceTree = "<group>"; };
+		F73A20D01BDC2DF7003BD1E5 /* XMASSelectedTextProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASSelectedTextProxy.h; sourceTree = "<group>"; };
 		F74BBB4E1B273D760092AED9 /* XMASRefactorMethodAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASRefactorMethodAction.h; sourceTree = "<group>"; };
 		F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASRefactorMethodAction.m; sourceTree = "<group>"; };
 		F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASComponentSwapperSpec.mm; sourceTree = "<group>"; };
@@ -414,9 +438,10 @@
 		F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASChangeMethodSignatureControllerProvider.m; sourceTree = "<group>"; };
 		F7BEDD141B5C5FB800A4704B /* XMASWindowProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASWindowProvider.h; sourceTree = "<group>"; };
 		F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASWindowProvider.m; sourceTree = "<group>"; };
+		F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftXPC.xcodeproj; path = SwiftXPC/SwiftXPC.xcodeproj; sourceTree = "<group>"; };
 		F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XcodeBetterRefactorTools-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Specs-Bridging-Header.h"; sourceTree = "<group>"; };
-		F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedTextProxy.swift; sourceTree = "<group>"; };
+		F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedSwiftProtocolProxy.swift; sourceTree = "<group>"; };
 		F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SourceKittenFramework.framework; sourceTree = "<group>"; };
 		F7D01BFB1B5C601700FE62DA /* XMASObjcTypeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcTypeParser.h; sourceTree = "<group>"; };
 		F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcTypeParser.m; sourceTree = "<group>"; };
@@ -453,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7C0348F1BDDF3BF00C7DC86 /* SwiftXPC.framework in Frameworks */,
 				960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */,
 				F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */,
 				960FA0931605819F00923A87 /* CoreFoundation.framework in Frameworks */,
@@ -538,6 +564,7 @@
 				F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */,
 				960FA0A0160584AC00923A87 /* XMASBetterRefactorTools.h */,
 				960FA0A1160584AC00923A87 /* XMASBetterRefactorTools.m */,
+				F73A20BB1BDC2D54003BD1E5 /* SwiftCompatibilityHeader.h */,
 			);
 			path = XcodeBetterRefactorTools;
 			sourceTree = "<group>";
@@ -699,9 +726,10 @@
 				F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */,
 				AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */,
 				AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */,
-				F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift */,
+				F7C49E9D1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift */,
 				F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */,
 				F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */,
+				F73A20D01BDC2DF7003BD1E5 /* XMASSelectedTextProxy.h */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -736,6 +764,7 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */,
 				F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */,
 				F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */,
 				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
@@ -787,6 +816,15 @@
 				F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		F7C034711BDDF3A100C7DC86 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */,
+				F7C0348C1BDDF3A100C7DC86 /* SwiftXPCTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F7D01BF81B5C5FE300FE62DA /* Parser */ = {
@@ -886,6 +924,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F7C0348E1BDDF3B800C7DC86 /* PBXTargetDependency */,
 				F7E009461B7FDAA900B9E6E6 /* PBXTargetDependency */,
 			);
 			name = XcodeBetterRefactorTools;
@@ -946,6 +985,10 @@
 				{
 					ProductGroup = F7BA624A1B2233D0005B99AF /* Products */;
 					ProjectRef = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
+				},
+				{
+					ProductGroup = F7C034711BDDF3A100C7DC86 /* Products */;
+					ProjectRef = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1049,6 +1092,20 @@
 			remoteRef = F7BA626D1B2233D0005B99AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftXPC.framework;
+			remoteRef = F7C034891BDDF3A100C7DC86 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7C0348C1BDDF3A100C7DC86 /* SwiftXPCTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftXPCTests.xctest;
+			remoteRef = F7C0348B1BDDF3A100C7DC86 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1144,7 +1201,7 @@
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE07954F1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
-				F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */,
+				F7C49E9E1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7BEDD181B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
 				F70C9FEE1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
@@ -1184,7 +1241,7 @@
 				F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */,
 				AE810AAD1B72C2FA0097573C /* FakeXcodeFileReference.m in Sources */,
 				F7BEDD171B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */,
-				F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedTextProxy.swift in Sources */,
+				F7C49E9F1BDA0E4A00DEDACF /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */,
 				F7D01C0A1B5C602700FE62DA /* XMASObjcMethodCallParser.m in Sources */,
 				F7F09FF41B281A1F00727AD7 /* XMASWindowProviderSpec.mm in Sources */,
@@ -1227,6 +1284,11 @@
 			name = Cedar;
 			targetProxy = F7BA62711B2233E5005B99AF /* PBXContainerItemProxy */;
 		};
+		F7C0348E1BDDF3B800C7DC86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftXPC;
+			targetProxy = F7C0348D1BDDF3B800C7DC86 /* PBXContainerItemProxy */;
+		};
 		F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Blindside;
@@ -1246,10 +1308,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1269,6 +1328,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1299,7 +1359,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/**",
-					"$(PROJECT_DIR)/Externals",
 				);
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
@@ -1342,7 +1401,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Externals/**",
-					"$(PROJECT_DIR)/Externals",
 				);
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_MODEL_TUNING = G5;
@@ -1433,10 +1491,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "SPECS=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1482,6 +1537,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "SPECS=1";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

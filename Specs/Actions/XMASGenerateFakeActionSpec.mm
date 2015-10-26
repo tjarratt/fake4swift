@@ -1,7 +1,9 @@
 #import <Cedar/Cedar.h>
-#import "XMASGenerateFakeAction.h"
+#import "Specs-Swift.h"
+
 #import "XMASAlert.h"
 #import "XMASSelectedTextProxy.h"
+#import "XMASGenerateFakeAction.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 
@@ -10,17 +12,17 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(XMASGenerateFakeActionSpec)
 
-fdescribe(@"XMASGenerateFakeAction", ^{
+describe(@"XMASGenerateFakeAction", ^{
     __block XMASGenerateFakeAction *subject;
 
     __block XMASAlert *alerter;
-    __block XMASSelectedTextProxy *selectedTextProxy;
+    __block id<XMASSelectedTextProxy> selectedTextProxy;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
-        selectedTextProxy = nice_fake_for([XMASSelectedTextProxy class]);
+        selectedTextProxy = nice_fake_for(@protocol(XMASSelectedTextProxy));
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         sourceCodeDocumentProxy = nice_fake_for([XMASCurrentSourceCodeDocumentProxy class]);
 
@@ -36,7 +38,9 @@ fdescribe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the cursor is inside a swift protocol declaration", ^{
         beforeEach(^{
-            selectedTextProxy stub_method(@selector(selectedProtocol)).and_return(@"myProtocol");
+            selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
+                .with(@"/path/to/something.swift")
+                .and_return(@"myProtocol");
 
             sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
                 .and_return(@"/path/to/something.swift");
