@@ -44,14 +44,14 @@
         return;
     }
 
-    NSString *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath];
-    if (!selectedProtocol || [selectedProtocol isEqualToString:@""]) {
+    ProtocolDeclaration *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath];
+    if (!selectedProtocol || [selectedProtocol.name isEqualToString:@""]) {
         [self.alerter flashMessage:@"put your cursor on a swift protocol to generate a fake for it"];
         return;
     }
 
-    [self.alerter flashMessage:[NSString stringWithFormat:@"generating fake '%@'", selectedProtocol]];
-    [self.fakeProtocolPersister persistProtocolNamed:selectedProtocol nearSourceFile:currentFilePath];
+    [self.alerter flashMessage:[NSString stringWithFormat:@"generating fake '%@'", selectedProtocol.name]];
+    [self.fakeProtocolPersister persistProtocolNamed:selectedProtocol.name nearSourceFile:currentFilePath];
 }
 
 #pragma mark - NSObject

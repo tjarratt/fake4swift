@@ -2,13 +2,9 @@ import AppKit
 import SwiftXPC
 import SourceKittenFramework
 
-protocol MySpecialProtocol {
-    func randomDouble()
-}
-
 class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
-    func selectedProtocolInFile(fileName : String!) -> String! {
+    func selectedProtocolInFile(fileName : String!) -> (ProtocolDeclaration?) {
         let xcodeRepository = XMASXcodeRepository.init()
         let editor = xcodeRepository.currentEditor()
         let locations = editor.currentSelectedDocumentLocations()
@@ -26,18 +22,33 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 }
 
                 let protocolName = dictValue["key.name"] as! String
+
+                NSLog("looking at a protocol '%@' %@", protocolName, dictValue.description)
+
                 let protocolRange = NSMakeRange(
                     Int.init(truncatingBitPattern: dictValue["key.nameoffset"] as! Int64),
                     Int.init(truncatingBitPattern: dictValue["key.namelength"] as! Int64)
                 )
 
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
-                    return protocolName
+                    return ProtocolDeclaration.init(
+                        name: protocolName,
+                        classOnly: false,
+                        includedProtocols: [],
+                        normalFuncs: [],
+                        staticFuncs: [],
+                        mutatingFuncs: [],
+                        initializers: [],
+                        getters: [],
+                        setters: [],
+                        subscriptGetters: [],
+                        subscriptSetters: []
+                    )
                 }
             }
         }
 
-        return ""
+        return nil
     }
 
     func rangesOverlap(cursorRange : NSRange, protocolRange : NSRange) -> Bool {
@@ -45,7 +56,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
             return false
         }
 
-        if protocolRange.location > cursorRange.location + cursorRange.length {
+        if cursorRange.location > protocolRange.location + protocolRange.length {
             return false
         }
 

@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
 
+@class ProtocolDeclaration;
+
 @protocol XMASSelectedTextProxy <NSObject>
 
-- (NSString *)selectedProtocolInFile:(NSString *)fileName;
+- (ProtocolDeclaration *)selectedProtocolInFile:(NSString *)fileName;
 
 @end
