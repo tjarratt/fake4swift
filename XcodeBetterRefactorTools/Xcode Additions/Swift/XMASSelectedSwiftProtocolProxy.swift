@@ -23,8 +23,6 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
                 let protocolName = dictValue["key.name"] as! String
 
-                NSLog("looking at a protocol '%@' %@", protocolName, dictValue.description)
-
                 let protocolRange = NSMakeRange(
                     Int.init(truncatingBitPattern: dictValue["key.nameoffset"] as! Int64),
                     Int.init(truncatingBitPattern: dictValue["key.namelength"] as! Int64)
