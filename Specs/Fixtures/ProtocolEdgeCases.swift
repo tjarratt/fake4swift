@@ -16,6 +16,9 @@ protocol MySpecialProtocol {
     var numberOfWheels: Int { get }             //readonly
     var numberOfSomething: Int { get set }      //read-write
 
+    static var classGetter : Int { get }
+    static var classAccessor : Int { get set }
+
     // TODO : think about optionals
     // TODO : think about non-nils
     // e.g.: (does that affect params or return values?)
@@ -31,7 +34,7 @@ protocol IncludesOtherProtocol : MyOptionalProtocol, NSObjectProtocol { // this 
 
 }
 
-protocol ImplementableByClassesOnly : class {
+public protocol ImplementableByClassesOnly : class {
 
 }
 

@@ -30,6 +30,40 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                     Int.init(truncatingBitPattern: dictValue["key.namelength"] as! Int64)
                 )
 
+                /*
+
+                notes : 
+                
+                classOnly ? Probably can't get that from sourcekit today (maybe?)
+                
+                optional methods :  look at key.substructure
+                                    look for key.kind = source.lang.swift.decl.function.method.instance
+                                    where key.attributes includes key.attribute = source.decl.attribute.optional
+                
+                includedProtocols : look for key.inheritedtypes
+                                    map over key.name to get a string for each protocol type
+                
+                functions (normal) : just look for key.substructure with decl.function.method.instance as key.kind
+                
+                functions (static) : key.kind = source.lang.swift.decl.function.method.static
+                
+                functions (mutating) : key.attributes includes {key.name = source.decl.attribute.mutating}
+                
+                initializers : instance.method where method name starts with init
+                                seems to lose type information? (swiftc dump-ast still has it tho!)
+                
+                getters : key.kind = source.lang.swift.decl.var.instance
+                            type info is in key.typename
+                setters : key.kind = source.lang.swift.decl.var.instance
+                            type info is in key.typename
+                
+                        (pretty shitty, we seem to lose information about whether these are just GET or SET or GET + Set)
+
+                static getters and setters -> key.kind = source.lang.swift.decl.var.static
+                
+                subscript anything -> TOTALLY UNAVAILABLE
+                */
+
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
                     return ProtocolDeclaration.init(
                         name: protocolName,
