@@ -24,6 +24,8 @@ protocol MySpecialProtocol {
     // e.g.: (does that affect params or return values?)
 
     // TODO : think about "out" params (e.g.: NSError **)
+    
+    // TODO : what about protocols with partial implementations (h/t to Alevine)
 }
 
 @objc protocol MyOptionalProtocol {
