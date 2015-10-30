@@ -3,12 +3,14 @@ import SwiftXPC
 import SourceKittenFramework
 
 class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
+    var xcodeRepository : XMASXcodeRepository
+
+    init(xcodeRepo : XMASXcodeRepository) {
+        xcodeRepository = xcodeRepo
+    }
 
     func selectedProtocolInFile(fileName : String!) -> (ProtocolDeclaration?) {
-        let xcodeRepository = XMASXcodeRepository.init()
-        let editor = xcodeRepository.currentEditor()
-        let locations = editor.currentSelectedDocumentLocations()
-        let selectedRange = locations.last!.characterRange()
+        let selectedRange : NSRange = xcodeRepository.cursorSelectionRange()
 
         let sourceFile = File.init(path: fileName)
         let fileStructure = Structure.init(file: sourceFile!)

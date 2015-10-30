@@ -6,6 +6,7 @@
 - (NSMenu *)menuWithTitle:(NSString *)title;
 
 - (id)currentEditor;
+- (NSRange)cursorSelectionRange;
 
 - (XC(IDEWorkspaceWindowController))currentWorkspaceController;
 - (XC(Workspace))currentWorkspace;

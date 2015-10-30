@@ -97,7 +97,10 @@ static XMASRefactorMethodAction *action;
         return [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:[injector getInstance:[XMASObjcCallExpressionTokenFilter class]]];
     }];
 
-    [binder bind:@protocol(XMASSelectedTextProxy) toClass:[XMASSelectedSwiftProtocolProxy class]];
+    [binder bind:@protocol(XMASSelectedTextProxy) toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        XMASXcodeRepository *xcodeRepo = [injector getInstance:[XMASXcodeRepository class]];
+        return [[XMASSelectedSwiftProtocolProxy alloc] initWithXcodeRepo:xcodeRepo];
+    }];
 }
 
 @end

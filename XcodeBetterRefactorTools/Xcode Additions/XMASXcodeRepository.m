@@ -36,6 +36,10 @@
     return [editorContext editor];                                    // IDESourceCodeEditor, Xcode3ProjectEditor or IBDocumentEditor
 }
 
+- (NSRange)cursorSelectionRange {
+    return [[[[self currentEditor] currentSelectedDocumentLocations] lastObject] characterRange];
+}
+
 #pragma mark - Documents
 
 - (NSURL *)currentSourceCodeDocumentFileURL {
