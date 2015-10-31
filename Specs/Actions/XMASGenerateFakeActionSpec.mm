@@ -37,10 +37,15 @@ describe(@"XMASGenerateFakeAction", ^{
     });
 
     describe(@"when the cursor is inside a swift protocol declaration", ^{
+        __block ProtocolDeclaration *fakeProtocol;
+
         beforeEach(^{
+            fakeProtocol = nice_fake_for([ProtocolDeclaration class]);
+            fakeProtocol stub_method(@selector(name)).and_return(@"MySpecialProtocol");
+
             selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
                 .with(@"/path/to/something.swift")
-                .and_return(@"myProtocol");
+                .and_return(@"MySpecialProtocol");
 
             sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
                 .and_return(@"/path/to/something.swift");
@@ -48,13 +53,13 @@ describe(@"XMASGenerateFakeAction", ^{
 
         it(@"should write out a new file using its fakeProtocolPersister", ^{
             fakeProtocolPersister should have_received(@selector(persistProtocolNamed:nearSourceFile:))
-                .with(@"myProtocol")
+                .with(@"MySpecialProtocol")
                 .and_with(@"/path/to/something.swift");
         });
 
         it(@"should alert the user the action succeeded", ^{
             alerter should have_received(@selector(flashMessage:))
-                .with(@"generating fake 'myProtocol'");
+                .with(@"generating fake 'MySpecialProtocol'");
         });
     });
 
