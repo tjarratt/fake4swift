@@ -26,14 +26,6 @@ import Foundation
             self.name = name
             self.returnType = returnType
     }
-
-    override func isEqual(object: AnyObject?) -> Bool {
-        if let other = object as? Accessor? {
-            return other?.name == self.name && other?.returnType == self.returnType
-        }
-
-        return false
-    }
 }
 
 typealias MethodName = String
@@ -52,6 +44,8 @@ typealias ReturnType = String
         initializers: Array<MethodDeclaration>,
         getters: Array<Accessor>,
         setters: Array<Accessor>,
+        staticGetters: Array<Accessor>,
+        staticSetters: Array<Accessor>,
         subscriptGetters: Array<Accessor>,
         subscriptSetters: Array<Accessor>
         ) {
@@ -63,6 +57,8 @@ typealias ReturnType = String
             self.initializers = initializers
             self.getters = getters
             self.setters = setters
+            self.staticGetters = staticGetters
+            self.staticSetters = staticSetters
             self.subscriptGetters = subscriptGetters
             self.subscriptSetters = subscriptSetters
             return
@@ -76,6 +72,9 @@ typealias ReturnType = String
 
     var getters : Array<Accessor>
     var setters : Array<Accessor>
+
+    var staticGetters : Array<Accessor>
+    var staticSetters : Array<Accessor>
 
     var subscriptGetters : Array<Accessor>
     var subscriptSetters : Array<Accessor>

@@ -2,6 +2,10 @@ import AppKit
 import SwiftXPC
 import SourceKittenFramework
 
+let protocolDeclKind : String = "source.lang.swift.decl.protocol"
+let instanceVarKind  : String = "source.lang.swift.decl.var.instance"
+let staticVarKind    : String = "source.lang.swift.decl.var.static"
+
 class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     var xcodeRepository : XMASXcodeRepository
 
@@ -19,7 +23,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
         for item in structureArray {
             if let protocolDict = item as? XPCDictionary {
-                if protocolDict["key.kind"]! != "source.lang.swift.decl.protocol" {
+                if protocolDict["key.kind"]! != protocolDeclKind {
                     continue
                 }
 
@@ -67,7 +71,8 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 */
 
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
-                    let (readonlyAccessors, readWriteAccessors) = accessorsFromProtocolDecl(protocolDict)
+                    let (getters, setters) = accessorsFromProtocolDecl(protocolDict, kind: instanceVarKind)
+                    let (staticGetters, staticSetters) = accessorsFromProtocolDecl(protocolDict, kind: staticVarKind)
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
@@ -76,8 +81,10 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                         staticFuncs: [],
                         mutatingFuncs: [],
                         initializers: [],
-                        getters: readonlyAccessors,
-                        setters: readWriteAccessors,
+                        getters: getters,
+                        setters: setters,
+                        staticGetters: staticGetters,
+                        staticSetters: staticSetters,
                         subscriptGetters: [],
                         subscriptSetters: []
                     )
@@ -100,7 +107,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         return true
     }
 
-    func accessorsFromProtocolDecl(protocolDict : XPCDictionary) -> (Array<Accessor>, Array<Accessor>) {
+    func accessorsFromProtocolDecl(protocolDict : XPCDictionary, kind : String) -> (Array<Accessor>, Array<Accessor>) {
         let fileSubStructure : XPCRepresentable = protocolDict["key.substructure"]!
         let structureArray = fileSubStructure as! XPCArray
 
@@ -109,7 +116,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
         for item in structureArray {
             if let protocolDict = item as? XPCDictionary {
-                if protocolDict["key.kind"]! != "source.lang.swift.decl.var.instance" {
+                if protocolDict["key.kind"]! != kind {
                     continue
                 }
 

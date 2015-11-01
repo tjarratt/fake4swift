@@ -37,12 +37,20 @@ fdescribe(@"XMASSelectedSwiftProtocolProxy", ^{
             protocolDeclaration.name should equal(@"MySpecialProtocol");
         });
 
-        it(@"should parse the instance variable getters and setters", ^{
+        it(@"should parse the instance getters and setters", ^{
             [protocolDeclaration.getters.firstObject valueForKey:@"name"] should equal(@"numberOfWheels");
             [protocolDeclaration.getters.firstObject valueForKey:@"returnType"] should equal(@"Int");
 
             [protocolDeclaration.setters.firstObject valueForKey:@"name"] should equal(@"numberOfSomething");
             [protocolDeclaration.setters.firstObject valueForKey:@"returnType"] should equal(@"Int");
+        });
+
+        it(@"should parse the static getters and setters", ^{
+            [protocolDeclaration.staticGetters.firstObject valueForKey:@"name"] should equal(@"classGetter");
+            [protocolDeclaration.staticGetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
+
+            [protocolDeclaration.staticSetters.firstObject valueForKey:@"name"] should equal(@"classAccessor");
+            [protocolDeclaration.staticSetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
         });
     });
 });
