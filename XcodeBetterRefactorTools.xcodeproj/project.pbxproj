@@ -66,6 +66,8 @@
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78655891BE4A77E00BB3026 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F78655901BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */; };
+		F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
 		F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */; };
@@ -338,6 +340,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */,
 				F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */,
 				F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */,
 				AE0C00EA1B717AA90065C099 /* Cedar.h in Copy Fixtures */,
@@ -430,6 +433,7 @@
 		F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASRefactorMethodAction.m; sourceTree = "<group>"; };
 		F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASComponentSwapperSpec.mm; sourceTree = "<group>"; };
 		F761C3DA1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionTokenFilterSpec.mm; sourceTree = "<group>"; };
+		F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASSelectedSwiftProtocolProxySpec.mm; sourceTree = "<group>"; };
 		F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEditMenuSpec.mm; sourceTree = "<group>"; };
 		F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InjectorSpec.mm; sourceTree = "<group>"; };
 		F79FF6791BDF62A90058EFE0 /* SwiftProtocolDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftProtocolDeclaration.swift; sourceTree = "<group>"; };
@@ -600,6 +604,7 @@
 			children = (
 				AE0C00CD1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm */,
 				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
+				F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -986,7 +991,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					F7BA62271B223369005B99AF = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1257,6 +1262,7 @@
 				F79FF67E1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */,
 				F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */,
+				F78655901BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm in Sources */,
 				F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */,
 				AE0C00E81B7176630065C099 /* XMASTokenizer.m in Sources */,
 				F79FF6801BDF64DA0058EFE0 /* ProtocolEdgeCases.swift in Sources */,
@@ -1341,6 +1347,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -1409,6 +1416,7 @@
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tomato.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
@@ -1451,6 +1459,7 @@
 				INFOPLIST_FILE = XcodeBetterRefactorTools/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				LD_RUNPATH_SEARCH_PATHS = "/Developer @loader_path/../Frameworks/ @executable_path/../Frameworks @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tomato.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/XcodeBetterRefactorTools-Bridging-Header.h";
@@ -1538,6 +1547,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tomato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/Specs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1582,6 +1592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks/ @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tomato.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XcodeBetterRefactorTools/Xcode Additions/Specs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

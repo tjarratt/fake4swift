@@ -45,7 +45,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
             selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
                 .with(@"/path/to/something.swift")
-                .and_return(@"MySpecialProtocol");
+                .and_return(fakeProtocol);
 
             sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
                 .and_return(@"/path/to/something.swift");

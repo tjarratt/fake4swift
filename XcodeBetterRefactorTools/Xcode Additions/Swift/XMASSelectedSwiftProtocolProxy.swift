@@ -18,18 +18,18 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         let structureArray = fileSubStructure as! XPCArray
 
         for item in structureArray {
-            if let dictValue = item as? XPCDictionary {
-                if dictValue["key.kind"]! != "source.lang.swift.decl.protocol" {
+            if let protocolDict = item as? XPCDictionary {
+                if protocolDict["key.kind"]! != "source.lang.swift.decl.protocol" {
                     continue
                 }
 
-                let protocolName = dictValue["key.name"] as! String
+                let protocolName = protocolDict["key.name"] as! String
 
-                NSLog("looking at a protocol '%@' %@", protocolName, dictValue.description)
+                NSLog("looking at a protocol '%@' %@", protocolName, protocolDict.description)
 
                 let protocolRange = NSMakeRange(
-                    Int.init(truncatingBitPattern: dictValue["key.nameoffset"] as! Int64),
-                    Int.init(truncatingBitPattern: dictValue["key.namelength"] as! Int64)
+                    Int.init(truncatingBitPattern: protocolDict["key.nameoffset"] as! Int64),
+                    Int.init(truncatingBitPattern: protocolDict["key.namelength"] as! Int64)
                 )
 
                 /*
@@ -67,16 +67,17 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 */
 
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
+                    let (readonlyAccessors, readWriteAccessors) = accessorsFromProtocolDecl(protocolDict)
+
                     return ProtocolDeclaration.init(
                         name: protocolName,
-                        classOnly: false,
                         includedProtocols: [],
                         normalFuncs: [],
                         staticFuncs: [],
                         mutatingFuncs: [],
                         initializers: [],
-                        getters: [],
-                        setters: [],
+                        getters: readonlyAccessors,
+                        setters: readWriteAccessors,
                         subscriptGetters: [],
                         subscriptSetters: []
                     )
@@ -97,5 +98,35 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         }
 
         return true
+    }
+
+    func accessorsFromProtocolDecl(protocolDict : XPCDictionary) -> (Array<Accessor>, Array<Accessor>) {
+        let fileSubStructure : XPCRepresentable = protocolDict["key.substructure"]!
+        let structureArray = fileSubStructure as! XPCArray
+
+        var getters : Array<Accessor> = []
+        var setters : Array<Accessor> = []
+
+        for item in structureArray {
+            if let protocolDict = item as? XPCDictionary {
+                if protocolDict["key.kind"]! != "source.lang.swift.decl.var.instance" {
+                    continue
+                }
+
+                let accessor = Accessor.init(
+                    name: protocolDict["key.name"] as! String,
+                    returnType: protocolDict["key.typename"] as! String
+                )
+
+                let accessibility : XPCRepresentable? = protocolDict["key.setter_accessibility"]
+                if let _ = accessibility as? String {
+                    setters.append(accessor)
+                } else {
+                    getters.append(accessor)
+                }
+            }
+        }
+
+        return (getters, setters)
     }
 }
