@@ -43,8 +43,6 @@
 		F70C9FE31BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE21BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm */; };
 		F70C9FE61BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */; };
 		F70C9FE71BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */; };
-		F70C9FEE1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */; };
-		F70C9FEF1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */; };
 		F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */; };
 		F70E1FC11B243AF000D971E6 /* MethodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */; };
 		F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70E1FC51B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm */; };
@@ -133,6 +131,9 @@
 		F7FC457D1BE7515C00299694 /* MySomewhatSpecialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
 		F7FC457E1BE7525500299694 /* FakeForMySpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */; };
 		F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
+		F7FC45821BE786DA00299694 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */; };
+		F7FC45831BE787E900299694 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */; };
+		F7FC45851BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -422,8 +423,6 @@
 		F70C9FE21BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASGenerateFakeActionSpec.mm; sourceTree = "<group>"; };
 		F70C9FE41BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASCurrentSourceCodeDocumentProxy.h; sourceTree = "<group>"; };
 		F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASCurrentSourceCodeDocumentProxy.m; sourceTree = "<group>"; };
-		F70C9FEC1BCA2E6300E9C019 /* XMASFakeProtocolPersister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASFakeProtocolPersister.h; sourceTree = "<group>"; };
-		F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASFakeProtocolPersister.m; sourceTree = "<group>"; };
 		F70E1FB61B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationParserSpec.mm; sourceTree = "<group>"; };
 		F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodDeclaration.m; sourceTree = "<group>"; };
 		F70E1FC51B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodDeclarationSpec.mm; sourceTree = "<group>"; };
@@ -504,6 +503,9 @@
 		F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASSwiftProtocolFakerSpec.mm; sourceTree = "<group>"; };
 		F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeForMySpecialProtocol.swift; sourceTree = "<group>"; };
 		F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySomewhatSpecialProtocol.swift; sourceTree = "<group>"; };
+		F7FC45801BE786DA00299694 /* XMASFakeProtocolPersister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASFakeProtocolPersister.h; sourceTree = "<group>"; };
+		F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASFakeProtocolPersister.m; sourceTree = "<group>"; };
+		F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASFakeProtocolPersisterSpec.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +621,7 @@
 				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
 				F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */,
 				F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */,
+				F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -695,8 +698,6 @@
 		F71E828A1B59715500BE93DC /* Code Generation */ = {
 			isa = PBXGroup;
 			children = (
-				F70C9FEC1BCA2E6300E9C019 /* XMASFakeProtocolPersister.h */,
-				F70C9FED1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m */,
 				F71E82BC1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.h */,
 				F71E82BD1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m */,
 				F7EA8A4F1B5AB78400367014 /* XMASObjcCallExpressionStringWriter.h */,
@@ -761,6 +762,8 @@
 		F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */ = {
 			isa = PBXGroup;
 			children = (
+				F7FC45801BE786DA00299694 /* XMASFakeProtocolPersister.h */,
+				F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */,
 				F79FF6631BDF62910058EFE0 /* Swift */,
 				F7B1D2831B5C5F7900C28AE7 /* XcodeInterfaces.h */,
 				F7B1D2841B5C5F7900C28AE7 /* XMASAlert.h */,
@@ -1251,9 +1254,9 @@
 				F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */,
 				F7D01C171B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE07954F1B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
+				F7FC45821BE786DA00299694 /* XMASFakeProtocolPersister.m in Sources */,
 				F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7BEDD181B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
-				F70C9FEE1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
 				F70C9FE61BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */,
 				F79FF67D1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				AE76356C1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
@@ -1272,6 +1275,7 @@
 				F70C9FE71BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */,
 				F71550CC1B8C3A6900F3418E /* XMASChangeMethodSignatureController.xib in Sources */,
 				F7B550831B294FEA006E59F9 /* XMASChangeMethodSignatureControllerSpec.mm in Sources */,
+				F7FC45831BE787E900299694 /* XMASFakeProtocolPersister.m in Sources */,
 				AE7635701B68283C00F85396 /* XMASObjcMethodDeclarationStringWriterSpec.mm in Sources */,
 				F70E1FB71B24375B00D971E6 /* XMASObjcMethodDeclarationParserSpec.mm in Sources */,
 				AE2FC66D1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm in Sources */,
@@ -1321,12 +1325,12 @@
 				F79AAFAE1B819EF800F7D2C5 /* InjectorSpec.mm in Sources */,
 				AE0C00D21B7134DF0065C099 /* XMASSearchPathExpander.m in Sources */,
 				F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
+				F7FC45851BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm in Sources */,
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7FC45791BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
 				F7FC457B1BE7510900299694 /* FakeForMySpecialProtocol.swift in Sources */,
-				F70C9FEF1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
 				F761C3DB1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm in Sources */,
 				F7E0094C1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */,

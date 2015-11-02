@@ -101,6 +101,12 @@ static XMASRefactorMethodAction *action;
         XMASXcodeRepository *xcodeRepo = [injector getInstance:[XMASXcodeRepository class]];
         return [[XMASSelectedSwiftProtocolProxy alloc] initWithXcodeRepo:xcodeRepo];
     }];
+
+    [binder bind:[XMASFakeProtocolPersister class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        XMASSwiftProtocolFaker *protocolFaker = [injector getInstance:[XMASSwiftProtocolFaker class]];
+        return [[XMASFakeProtocolPersister alloc] initWithProtocolFaker:protocolFaker
+                fileManager:[NSFileManager defaultManager]];
+    }];
 }
 
 @end

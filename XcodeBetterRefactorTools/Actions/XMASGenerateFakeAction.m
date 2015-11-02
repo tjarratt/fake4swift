@@ -18,7 +18,7 @@
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
               selectedTextProxy:(id <XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-        sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy{
+        sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy {
     if (self = [super init]) {
         self.alerter = alerter;
         self.selectedTextProxy = selectedTextProxy;
@@ -51,7 +51,7 @@
     }
 
     [self.alerter flashMessage:[NSString stringWithFormat:@"generating fake '%@'", selectedProtocol.name]];
-    [self.fakeProtocolPersister persistProtocolNamed:selectedProtocol.name nearSourceFile:currentFilePath];
+    [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol nearSourceFile:currentFilePath];
 }
 
 #pragma mark - NSObject

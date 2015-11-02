@@ -52,8 +52,8 @@ describe(@"XMASGenerateFakeAction", ^{
         });
 
         it(@"should write out a new file using its fakeProtocolPersister", ^{
-            fakeProtocolPersister should have_received(@selector(persistProtocolNamed:nearSourceFile:))
-                .with(@"MySpecialProtocol")
+            fakeProtocolPersister should have_received(@selector(persistFakeForProtocol:nearSourceFile:))
+                .with(fakeProtocol)
                 .and_with(@"/path/to/something.swift");
         });
 

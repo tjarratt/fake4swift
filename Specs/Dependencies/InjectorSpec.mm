@@ -53,6 +53,12 @@ describe(@"Injector", ^{
         XMASSwiftProtocolFaker *protocolFaker = [injector getInstance:[XMASSwiftProtocolFaker class]];
         protocolFaker should be_instance_of([XMASSwiftProtocolFaker class]);
     });
+
+    it(@"should provide a fake protocol persister", ^{
+        XMASFakeProtocolPersister *fakeProtocolPersister = [injector getInstance:[XMASFakeProtocolPersister class]];
+        fakeProtocolPersister.protocolFaker should be_instance_of([XMASSwiftProtocolFaker class]);
+        fakeProtocolPersister.fileManager should be_instance_of([NSFileManager class]);
+    });
 });
 
 SPEC_END
