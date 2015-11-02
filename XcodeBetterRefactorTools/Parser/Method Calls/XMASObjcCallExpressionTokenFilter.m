@@ -43,7 +43,9 @@
         return NO;
     }
 
-    if (token.cursor.kind == CKCursorKindObjCMessageExpr || token.cursor.kind == CKCursorKindDeclStmt) {
+    if (token.cursor.kind == CKCursorKindObjCMessageExpr ||
+        token.cursor.kind == CKCursorKindDeclStmt ||
+        token.cursor.kind == CKCursorKindCompoundStmt) {
         return YES;
     }
 
