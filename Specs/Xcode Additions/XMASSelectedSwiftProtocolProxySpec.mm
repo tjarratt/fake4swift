@@ -8,7 +8,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(XMASSelectedSwiftProtocolProxySpec)
 
-fdescribe(@"XMASSelectedSwiftProtocolProxy", ^{
+describe(@"XMASSelectedSwiftProtocolProxy", ^{
     __block XMASSelectedSwiftProtocolProxy *subject;
     __block XMASXcodeRepository *fakeXcodeRepository;
 
@@ -22,14 +22,13 @@ fdescribe(@"XMASSelectedSwiftProtocolProxy", ^{
         subject = [injector getInstance:@protocol(XMASSelectedTextProxy)];
     });
 
+    NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolEdgeCases"
+                                                            ofType:@"swift"];
+
     context(@"when a swift protocol is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
             fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
-
-            NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolEdgeCases"
-                                                                    ofType:@"swift"];
-
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
         });
 
@@ -51,6 +50,12 @@ fdescribe(@"XMASSelectedSwiftProtocolProxy", ^{
 
             [protocolDeclaration.staticSetters.firstObject valueForKey:@"name"] should equal(@"classAccessor");
             [protocolDeclaration.staticSetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
+        });
+    });
+
+    context(@"when no protocol is selected", ^{
+        it(@"should return nil", ^{
+            [subject selectedProtocolInFile:fixturePath] should be_nil;
         });
     });
 });
