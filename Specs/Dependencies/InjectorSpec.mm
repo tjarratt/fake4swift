@@ -48,6 +48,11 @@ describe(@"Injector", ^{
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
         generateFakeAction.sourceCodeDocumentProxy should be_instance_of([XMASCurrentSourceCodeDocumentProxy class]);
     });
+
+    it(@"should provide a Swift Protocol Faker", ^{
+        XMASSwiftProtocolFaker *protocolFaker = [injector getInstance:[XMASSwiftProtocolFaker class]];
+        protocolFaker should be_instance_of([XMASSwiftProtocolFaker class]);
+    });
 });
 
 SPEC_END

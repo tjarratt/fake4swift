@@ -126,6 +126,13 @@
 		F7EA8A601B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7EA8A5F1B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm */; };
 		F7F09FF41B281A1F00727AD7 /* XMASWindowProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7F09FF31B281A1F00727AD7 /* XMASWindowProviderSpec.mm */; };
 		F7F9F3411B85A90A0096252D /* XMASChangeMethodSignatureController.xib in Sources */ = {isa = PBXBuildFile; fileRef = F71FFF401B85A8E800DC8A80 /* XMASChangeMethodSignatureController.xib */; };
+		F7FC45611BE7484700299694 /* XMASSwiftProtocolFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45601BE7484700299694 /* XMASSwiftProtocolFaker.swift */; };
+		F7FC45621BE7484700299694 /* XMASSwiftProtocolFaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45601BE7484700299694 /* XMASSwiftProtocolFaker.swift */; };
+		F7FC45791BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */; };
+		F7FC457B1BE7510900299694 /* FakeForMySpecialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */; };
+		F7FC457D1BE7515C00299694 /* MySomewhatSpecialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
+		F7FC457E1BE7525500299694 /* FakeForMySpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */; };
+		F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,6 +347,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F7FC457E1BE7525500299694 /* FakeForMySpecialProtocol.swift in Copy Fixtures */,
+				F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
 				F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */,
 				F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */,
 				F7E651521B71E469006D35EE /* RefactorMethodExpected2.h in Copy Fixtures */,
@@ -491,6 +500,10 @@
 		F7EA8A501B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcCallExpressionStringWriter.m; sourceTree = "<group>"; };
 		F7EA8A5F1B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionStringWriterSpec.mm; sourceTree = "<group>"; };
 		F7F09FF31B281A1F00727AD7 /* XMASWindowProviderSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASWindowProviderSpec.mm; sourceTree = "<group>"; };
+		F7FC45601BE7484700299694 /* XMASSwiftProtocolFaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSwiftProtocolFaker.swift; sourceTree = "<group>"; };
+		F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASSwiftProtocolFakerSpec.mm; sourceTree = "<group>"; };
+		F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeForMySpecialProtocol.swift; sourceTree = "<group>"; };
+		F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySomewhatSpecialProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +618,7 @@
 				AE0C00CD1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm */,
 				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
 				F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */,
+				F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -638,9 +652,10 @@
 		F70A03511B49DC420009B348 /* Expected */ = {
 			isa = PBXGroup;
 			children = (
+				F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */,
 				AE76355C1B68245B00F85396 /* RefactorMethodDeclarationExpected.m */,
-				F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */,
 				AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */,
+				F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */,
 				F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */,
 			);
 			path = Expected;
@@ -667,6 +682,7 @@
 				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
 				F70A03511B49DC420009B348 /* Expected */,
 				F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */,
+				F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */,
 				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
 				F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */,
 				F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */,
@@ -737,6 +753,7 @@
 			children = (
 				F79FF67C1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift */,
 				F79FF6791BDF62A90058EFE0 /* SwiftProtocolDeclaration.swift */,
+				F7FC45601BE7484700299694 /* XMASSwiftProtocolFaker.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -1241,6 +1258,7 @@
 				F79FF67D1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				AE76356C1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
 				F7EA8A511B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
+				F7FC45611BE7484700299694 /* XMASSwiftProtocolFaker.swift in Sources */,
 				F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */,
 				AE71D5B21B66F5CE00E40833 /* XMASXcodeAdditions.m in Sources */,
 				F7F9F3411B85A90A0096252D /* XMASChangeMethodSignatureController.xib in Sources */,
@@ -1287,6 +1305,7 @@
 				F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */,
 				AE0C00CE1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm in Sources */,
 				F70C9FE11BC8F23200E9C019 /* XMASGenerateFakeAction.m in Sources */,
+				F7FC45621BE7484700299694 /* XMASSwiftProtocolFaker.swift in Sources */,
 				F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7B4B4CA1B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */,
 				F7EA8A521B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
@@ -1295,6 +1314,7 @@
 				F7BA62301B223369005B99AF /* main.mm in Sources */,
 				F7EA8A601B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm in Sources */,
 				F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */,
+				F7FC457D1BE7515C00299694 /* MySomewhatSpecialProtocol.swift in Sources */,
 				F7D01C181B5C603700FE62DA /* XMASObjcMethodDeclarationParameter.m in Sources */,
 				AE76356D1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
 				F71E82C11B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm in Sources */,
@@ -1303,7 +1323,9 @@
 				F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
+				F7FC45791BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
+				F7FC457B1BE7510900299694 /* FakeForMySpecialProtocol.swift in Sources */,
 				F70C9FEF1BCA2E6300E9C019 /* XMASFakeProtocolPersister.m in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
 				F761C3DB1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm in Sources */,
