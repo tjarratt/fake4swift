@@ -7,14 +7,10 @@ class XMASSwiftProtocolFaker: NSObject {
 
         lines.append(classDeclarationForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(initializerForFakeImplementingProtocol(protocolDecl))
-        lines.append([])
         lines.appendContentsOf(mutableVarsForFakeImplementingProtocol(protocolDecl))
-        lines.append([])
         lines.appendContentsOf(customGetterSettersForFakeImplementingProtocol(protocolDecl))
-        lines.append([])
         lines.appendContentsOf(assertionHelpersForAccessorsForFakeImplementingProtocol(protocolDecl))
         lines.append(["}"])
-        lines.append([])
         lines.append([])
 
         return lines.map({ (tokens : Array<String>) -> String in
@@ -35,11 +31,14 @@ class XMASSwiftProtocolFaker: NSObject {
         var lines : Array<Array<String>> = [["    init() {"]]
 
         for accessor in protocolDecl.getters {
-            lines.append(["        self._" + accessor.name, "=", "0"])
+            lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
+        }
+        for accessor in protocolDecl.setters {
             lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
         }
 
         lines.append(["    }"])
+        lines.append([])
 
         return lines
     }
@@ -48,8 +47,14 @@ class XMASSwiftProtocolFaker: NSObject {
         var lines : Array<Array<String>> = []
 
         for accessor in protocolDecl.getters {
-            lines.append(["    var", "_" + accessor.name, ":", accessor.returnType])
+            lines.append(["    var", "_" + accessor.name, ":", accessor.returnType + "?"])
             lines.append(["    var", "_set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
+            lines.append([])
+        }
+        for accessor in protocolDecl.setters {
+            lines.append(["    var", "_" + accessor.name, ":", accessor.returnType + "?"])
+            lines.append(["    var", "_set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
+            lines.append([])
         }
 
         return lines
@@ -61,7 +66,7 @@ class XMASSwiftProtocolFaker: NSObject {
         for accessor in protocolDecl.getters {
             lines.append(["    var", accessor.name, ":", accessor.returnType, "{"])
             lines.append(["        get", "{"])
-            lines.append(["            return", "_" + accessor.name])
+            lines.append(["            return", "_" + accessor.name + "!"])
             lines.append(["        }"])
 
             lines.append([])
@@ -71,6 +76,22 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append(["            _set_" + accessor.name + "Args.append(newValue)"])
             lines.append(["        }"])
             lines.append(["    }"])
+            lines.append([])
+        }
+        for accessor in protocolDecl.setters {
+            lines.append(["    var", accessor.name, ":", accessor.returnType, "{"])
+            lines.append(["        get", "{"])
+            lines.append(["            return", "_" + accessor.name + "!"])
+            lines.append(["        }"])
+
+            lines.append([])
+
+            lines.append(["        set", "{"])
+            lines.append(["            _" + accessor.name, "=", "newValue"])
+            lines.append(["            _set_" + accessor.name + "Args.append(newValue)"])
+            lines.append(["        }"])
+            lines.append(["    }"])
+            lines.append([])
         }
 
         return lines
@@ -94,7 +115,20 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
             lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
+            lines.append([])
+        }
 
+        for accessor in protocolDecl.setters {
+            lines.append(["    func set" + upcase(accessor.name) + "CallCount()", "->", "Int", "{"])
+            lines.append(["        return", "_set_" + accessor.name + "Args.count"])
+            lines.append(["    }"])
+
+            lines.append([])
+
+            lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
+            lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
+            lines.append(["    }"])
+            lines.append([])
         }
 
         return lines
