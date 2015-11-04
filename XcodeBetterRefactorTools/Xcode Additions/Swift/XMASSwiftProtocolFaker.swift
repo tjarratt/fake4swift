@@ -5,6 +5,8 @@ class XMASSwiftProtocolFaker: NSObject {
     func fakeForProtocol(protocolDecl: ProtocolDeclaration) -> String {
         var lines : Array<Array<String>> = []
 
+        lines.append(["import", "Foundation"])
+        lines.append([])
         lines.append(classDeclarationForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(initializerForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(mutableVarsForFakeImplementingProtocol(protocolDecl))
@@ -113,6 +115,9 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append([])
 
             lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
+            lines.append(["        if index < 0 || index >=", "_set_" + accessor.name + "Args.count", "{"])
+            lines.append(["            throw NSError.init(domain: \"swift-generate-fake-domain\", code: 1, userInfo: nil)"])
+            lines.append(["        }"])
             lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
             lines.append([])
@@ -126,6 +131,9 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append([])
 
             lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
+            lines.append(["        if index < 0 || index >=", "_set_" + accessor.name + "Args.count", "{"])
+            lines.append(["            throw NSError.init(domain: \"swift-generate-fake-domain\", code: 1, userInfo: nil)"])
+            lines.append(["        }"])
             lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
             lines.append([])

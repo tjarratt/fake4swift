@@ -1,3 +1,5 @@
+import Foundation
+
 class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     init() {
         self._set_myAttributeArgs = []
@@ -37,6 +39,9 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     }
 
     func setMyAttributeArgsForCall(index : Int) throws -> Int {
+        if index < 0 || index >= _set_myAttributeArgs.count {
+            throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
+        }
         return _set_myAttributeArgs[index]
     }
 
@@ -45,6 +50,9 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     }
 
     func setMyNameArgsForCall(index : Int) throws -> String {
+        if index < 0 || index >= _set_myNameArgs.count {
+            throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
+        }
         return _set_myNameArgs[index]
     }
 
