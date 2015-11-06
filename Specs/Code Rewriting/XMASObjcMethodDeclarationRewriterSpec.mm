@@ -152,7 +152,7 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
                 [subject changeMethodDeclarationForSymbol:symbol toMethod:newMethodDeclaration];
             });
 
-            it(@"should change the method declaration to match the new method", ^{
+            xit(@"should change the method declaration to match the new method", ^{
                 NSString *expectedFilePath = [[NSBundle mainBundle] pathForResource:@"RefactorMethodExpected2" ofType:@"h"];
                 NSString *expectedFileContents = [NSString stringWithContentsOfFile:expectedFilePath
                                                                            encoding:NSUTF8StringEncoding
