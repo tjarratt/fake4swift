@@ -2,7 +2,8 @@ protocol MySpecialProtocol {
     func voidMethod()
     func randomDouble() -> Double
     func randomDoubleWithSeed(seed: Int) -> Double
-    func multipleReturns() -> (Double, Double)
+    func randomDoubleWithSeeds(seed: Int, secondSeed: Int) -> Double
+    func returnsMultipleValues() -> (Double, Double)
 
     mutating func mutates()
     static func isStatic()

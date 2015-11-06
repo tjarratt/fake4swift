@@ -1,19 +1,26 @@
 import Foundation
 
+@objc class MethodParameter : NSObject {
+    var name : MethodName
+    var type : ReturnType
+
+    init(name: MethodName, type: ReturnType) {
+        self.name = name
+        self.type = type
+    }
+}
+
 @objc class MethodDeclaration : NSObject {
     var name : MethodName
-    var arguments : Array<(String, String)>
-    var returnValueTypes : Array<String>
-    var optional : Bool
+    var arguments : Array<MethodParameter>
+    var returnValueTypes : Array<ReturnType>
 
     init(name: String,
-        arguments: Array<(String, String)>,
-        returnValueTypes: Array<String>,
-        optional: Bool) {
+        arguments: Array<MethodParameter>,
+        returnValueTypes: Array<ReturnType>) {
             self.name = name
             self.arguments = arguments
             self.returnValueTypes = returnValueTypes
-            self.optional = optional
     }
 }
 
@@ -38,9 +45,9 @@ typealias ReturnType = String
 
     init(name: String,
         includedProtocols: Array<ProtocolDeclaration>,
-        normalFuncs: Array<MethodDeclaration>,
-        staticFuncs: Array<MethodDeclaration>,
-        mutatingFuncs: Array<MethodDeclaration>,
+        instanceMethods: Array<MethodDeclaration>,
+        staticMethods: Array<MethodDeclaration>,
+        mutatingMethods: Array<MethodDeclaration>,
         initializers: Array<MethodDeclaration>,
         getters: Array<Accessor>,
         setters: Array<Accessor>,
@@ -51,9 +58,9 @@ typealias ReturnType = String
         ) {
             self.name = name
             self.includedProtocols = includedProtocols
-            self.normalFuncs = normalFuncs
-            self.staticFuncs = staticFuncs
-            self.mutatingFuncs = mutatingFuncs
+            self.instanceMethods = instanceMethods
+            self.staticMethods = staticMethods
+            self.mutatingMethods = mutatingMethods
             self.initializers = initializers
             self.getters = getters
             self.setters = setters
@@ -64,9 +71,9 @@ typealias ReturnType = String
             return
     }
 
-    var normalFuncs : Array<MethodDeclaration>
-    var staticFuncs : Array<MethodDeclaration>
-    var mutatingFuncs : Array<MethodDeclaration>
+    var instanceMethods : Array<MethodDeclaration>
+    var staticMethods : Array<MethodDeclaration>
+    var mutatingMethods : Array<MethodDeclaration>
 
     var initializers : Array<MethodDeclaration>
 

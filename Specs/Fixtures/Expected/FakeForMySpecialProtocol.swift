@@ -4,6 +4,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     init() {
         self._set_myAttributeArgs = []
         self._set_myNameArgs = []
+        self.doesNothingCallCount = 0
     }
 
     var _myAttribute : Int?
@@ -56,4 +57,8 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
         return _set_myNameArgs[index]
     }
 
+    var doesNothingCallCount : Int
+    func doesNothing() {
+        self.doesNothingCallCount++
+    }
 }

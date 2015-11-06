@@ -34,13 +34,6 @@ describe(@"XMASSwiftProtocolFaker", ^{
     it(@"should create a reasonably useful fake for the selected protocol", ^{
         NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
 
-        NSString *whatWeGot = [subject fakeForProtocol:protocolDeclaration];
-        if (![expectedContents isEqualToString:whatWeGot]) {
-            NSRange range = [whatWeGot rangeOfString:expectedContents];
-            NSLog(@"%@", [expectedContents commonPrefixWithString:whatWeGot options:0]);
-            NSLog(@"%lu-%lu", range.location, range.length);
-        }
-
         [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
     });
 });

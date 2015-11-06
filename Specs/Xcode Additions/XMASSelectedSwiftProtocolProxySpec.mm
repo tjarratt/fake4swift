@@ -51,6 +51,45 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
             [protocolDeclaration.staticSetters.firstObject valueForKey:@"name"] should equal(@"classAccessor");
             [protocolDeclaration.staticSetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
         });
+
+        it(@"should parse the instance methods", ^{
+            protocolDeclaration.instanceMethods.count should equal(5);
+
+            NSArray<NSString *> *expectedMethodNames = @[
+                                                        @"voidMethod",
+                                                        @"randomDouble",
+                                                        @"randomDoubleWithSeed",
+                                                        @"randomDoubleWithSeeds",
+                                                        @"returnsMultipleValues"];
+            [protocolDeclaration.instanceMethods valueForKey:@"name"] should equal(expectedMethodNames);
+
+            NSArray<NSString *> *expectedArgumentNames = @[
+                                                           @[],
+                                                           @[],
+                                                           @[@"seed"],
+                                                           @[@"seed", @"secondSeed"],
+                                                           @[],
+                                                           ];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"name"] should equal(expectedArgumentNames);
+
+            NSArray<NSString *> *expectedArgumentTypes = @[
+                                                         @[],
+                                                         @[],
+                                                         @[@"Int"],
+                                                         @[@"Int", @"Int"],
+                                                         @[],
+                                                         ];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"type"] should equal(expectedArgumentTypes);
+
+            NSArray<NSString *> *expectedReturnTypes = @[
+                                                        @[],
+                                                        @[@"Double"],
+                                                        @[@"Double"],
+                                                        @[@"Double"],
+                                                        @[@"Double", @"Double"],
+                                                        ];
+            [protocolDeclaration.instanceMethods valueForKey:@"returnValueTypes"] should equal(expectedReturnTypes);
+        });
     });
 
     context(@"when no protocol is selected", ^{

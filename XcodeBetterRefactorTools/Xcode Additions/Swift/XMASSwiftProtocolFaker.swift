@@ -12,6 +12,7 @@ class XMASSwiftProtocolFaker: NSObject {
         lines.appendContentsOf(mutableVarsForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(customGetterSettersForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(assertionHelpersForAccessorsForFakeImplementingProtocol(protocolDecl))
+        lines.appendContentsOf(implsForInstanceMethodsForFakeImplementingProtocol(protocolDecl))
         lines.append(["}"])
         lines.append([])
 
@@ -37,6 +38,9 @@ class XMASSwiftProtocolFaker: NSObject {
         }
         for accessor in protocolDecl.setters {
             lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
+        }
+        for method in protocolDecl.instanceMethods {
+            lines.append(["        self." + method.name + "CallCount = 0"])
         }
 
         lines.append(["    }"])
@@ -137,6 +141,19 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
             lines.append([])
+        }
+
+        return lines
+    }
+
+    func implsForInstanceMethodsForFakeImplementingProtocol(protocolDecl: ProtocolDeclaration) -> Array<Array<String>> {
+        var lines : Array<Array<String>> = []
+
+        for method in protocolDecl.instanceMethods {
+            lines.append(["    var " + method.name + "CallCount : Int"])
+            lines.append(["    func", method.name + "() {"])
+            lines.append(["        self." + method.name + "CallCount++"])
+            lines.append(["    }"])
         }
 
         return lines

@@ -68,6 +68,19 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     expect { try subject.setMyNameArgsForCall(222) }.to(throwError())
                 }
             }
+
+            describe("instance methods") {
+                beforeEach() {
+                    subject.doesNothing()
+                }
+
+                it("allows you to call them and observe that they were invoked") {
+                    expect(subject.doesNothingCallCount).to(equal(1))
+
+                    subject.doesNothing()
+                    expect(subject.doesNothingCallCount).to(equal(2))
+                }
+            }
         }
     }
 }
