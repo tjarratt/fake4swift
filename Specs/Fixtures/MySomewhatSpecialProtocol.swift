@@ -3,4 +3,5 @@ protocol MySomewhatSpecialProtocol {
     var myName : String { get set }
 
     func doesNothing()
+    func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int)
 }
