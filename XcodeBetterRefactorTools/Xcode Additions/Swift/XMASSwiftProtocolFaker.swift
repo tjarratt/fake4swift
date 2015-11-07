@@ -151,11 +151,45 @@ class XMASSwiftProtocolFaker: NSObject {
 
         for method in protocolDecl.instanceMethods {
             lines.append(["    var " + method.name + "CallCount : Int"])
-            lines.append(["    func", method.name + "() {"])
+
+            let returnTypes : String = concatReturnTypes(method.returnValueTypes)
+            let argTypes : String = concatArgTypes(method.arguments)
+            let namedArguments : String = concatNamedArguments(method.arguments)
+
+            if method.returnValueTypes.count > 0 {
+                lines.append(["    var", method.name + "Stub : (" + argTypes, "->", returnTypes + ")?"])
+                lines.append(["    func", method.name + "Returns(stubbedValues:", concatReturnTypes(method.returnValueTypes) + ") {"])
+                lines.append(["        self." + method.name + "Stub = {" + namedArguments, "->", returnTypes, "in"])
+                lines.append(["            return stubbedValues"])
+                lines.append(["        }"])
+                lines.append(["    }"])
+            }
+
+            let returnArrow : String = method.returnValueTypes.count > 0 ? " -> " + returnTypes : ""
+
+            lines.append(["    func", method.name + namedArguments + returnArrow + " {"])
             lines.append(["        self." + method.name + "CallCount++"])
+            if method.returnValueTypes.count > 0 {
+                lines.append(["        return self." + method.name + "Stub!(" + method.arguments.map { $0.name }.joinWithSeparator(", ") + ")"])
+            }
             lines.append(["    }"])
+            lines.append([])
         }
 
+        lines.removeLast()
+
         return lines
+    }
+
+    func concatReturnTypes(returnTypes : Array<ReturnType>) -> String {
+        return "(" + returnTypes.joinWithSeparator(", ") + ")"
+    }
+
+    func concatArgTypes(args : Array<MethodParameter>) -> String {
+        return "(" + args.map { $0.type }.joinWithSeparator(", ") + ")"
+    }
+
+    func concatNamedArguments(args : Array<MethodParameter>) -> String {
+        return "(" + args.map { $0.name + ": " + $0.type }.joinWithSeparator(", ") + ")"
     }
 }

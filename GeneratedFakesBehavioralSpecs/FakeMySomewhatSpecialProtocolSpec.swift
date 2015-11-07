@@ -80,6 +80,14 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     subject.doesNothing()
                     expect(subject.doesNothingCallCount).to(equal(2))
                 }
+
+                it("allows you to stub the return value for methods that return values") {
+                    subject.doesStuffReturns((["test-yo"], 5))
+
+                    let tuple = subject.doesStuff("this", otherStuff: ["that"])
+                    expect(tuple.0).to(equal(["test-yo"]))
+                    expect(tuple.1).to(equal(5))
+                }
             }
         }
     }

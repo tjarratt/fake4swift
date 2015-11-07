@@ -66,7 +66,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     var doesStuffCallCount : Int
     var doesStuffStub : ((String, [String]) -> ([String], Int))?
     func doesStuffReturns(stubbedValues: ([String], Int)) {
-        self.doesStuffStub = {(stuff: String, otherStuff: [String]) -> (([String], Int)) in
+        self.doesStuffStub = {(stuff: String, otherStuff: [String]) -> ([String], Int) in
             return stubbedValues
         }
     }
