@@ -22,6 +22,14 @@ import Foundation
             self.arguments = arguments
             self.returnValueTypes = returnValueTypes
     }
+
+    func hasArguments() -> Bool {
+        return arguments.count > 0
+    }
+
+    func hasReturnValues() -> Bool {
+        return returnValueTypes.count > 0
+    }
 }
 
 @objc class Accessor : NSObject {

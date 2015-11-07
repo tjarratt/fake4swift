@@ -88,6 +88,21 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     expect(tuple.0).to(equal(["test-yo"]))
                     expect(tuple.1).to(equal(5))
                 }
+
+                it("allows you to write assertions for the arguments passed into each invocation") {
+                    subject.doesStuffReturns(([], 0))
+                    subject.doesStuff("kool", otherStuff: ["keith"])
+
+                    var args = subject.doesStuffArgsForCall(0)
+                    expect(args.0).to(equal("kool"))
+                    expect(args.1).to(equal(["keith"]))
+
+                    subject.doesStuff("dr", otherStuff: ["octogon"])
+
+                    args = subject.doesStuffArgsForCall(1)
+                    expect(args.0).to(equal("dr"))
+                    expect(args.1).to(equal(["octogon"]))
+                }
             }
         }
     }

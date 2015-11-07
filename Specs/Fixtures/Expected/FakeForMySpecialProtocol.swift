@@ -5,6 +5,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
         self._set_myAttributeArgs = []
         self._set_myNameArgs = []
         self.doesNothingCallCount = 0
+        self._doesStuffArgs = []
         self.doesStuffCallCount = 0
     }
 
@@ -65,13 +66,18 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
 
     var doesStuffCallCount : Int
     var doesStuffStub : ((String, [String]) -> ([String], Int))?
+    var _doesStuffArgs : Array<(String, [String])>
     func doesStuffReturns(stubbedValues: ([String], Int)) {
         self.doesStuffStub = {(stuff: String, otherStuff: [String]) -> ([String], Int) in
             return stubbedValues
         }
     }
+    func doesStuffArgsForCall(callIndex: Int) -> (String, [String]) {
+        return self._doesStuffArgs[callIndex]
+    }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
         self.doesStuffCallCount++
+        self._doesStuffArgs.append((stuff, otherStuff))
         return self.doesStuffStub!(stuff, otherStuff)
     }
 }

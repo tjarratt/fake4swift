@@ -40,6 +40,9 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
         }
         for method in protocolDecl.instanceMethods {
+            if method.hasArguments() {
+                lines.append(["        self._" + method.name + "Args = []"])
+            }
             lines.append(["        self." + method.name + "CallCount = 0"])
         }
 
@@ -156,8 +159,15 @@ class XMASSwiftProtocolFaker: NSObject {
             let argTypes : String = concatArgTypes(method.arguments)
             let namedArguments : String = concatNamedArguments(method.arguments)
 
-            if method.returnValueTypes.count > 0 {
+            if method.hasReturnValues() {
                 lines.append(["    var", method.name + "Stub : (" + argTypes, "->", returnTypes + ")?"])
+            }
+
+            if method.hasArguments() {
+                lines.append(["    var _" + method.name + "Args : Array<" + argTypes + ">"])
+            }
+
+            if method.hasReturnValues() {
                 lines.append(["    func", method.name + "Returns(stubbedValues:", concatReturnTypes(method.returnValueTypes) + ") {"])
                 lines.append(["        self." + method.name + "Stub = {" + namedArguments, "->", returnTypes, "in"])
                 lines.append(["            return stubbedValues"])
@@ -165,12 +175,22 @@ class XMASSwiftProtocolFaker: NSObject {
                 lines.append(["    }"])
             }
 
-            let returnArrow : String = method.returnValueTypes.count > 0 ? " -> " + returnTypes : ""
+            if method.hasArguments() {
+                lines.append(["    func", method.name + "ArgsForCall(callIndex: Int) ->", argTypes, "{"])
+                lines.append(["        return self._" + method.name + "Args[callIndex]"])
+                lines.append(["    }"])
+            }
+
+            let returnArrow : String = method.hasReturnValues() ? " -> " + returnTypes : ""
+            let argumentNames : String = method.arguments.map { $0.name }.joinWithSeparator(", ")
 
             lines.append(["    func", method.name + namedArguments + returnArrow + " {"])
             lines.append(["        self." + method.name + "CallCount++"])
-            if method.returnValueTypes.count > 0 {
-                lines.append(["        return self." + method.name + "Stub!(" + method.arguments.map { $0.name }.joinWithSeparator(", ") + ")"])
+            if method.hasArguments() {
+                lines.append(["        self._" + method.name + "Args.append((" + argumentNames + "))"])
+            }
+            if method.hasReturnValues() {
+                lines.append(["        return self." + method.name + "Stub!(" + argumentNames + ")"])
             }
             lines.append(["    }"])
             lines.append([])
