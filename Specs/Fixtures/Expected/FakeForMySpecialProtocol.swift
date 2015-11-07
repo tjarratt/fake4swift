@@ -2,18 +2,18 @@ import Foundation
 
 class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     init() {
-        self._set_myAttributeArgs = []
-        self._set_myNameArgs = []
+        self.set_myAttributeArgs = []
+        self.set_myNameArgs = []
         self.doesNothingCallCount = 0
-        self._doesStuffArgs = []
+        self.doesStuffArgs = []
         self.doesStuffCallCount = 0
     }
 
-    var _myAttribute : Int?
-    var _set_myAttributeArgs : Array<Int>
+    private var _myAttribute : Int?
+    private var set_myAttributeArgs : Array<Int>
 
-    var _myName : String?
-    var _set_myNameArgs : Array<String>
+    private var _myName : String?
+    private var set_myNameArgs : Array<String>
 
     var myAttribute : Int {
         get {
@@ -22,7 +22,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
 
         set {
             _myAttribute = newValue
-            _set_myAttributeArgs.append(newValue)
+            set_myAttributeArgs.append(newValue)
         }
     }
 
@@ -33,30 +33,30 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
 
         set {
             _myName = newValue
-            _set_myNameArgs.append(newValue)
+            set_myNameArgs.append(newValue)
         }
     }
 
     func setMyAttributeCallCount() -> Int {
-        return _set_myAttributeArgs.count
+        return set_myAttributeArgs.count
     }
 
     func setMyAttributeArgsForCall(index : Int) throws -> Int {
-        if index < 0 || index >= _set_myAttributeArgs.count {
+        if index < 0 || index >= set_myAttributeArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
-        return _set_myAttributeArgs[index]
+        return set_myAttributeArgs[index]
     }
 
     func setMyNameCallCount() -> Int {
-        return _set_myNameArgs.count
+        return set_myNameArgs.count
     }
 
     func setMyNameArgsForCall(index : Int) throws -> String {
-        if index < 0 || index >= _set_myNameArgs.count {
+        if index < 0 || index >= set_myNameArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
-        return _set_myNameArgs[index]
+        return set_myNameArgs[index]
     }
 
     var doesNothingCallCount : Int
@@ -66,18 +66,18 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
 
     var doesStuffCallCount : Int
     var doesStuffStub : ((String, [String]) -> ([String], Int))?
-    var _doesStuffArgs : Array<(String, [String])>
+    private var doesStuffArgs : Array<(String, [String])>
     func doesStuffReturns(stubbedValues: ([String], Int)) {
         self.doesStuffStub = {(stuff: String, otherStuff: [String]) -> ([String], Int) in
             return stubbedValues
         }
     }
     func doesStuffArgsForCall(callIndex: Int) -> (String, [String]) {
-        return self._doesStuffArgs[callIndex]
+        return self.doesStuffArgs[callIndex]
     }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
         self.doesStuffCallCount++
-        self._doesStuffArgs.append((stuff, otherStuff))
+        self.doesStuffArgs.append((stuff, otherStuff))
         return self.doesStuffStub!(stuff, otherStuff)
     }
 }

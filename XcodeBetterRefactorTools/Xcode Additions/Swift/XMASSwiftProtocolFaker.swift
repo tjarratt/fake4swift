@@ -34,14 +34,14 @@ class XMASSwiftProtocolFaker: NSObject {
         var lines : Array<Array<String>> = [["    init() {"]]
 
         for accessor in protocolDecl.getters {
-            lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
+            lines.append(["        self.set_" + accessor.name + "Args", "=", "[]"])
         }
         for accessor in protocolDecl.setters {
-            lines.append(["        self._set_" + accessor.name + "Args", "=", "[]"])
+            lines.append(["        self.set_" + accessor.name + "Args", "=", "[]"])
         }
         for method in protocolDecl.instanceMethods {
             if method.hasArguments() {
-                lines.append(["        self._" + method.name + "Args = []"])
+                lines.append(["        self." + method.name + "Args = []"])
             }
             lines.append(["        self." + method.name + "CallCount = 0"])
         }
@@ -56,13 +56,13 @@ class XMASSwiftProtocolFaker: NSObject {
         var lines : Array<Array<String>> = []
 
         for accessor in protocolDecl.getters {
-            lines.append(["    var", "_" + accessor.name, ":", accessor.returnType + "?"])
-            lines.append(["    var", "_set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
+            lines.append(["    private var", "_" + accessor.name, ":", accessor.returnType + "?"])
+            lines.append(["    private var", "set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
             lines.append([])
         }
         for accessor in protocolDecl.setters {
-            lines.append(["    var", "_" + accessor.name, ":", accessor.returnType + "?"])
-            lines.append(["    var", "_set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
+            lines.append(["    private var", "_" + accessor.name, ":", accessor.returnType + "?"])
+            lines.append(["    private var", "set_" + accessor.name + "Args", ":", "Array<" + accessor.returnType + ">"])
             lines.append([])
         }
 
@@ -82,7 +82,7 @@ class XMASSwiftProtocolFaker: NSObject {
 
             lines.append(["        set", "{"])
             lines.append(["            _" + accessor.name, "=", "newValue"])
-            lines.append(["            _set_" + accessor.name + "Args.append(newValue)"])
+            lines.append(["            set_" + accessor.name + "Args.append(newValue)"])
             lines.append(["        }"])
             lines.append(["    }"])
             lines.append([])
@@ -97,7 +97,7 @@ class XMASSwiftProtocolFaker: NSObject {
 
             lines.append(["        set", "{"])
             lines.append(["            _" + accessor.name, "=", "newValue"])
-            lines.append(["            _set_" + accessor.name + "Args.append(newValue)"])
+            lines.append(["            set_" + accessor.name + "Args.append(newValue)"])
             lines.append(["        }"])
             lines.append(["    }"])
             lines.append([])
@@ -116,32 +116,32 @@ class XMASSwiftProtocolFaker: NSObject {
 
         for accessor in protocolDecl.getters {
             lines.append(["    func set" + upcase(accessor.name) + "CallCount()", "->", "Int", "{"])
-            lines.append(["        return", "_set_" + accessor.name + "Args.count"])
+            lines.append(["        return", "set_" + accessor.name + "Args.count"])
             lines.append(["    }"])
 
             lines.append([])
 
             lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
-            lines.append(["        if index < 0 || index >=", "_set_" + accessor.name + "Args.count", "{"])
+            lines.append(["        if index < 0 || index >=", "set_" + accessor.name + "Args.count", "{"])
             lines.append(["            throw NSError.init(domain: \"swift-generate-fake-domain\", code: 1, userInfo: nil)"])
             lines.append(["        }"])
-            lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
+            lines.append(["        return", "set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
             lines.append([])
         }
 
         for accessor in protocolDecl.setters {
             lines.append(["    func set" + upcase(accessor.name) + "CallCount()", "->", "Int", "{"])
-            lines.append(["        return", "_set_" + accessor.name + "Args.count"])
+            lines.append(["        return", "set_" + accessor.name + "Args.count"])
             lines.append(["    }"])
 
             lines.append([])
 
             lines.append(["    func set" + upcase(accessor.name) + "ArgsForCall(index : Int)", "throws", "->", accessor.returnType, "{"])
-            lines.append(["        if index < 0 || index >=", "_set_" + accessor.name + "Args.count", "{"])
+            lines.append(["        if index < 0 || index >=", "set_" + accessor.name + "Args.count", "{"])
             lines.append(["            throw NSError.init(domain: \"swift-generate-fake-domain\", code: 1, userInfo: nil)"])
             lines.append(["        }"])
-            lines.append(["        return", "_set_" + accessor.name + "Args[index]"])
+            lines.append(["        return", "set_" + accessor.name + "Args[index]"])
             lines.append(["    }"])
             lines.append([])
         }
@@ -164,7 +164,7 @@ class XMASSwiftProtocolFaker: NSObject {
             }
 
             if method.hasArguments() {
-                lines.append(["    var _" + method.name + "Args : Array<" + argTypes + ">"])
+                lines.append(["    private var", method.name + "Args : Array<" + argTypes + ">"])
             }
 
             if method.hasReturnValues() {
@@ -177,7 +177,7 @@ class XMASSwiftProtocolFaker: NSObject {
 
             if method.hasArguments() {
                 lines.append(["    func", method.name + "ArgsForCall(callIndex: Int) ->", argTypes, "{"])
-                lines.append(["        return self._" + method.name + "Args[callIndex]"])
+                lines.append(["        return self." + method.name + "Args[callIndex]"])
                 lines.append(["    }"])
             }
 
@@ -187,7 +187,7 @@ class XMASSwiftProtocolFaker: NSObject {
             lines.append(["    func", method.name + namedArguments + returnArrow + " {"])
             lines.append(["        self." + method.name + "CallCount++"])
             if method.hasArguments() {
-                lines.append(["        self._" + method.name + "Args.append((" + argumentNames + "))"])
+                lines.append(["        self." + method.name + "Args.append((" + argumentNames + "))"])
             }
             if method.hasReturnValues() {
                 lines.append(["        return self." + method.name + "Stub!(" + argumentNames + ")"])
