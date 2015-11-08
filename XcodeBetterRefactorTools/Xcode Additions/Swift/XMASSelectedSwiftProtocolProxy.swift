@@ -6,6 +6,7 @@ let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
 let instanceVarKind    : String = "source.lang.swift.decl.var.instance"
 let staticVarKind      : String = "source.lang.swift.decl.var.static"
 let instanceMethodKind : String = "source.lang.swift.decl.function.method.instance"
+let staticMethodKind : String = "source.lang.swift.decl.function.method.static"
 
 class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     var xcodeRepository : XMASXcodeRepository
@@ -69,13 +70,15 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
                     let (getters, setters) = accessorsFromProtocolDecl(protocolDict, kind: instanceVarKind)
                     let (staticGetters, staticSetters) = accessorsFromProtocolDecl(protocolDict, kind: staticVarKind)
-                    let funcs = instanceMethodsFromProtocolDecl(protocolDict, fileContents: fileContents)
+                    let methods = methodsFromProtocolDecl(protocolDict, fileContents: fileContents)
+                    let instanceMethods = methods.instanceM
+                    let staticMethods = methods.staticM
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
                         includedProtocols: [],
-                        instanceMethods: funcs,
-                        staticMethods: [],
+                        instanceMethods: instanceMethods,
+                        staticMethods: staticMethods,
                         mutatingMethods: [],
                         initializers: [],
                         getters: getters,
@@ -134,35 +137,48 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         return (getters, setters)
     }
 
-    func instanceMethodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> Array<MethodDeclaration> {
-        var methods : Array<MethodDeclaration> = []
+    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> (instanceM: Array<MethodDeclaration>, staticM: Array<MethodDeclaration>) {
+        var instanceMethods : Array<MethodDeclaration> = []
+        var staticMethods : Array<MethodDeclaration> = []
         let subStructure : XPCRepresentable = protocolDict["key.substructure"]!
         let subStructureArray = subStructure as! XPCArray
 
         for item in subStructureArray {
             if let protocolBodyItem = item as? XPCDictionary {
-                if protocolBodyItem["key.kind"]! != instanceMethodKind {
+                let isInstanceMethod = protocolBodyItem["key.kind"]! == instanceMethodKind
+                let isStaticMethod = protocolBodyItem["key.kind"]! == staticMethodKind
+                if  !isInstanceMethod && !isStaticMethod {
                     continue
                 }
+
+                let methodDeclaration = MethodDeclaration.init(
+                    name: methodNameFromMethodDict(protocolBodyItem),
+                    arguments: argumentsFromMethodDict(protocolBodyItem),
+                    returnValueTypes: returnTypesFromMethodDict(protocolBodyItem, fileContents: fileContents)
+                )
 
                 // ignores initializers and static methods, which include attributes
                 // to be **MORE** correct, we should verify the attributes does not contain
                 // the attributes for initializers or static methods
-                // unfortunately, the attribute for an initiailizer is "source.decl.attribute.__raw_doc_comment"
+                // unfortunately, the attribute for an initializer is "source.decl.attribute.__raw_doc_comment"
                 // ... garbage.
-                if let _ = protocolBodyItem["key.attributes"] as? XPCArray {
+                if let _ = protocolBodyItem["key.attributes"] as? [XPCRepresentable] {
                     continue
                 }
 
-                methods.append(MethodDeclaration.init(
-                    name: methodNameFromMethodDict(protocolBodyItem),
-                    arguments: argumentsFromMethodDict(protocolBodyItem),
-                    returnValueTypes: returnTypesFromMethodDict(protocolBodyItem, fileContents: fileContents)
-                ))
+                if isInstanceMethod {
+                    instanceMethods.append(methodDeclaration)
+                } else {
+                    staticMethods.append(methodDeclaration)
+                }
             }
         }
 
-        return methods
+        return (instanceM: instanceMethods, staticM: staticMethods)
+    }
+
+    func staticMethodContainMatcher(item : XPCRepresentable) -> Bool {
+        return item == "source.lang.swift.decl.function.method.static"
     }
 
     func methodNameFromMethodDict(protocolBodyItem : XPCDictionary) -> String {

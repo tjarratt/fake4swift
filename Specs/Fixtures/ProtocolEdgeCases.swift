@@ -7,8 +7,8 @@ protocol MySpecialProtocol {
     func randomDoubleWithSeeds(seed: Int, secondSeed: Int) -> Double
     func returnsMultipleValues() -> (Double, Double)
 
-    mutating func mutates()
     static func isStatic()
+    mutating func mutates()
 
     // required initializer declaration
     init(this: Int, orThat: Int)

@@ -104,6 +104,44 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     expect(args.1).to(equal(["octogon"]))
                 }
             }
+
+            describe("static methods") {
+                beforeEach() {
+                    FakeMySomewhatSpecialProtocol.reset()
+                }
+
+                it("allows you to call them and observe that they were invoked") {
+                    expect(FakeMySomewhatSpecialProtocol.staticMethodCallCount).to(equal(0))
+
+                    FakeMySomewhatSpecialProtocol.staticMethodStub = {(_ : String, _: Bool) -> [String] in
+                        return ["this", "that", "test"]
+                    }
+                    FakeMySomewhatSpecialProtocol.staticMethod("real-talk", soStatic: false)
+
+                    expect(FakeMySomewhatSpecialProtocol.staticMethodCallCount).to(equal(1))
+                }
+
+                it("allows you to stub the return value for methods that return values") {
+                    FakeMySomewhatSpecialProtocol.staticMethodReturns(["radiation", "sickness"])
+
+                    let stubbedValues = FakeMySomewhatSpecialProtocol.staticMethod("is bad", soStatic: true)
+                    expect(stubbedValues).to(equal(["radiation", "sickness"]))
+                }
+
+                it("allows you to write assertions for the arguments passed into each invocation") {
+                    FakeMySomewhatSpecialProtocol.staticMethodReturns(["dream", "a", "little", "dream", "of", "me"])
+                    FakeMySomewhatSpecialProtocol.staticMethod("sup", soStatic: true)
+
+                    var args = FakeMySomewhatSpecialProtocol.staticMethodArgsForCall(0)
+                    expect(args.0).to(equal("sup"))
+                    expect(args.1).to(equal(true))
+
+                    FakeMySomewhatSpecialProtocol.staticMethod("republic-of-dave", soStatic: false)
+                    args = FakeMySomewhatSpecialProtocol.staticMethodArgsForCall(1)
+                    expect(args.0).to(equal("republic-of-dave"))
+                    expect(args.1).to(equal(false))
+                }
+            }
         }
     }
 }

@@ -30,6 +30,16 @@ import Foundation
     func hasReturnValues() -> Bool {
         return returnValueTypes.count > 0
     }
+
+    override func isEqual(object: AnyObject?) -> Bool {
+        if let other = object as? MethodDeclaration {
+            return self.name == other.name &&
+                self.arguments == other.arguments &&
+                self.returnValueTypes == other.returnValueTypes
+        }
+
+        return false
+    }
 }
 
 @objc class Accessor : NSObject {

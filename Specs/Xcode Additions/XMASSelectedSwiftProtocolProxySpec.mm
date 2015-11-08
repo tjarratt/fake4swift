@@ -36,7 +36,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
             protocolDeclaration.name should equal(@"MySpecialProtocol");
         });
 
-        it(@"should parse the instance getters and setters", ^{
+        it(@"should parse instance getters and setters", ^{
             [protocolDeclaration.getters.firstObject valueForKey:@"name"] should equal(@"numberOfWheels");
             [protocolDeclaration.getters.firstObject valueForKey:@"returnType"] should equal(@"Int");
 
@@ -44,7 +44,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
             [protocolDeclaration.setters.firstObject valueForKey:@"returnType"] should equal(@"Int");
         });
 
-        it(@"should parse the static getters and setters", ^{
+        it(@"should parse static getters and setters", ^{
             [protocolDeclaration.staticGetters.firstObject valueForKey:@"name"] should equal(@"classGetter");
             [protocolDeclaration.staticGetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
 
@@ -52,7 +52,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
             [protocolDeclaration.staticSetters.firstObject valueForKey:@"returnType"] should equal(@"Int");
         });
 
-        it(@"should parse the instance methods", ^{
+        it(@"should parse instance methods", ^{
             protocolDeclaration.instanceMethods.count should equal(5);
 
             NSArray<NSString *> *expectedMethodNames = @[
@@ -89,6 +89,15 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
                                                         @[@"Double", @"Double"],
                                                         ];
             [protocolDeclaration.instanceMethods valueForKey:@"returnValueTypes"] should equal(expectedReturnTypes);
+        });
+
+        it(@"should parse static methods", ^{
+            protocolDeclaration.staticMethods.count should equal(1);
+
+            MethodDeclaration *expectedMethodDeclaration = [[MethodDeclaration alloc] initWithName:@"isStatic"
+                                                                                         arguments:@[]
+                                                                                  returnValueTypes:@[]];
+            protocolDeclaration.staticMethods.firstObject should equal(expectedMethodDeclaration);
         });
     });
 

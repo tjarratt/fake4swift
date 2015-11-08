@@ -16,6 +16,7 @@ class XMASSwiftProtocolFaker: NSObject {
         lines.appendContentsOf(customGetterSettersForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(assertionHelpersForAccessorsForFakeImplementingProtocol(protocolDecl))
         lines.appendContentsOf(implsForInstanceMethodsForFakeImplementingProtocol(protocolDecl))
+        lines.appendContentsOf(implsForStaticMethodsForFakeImplementingProtocol(protocolDecl))
         lines.append(["}"])
         lines.append([])
 
@@ -196,10 +197,68 @@ class XMASSwiftProtocolFaker: NSObject {
                 lines.append(["        return self." + method.name + "Stub!(" + argumentNames + ")"])
             }
             lines.append(["    }"])
-            lines.append([])
         }
 
         lines.removeLast()
+
+        return lines
+    }
+
+    func implsForStaticMethodsForFakeImplementingProtocol(protocolDecl: ProtocolDeclaration) -> Array<Array<String>> {
+        var lines : Array<Array<String>> = []
+
+        for method in protocolDecl.staticMethods {
+            lines.append(["    static", "var " + method.name + "CallCount : Int = 0"])
+
+            let returnTypes : String = concatReturnTypes(method.returnValueTypes)
+            let argTypes : String = concatArgTypes(method.arguments)
+            let namedArguments : String = concatNamedArguments(method.arguments)
+
+            if method.hasReturnValues() {
+                lines.append(["    static", "var", method.name + "Stub : (" + argTypes, "->", returnTypes + ")?"])
+            }
+
+            if method.hasArguments() {
+                lines.append(["    static", "private var", method.name + "Args : Array<" + argTypes + "> = []"])
+            }
+
+            if method.hasReturnValues() {
+                lines.append(["    static", "func", method.name + "Returns(stubbedValues:", concatReturnTypes(method.returnValueTypes) + ") {"])
+                lines.append(["        self." + method.name + "Stub = {" + namedArguments, "->", returnTypes, "in"])
+                lines.append(["            return stubbedValues"])
+                lines.append(["        }"])
+                lines.append(["    }"])
+            }
+
+            if method.hasArguments() {
+                lines.append(["    static", "func", method.name + "ArgsForCall(callIndex: Int) ->", argTypes, "{"])
+                lines.append(["        return self." + method.name + "Args[callIndex]"])
+                lines.append(["    }"])
+            }
+
+            let returnArrow : String = method.hasReturnValues() ? " -> " + returnTypes : ""
+            let argumentNames : String = method.arguments.map { $0.name }.joinWithSeparator(", ")
+
+            lines.append(["    static", "func", method.name + namedArguments + returnArrow + " {"])
+            lines.append(["        self." + method.name + "CallCount++"])
+            if method.hasArguments() {
+                lines.append(["        self." + method.name + "Args.append((" + argumentNames + "))"])
+            }
+            if method.hasReturnValues() {
+                lines.append(["        return self." + method.name + "Stub!(" + argumentNames + ")"])
+            }
+            lines.append(["    }"])
+            lines.append([])
+        }
+
+        lines.append(["    static func reset() {"])
+        for method in (protocolDecl.staticMethods.filter { $0.hasArguments() }) {
+            lines.append(["        self." + method.name + "Args = []"])
+        }
+        for method in (protocolDecl.staticMethods.filter { $0.hasReturnValues() }) {
+            lines.append(["        self." + method.name + "Stub = nil"])
+        }
+        lines.append(["    }"])
 
         return lines
     }
