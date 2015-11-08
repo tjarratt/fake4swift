@@ -6,7 +6,8 @@ let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
 let instanceVarKind    : String = "source.lang.swift.decl.var.instance"
 let staticVarKind      : String = "source.lang.swift.decl.var.static"
 let instanceMethodKind : String = "source.lang.swift.decl.function.method.instance"
-let staticMethodKind : String = "source.lang.swift.decl.function.method.static"
+let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
+let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
 class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     var xcodeRepository : XMASXcodeRepository
@@ -41,28 +42,15 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
                 /*
 
-                notes :
+                TODO (unimplemented features) notes :
 
                 includedProtocols : look for key.inheritedtypes
                 map over key.name to get a string for each protocol type
 
-                functions (normal) : just look for key.substructure with decl.function.method.instance as key.kind
-
-                functions (static) : key.kind = source.lang.swift.decl.function.method.static
-
-                functions (mutating) : key.attributes includes {key.name = source.decl.attribute.mutating}
-
                 initializers : instance.method where method name starts with init
                 seems to lose type information? (swiftc dump-ast still has it tho!)
 
-                getters : key.kind = source.lang.swift.decl.var.instance
-                type info is in key.typename
-                setters : key.kind = source.lang.swift.decl.var.instance
-                type info is in key.typename
-
                 (pretty shitty, we seem to lose information about whether these are just GET or SET or GET + Set)
-
-                static getters and setters -> key.kind = source.lang.swift.decl.var.static
 
                 subscript anything -> TOTALLY UNAVAILABLE
                 */
@@ -73,13 +61,14 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                     let methods = methodsFromProtocolDecl(protocolDict, fileContents: fileContents)
                     let instanceMethods = methods.instanceM
                     let staticMethods = methods.staticM
+                    let mutatingMethods = methods.mutableM
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
                         includedProtocols: [],
                         instanceMethods: instanceMethods,
                         staticMethods: staticMethods,
-                        mutatingMethods: [],
+                        mutatingMethods: mutatingMethods,
                         initializers: [],
                         getters: getters,
                         setters: setters,
@@ -137,9 +126,10 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         return (getters, setters)
     }
 
-    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> (instanceM: Array<MethodDeclaration>, staticM: Array<MethodDeclaration>) {
+    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> (instanceM: [MethodDeclaration], staticM: [MethodDeclaration], mutableM: [MethodDeclaration]) {
         var instanceMethods : Array<MethodDeclaration> = []
         var staticMethods : Array<MethodDeclaration> = []
+        var mutableMethods : Array<MethodDeclaration> = []
         let subStructure : XPCRepresentable = protocolDict["key.substructure"]!
         let subStructureArray = subStructure as! XPCArray
 
@@ -147,6 +137,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
             if let protocolBodyItem = item as? XPCDictionary {
                 let isInstanceMethod = protocolBodyItem["key.kind"]! == instanceMethodKind
                 let isStaticMethod = protocolBodyItem["key.kind"]! == staticMethodKind
+                let isMutableMethod = hasMatchingAttribute(protocolBodyItem, attributeName: mutableMethodKind)
                 if  !isInstanceMethod && !isStaticMethod {
                     continue
                 }
@@ -157,16 +148,15 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                     returnValueTypes: returnTypesFromMethodDict(protocolBodyItem, fileContents: fileContents)
                 )
 
-                // ignores initializers and static methods, which include attributes
-                // to be **MORE** correct, we should verify the attributes does not contain
-                // the attributes for initializers or static methods
-                // unfortunately, the attribute for an initializer is "source.decl.attribute.__raw_doc_comment"
-                // ... garbage.
-                if let _ = protocolBodyItem["key.attributes"] as? [XPCRepresentable] {
+                // initializers are not supported right now
+                if methodDeclaration.name.hasPrefix("init") {
                     continue
                 }
 
-                if isInstanceMethod {
+                if isMutableMethod {
+                    mutableMethods.append(methodDeclaration)
+                }
+                else if isInstanceMethod {
                     instanceMethods.append(methodDeclaration)
                 } else {
                     staticMethods.append(methodDeclaration)
@@ -174,12 +164,23 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
             }
         }
 
-        return (instanceM: instanceMethods, staticM: staticMethods)
+        return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
     }
 
-    func staticMethodContainMatcher(item : XPCRepresentable) -> Bool {
-        return item == "source.lang.swift.decl.function.method.static"
+    func hasMatchingAttribute(protocolBodyItem : XPCDictionary, attributeName: String) -> Bool {
+        if let attributes = protocolBodyItem["key.attributes"] as? [XPCRepresentable] {
+            for attribute : XPCRepresentable in attributes {
+                if let attrs = attribute as? XPCDictionary {
+                    if attrs["key.attribute"]! == attributeName {
+                        return true
+                    }
+                }
+            }
+        }
+
+        return false
     }
+
 
     func methodNameFromMethodDict(protocolBodyItem : XPCDictionary) -> String {
         let methodName : String = protocolBodyItem["key.name"] as! String

@@ -4,7 +4,34 @@ import Mustache
 class XMASSwiftProtocolFaker: NSObject {
 
     func fakeForProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        let template = try! Template(named: "SwiftCounterfeit")
+        if protocolDecl.mutatingMethods.isEmpty {
+            return self.classImplementingProtocol(protocolDecl).stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
+        } else {
+            return self.structImplementingProtocol(protocolDecl).stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
+        }
+    }
+
+    // private
+    func structImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
+        let template = try! Template(named: "SwiftCounterfeitStruct")
+
+        let boxedData = Box([
+            "protocol_name": protocolDecl.name,
+            "getters": protocolDecl.getters.map(mapAccessorToDict),
+            "setters": protocolDecl.setters.map(mapAccessorToDict),
+            "instance_methods": protocolDecl.instanceMethods.map(mapMethodsToDict),
+            "static_methods": protocolDecl.staticMethods.map(mapMethodsToDict),
+            "mutating_methods": protocolDecl.mutatingMethods.map(mapMethodsToDict),
+            ])
+
+        let result : String = try! template.render(boxedData)
+        return result.componentsSeparatedByString("\n").filter( {
+            !$0.hasPrefix("*")
+        }).joinWithSeparator("\n")
+    }
+
+    func classImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
+        let template = try! Template(named: "SwiftCounterfeitClass")
 
         let boxedData = Box([
             "protocol_name": protocolDecl.name,

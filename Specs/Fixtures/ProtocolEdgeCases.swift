@@ -8,9 +8,6 @@ protocol MySpecialProtocol {
     func returnsMultipleValues() -> (Double, Double)
 
     static func isStatic()
-    mutating func mutates()
-
-    // required initializer declaration
     init(this: Int, orThat: Int)
 
     subscript(subscriptAssignable : Int, areYouKidding : Float) -> Bool { get }
@@ -37,6 +34,10 @@ protocol MySpecialProtocol {
 
 protocol IncludesOtherProtocol : MyOptionalProtocol, NSObjectProtocol { // this is right annoying
 
+}
+
+protocol ImplementableByStructsOnly {
+    mutating func mutates()
 }
 
 public protocol ImplementableByClassesOnly : class {

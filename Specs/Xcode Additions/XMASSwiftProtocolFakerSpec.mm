@@ -11,30 +11,55 @@ SPEC_BEGIN(XMASSwiftProtocolFakerSpec)
 describe(@"XMASSwiftProtocolFaker", ^{
     __block XMASSwiftProtocolFaker *subject;
     __block ProtocolDeclaration *protocolDeclaration;
+    __block XMASXcodeRepository *fakeXcodeRepository;
+    __block id<XMASSelectedTextProxy> selectedTextProxy;
 
     beforeEach(^{
         NSArray *modules = @[[[RefactorToolsModule alloc] init]];
         id<BSInjector, BSBinder> injector = (id<BSInjector, BSBinder>)[Blindside injectorWithModules:modules];
 
-        XMASXcodeRepository *fakeXcodeRepository = nice_fake_for([XMASXcodeRepository class]);
+        fakeXcodeRepository = nice_fake_for([XMASXcodeRepository class]);
         [injector bind:[XMASXcodeRepository class] toInstance:fakeXcodeRepository];
 
         subject = [injector getInstance:[XMASSwiftProtocolFaker class]];
 
-        id<XMASSelectedTextProxy> selectedTextProxy = [injector getInstance:@protocol(XMASSelectedTextProxy)];
-        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MySomewhatSpecialProtocol"
-                                                                ofType:@"swift"];
-
-        fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
-        protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
+        selectedTextProxy = [injector getInstance:@protocol(XMASSelectedTextProxy)];
     });
 
-    NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySpecialProtocol" ofType:@"swift"];
+    describe(@"given a protocol that can only be implemented by a class", ^{
+        beforeEach(^{
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
 
-    it(@"should create a reasonably useful fake for the selected protocol", ^{
-        NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
+            NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MySomewhatSpecialProtocol"
+                                                                    ofType:@"swift"];
+            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
+        });
 
-        [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
+        NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySpecialProtocol" ofType:@"swift"];
+
+        it(@"should create a reasonably useful fake for the selected protocol", ^{
+            NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
+
+            [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
+        });
+    });
+
+    describe(@"given a protocol that can only be implemented by a struct", ^{
+        beforeEach(^{
+            NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MyMutatingProtocol"
+                                                                    ofType:@"swift"];
+
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
+            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
+        });
+
+        NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];
+
+        it(@"should create a struct that implements the protocol", ^{
+            NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
+
+            [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
+        });
     });
 });
 

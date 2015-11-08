@@ -53,8 +53,6 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
         });
 
         it(@"should parse instance methods", ^{
-            protocolDeclaration.instanceMethods.count should equal(5);
-
             NSArray<NSString *> *expectedMethodNames = @[
                                                         @"voidMethod",
                                                         @"randomDouble",
@@ -94,10 +92,29 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
         it(@"should parse static methods", ^{
             protocolDeclaration.staticMethods.count should equal(1);
 
-            MethodDeclaration *expectedMethodDeclaration = [[MethodDeclaration alloc] initWithName:@"isStatic"
+            MethodDeclaration *expectedMethod = [[MethodDeclaration alloc] initWithName:@"isStatic"
                                                                                          arguments:@[]
                                                                                   returnValueTypes:@[]];
-            protocolDeclaration.staticMethods.firstObject should equal(expectedMethodDeclaration);
+            protocolDeclaration.staticMethods.firstObject should equal(expectedMethod);
+        });
+    });
+
+    context(@"when a swift protocol with mutating methods is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        beforeEach(^{
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1155, 0));
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
+        });
+
+        it(@"should parse the name of the selected protocol", ^{
+            protocolDeclaration.name should equal(@"ImplementableByStructsOnly");
+        });
+
+        it(@"should parse mutable methods", ^{
+            MethodDeclaration *expectedMethod = [[MethodDeclaration alloc] initWithName:@"mutates"
+                                                                              arguments:@[]
+                                                                       returnValueTypes:@[]];
+            protocolDeclaration.mutatingMethods should equal(@[expectedMethod]);
         });
     });
 

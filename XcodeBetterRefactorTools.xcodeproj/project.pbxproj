@@ -38,8 +38,8 @@
 		F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
 		F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F70346391BEF443700A8FD27 /* SwiftCounterfeit.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */; };
-		F703463A1BEF444300A8FD27 /* SwiftCounterfeit.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */; };
+		F70346391BEF443700A8FD27 /* SwiftCounterfeitClass.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */; };
+		F703463A1BEF444300A8FD27 /* SwiftCounterfeitClass.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */; };
 		F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */; };
 		F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */; };
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
@@ -124,6 +124,15 @@
 		F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */; };
 		F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
+		F7DB97301BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
+		F7DB97311BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
+		F7DB97581BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB97571BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift */; };
+		F7DB975A1BF00FF200A9C474 /* MyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
+		F7DB975B1BF00FF200A9C474 /* MyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
+		F7DB975C1BF0109800A9C474 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
+		F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
+		F7DB975F1BF0135000A9C474 /* SwiftCounterfeitStruct.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
+		F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
 		F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */; };
@@ -507,7 +516,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F70346391BEF443700A8FD27 /* SwiftCounterfeit.mustache in Copy Mustache Templates */,
+				F7DB975F1BF0135000A9C474 /* SwiftCounterfeitStruct.mustache in Copy Mustache Templates */,
+				F70346391BEF443700A8FD27 /* SwiftCounterfeitClass.mustache in Copy Mustache Templates */,
 			);
 			name = "Copy Mustache Templates";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,7 +542,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				F703463A1BEF444300A8FD27 /* SwiftCounterfeit.mustache in Copy Fixtures */,
+				F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
+				F7DB975C1BF0109800A9C474 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */,
+				F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */,
+				F703463A1BEF444300A8FD27 /* SwiftCounterfeitClass.mustache in Copy Fixtures */,
 				F7FC457E1BE7525500299694 /* FakeForMySpecialProtocol.swift in Copy Fixtures */,
 				F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
 				F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */,
@@ -603,7 +616,7 @@
 		AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempFileHelper.m; sourceTree = "<group>"; };
 		AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodExpected.h; sourceTree = "<group>"; };
 		F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mustache.xcodeproj; path = GRMustacheSwift/Mustache.xcodeproj; sourceTree = "<group>"; };
-		F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = SwiftCounterfeit.mustache; sourceTree = "<group>"; };
+		F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = SwiftCounterfeitClass.mustache; sourceTree = "<group>"; };
 		F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASMethodOccurrencesRepositorySpec.mm; sourceTree = "<group>"; };
 		F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodCallParserSpec.mm; sourceTree = "<group>"; };
 		F70C9FDE1BC8F23200E9C019 /* XMASGenerateFakeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASGenerateFakeAction.h; sourceTree = "<group>"; };
@@ -682,6 +695,10 @@
 		F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
 		F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionSpec.mm; sourceTree = "<group>"; };
 		F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealisticMethodCalls.m; sourceTree = "<group>"; };
+		F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeForMyMutatingProtocol.swift; sourceTree = "<group>"; };
+		F7DB97571BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMyMutatingProtocolSpec.swift; sourceTree = "<group>"; };
+		F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMutatingProtocol.swift; sourceTree = "<group>"; };
+		F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftCounterfeitStruct.mustache; sourceTree = "<group>"; };
 		F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Blindside.xcodeproj; path = Blindside/Blindside.xcodeproj; sourceTree = "<group>"; };
 		F7E009491B7FDBE900B9E6E6 /* RefactorToolsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefactorToolsModule.h; sourceTree = "<group>"; };
 		F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefactorToolsModule.m; sourceTree = "<group>"; };
@@ -865,7 +882,8 @@
 		F70346361BEF43A900A8FD27 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */,
+				F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */,
+				F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */,
 			);
 			name = Templates;
 			sourceTree = "<group>";
@@ -881,6 +899,7 @@
 		F70A03511B49DC420009B348 /* Expected */ = {
 			isa = PBXGroup;
 			children = (
+				F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */,
 				F7FC457A1BE7510900299694 /* FakeForMySpecialProtocol.swift */,
 				AE76355C1B68245B00F85396 /* RefactorMethodDeclarationExpected.m */,
 				AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */,
@@ -911,6 +930,7 @@
 				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
 				F70A03511B49DC420009B348 /* Expected */,
 				F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */,
+				F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */,
 				F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */,
 				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
 				F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */,
@@ -964,6 +984,7 @@
 			children = (
 				F76510E91BE9FA5800BFDAD8 /* Info.plist */,
 				F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */,
+				F7DB97571BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift */,
 			);
 			path = GeneratedFakesBehavioralSpecs;
 			sourceTree = "<group>";
@@ -1720,8 +1741,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F76511031BE9FAB400BFDAD8 /* MySomewhatSpecialProtocol.swift in Sources */,
+				F7DB97581BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift in Sources */,
 				F765113E1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift in Sources */,
+				F7DB975B1BF00FF200A9C474 /* MyMutatingProtocol.swift in Sources */,
+				F76511031BE9FAB400BFDAD8 /* MySomewhatSpecialProtocol.swift in Sources */,
+				F7DB97311BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */,
 				F76511021BE9FA9700BFDAD8 /* FakeForMySpecialProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1757,6 +1781,7 @@
 				F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */,
 				AE810AAD1B72C2FA0097573C /* FakeXcodeFileReference.m in Sources */,
 				F7BEDD171B5C5FB800A4704B /* XMASChangeMethodSignatureController.m in Sources */,
+				F7DB975A1BF00FF200A9C474 /* MyMutatingProtocol.swift in Sources */,
 				F70E1FC61B24DA1300D971E6 /* XMASObjcMethodDeclarationSpec.mm in Sources */,
 				F7D01C0A1B5C602700FE62DA /* XMASObjcMethodCallParser.m in Sources */,
 				F7F09FF41B281A1F00727AD7 /* XMASWindowProviderSpec.mm in Sources */,
@@ -1787,6 +1812,7 @@
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7FC45791BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm in Sources */,
+				F7DB97301BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
 				F7FC457B1BE7510900299694 /* FakeForMySpecialProtocol.swift in Sources */,
 				F7B1D2891B5C5F7900C28AE7 /* XMASAlert.m in Sources */,
