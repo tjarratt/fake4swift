@@ -34,6 +34,10 @@
 		AEE1B5901B69456600CC8AFE /* RefactorMethodFixture.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */; };
 		AEE1B5941B6945B700CC8AFE /* TempFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */; };
 		AEE1B5961B6947B200CC8AFE /* RefactorMethodExpected.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */; };
+		F70346301BEF3FF300A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
+		F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
+		F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */; };
 		F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */; };
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
@@ -142,6 +146,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F70346181BEF3FDE00A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 563AE19719FBE47A0028C6C1;
+			remoteInfo = MustacheiOS;
+		};
+		F703461A1BEF3FDE00A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 563AE1A219FBE47A0028C6C1;
+			remoteInfo = MustacheiOSTests;
+		};
+		F703461C1BEF3FDE00A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 561E725C1A8BDC2B004ED48B;
+			remoteInfo = MustacheOSX;
+		};
+		F703461E1BEF3FDE00A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 561E72661A8BDC2B004ED48B;
+			remoteInfo = MustacheOSXTests;
+		};
+		F703462E1BEF3FEB00A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 561E725B1A8BDC2B004ED48B;
+			remoteInfo = MustacheOSX;
+		};
+		F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 561E725B1A8BDC2B004ED48B;
+			remoteInfo = MustacheOSX;
+		};
 		F76511101BE9FAC800BFDAD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F76511041BE9FAC800BFDAD8 /* Quick.xcodeproj */;
@@ -459,6 +505,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */,
 				F78655891BE4A77E00BB3026 /* SourceKittenFramework.framework in Copy frameworks */,
 				F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */,
 				F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy frameworks */,
@@ -496,6 +543,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */,
 				F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */,
 				F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */,
 				F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */,
@@ -540,6 +588,7 @@
 		AEE1B5921B6945B700CC8AFE /* TempFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempFileHelper.h; sourceTree = "<group>"; };
 		AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempFileHelper.m; sourceTree = "<group>"; };
 		AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodExpected.h; sourceTree = "<group>"; };
+		F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mustache.xcodeproj; path = GRMustacheSwift/Mustache.xcodeproj; sourceTree = "<group>"; };
 		F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASMethodOccurrencesRepositorySpec.mm; sourceTree = "<group>"; };
 		F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodCallParserSpec.mm; sourceTree = "<group>"; };
 		F70C9FDE1BC8F23200E9C019 /* XMASGenerateFakeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASGenerateFakeAction.h; sourceTree = "<group>"; };
@@ -642,6 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70346301BEF3FF300A8FD27 /* Mustache.framework in Frameworks */,
 				F7C0348F1BDDF3BF00C7DC86 /* SwiftXPC.framework in Frameworks */,
 				960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */,
 				F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */,
@@ -664,6 +714,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */,
 				F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */,
 				F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */,
 				F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */,
@@ -698,12 +749,12 @@
 			isa = PBXGroup;
 			children = (
 				F7BA62481B2233B0005B99AF /* Externals */,
-				960FA0941605819F00923A87 /* XcodeBetterRefactorTools */,
-				960FA0951605819F00923A87 /* Supporting Files */,
-				F7BA62291B223369005B99AF /* Specs */,
-				F76510E61BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs */,
 				960FA0911605819F00923A87 /* Frameworks */,
+				F76510E61BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs */,
 				960FA0901605819F00923A87 /* Products */,
+				F7BA62291B223369005B99AF /* Specs */,
+				960FA0951605819F00923A87 /* Supporting Files */,
+				960FA0941605819F00923A87 /* XcodeBetterRefactorTools */,
 			);
 			sourceTree = "<group>";
 		};
@@ -757,11 +808,11 @@
 		AE0C00C01B7134560065C099 /* Xcode Additions */ = {
 			isa = PBXGroup;
 			children = (
+				F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */,
 				AE0C00CD1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm */,
-				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
 				F786558F1BE4AAD800BB3026 /* XMASSelectedSwiftProtocolProxySpec.mm */,
 				F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */,
-				F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */,
+				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -782,6 +833,17 @@
 				AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */,
 			);
 			path = "Test Helpers";
+			sourceTree = "<group>";
+		};
+		F70345FE1BEF3FDE00A8FD27 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F70346191BEF3FDE00A8FD27 /* Mustache.framework */,
+				F703461B1BEF3FDE00A8FD27 /* MustacheiOSTests.xctest */,
+				F703461D1BEF3FDE00A8FD27 /* Mustache.framework */,
+				F703461F1BEF3FDE00A8FD27 /* MustacheOSXTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F70A033E1B49D06E0009B348 /* Indexes */ = {
@@ -940,25 +1002,25 @@
 		F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */ = {
 			isa = PBXGroup;
 			children = (
-				F7FC45801BE786DA00299694 /* XMASFakeProtocolPersister.h */,
-				F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */,
+				F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */,
 				F79FF6631BDF62910058EFE0 /* Swift */,
+				F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */,
 				F7B1D2831B5C5F7900C28AE7 /* XcodeInterfaces.h */,
 				F7B1D2841B5C5F7900C28AE7 /* XMASAlert.h */,
 				F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */,
 				F70C9FE41BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.h */,
 				F70C9FE51BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m */,
+				F7FC45801BE786DA00299694 /* XMASFakeProtocolPersister.h */,
+				F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */,
 				AE0C00CF1B7134DF0065C099 /* XMASSearchPathExpander.h */,
 				AE0C00D01B7134DF0065C099 /* XMASSearchPathExpander.m */,
+				F73A20D01BDC2DF7003BD1E5 /* XMASSelectedTextProxy.h */,
 				AE71D5B01B66F5CE00E40833 /* XMASXcodeAdditions.h */,
 				AE71D5B11B66F5CE00E40833 /* XMASXcodeAdditions.m */,
 				F7B1D2861B5C5F7900C28AE7 /* XMASXcodeRepository.h */,
 				F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */,
 				AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */,
 				AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */,
-				F7C49E9B1BDA0E4900DEDACF /* XcodeBetterRefactorTools-Bridging-Header.h */,
-				F7C49E9C1BDA0E4900DEDACF /* Specs-Bridging-Header.h */,
-				F73A20D01BDC2DF7003BD1E5 /* XMASSelectedTextProxy.h */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -993,6 +1055,7 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */,
 				F76511221BE9FAD100BFDAD8 /* Nimble.xcodeproj */,
 				F76511041BE9FAC800BFDAD8 /* Quick.xcodeproj */,
 				F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */,
@@ -1155,6 +1218,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F703462F1BEF3FEB00A8FD27 /* PBXTargetDependency */,
 				F7C0348E1BDDF3B800C7DC86 /* PBXTargetDependency */,
 				F7E009461B7FDAA900B9E6E6 /* PBXTargetDependency */,
 			);
@@ -1194,6 +1258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F70346321BEF3FF900A8FD27 /* PBXTargetDependency */,
 				F786558E1BE4A8D100BB3026 /* PBXTargetDependency */,
 				F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */,
 				F7BA62721B2233E5005B99AF /* PBXTargetDependency */,
@@ -1241,6 +1306,10 @@
 					ProjectRef = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
 				},
 				{
+					ProductGroup = F70345FE1BEF3FDE00A8FD27 /* Products */;
+					ProjectRef = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+				},
+				{
 					ProductGroup = F76511231BE9FAD100BFDAD8 /* Products */;
 					ProjectRef = F76511221BE9FAD100BFDAD8 /* Nimble.xcodeproj */;
 				},
@@ -1264,6 +1333,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F70346191BEF3FDE00A8FD27 /* Mustache.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mustache.framework;
+			remoteRef = F70346181BEF3FDE00A8FD27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F703461B1BEF3FDE00A8FD27 /* MustacheiOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MustacheiOSTests.xctest;
+			remoteRef = F703461A1BEF3FDE00A8FD27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F703461D1BEF3FDE00A8FD27 /* Mustache.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mustache.framework;
+			remoteRef = F703461C1BEF3FDE00A8FD27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F703461F1BEF3FDE00A8FD27 /* MustacheOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MustacheOSXTests.xctest;
+			remoteRef = F703461E1BEF3FDE00A8FD27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F76511111BE9FAC800BFDAD8 /* Quick.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1677,6 +1774,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F703462F1BEF3FEB00A8FD27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MustacheOSX;
+			targetProxy = F703462E1BEF3FEB00A8FD27 /* PBXContainerItemProxy */;
+		};
+		F70346321BEF3FF900A8FD27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MustacheOSX;
+			targetProxy = F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */;
+		};
 		F76511381BE9FADA00BFDAD8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Nimble-OSX";
