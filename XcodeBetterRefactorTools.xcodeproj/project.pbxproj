@@ -38,6 +38,8 @@
 		F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
 		F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F70346391BEF443700A8FD27 /* SwiftCounterfeit.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */; };
+		F703463A1BEF444300A8FD27 /* SwiftCounterfeit.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */; };
 		F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */; };
 		F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */; };
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
@@ -499,6 +501,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F70346381BEF441700A8FD27 /* Copy Mustache Templates */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F70346391BEF443700A8FD27 /* SwiftCounterfeit.mustache in Copy Mustache Templates */,
+			);
+			name = "Copy Mustache Templates";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F70B5EE61B2435E900AA32BB /* Copy frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -519,6 +532,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F703463A1BEF444300A8FD27 /* SwiftCounterfeit.mustache in Copy Fixtures */,
 				F7FC457E1BE7525500299694 /* FakeForMySpecialProtocol.swift in Copy Fixtures */,
 				F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
 				F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */,
@@ -589,6 +603,7 @@
 		AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempFileHelper.m; sourceTree = "<group>"; };
 		AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefactorMethodExpected.h; sourceTree = "<group>"; };
 		F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mustache.xcodeproj; path = GRMustacheSwift/Mustache.xcodeproj; sourceTree = "<group>"; };
+		F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = SwiftCounterfeit.mustache; sourceTree = "<group>"; };
 		F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASMethodOccurrencesRepositorySpec.mm; sourceTree = "<group>"; };
 		F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodCallParserSpec.mm; sourceTree = "<group>"; };
 		F70C9FDE1BC8F23200E9C019 /* XMASGenerateFakeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASGenerateFakeAction.h; sourceTree = "<group>"; };
@@ -780,6 +795,7 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
+				F70346361BEF43A900A8FD27 /* Templates */,
 				9608A8FD1622755B00763892 /* Actions */,
 				F71E828A1B59715500BE93DC /* Code Generation */,
 				F7E009481B7FDBCB00B9E6E6 /* Dependencies */,
@@ -844,6 +860,14 @@
 				F703461F1BEF3FDE00A8FD27 /* MustacheOSXTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F70346361BEF43A900A8FD27 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				F70346371BEF440000A8FD27 /* SwiftCounterfeit.mustache */,
+			);
+			name = Templates;
 			sourceTree = "<group>";
 		};
 		F70A033E1B49D06E0009B348 /* Indexes */ = {
@@ -1214,6 +1238,7 @@
 				960FA08C1605819F00923A87 /* Frameworks */,
 				F76B9B6B1B23F2F90028AC9A /* CopyFiles */,
 				F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */,
+				F70346381BEF441700A8FD27 /* Copy Mustache Templates */,
 			);
 			buildRules = (
 			);
