@@ -28,7 +28,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(21, 0));
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
         });
 

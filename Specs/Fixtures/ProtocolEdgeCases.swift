@@ -1,3 +1,5 @@
+import Foundation
+
 protocol MySpecialProtocol {
     func voidMethod()
     func randomDouble() -> Double

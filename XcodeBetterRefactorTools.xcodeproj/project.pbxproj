@@ -2086,6 +2086,7 @@
 				F76510EB1BE9FA5800BFDAD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7BA62461B22336A005B99AF /* Build configuration list for PBXNativeTarget "Specs" */ = {
 			isa = XCConfigurationList;
