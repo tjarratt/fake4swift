@@ -3,6 +3,11 @@ import Mustache
 
 class XMASSwiftProtocolFaker: NSObject {
 
+    var bundle : NSBundle
+    init(bundle: NSBundle) {
+        self.bundle = bundle
+    }
+
     func fakeForProtocol(protocolDecl: ProtocolDeclaration) -> String {
         if protocolDecl.mutatingMethods.isEmpty {
             return self.classImplementingProtocol(protocolDecl).stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
@@ -13,9 +18,27 @@ class XMASSwiftProtocolFaker: NSObject {
 
     // private
     func structImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        let template = try! Template(named: "SwiftCounterfeitStruct")
+        let path : String = self.bundle.pathForResource("SwiftCounterfeitStruct", ofType: "mustache")!
+        let template = try! Template(path: path)
 
-        let boxedData = Box([
+        let result : String = try! template.render(boxDataForProtocol(protocolDecl))
+        return result.componentsSeparatedByString("\n").filter( {
+            !$0.hasPrefix("*")
+        }).joinWithSeparator("\n")
+    }
+
+    func classImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
+        let path : String = self.bundle.pathForResource("SwiftCounterfeitClass", ofType: "mustache")!
+        let template = try! Template(path: path)
+
+        let result : String = try! template.render(boxDataForProtocol(protocolDecl))
+        return result.componentsSeparatedByString("\n").filter( {
+            !$0.hasPrefix("*")
+        }).joinWithSeparator("\n")
+    }
+
+    private func boxDataForProtocol(protocolDecl: ProtocolDeclaration) -> MustacheBox {
+        return Box([
             "protocol_name": protocolDecl.name,
             "getters": protocolDecl.getters.map(mapAccessorToDict),
             "setters": protocolDecl.setters.map(mapAccessorToDict),
@@ -23,28 +46,6 @@ class XMASSwiftProtocolFaker: NSObject {
             "static_methods": protocolDecl.staticMethods.map(mapMethodsToDict),
             "mutating_methods": protocolDecl.mutatingMethods.map(mapMethodsToDict),
             ])
-
-        let result : String = try! template.render(boxedData)
-        return result.componentsSeparatedByString("\n").filter( {
-            !$0.hasPrefix("*")
-        }).joinWithSeparator("\n")
-    }
-
-    func classImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        let template = try! Template(named: "SwiftCounterfeitClass")
-
-        let boxedData = Box([
-            "protocol_name": protocolDecl.name,
-            "getters": protocolDecl.getters.map(mapAccessorToDict),
-            "setters": protocolDecl.setters.map(mapAccessorToDict),
-            "instance_methods": protocolDecl.instanceMethods.map(mapMethodsToDict),
-            "static_methods": protocolDecl.staticMethods.map(mapMethodsToDict),
-        ])
-
-        let result : String = try! template.render(boxedData)
-        return result.componentsSeparatedByString("\n").filter( {
-            !$0.hasPrefix("*")
-        }).joinWithSeparator("\n")
     }
 
     private func upcase(str : String) -> String {

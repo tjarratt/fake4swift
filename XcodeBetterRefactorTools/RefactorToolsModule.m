@@ -107,6 +107,12 @@ static XMASRefactorMethodAction *action;
         return [[XMASFakeProtocolPersister alloc] initWithProtocolFaker:protocolFaker
                 fileManager:[NSFileManager defaultManager]];
     }];
+
+    [binder bind:[XMASSwiftProtocolFaker class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        return [[XMASSwiftProtocolFaker alloc] initWithBundle:[injector getInstance:@"MainBundle"]];
+    }];
+
+    [binder bind:@"MainBundle" toInstance:[NSBundle bundleWithIdentifier:@"com.tomato.XcodeBetterRefactorTools"]];
 }
 
 @end

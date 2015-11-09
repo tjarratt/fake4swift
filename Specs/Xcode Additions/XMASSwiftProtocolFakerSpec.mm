@@ -20,6 +20,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
         fakeXcodeRepository = nice_fake_for([XMASXcodeRepository class]);
         [injector bind:[XMASXcodeRepository class] toInstance:fakeXcodeRepository];
+        [injector bind:@"MainBundle" toInstance:[NSBundle mainBundle]];
 
         subject = [injector getInstance:[XMASSwiftProtocolFaker class]];
 
