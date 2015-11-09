@@ -47,7 +47,6 @@ class XMASSwiftProtocolFaker: NSObject {
         }).joinWithSeparator("\n")
     }
 
-    // private
     private func upcase(str : String) -> String {
         return str.stringByReplacingCharactersInRange(str.startIndex...str.startIndex,
             withString: String(str[str.startIndex]).capitalizedString)
