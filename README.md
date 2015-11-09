@@ -16,7 +16,7 @@ BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD 
    
    (Edit > Generate Fake Protocol)
 
-   Generates a file in your project with a test double that implements the Swift protocol under your cursor. 
+   Generates a file in your project with a test double that implements the Swift protocol under your cursor. Inspired by [counterfeiter](https://github.com/maxbrunsfeld/counterfeiter).
    
    Given a swift protocol...
    
