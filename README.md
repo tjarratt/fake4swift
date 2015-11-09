@@ -1,13 +1,17 @@
 BetterRefactorTools is an Xcode plugin that adds handy shortcuts for refactoring methods in Objective-C.
 
 # Installation
-* git clone https://github.com/tjarratt/Xcode-Better-Refactor-Tools.git
-* cd Xcode-Better-Refactor-Tools
-* rake install
+* `git clone https://github.com/tjarratt/Xcode-Better-Refactor-Tools.git`
+* `cd Xcode-Better-Refactor-Tools`
+* `rake install`
 
 # Features
 
-* (note: this list may be incomplete)
+   <kbd>CTRL</kbd> + <kbd>g</kbd>
+
+   Generate a class that implements the Swift protocol under your cursor.
+
+   (Edit > Generate Fake Protocol)
 
    <kbd>CMD</kbd> + <kbd>F6</kbd>
    
@@ -15,15 +19,11 @@ BetterRefactorTools is an Xcode plugin that adds handy shortcuts for refactoring
    
    (Edit > Refactor Current Method)
 
-   <kbd>CTRL</kbd> + <kbd>g</kbd>
-
-   Generate a class that implements the protocol under your cursor. Only works with Swift.
-
-   (Edit > Generate Fake Protocol)
-
 # Known defects
 
-* Generate Fake   : Only supports swift protocols with "var name : Type { get set }"
+* Generate Fake   : Does not support initializers
+* Generate Fake   : Does not support protocols that include other protocols
+* Generate Fake   : Does not handle protocols that use `typealias`
 * Refactor Method : Only supports instance methods
 * Refactor Method : ay get confused when an argument is a protocol type (e.g.: `id<AnyProtocol>`)
 * Refactor Method : Cannot find call sites of methods in all `.mm` files. (especially Cedar specs)
