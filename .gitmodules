@@ -19,3 +19,6 @@
 [submodule "Externals/GRMustacheSwift"]
 	path = Externals/GRMustacheSwift
 	url = https://github.com/groue/GRMustache.swift.git
+[submodule "Externals/SWXMLHash"]
+	path = Externals/SWXMLHash
+	url = https://github.com/drmohundro/SWXMLHash

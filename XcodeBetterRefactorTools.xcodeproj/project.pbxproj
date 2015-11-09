@@ -346,6 +346,41 @@
 			remoteGlobalIDString = 34A18BDF1B9F887300A65DB3;
 			remoteInfo = "Blindside-watchOS BuildTest Extension";
 		};
+		F7A556E31BF138A6006B9741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD6083EF196CA106000B4F8D;
+			remoteInfo = SWXMLHash;
+		};
+		F7A556E51BF138A6006B9741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD9D052C1A757D8B003CCB21;
+			remoteInfo = SWXMLHashOSX;
+		};
+		F7A556E71BF138A6006B9741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD6083FA196CA106000B4F8D;
+			remoteInfo = SWXMLHashTests;
+		};
+		F7A556E91BF138A6006B9741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD9D05361A757D8B003CCB21;
+			remoteInfo = SWXMLHashOSXTests;
+		};
+		F7A556EB1BF138B6006B9741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CD9D052B1A757D8B003CCB21;
+			remoteInfo = SWXMLHashOSX;
+		};
 		F7BA62591B2233D0005B99AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
@@ -653,6 +688,7 @@
 		F79FF6791BDF62A90058EFE0 /* SwiftProtocolDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftProtocolDeclaration.swift; sourceTree = "<group>"; };
 		F79FF67C1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedSwiftProtocolProxy.swift; sourceTree = "<group>"; };
 		F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolEdgeCases.swift; sourceTree = "<group>"; };
+		F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = SWXMLHash/SWXMLHash.xcodeproj; sourceTree = "<group>"; };
 		F7B1D2831B5C5F7900C28AE7 /* XcodeInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeInterfaces.h; sourceTree = "<group>"; };
 		F7B1D2841B5C5F7900C28AE7 /* XMASAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASAlert.h; sourceTree = "<group>"; };
 		F7B1D2851B5C5F7900C28AE7 /* XMASAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASAlert.m; sourceTree = "<group>"; };
@@ -1044,6 +1080,17 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
+		F7A556DD1BF138A6006B9741 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7A556E41BF138A6006B9741 /* SWXMLHash.framework */,
+				F7A556E61BF138A6006B9741 /* SWXMLHash.framework */,
+				F7A556E81BF138A6006B9741 /* SWXMLHashTests.xctest */,
+				F7A556EA1BF138A6006B9741 /* SWXMLHashOSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,14 +1147,15 @@
 		F7BA62481B2233B0005B99AF /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */,
+				F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */,
+				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
 				F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */,
 				F76511221BE9FAD100BFDAD8 /* Nimble.xcodeproj */,
 				F76511041BE9FAC800BFDAD8 /* Quick.xcodeproj */,
-				F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */,
 				F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */,
-				F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */,
-				F7E491F61B23EBC400BE3A61 /* ClangKit.framework */,
-				F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */,
+				F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */,
+				F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -1264,6 +1312,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F7A556EC1BF138B6006B9741 /* PBXTargetDependency */,
 				F703462F1BEF3FEB00A8FD27 /* PBXTargetDependency */,
 				F7C0348E1BDDF3B800C7DC86 /* PBXTargetDependency */,
 				F7E009461B7FDAA900B9E6E6 /* PBXTargetDependency */,
@@ -1366,6 +1415,10 @@
 				{
 					ProductGroup = F7C034711BDDF3A100C7DC86 /* Products */;
 					ProjectRef = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
+				},
+				{
+					ProductGroup = F7A556DD1BF138A6006B9741 /* Products */;
+					ProjectRef = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1531,6 +1584,34 @@
 			fileType = "wrapper.app-extension";
 			path = "Blindside-watchOS BuildTest Extension.appex";
 			remoteRef = F78BDE471BC3A00000AFB7D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7A556E41BF138A6006B9741 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = F7A556E31BF138A6006B9741 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7A556E61BF138A6006B9741 /* SWXMLHash.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SWXMLHash.framework;
+			remoteRef = F7A556E51BF138A6006B9741 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7A556E81BF138A6006B9741 /* SWXMLHashTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SWXMLHashTests.xctest;
+			remoteRef = F7A556E71BF138A6006B9741 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7A556EA1BF138A6006B9741 /* SWXMLHashOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SWXMLHashOSXTests.xctest;
+			remoteRef = F7A556E91BF138A6006B9741 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F7BA625A1B2233D0005B99AF /* Cedar.framework */ = {
@@ -1849,6 +1930,11 @@
 			isa = PBXTargetDependency;
 			name = SwiftXPC;
 			targetProxy = F786558D1BE4A8D100BB3026 /* PBXContainerItemProxy */;
+		};
+		F7A556EC1BF138B6006B9741 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SWXMLHashOSX;
+			targetProxy = F7A556EB1BF138B6006B9741 /* PBXContainerItemProxy */;
 		};
 		F7BA62721B2233E5005B99AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
