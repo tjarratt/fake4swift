@@ -76,7 +76,7 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
 
 *   {{/ setters }}
 *   {{# mutating_methods }}
-    var {{ name }}CallCount : Int = 0
+    private(set) var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
     var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}) -> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
@@ -107,7 +107,7 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
 
 *   {{/ mutating_methods }}
 *   {{# instance_methods }}
-    var {{ name }}CallCount : Int = 0
+    private(set) var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
     var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}) -> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
@@ -138,7 +138,7 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
 
 *   {{/ instance_methods }}
 *   {{# static_methods }}
-    static var {{ name }}CallCount : Int = 0
+    private(set) static var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
     static var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}) -> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}

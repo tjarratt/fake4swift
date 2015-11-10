@@ -59,12 +59,12 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
         return set_myNameArgs[index]
     }
 
-    var doesNothingCallCount : Int = 0
+    private(set) var doesNothingCallCount : Int = 0
     func doesNothing() {
         self.doesNothingCallCount++
     }
 
-    var doesStuffCallCount : Int = 0
+    private(set) var doesStuffCallCount : Int = 0
     var doesStuffStub : ((String, [String]) -> ([String], Int))?
     private var doesStuffArgs : Array<(String, [String])> = []
     func doesStuffReturns(stubbedValues: ([String], Int)) {
@@ -81,7 +81,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
         return self.doesStuffStub!(stuff, otherStuff)
     }
 
-    static var staticMethodCallCount : Int = 0
+    private(set) static var staticMethodCallCount : Int = 0
     static var staticMethodStub : ((String, Bool) -> (Array<String>))?
     static private var staticMethodArgs : Array<(String, Bool)> = []
     static func staticMethodReturns(stubbedValues: (Array<String>)) {

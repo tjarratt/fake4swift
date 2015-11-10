@@ -7,7 +7,7 @@ struct FakeMyMutatingProtocol : MyMutatingProtocol {
     init() {
     }
 
-    var mutableMethodCallCount : Int = 0
+    private(set) var mutableMethodCallCount : Int = 0
     var mutableMethodStub : ((String, String) -> (String))?
     private var mutableMethodArgs : Array<(String, String)> = []
     mutating func mutableMethodReturns(stubbedValues: (String)) {
