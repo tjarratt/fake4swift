@@ -9,32 +9,14 @@ class XMASSwiftProtocolFaker: NSObject {
     }
 
     func fakeForProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        if protocolDecl.mutatingMethods.isEmpty {
-            return self.classImplementingProtocol(protocolDecl).stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
-        } else {
-            return self.structImplementingProtocol(protocolDecl).stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
-        }
-    }
-
-    // private
-    func structImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        let path : String = self.bundle.pathForResource("SwiftCounterfeitStruct", ofType: "mustache")!
+        let templateName = protocolDecl.mutatingMethods.isEmpty ? "SwiftCounterfeitClass" : "SwiftCounterfeitStruct"
+        let path : String = self.bundle.pathForResource(templateName, ofType: "mustache")!
         let template = try! Template(path: path)
 
         let result : String = try! template.render(boxDataForProtocol(protocolDecl))
         return result.componentsSeparatedByString("\n").filter( {
             !$0.hasPrefix("*")
-        }).joinWithSeparator("\n")
-    }
-
-    func classImplementingProtocol(protocolDecl: ProtocolDeclaration) -> String {
-        let path : String = self.bundle.pathForResource("SwiftCounterfeitClass", ofType: "mustache")!
-        let template = try! Template(path: path)
-
-        let result : String = try! template.render(boxDataForProtocol(protocolDecl))
-        return result.componentsSeparatedByString("\n").filter( {
-            !$0.hasPrefix("*")
-        }).joinWithSeparator("\n")
+        }).joinWithSeparator("\n").stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
     }
 
     private func boxDataForProtocol(protocolDecl: ProtocolDeclaration) -> MustacheBox {
