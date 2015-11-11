@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface XMASAlert : NSObject
 
 - (void)flashMessage:(NSString *)message;
@@ -7,3 +9,5 @@
 - (void)flashComfortingMessageForException:(NSException *)exception;
 
 @end
+
+NS_ASSUME_NONNULL_END

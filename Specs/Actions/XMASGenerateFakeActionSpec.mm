@@ -38,7 +38,6 @@ describe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the cursor is inside a swift protocol declaration", ^{
         __block ProtocolDeclaration *fakeProtocol;
-
         beforeEach(^{
             fakeProtocol = nice_fake_for([ProtocolDeclaration class]);
             fakeProtocol stub_method(@selector(name)).and_return(@"MySpecialProtocol");
@@ -51,15 +50,33 @@ describe(@"XMASGenerateFakeAction", ^{
                 .and_return(@"/path/to/something.swift");
         });
 
-        it(@"should write out a new file using its fakeProtocolPersister", ^{
-            fakeProtocolPersister should have_received(@selector(persistFakeForProtocol:nearSourceFile:))
-                .with(fakeProtocol)
-                .and_with(@"/path/to/something.swift");
+        context(@"and the fake can be persisted to disk", ^{
+            it(@"should write out a new file using its fakeProtocolPersister", ^{
+                fakeProtocolPersister should have_received(@selector(persistFakeForProtocol:nearSourceFile:))
+                    .with(fakeProtocol)
+                    .and_with(@"/path/to/something.swift");
+            });
+
+            it(@"should alert the user the action succeeded", ^{
+                alerter should have_received(@selector(flashMessage:))
+                    .with(@"Generated FakeMySpecialProtocol successfully!");
+            });
         });
 
-        it(@"should alert the user the action succeeded", ^{
-            alerter should have_received(@selector(flashMessage:))
-                .with(@"generating fake 'MySpecialProtocol'");
+        context(@"and an error occurs persisting the fake", ^{
+            beforeEach(^{
+                fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:))
+                    .and_raise_exception();
+            });
+
+            it(@"should not alert the user that it generated the fake", ^{
+                alerter should_not have_received(@selector(flashMessage:))
+                    .with(@"Generated FakeMySpecialProtocol successfully!");
+            });
+
+            it(@"should alert the user that something went wrong", ^{
+                alerter should have_received(@selector(flashComfortingMessageForException:));
+            });
         });
     });
 

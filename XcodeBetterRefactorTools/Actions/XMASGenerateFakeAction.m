@@ -33,7 +33,7 @@
     @try {
         [self generateFakeForProtocolUnderCursor];
     } @catch (NSException *e) {
-
+        [self.alerter flashComfortingMessageForException:e];
     }
 }
 
@@ -50,8 +50,8 @@
         return;
     }
 
-    [self.alerter flashMessage:[NSString stringWithFormat:@"generating fake '%@'", selectedProtocol.name]];
     [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol nearSourceFile:currentFilePath];
+    [self.alerter flashMessage:[NSString stringWithFormat:@"Generated Fake%@ successfully!", selectedProtocol.name]];
 }
 
 #pragma mark - NSObject
