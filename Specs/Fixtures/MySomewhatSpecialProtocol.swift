@@ -6,4 +6,6 @@ protocol MySomewhatSpecialProtocol {
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int)
 
     static func staticMethod(isStatic: String, soStatic: Bool) -> Array<String>
+
+    func soulOfAFunky(drummer: String?) -> String?
 }

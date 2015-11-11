@@ -81,6 +81,23 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
         return self.doesStuffStub!(stuff, otherStuff)
     }
 
+    private(set) var soulOfAFunkyCallCount : Int = 0
+    var soulOfAFunkyStub : ((String?) -> (String?))?
+    private var soulOfAFunkyArgs : Array<(String?)> = []
+    func soulOfAFunkyReturns(stubbedValues: (String?)) {
+        self.soulOfAFunkyStub = {(drummer: String?) -> (String?) in
+            return stubbedValues
+        }
+    }
+    func soulOfAFunkyArgsForCall(callIndex: Int) -> (String?) {
+        return self.soulOfAFunkyArgs[callIndex]
+    }
+    func soulOfAFunky(drummer: String?) -> (String?) {
+        self.soulOfAFunkyCallCount++
+        self.soulOfAFunkyArgs.append((drummer))
+        return self.soulOfAFunkyStub!(drummer)
+    }
+
     private(set) static var staticMethodCallCount : Int = 0
     static var staticMethodStub : ((String, Bool) -> (Array<String>))?
     static private var staticMethodArgs : Array<(String, Bool)> = []

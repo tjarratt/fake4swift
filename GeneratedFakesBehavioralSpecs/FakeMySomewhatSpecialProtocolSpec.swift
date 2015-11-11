@@ -142,6 +142,35 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     expect(args.1).to(equal(false))
                 }
             }
+
+            describe("methods that receive and return optionals") {
+                var drummer : String?
+
+                beforeEach() {
+                    subject.soulOfAFunkyReturns("this-or-that")
+                    subject.soulOfAFunky(drummer)
+                }
+
+                it("allows you to inspect the args that were passed in") {
+                    expect(subject.soulOfAFunkyArgsForCall(0)).to(beNil())
+                }
+
+                it("allows you to call them and observe that they were invoked") {
+                    expect(subject.soulOfAFunkyCallCount).to(equal(1))
+                }
+
+                context("given a non-nil value") {
+                    beforeEach() {
+                        drummer = "clyde stubblefield"
+                        subject.soulOfAFunky(drummer)
+                    }
+
+                    it("records the argument") {
+                        expect(subject.soulOfAFunkyCallCount).to(equal(2))
+                        expect(subject.soulOfAFunkyArgsForCall(1)).to(equal("clyde stubblefield"))
+                    }
+                }
+            }
         }
     }
 }
