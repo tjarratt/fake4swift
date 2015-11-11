@@ -31,9 +31,15 @@
     }
 
     // create fake for protocol
+    NSError *error = nil;
+    NSData *fileContents = [[self.protocolFaker fakeForProtocol:protocolDecl error:&error] dataUsingEncoding:NSUTF8StringEncoding];
+    if (error != nil) {
+        NSString *failureReason = error.localizedFailureReason;
+        [[NSException exceptionWithName:@"" reason:failureReason userInfo:nil] raise];
+    }
+
     NSString *fakeFileName = [[@"Fake" stringByAppendingString:protocolDecl.name] stringByAppendingString:@".swift"];
     NSString *pathToFake = [fakesDir stringByAppendingPathComponent:fakeFileName];
-    NSData *fileContents = [[self.protocolFaker fakeForProtocol:protocolDecl] dataUsingEncoding:NSUTF8StringEncoding];
 
     // write out file contents into ^^/fakes/fake_blah_blah_blah.swift
     [self.fileManager createFileAtPath:pathToFake

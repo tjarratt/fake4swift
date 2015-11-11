@@ -41,7 +41,9 @@ describe(@"XMASSwiftProtocolFaker", ^{
         it(@"should create a reasonably useful fake for the selected protocol", ^{
             NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
 
-            [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
+            NSError *error;
+            [subject fakeForProtocol:protocolDeclaration error:&error] should equal(expectedContents);
+            error should be_nil;
         });
     });
 
@@ -59,7 +61,9 @@ describe(@"XMASSwiftProtocolFaker", ^{
         it(@"should create a struct that implements the protocol", ^{
             NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
 
-            [subject fakeForProtocol:protocolDeclaration] should equal(expectedContents);
+            NSError *error;
+            [subject fakeForProtocol:protocolDeclaration error:&error] should equal(expectedContents);
+            error should be_nil;
         });
     });
 });

@@ -8,16 +8,27 @@ class XMASSwiftProtocolFaker: NSObject {
         self.bundle = bundle
     }
 
-    func fakeForProtocol(protocolDecl: ProtocolDeclaration) -> String {
+    func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String {
         let templateName = protocolDecl.mutatingMethods.isEmpty ? "SwiftCounterfeitClass" : "SwiftCounterfeitStruct"
-        let path : String = self.bundle.pathForResource(templateName, ofType: "mustache")!
-        let template = try! Template(path: path)
+        let path : String! = self.bundle.pathForResource(templateName, ofType: "mustache")
 
-        let result : String = try! template.render(boxDataForProtocol(protocolDecl))
+        guard path != nil else {
+            throw(NSError.init(
+                domain: "swift-counterfeiter-domain",
+                code: 1,
+                userInfo: [NSLocalizedFailureReasonErrorKey: "missing template: " + templateName])
+            )
+        }
+
+        let template = try Template(path: path)
+        let result : String = try template.render(boxDataForProtocol(protocolDecl))
+
         return result.componentsSeparatedByString("\n").filter( {
             !$0.hasPrefix("*")
         }).joinWithSeparator("\n").stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
     }
+
+// Mark - Private methods
 
     private func boxDataForProtocol(protocolDecl: ProtocolDeclaration) -> MustacheBox {
         return Box([
