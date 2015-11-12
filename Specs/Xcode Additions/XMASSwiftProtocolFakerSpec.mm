@@ -36,7 +36,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
             protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
         });
 
-        NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySpecialProtocol" ofType:@"swift"];
+        NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySomewhatSpecialProtocol" ofType:@"swift"];
 
         it(@"should create a reasonably useful fake for the selected protocol", ^{
             NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];

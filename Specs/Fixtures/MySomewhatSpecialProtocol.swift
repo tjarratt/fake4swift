@@ -7,5 +7,5 @@ protocol MySomewhatSpecialProtocol {
 
     static func staticMethod(isStatic: String, soStatic: Bool) -> Array<String>
 
-    func soulOfAFunky(drummer: String?) -> String?
+    func soulOfAFunky(drummer: String?) throws -> String?
 }

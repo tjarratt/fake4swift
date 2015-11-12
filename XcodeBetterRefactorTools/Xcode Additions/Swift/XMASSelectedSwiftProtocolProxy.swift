@@ -126,7 +126,9 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         return (getters, setters)
     }
 
-    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> (instanceM: [MethodDeclaration], staticM: [MethodDeclaration], mutableM: [MethodDeclaration]) {
+    typealias MethodDecls = (instanceM: [MethodDeclaration], staticM: [MethodDeclaration], mutableM: [MethodDeclaration])
+
+    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> MethodDecls {
         var instanceMethods : Array<MethodDeclaration> = []
         var staticMethods : Array<MethodDeclaration> = []
         var mutableMethods : Array<MethodDeclaration> = []
@@ -144,6 +146,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
                 let methodDeclaration = MethodDeclaration.init(
                     name: methodNameFromMethodDict(protocolBodyItem),
+                    throwsError: methodCanThrowError(protocolBodyItem, fileContents: fileContents),
                     arguments: argumentsFromMethodDict(protocolBodyItem),
                     returnValueTypes: returnTypesFromMethodDict(protocolBodyItem, fileContents: fileContents)
                 )
@@ -180,7 +183,6 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
         return false
     }
-
 
     func methodNameFromMethodDict(protocolBodyItem : XPCDictionary) -> String {
         let methodName : String = protocolBodyItem["key.name"] as! String
@@ -246,5 +248,32 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         }
 
         return types
+    }
+
+    func methodCanThrowError(methodItem : XPCDictionary, fileContents: NSString) -> Bool {
+        var regex : NSRegularExpression
+        try! regex = NSRegularExpression(pattern: ".*\\)\\sthrows\\s", options: NSRegularExpressionOptions.CaseInsensitive)
+
+        let startOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.offset"] as! Int64)
+        let lengthOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.length"] as! Int64)
+        let endOfMethodDecl : Int = startOfMethodDecl + lengthOfMethodDecl
+
+        let rangeOfFileAfterMethodDecl : NSRange = NSRange.init(location: endOfMethodDecl, length: fileContents.length - endOfMethodDecl)
+        var indexOfNextNewline : NSInteger = fileContents.rangeOfString("\n", options: NSStringCompareOptions.LiteralSearch, range: rangeOfFileAfterMethodDecl).location
+
+        if indexOfNextNewline == NSNotFound {
+            indexOfNextNewline = endOfMethodDecl
+        }
+
+        let range = NSMakeRange(startOfMethodDecl, indexOfNextNewline - startOfMethodDecl + 1)
+        let funcDeclarationString = fileContents.substringWithRange(range) as String
+
+        let numberOfMatches = regex.numberOfMatchesInString(
+            funcDeclarationString,
+            options: NSMatchingOptions.Anchored,
+            range: NSRange.init(location: 0, length: funcDeclarationString.characters.count)
+        )
+
+        return numberOfMatches > 0
     }
 }

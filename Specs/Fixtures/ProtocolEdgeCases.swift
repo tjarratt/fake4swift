@@ -53,3 +53,7 @@ protocol GenericProtocolWithTypeAlias {
     subscript(i: Int) -> ItemType { get }
 }
 
+protocol ThingsThatGoBoom {
+    func thisVoidMethodThrows() throws
+    func thisMethodThrowsToo() throws -> String
+}

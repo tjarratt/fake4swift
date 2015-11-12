@@ -78,7 +78,7 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
 *   {{# mutating_methods }}
     private(set) var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
-    var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}) -> ({{{ comma_delimited_return_types }}}))?
+    var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}){{throws}}-> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
     private var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
@@ -95,13 +95,13 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    mutating func {{name}}({{ named_arguments }}) {{{ optional_return_expression }}}{
+    mutating func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
         self.{{name}}CallCount++
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}
 *       {{# has_return_values }}
-        return self.{{ name }}Stub!({{ comma_delimited_arg_names }})
+        return {{pre_stub_invocation}}self.{{ name }}Stub!({{ comma_delimited_arg_names }})
 *       {{/ has_return_values }}
     }
 
@@ -109,7 +109,7 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
 *   {{# instance_methods }}
     private(set) var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
-    var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}) -> ({{{ comma_delimited_return_types }}}))?
+    var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}){{throws}}-> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
     private var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
@@ -126,13 +126,13 @@ struct Fake{{protocol_name}} : {{protocol_name}} {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    func {{name}}({{ named_arguments }}) {{{ optional_return_expression }}}{
+    func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
         self.{{name}}CallCount++
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}
 *       {{# has_return_values }}
-        return self.{{ name }}Stub!({{ comma_delimited_arg_names }})
+        return {{pre_stub_invocation}}self.{{ name }}Stub!({{ comma_delimited_arg_names }})
 *       {{/ has_return_values }}
     }
 

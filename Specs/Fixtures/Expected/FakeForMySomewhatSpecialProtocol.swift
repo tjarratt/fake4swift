@@ -82,7 +82,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     }
 
     private(set) var soulOfAFunkyCallCount : Int = 0
-    var soulOfAFunkyStub : ((String?) -> (String?))?
+    var soulOfAFunkyStub : ((String?) throws -> (String?))?
     private var soulOfAFunkyArgs : Array<(String?)> = []
     func soulOfAFunkyReturns(stubbedValues: (String?)) {
         self.soulOfAFunkyStub = {(drummer: String?) -> (String?) in
@@ -92,10 +92,10 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol {
     func soulOfAFunkyArgsForCall(callIndex: Int) -> (String?) {
         return self.soulOfAFunkyArgs[callIndex]
     }
-    func soulOfAFunky(drummer: String?) -> (String?) {
+    func soulOfAFunky(drummer: String?) throws -> (String?) {
         self.soulOfAFunkyCallCount++
         self.soulOfAFunkyArgs.append((drummer))
-        return self.soulOfAFunkyStub!(drummer)
+        return try self.soulOfAFunkyStub!(drummer)
     }
 
     private(set) static var staticMethodCallCount : Int = 0

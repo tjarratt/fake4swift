@@ -80,10 +80,11 @@ class XMASSwiftProtocolFaker: NSObject {
             "named_arguments":              namedArgumentsFor(method),
             "comma_delimited_arg_names":    argumentNamesFor(method),
             "comma_delimited_arg_types":    argumentTypesFor(method),
-
+            "throws":                       method.throwsError ? " throws " : " ",
             "has_return_values":            method.hasReturnValues(),
             "comma_delimited_return_types": returnTypesFor(method),
             "optional_return_expression":   optionalReturnsFor(method),
+            "pre_stub_invocation":          method.throwsError ? "try " : "",
         ]
     }
 }

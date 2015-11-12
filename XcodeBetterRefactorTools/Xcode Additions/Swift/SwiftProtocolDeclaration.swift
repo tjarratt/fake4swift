@@ -12,13 +12,16 @@ import Foundation
 
 @objc class MethodDeclaration : NSObject {
     var name : MethodName
+    var throwsError : Bool
     var arguments : Array<MethodParameter>
     var returnValueTypes : Array<ReturnType>
 
     init(name: String,
+        throwsError: Bool,
         arguments: Array<MethodParameter>,
         returnValueTypes: Array<ReturnType>) {
             self.name = name
+            self.throwsError = throwsError
             self.arguments = arguments
             self.returnValueTypes = returnValueTypes
     }
@@ -35,7 +38,8 @@ import Foundation
         if let other = object as? MethodDeclaration {
             return self.name == other.name &&
                 self.arguments == other.arguments &&
-                self.returnValueTypes == other.returnValueTypes
+                self.returnValueTypes == other.returnValueTypes &&
+                self.throwsError == other.throwsError
         }
 
         return false

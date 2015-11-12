@@ -93,8 +93,9 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
             protocolDeclaration.staticMethods.count should equal(1);
 
             MethodDeclaration *expectedMethod = [[MethodDeclaration alloc] initWithName:@"isStatic"
-                                                                                         arguments:@[]
-                                                                                  returnValueTypes:@[]];
+                                                                            throwsError:NO
+                                                                              arguments:@[]
+                                                                       returnValueTypes:@[]];
             protocolDeclaration.staticMethods.firstObject should equal(expectedMethod);
         });
     });
@@ -112,9 +113,31 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
 
         it(@"should parse mutable methods", ^{
             MethodDeclaration *expectedMethod = [[MethodDeclaration alloc] initWithName:@"mutates"
+                                                                            throwsError:NO
                                                                               arguments:@[]
                                                                        returnValueTypes:@[]];
             protocolDeclaration.mutatingMethods should equal(@[expectedMethod]);
+        });
+    });
+
+    context(@"when a swift protocol with methods that throw is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        beforeEach(^{
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1620, 0));
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
+        });
+
+        it(@"should have methods that throws errors", ^{
+            protocolDeclaration.instanceMethods should contain([[MethodDeclaration alloc] initWithName:@"thisVoidMethodThrows"
+                                                                                           throwsError:YES
+                                                                                             arguments:@[]
+                                                                                      returnValueTypes:@[]]);
+
+            protocolDeclaration.instanceMethods should contain([[MethodDeclaration alloc] initWithName:@"thisMethodThrowsToo"
+                                                                                           throwsError:YES
+                                                                                             arguments:@[]
+                                                                                      returnValueTypes:@[@"String"]]);
+
         });
     });
 

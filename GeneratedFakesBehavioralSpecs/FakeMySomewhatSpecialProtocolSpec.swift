@@ -148,7 +148,7 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
 
                 beforeEach() {
                     subject.soulOfAFunkyReturns("this-or-that")
-                    subject.soulOfAFunky(drummer)
+                    try! subject.soulOfAFunky(drummer)
                 }
 
                 it("allows you to inspect the args that were passed in") {
@@ -162,12 +162,27 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                 context("given a non-nil value") {
                     beforeEach() {
                         drummer = "clyde stubblefield"
-                        subject.soulOfAFunky(drummer)
+                        try! subject.soulOfAFunky(drummer)
                     }
 
                     it("records the argument") {
                         expect(subject.soulOfAFunkyCallCount).to(equal(2))
                         expect(subject.soulOfAFunkyArgsForCall(1)).to(equal("clyde stubblefield"))
+                    }
+                }
+
+                context("when it would throw") {
+                    beforeEach() {
+                        subject.soulOfAFunkyStub = {(_ : String?) throws -> String? in
+                            throw NSError.init(domain: "", code: 0, userInfo: nil)
+                            return "hai"
+                        }
+                    }
+
+                    it("can be expected to throw an error") {
+                        expect {
+                            try subject.soulOfAFunky("sup")
+                        }.to(throwError())
                     }
                 }
             }
