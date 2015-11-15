@@ -9,6 +9,8 @@ let instanceMethodKind : String = "source.lang.swift.decl.function.method.instan
 let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
 let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
+let errorDomain : String = "parse-swift-protocol-domain"
+
 @objc class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     var xcodeRepository : XMASXcodeRepository
 
@@ -20,16 +22,20 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
         let selectedRange : NSRange = xcodeRepository.cursorSelectionRange()
 
         var fileContents : NSString
-        try! fileContents = NSString.init(contentsOfFile: fileName, encoding:NSUTF8StringEncoding)
+        try fileContents = NSString.init(contentsOfFile: fileName, encoding:NSUTF8StringEncoding)
 
-        let sourceFile = File.init(path: fileName)
-        let fileStructure = Structure.init(file: sourceFile!)
-        let fileSubStructure : XPCRepresentable = fileStructure.dictionary["key.substructure"]!
-        let structureArray = fileSubStructure as! XPCArray
+        guard let sourceFile = File.init(path: fileName) as File! else {
+            throw NSError.init(domain: errorDomain, code: 5, userInfo: [NSLocalizedFailureReasonErrorKey: "could not read " + fileName])
+        }
 
-        for item in structureArray {
+        let fileStructure = Structure.init(file: sourceFile)
+        guard let substructure = fileStructure.dictionary["key.substructure"] as? XPCArray else {
+            throw NSError.init(domain: errorDomain, code: 55, userInfo: nil)
+        }
+
+        for item in substructure {
             if let protocolDict = item as? XPCDictionary {
-                if protocolDict["key.kind"]! != protocolDeclKind {
+                if protocolDict["key.kind"] == nil || protocolDict["key.kind"]! != protocolDeclKind {
                     continue
                 }
 
@@ -44,9 +50,6 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
                 /*
 
                 TODO (unimplemented features) notes :
-
-                includedProtocols : look for key.inheritedtypes
-                map over key.name to get a string for each protocol type
 
                 initializers : instance.method where method name starts with init
                 seems to lose type information? (swiftc dump-ast still has it tho!)
@@ -85,7 +88,7 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
         }
 
         let userInfo = [NSLocalizedFailureReasonErrorKey: "No protocol was selected"]
-        throw NSError.init(domain: "parse-swift-protocol-domain", code: 1, userInfo: userInfo)
+        throw NSError.init(domain: errorDomain, code: 1, userInfo: userInfo)
     }
 
     func rangesOverlap(cursorRange : NSRange, protocolRange : NSRange) -> Bool {
@@ -110,7 +113,7 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
         for item in fileSubStructure {
             if let protocolDict = item as? XPCDictionary {
-                if protocolDict["key.kind"]! != kind {
+                if protocolDict["key.kind"] == nil || protocolDict["key.kind"]! != kind {
                     continue
                 }
 
@@ -185,7 +188,7 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
         if let attributes = protocolBodyItem["key.attributes"] as? [XPCRepresentable] {
             for attribute : XPCRepresentable in attributes {
                 if let attrs = attribute as? XPCDictionary {
-                    if attrs["key.attribute"]! == attributeName {
+                    if attrs["key.attribute"] != nil && attrs["key.attribute"]! == attributeName {
                         return true
                     }
                 }
@@ -209,15 +212,13 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
     }
 
     func argumentsFromMethodDict(dict : XPCDictionary) -> Array<MethodParameter> {
-        let substructure : XPCRepresentable? = dict["key.substructure"]
-        if substructure == nil {
-            return []
-        }
-
-        let substructureArray = substructure as! XPCArray
         var parameters : Array<MethodParameter> = []
 
-        for item in substructureArray {
+        guard let substructure = dict["key.substructure"] as? XPCArray else {
+            return parameters
+        }
+
+        for item in substructure {
             let innerDict : XPCDictionary = item as! XPCDictionary
             if innerDict["key.kind"] as! String != "source.lang.swift.decl.var.parameter" {
                 continue
@@ -306,16 +307,16 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
     func inheritedTypesForProtocol(protocolDict: XPCDictionary) -> Array<String> {
         var inheritedProtocols : [String] = []
-        let inheritedTypes = protocolDict["key.inheritedtypes"] as? [XPCRepresentable]
+        guard let inheritedTypes = protocolDict["key.inheritedtypes"] as? XPCArray else {
+            return inheritedProtocols
+        }
 
-        if inheritedTypes != nil {
-            for type in inheritedTypes! {
-                guard let typedDict = type as? XPCDictionary else {
-                    continue
-                }
-
-                inheritedProtocols.append(typedDict["key.name"] as! String)
+        for type in inheritedTypes {
+            guard let typedDict = type as? XPCDictionary else {
+                continue
             }
+
+            inheritedProtocols.append(typedDict["key.name"] as! String)
         }
 
         return inheritedProtocols
