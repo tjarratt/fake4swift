@@ -973,17 +973,10 @@
 		F70E1FBC1B24382000D971E6 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				AE0C00E91B717A670065C099 /* Cedar.h */,
-				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
+				F7D4806A1BF93E2300A37765 /* CallExpressions */,
+				F7D480691BF93E1E00A37765 /* Cedar */,
+				F7D480401BF93E0F00A37765 /* Protocols */,
 				F70A03511B49DC420009B348 /* Expected */,
-				F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */,
-				F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */,
-				F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */,
-				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
-				F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */,
-				F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */,
-				AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */,
-				F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -1264,6 +1257,37 @@
 				F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */,
 			);
 			path = "Method Declarations";
+			sourceTree = "<group>";
+		};
+		F7D480401BF93E0F00A37765 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */,
+				F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */,
+				F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F7D480691BF93E1E00A37765 /* Cedar */ = {
+			isa = PBXGroup;
+			children = (
+				AE0C00E91B717A670065C099 /* Cedar.h */,
+				AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */,
+			);
+			path = Cedar;
+			sourceTree = "<group>";
+		};
+		F7D4806A1BF93E2300A37765 /* CallExpressions */ = {
+			isa = PBXGroup;
+			children = (
+				F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */,
+				F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */,
+				F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */,
+				AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */,
+				F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */,
+			);
+			path = CallExpressions;
 			sourceTree = "<group>";
 		};
 		F7DB97711BF8700600A9C474 /* Logging */ = {
