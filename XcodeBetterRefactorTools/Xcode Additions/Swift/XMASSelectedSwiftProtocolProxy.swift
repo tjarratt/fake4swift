@@ -56,6 +56,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 */
 
                 if rangesOverlap(selectedRange, protocolRange: protocolRange) {
+                    let usesTypeAlias = findTypealiasInProtocolDecl(protocolDict, fileContents: fileContents)
                     let (getters, setters) = accessorsFromProtocolDecl(protocolDict, kind: instanceVarKind)
                     let (staticGetters, staticSetters) = accessorsFromProtocolDecl(protocolDict, kind: staticVarKind)
                     let methods = methodsFromProtocolDecl(protocolDict, fileContents: fileContents)
@@ -65,6 +66,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
+                        usesTypeAlias: usesTypeAlias,
                         includedProtocols: [],
                         instanceMethods: instanceMethods,
                         staticMethods: staticMethods,
@@ -275,5 +277,21 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         )
 
         return numberOfMatches > 0
+    }
+
+    func findTypealiasInProtocolDecl(protocolBody: XPCDictionary, fileContents: NSString) -> Bool {
+        // read from body offset - body length
+        // regex for " typealias "
+        let startOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodyoffset"] as! Int64)
+        let lengthOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodylength"] as! Int64)
+        let range : NSRange = NSRange.init(location: startOfProtocolBody, length: lengthOfProtocolBody)
+        let protocolString : String = fileContents.substringWithRange(range)
+
+        var regex : NSRegularExpression
+        try! regex = NSRegularExpression(pattern: "\\stypealias\\s", options: NSRegularExpressionOptions.AnchorsMatchLines)
+
+        let rangeOfString : NSRange = NSRange.init(location: 0, length: lengthOfProtocolBody)
+        let matches = regex.matchesInString(protocolString, options: NSMatchingOptions.init(rawValue: 0), range: rangeOfString)
+        return matches.count > 0
     }
 }

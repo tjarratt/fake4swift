@@ -98,6 +98,10 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
                                                                        returnValueTypes:@[]];
             protocolDeclaration.staticMethods.firstObject should equal(expectedMethod);
         });
+
+        it(@"should indicate that the protocol does not use typealias", ^{
+            protocolDeclaration.usesTypealias should be_falsy;
+        });
     });
 
     context(@"when a swift protocol with mutating methods is selected", ^{
@@ -117,6 +121,10 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
                                                                               arguments:@[]
                                                                        returnValueTypes:@[]];
             protocolDeclaration.mutatingMethods should equal(@[expectedMethod]);
+        });
+
+        it(@"should indicate that the protocol does not use typealias", ^{
+            protocolDeclaration.usesTypealias should be_falsy;
         });
     });
 
@@ -138,6 +146,22 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
                                                                                              arguments:@[]
                                                                                       returnValueTypes:@[@"String"]]);
 
+        });
+
+        it(@"should indicate that the protocol does not use typealias", ^{
+            protocolDeclaration.usesTypealias should be_falsy;
+        });
+    });
+
+    context(@"when the swift protocol uses typealias", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        beforeEach(^{
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1500, 0));
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
+        });
+
+        it(@"should indicate that the protocol uses typealias", ^{
+            protocolDeclaration.usesTypealias should be_truthy;
         });
     });
 

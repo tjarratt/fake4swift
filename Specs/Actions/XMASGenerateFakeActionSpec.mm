@@ -85,6 +85,7 @@ describe(@"XMASGenerateFakeAction", ^{
         context(@"but the protocol to stub includes additional protocols", ^{
             beforeEach(^{
                 ProtocolDeclaration *unsupportedProtocolDecl = [[ProtocolDeclaration alloc] initWithName:@"UnsupportedProtocol"
+                                                                                           usesTypeAlias:NO
                                                                                        includedProtocols:@[@"This", @"Isn't", @"Supported"]
                                                                                          instanceMethods:@[]
                                                                                            staticMethods:@[]
@@ -115,6 +116,43 @@ describe(@"XMASGenerateFakeAction", ^{
             it(@"should log a more detailed message", ^{
                 logger should have_received(@selector(logMessage:))
                     .with(@"Unable to generate fake 'UnsupportedProtocol'. It includes 3 other protocols -- this is not supported yet. Sorry!");
+            });
+        });
+
+        context(@"but the protocol to stub uses typealias", ^{
+            beforeEach(^{
+                ProtocolDeclaration *unsupportedProtocolDecl = [[ProtocolDeclaration alloc] initWithName:@"UnsupportedProtocol"
+                                                                                           usesTypeAlias:YES
+                                                                                       includedProtocols:@[]
+                                                                                         instanceMethods:@[]
+                                                                                           staticMethods:@[]
+                                                                                         mutatingMethods:@[]
+                                                                                            initializers:@[]
+                                                                                                 getters:@[]
+                                                                                                 setters:@[]
+                                                                                           staticGetters:@[]
+                                                                                           staticSetters:@[]
+                                                                                        subscriptGetters:@[]
+                                                                                        subscriptSetters:@[]];
+
+                selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
+                    .again()
+                    .with(@"/path/to/something.swift")
+                    .and_return(unsupportedProtocolDecl);
+            });
+
+            it(@"should alert the user this can't be generated", ^{
+                alerter should have_received(@selector(flashMessage:))
+                    .with(@"FAILED. Check Console.app");
+            });
+
+            it(@"should not attempt to persist any files", ^{
+                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:));
+            });
+
+            it(@"should log a more detailed message", ^{
+                logger should have_received(@selector(logMessage:))
+                    .with(@"Unable to generate fake 'UnsupportedProtocol'. It uses a typealias -- this is not supported yet. Sorry!");
             });
         });
     });

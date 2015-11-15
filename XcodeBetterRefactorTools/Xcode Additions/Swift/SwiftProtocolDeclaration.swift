@@ -66,6 +66,7 @@ typealias ReturnType = String
     var name : String
 
     init(name: String,
+        usesTypeAlias: Bool,
         includedProtocols: Array<ProtocolDeclaration>,
         instanceMethods: Array<MethodDeclaration>,
         staticMethods: Array<MethodDeclaration>,
@@ -79,6 +80,7 @@ typealias ReturnType = String
         subscriptSetters: Array<Accessor>
         ) {
             self.name = name
+            self.usesTypealias = usesTypeAlias
             self.includedProtocols = includedProtocols
             self.instanceMethods = instanceMethods
             self.staticMethods = staticMethods
@@ -109,4 +111,6 @@ typealias ReturnType = String
     var subscriptSetters : Array<Accessor>
 
     var includedProtocols : Array<ProtocolDeclaration>
+
+    var usesTypealias : Bool
 }

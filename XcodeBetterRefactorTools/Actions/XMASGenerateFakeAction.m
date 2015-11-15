@@ -5,7 +5,8 @@
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "XMASSelectedTextProxy.h"
 
-NSString *unsupportedProtocolDecl = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
+NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
+NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
 
 @interface XMASGenerateFakeAction ()
 @property (nonatomic, strong) XMASAlert *alerter;
@@ -57,7 +58,15 @@ NSString *unsupportedProtocolDecl = @"Unable to generate fake '%@'. It includes 
     if (selectedProtocol.includedProtocols.count > 0) {
         [self.alerter flashMessage:@"FAILED. Check Console.app"];
 
-        NSString *logMessage = [[NSString alloc] initWithFormat:unsupportedProtocolDecl, selectedProtocol.name, selectedProtocol.includedProtocols.count];
+        NSString *logMessage = [[NSString alloc] initWithFormat:protocolIncludesOtherMessage, selectedProtocol.name, selectedProtocol.includedProtocols.count];
+        [self.logger logMessage:logMessage];
+        return;
+    }
+
+    if (selectedProtocol.usesTypealias) {
+        [self.alerter flashMessage:@"FAILED. Check Console.app"];
+
+        NSString *logMessage = [[NSString alloc] initWithFormat:protocolUsesTypealiasMessage, selectedProtocol.name];
         [self.logger logMessage:logMessage];
         return;
     }
