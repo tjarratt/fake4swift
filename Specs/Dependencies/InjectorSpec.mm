@@ -44,6 +44,7 @@ describe(@"Injector", ^{
     it(@"should provide a Generate Fake Action", ^{
         XMASGenerateFakeAction *generateFakeAction = [injector getInstance:[XMASGenerateFakeAction class]];
         generateFakeAction.alerter should be_instance_of([XMASAlert class]);
+        generateFakeAction.logger should be_instance_of([XMASLogger class]);
         generateFakeAction.selectedTextProxy should conform_to(@protocol(XMASSelectedTextProxy));
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
         generateFakeAction.sourceCodeDocumentProxy should be_instance_of([XMASCurrentSourceCodeDocumentProxy class]);
@@ -52,6 +53,12 @@ describe(@"Injector", ^{
     it(@"should provide a Swift Protocol Faker", ^{
         XMASSwiftProtocolFaker *protocolFaker = [injector getInstance:[XMASSwiftProtocolFaker class]];
         protocolFaker should be_instance_of([XMASSwiftProtocolFaker class]);
+    });
+
+    it(@"should provide a Logger", ^{
+        XMASLogger *logger = [injector getInstance:[XMASLogger class]];
+        logger should_not be_nil;
+        logger should be_instance_of([XMASLogger class]);
     });
 
     it(@"should provide a fake protocol persister", ^{

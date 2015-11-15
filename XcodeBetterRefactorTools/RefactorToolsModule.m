@@ -46,6 +46,7 @@ static XMASRefactorMethodAction *action;
 
     [binder bind:[XMASGenerateFakeAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         return [[XMASGenerateFakeAction alloc] initWithAlerter:[injector getInstance:[XMASAlert class]]
+                                                        logger:[injector getInstance:[XMASLogger class]]
                                              selectedTextProxy:[injector getInstance:@protocol(XMASSelectedTextProxy)]
                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
                                        sourceCodeDocumentProxy:[injector getInstance:[XMASCurrentSourceCodeDocumentProxy class]]];

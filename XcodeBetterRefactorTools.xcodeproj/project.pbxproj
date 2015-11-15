@@ -133,6 +133,8 @@
 		F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
 		F7DB975F1BF0135000A9C474 /* SwiftCounterfeitStruct.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
 		F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
+		F7DB979B1BF8703600A9C474 /* XMASLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB979A1BF8703600A9C474 /* XMASLogger.swift */; };
+		F7DB979C1BF8703600A9C474 /* XMASLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB979A1BF8703600A9C474 /* XMASLogger.swift */; };
 		F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */; };
@@ -742,6 +744,7 @@
 		F7DB97571BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMyMutatingProtocolSpec.swift; sourceTree = "<group>"; };
 		F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMutatingProtocol.swift; sourceTree = "<group>"; };
 		F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftCounterfeitStruct.mustache; sourceTree = "<group>"; };
+		F7DB979A1BF8703600A9C474 /* XMASLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASLogger.swift; sourceTree = "<group>"; };
 		F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Blindside.xcodeproj; path = Blindside/Blindside.xcodeproj; sourceTree = "<group>"; };
 		F7E009491B7FDBE900B9E6E6 /* RefactorToolsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefactorToolsModule.h; sourceTree = "<group>"; };
 		F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefactorToolsModule.m; sourceTree = "<group>"; };
@@ -855,6 +858,7 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
+				F7DB97711BF8700600A9C474 /* Logging */,
 				F70346361BEF43A900A8FD27 /* Templates */,
 				9608A8FD1622755B00763892 /* Actions */,
 				F71E828A1B59715500BE93DC /* Code Generation */,
@@ -1260,6 +1264,14 @@
 				F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */,
 			);
 			path = "Method Declarations";
+			sourceTree = "<group>";
+		};
+		F7DB97711BF8700600A9C474 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				F7DB979A1BF8703600A9C474 /* XMASLogger.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		F7E009231B7FDA8900B9E6E6 /* Products */ = {
@@ -1815,6 +1827,7 @@
 				F7FC45821BE786DA00299694 /* XMASFakeProtocolPersister.m in Sources */,
 				F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */,
 				F7BEDD181B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
+				F7DB979B1BF8703600A9C474 /* XMASLogger.swift in Sources */,
 				F70C9FE61BC8FB8A00E9C019 /* XMASCurrentSourceCodeDocumentProxy.m in Sources */,
 				F79FF67D1BDF62B60058EFE0 /* XMASSelectedSwiftProtocolProxy.swift in Sources */,
 				AE76356C1B68266100F85396 /* XMASObjcMethodDeclarationStringWriter.m in Sources */,
@@ -1863,6 +1876,7 @@
 				F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */,
 				F79837621B365DC2000F1EBD /* XMASEditMenu.m in Sources */,
 				AE0795501B68009E000DE4C8 /* XMASObjcMethodDeclarationRewriter.m in Sources */,
+				F7DB979C1BF8703600A9C474 /* XMASLogger.swift in Sources */,
 				AEE1B5941B6945B700CC8AFE /* TempFileHelper.m in Sources */,
 				F7D01C161B5C603700FE62DA /* XMASObjcMethodDeclaration.m in Sources */,
 				F7B1D28B1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */,

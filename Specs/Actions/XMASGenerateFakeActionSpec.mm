@@ -16,17 +16,20 @@ describe(@"XMASGenerateFakeAction", ^{
     __block XMASGenerateFakeAction *subject;
 
     __block XMASAlert *alerter;
+    __block XMASLogger *logger;
     __block id<XMASSelectedTextProxy> selectedTextProxy;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 
     beforeEach(^{
         alerter = nice_fake_for([XMASAlert class]);
+        logger = nice_fake_for([XMASLogger class]);
         selectedTextProxy = nice_fake_for(@protocol(XMASSelectedTextProxy));
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         sourceCodeDocumentProxy = nice_fake_for([XMASCurrentSourceCodeDocumentProxy class]);
 
         subject = [[XMASGenerateFakeAction alloc] initWithAlerter:alerter
+                                                           logger:logger
                                                 selectedTextProxy:selectedTextProxy
                                             fakeProtocolPersister:fakeProtocolPersister
                                           sourceCodeDocumentProxy:sourceCodeDocumentProxy];
@@ -63,7 +66,7 @@ describe(@"XMASGenerateFakeAction", ^{
             });
         });
 
-        context(@"and an error occurs persisting the fake", ^{
+        context(@"but an error occurs persisting the fake", ^{
             beforeEach(^{
                 fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:))
                     .and_raise_exception();
@@ -76,6 +79,42 @@ describe(@"XMASGenerateFakeAction", ^{
 
             it(@"should alert the user that something went wrong", ^{
                 alerter should have_received(@selector(flashComfortingMessageForException:));
+            });
+        });
+
+        context(@"but the protocol to stub includes additional protocols", ^{
+            beforeEach(^{
+                ProtocolDeclaration *unsupportedProtocolDecl = [[ProtocolDeclaration alloc] initWithName:@"UnsupportedProtocol"
+                                                                                       includedProtocols:@[@"This", @"Isn't", @"Supported"]
+                                                                                         instanceMethods:@[]
+                                                                                           staticMethods:@[]
+                                                                                         mutatingMethods:@[]
+                                                                                            initializers:@[]
+                                                                                                 getters:@[]
+                                                                                                 setters:@[]
+                                                                                           staticGetters:@[]
+                                                                                           staticSetters:@[]
+                                                                                        subscriptGetters:@[]
+                                                                                        subscriptSetters:@[]];
+
+                selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
+                    .again()
+                    .with(@"/path/to/something.swift")
+                    .and_return(unsupportedProtocolDecl);
+            });
+
+            it(@"should alert the user this can't be generated", ^{
+                alerter should have_received(@selector(flashMessage:))
+                    .with(@"FAILED. Check Console.app");
+            });
+
+            it(@"should not attempt to persist any files", ^{
+                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:));
+            });
+
+            it(@"should log a more detailed message", ^{
+                logger should have_received(@selector(logMessage:))
+                    .with(@"Unable to generate fake 'UnsupportedProtocol'. It includes 3 other protocols -- this is not supported yet. Sorry!");
             });
         });
     });

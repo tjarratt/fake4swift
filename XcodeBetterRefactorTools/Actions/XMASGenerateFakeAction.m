@@ -5,9 +5,11 @@
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "XMASSelectedTextProxy.h"
 
+NSString *unsupportedProtocolDecl = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 
 @interface XMASGenerateFakeAction ()
 @property (nonatomic, strong) XMASAlert *alerter;
+@property (nonatomic, strong) XMASLogger *logger;
 @property (nonatomic, strong) id<XMASSelectedTextProxy> selectedTextProxy;
 @property (nonatomic, strong) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, strong) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
@@ -16,11 +18,13 @@
 @implementation XMASGenerateFakeAction
 
 - (instancetype)initWithAlerter:(XMASAlert *)alerter
+                         logger:(XMASLogger *)logger
               selectedTextProxy:(id <XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy {
     if (self = [super init]) {
         self.alerter = alerter;
+        self.logger = logger;
         self.selectedTextProxy = selectedTextProxy;
         self.fakeProtocolPersister = fakeProtocolPersister;
         self.sourceCodeDocumentProxy = sourceCodeDocumentProxy;
@@ -47,6 +51,14 @@
     ProtocolDeclaration *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath];
     if (!selectedProtocol || [selectedProtocol.name isEqualToString:@""]) {
         [self.alerter flashMessage:@"put your cursor on a swift protocol to generate a fake for it"];
+        return;
+    }
+
+    if (selectedProtocol.includedProtocols.count > 0) {
+        [self.alerter flashMessage:@"FAILED. Check Console.app"];
+
+        NSString *logMessage = [[NSString alloc] initWithFormat:unsupportedProtocolDecl, selectedProtocol.name, selectedProtocol.includedProtocols.count];
+        [self.logger logMessage:logMessage];
         return;
     }
 
