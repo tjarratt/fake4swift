@@ -9,14 +9,14 @@ let instanceMethodKind : String = "source.lang.swift.decl.function.method.instan
 let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
 let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
-class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
+@objc class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     var xcodeRepository : XMASXcodeRepository
 
     init(xcodeRepo : XMASXcodeRepository) {
         xcodeRepository = xcodeRepo
     }
 
-    func selectedProtocolInFile(fileName : String!) -> (ProtocolDeclaration?) {
+    @objc func selectedProtocolInFile(fileName : String!) throws -> ProtocolDeclaration {
         let selectedRange : NSRange = xcodeRepository.cursorSelectionRange()
 
         var fileContents : NSString
@@ -84,7 +84,8 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
             }
         }
 
-        return nil
+        let userInfo = [NSLocalizedFailureReasonErrorKey: "No protocol was selected"]
+        throw NSError.init(domain: "parse-swift-protocol-domain", code: 1, userInfo: userInfo)
     }
 
     func rangesOverlap(cursorRange : NSRange, protocolRange : NSRange) -> Bool {

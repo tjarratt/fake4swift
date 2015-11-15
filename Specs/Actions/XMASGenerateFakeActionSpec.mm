@@ -45,8 +45,8 @@ describe(@"XMASGenerateFakeAction", ^{
             fakeProtocol = nice_fake_for([ProtocolDeclaration class]);
             fakeProtocol stub_method(@selector(name)).and_return(@"MySpecialProtocol");
 
-            selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
-                .with(@"/path/to/something.swift")
+            selectedTextProxy stub_method(@selector(selectedProtocolInFile:error:))
+                .with(@"/path/to/something.swift", Arguments::anything)
                 .and_return(fakeProtocol);
 
             sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
@@ -98,9 +98,9 @@ describe(@"XMASGenerateFakeAction", ^{
                                                                                         subscriptGetters:@[]
                                                                                         subscriptSetters:@[]];
 
-                selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
+                selectedTextProxy stub_method(@selector(selectedProtocolInFile:error:))
                     .again()
-                    .with(@"/path/to/something.swift")
+                    .with(@"/path/to/something.swift", Arguments::anything)
                     .and_return(unsupportedProtocolDecl);
             });
 
@@ -135,9 +135,9 @@ describe(@"XMASGenerateFakeAction", ^{
                                                                                         subscriptGetters:@[]
                                                                                         subscriptSetters:@[]];
 
-                selectedTextProxy stub_method(@selector(selectedProtocolInFile:))
+                selectedTextProxy stub_method(@selector(selectedProtocolInFile:error:))
                     .again()
-                    .with(@"/path/to/something.swift")
+                    .with(@"/path/to/something.swift", Arguments::anything)
                     .and_return(unsupportedProtocolDecl);
             });
 
@@ -173,6 +173,11 @@ describe(@"XMASGenerateFakeAction", ^{
         beforeEach(^{
             sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
                 .and_return(@"/path/to/something.swift");
+            selectedTextProxy stub_method(@selector(selectedProtocolInFile:error:))
+                .and_do_block(^NSString *(id something, NSError **error) {
+                    *error = [[NSError alloc] initWithDomain:@"some-domain" code:1 userInfo:nil];
+                    return nil;
+                });
         });
 
         it(@"should alert the user to select a protocol", ^{

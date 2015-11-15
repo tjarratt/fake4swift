@@ -33,7 +33,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
             NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MySomewhatSpecialProtocol"
                                                                     ofType:@"swift"];
-            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
+            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath error:nil];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySomewhatSpecialProtocol" ofType:@"swift"];
@@ -53,7 +53,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                                     ofType:@"swift"];
 
             fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
-            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath];
+            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath error:nil];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];

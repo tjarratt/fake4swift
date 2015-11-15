@@ -4,6 +4,6 @@
 
 @protocol XMASSelectedTextProxy <NSObject>
 
-- (ProtocolDeclaration *)selectedProtocolInFile:(NSString *)fileName;
+- (ProtocolDeclaration *)selectedProtocolInFile:(NSString *)fileName error:(NSError **)error;
 
 @end
