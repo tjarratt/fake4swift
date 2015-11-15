@@ -67,7 +67,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
-                        usesTypeAlias: usesTypeAlias,
+                        usesTypealias: usesTypeAlias,
                         includedProtocols: inheritedProtocols,
                         instanceMethods: instanceMethods,
                         staticMethods: staticMethods,
@@ -100,13 +100,14 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
     }
 
     func accessorsFromProtocolDecl(protocolDict : XPCDictionary, kind : String) -> (Array<Accessor>, Array<Accessor>) {
-        let fileSubStructure : XPCRepresentable = protocolDict["key.substructure"]!
-        let structureArray = fileSubStructure as! XPCArray
-
         var getters : Array<Accessor> = []
         var setters : Array<Accessor> = []
 
-        for item in structureArray {
+        guard let fileSubStructure = protocolDict["key.substructure"] as? XPCArray else {
+            return (getters, setters)
+        }
+
+        for item in fileSubStructure {
             if let protocolDict = item as? XPCDictionary {
                 if protocolDict["key.kind"]! != kind {
                     continue
@@ -129,16 +130,22 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         return (getters, setters)
     }
 
-    typealias MethodDecls = (instanceM: [MethodDeclaration], staticM: [MethodDeclaration], mutableM: [MethodDeclaration])
+    typealias MethodDecls = (
+        instanceM: [MethodDeclaration],
+        staticM: [MethodDeclaration],
+        mutableM: [MethodDeclaration]
+    )
 
     func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> MethodDecls {
         var instanceMethods : Array<MethodDeclaration> = []
         var staticMethods : Array<MethodDeclaration> = []
         var mutableMethods : Array<MethodDeclaration> = []
-        let subStructure : XPCRepresentable = protocolDict["key.substructure"]!
-        let subStructureArray = subStructure as! XPCArray
 
-        for item in subStructureArray {
+        guard let substructure = protocolDict["key.substructure"] as? XPCArray else {
+            return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
+        }
+
+        for item in substructure {
             if let protocolBodyItem = item as? XPCDictionary {
                 let isInstanceMethod = protocolBodyItem["key.kind"]! == instanceMethodKind
                 let isStaticMethod = protocolBodyItem["key.kind"]! == staticMethodKind

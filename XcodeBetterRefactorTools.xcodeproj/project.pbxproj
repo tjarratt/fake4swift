@@ -123,6 +123,8 @@
 		F7D01C191B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */; };
 		F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */; };
+		F7D4806C1BF9402C00A37765 /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */; };
+		F7D4806D1BF9407600A37765 /* EmptyProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */; };
 		F7D5140B1B79DA3100B28AB4 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
 		F7DB97301BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
 		F7DB97311BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
@@ -586,6 +588,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F7D4806D1BF9407600A37765 /* EmptyProtocol.swift in Copy Fixtures */,
 				F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
 				F7DB975C1BF0109800A9C474 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */,
 				F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */,
@@ -739,6 +742,7 @@
 		F7D01C111B5C603700FE62DA /* XMASObjcMethodDeclarationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcMethodDeclarationParser.h; sourceTree = "<group>"; };
 		F7D01C121B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcMethodDeclarationParser.m; sourceTree = "<group>"; };
 		F7D3213F1B26C0A800729830 /* XMASRefactorMethodActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASRefactorMethodActionSpec.mm; sourceTree = "<group>"; };
+		F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
 		F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealisticMethodCalls.m; sourceTree = "<group>"; };
 		F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeForMyMutatingProtocol.swift; sourceTree = "<group>"; };
 		F7DB97571BEFFC9900A9C474 /* FakeMyMutatingProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMyMutatingProtocolSpec.swift; sourceTree = "<group>"; };
@@ -975,8 +979,8 @@
 			children = (
 				F7D4806A1BF93E2300A37765 /* CallExpressions */,
 				F7D480691BF93E1E00A37765 /* Cedar */,
-				F7D480401BF93E0F00A37765 /* Protocols */,
 				F70A03511B49DC420009B348 /* Expected */,
+				F7D480401BF93E0F00A37765 /* Protocols */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -1262,6 +1266,7 @@
 		F7D480401BF93E0F00A37765 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */,
 				F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */,
 				F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */,
 				F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */,
@@ -1924,6 +1929,7 @@
 				F7B4B4CA1B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */,
 				F7EA8A521B5AB78400367014 /* XMASObjcCallExpressionStringWriter.m in Sources */,
 				F7D01C081B5C602700FE62DA /* XMASObjcMethodCall.m in Sources */,
+				F7D4806C1BF9402C00A37765 /* EmptyProtocol.swift in Sources */,
 				F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */,
 				F7BA62301B223369005B99AF /* main.mm in Sources */,
 				F7EA8A601B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm in Sources */,

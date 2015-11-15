@@ -63,10 +63,8 @@ typealias ReturnType = String
 // random thought :: we should PROBABLY `import` everything from the file, right?
 // does source kitten give us that? (PLEASE SAY YES)
 @objc class ProtocolDeclaration : NSObject {
-    var name : String
-
     init(name: String,
-        usesTypeAlias: Bool,
+        usesTypealias: Bool,
         includedProtocols: Array<String>,
         instanceMethods: Array<MethodDeclaration>,
         staticMethods: Array<MethodDeclaration>,
@@ -80,7 +78,7 @@ typealias ReturnType = String
         subscriptSetters: Array<Accessor>
         ) {
             self.name = name
-            self.usesTypealias = usesTypeAlias
+            self.usesTypealias = usesTypealias
             self.includedProtocols = includedProtocols
             self.instanceMethods = instanceMethods
             self.staticMethods = staticMethods
@@ -94,6 +92,28 @@ typealias ReturnType = String
             self.subscriptSetters = subscriptSetters
             return
     }
+
+    override func isEqual(object: AnyObject?) -> Bool {
+        if let other = object as? ProtocolDeclaration {
+            return self.name == other.name &&
+                self.usesTypealias == other.usesTypealias &&
+                self.includedProtocols == other.includedProtocols &&
+                self.instanceMethods == other.instanceMethods &&
+                self.staticMethods == other.staticMethods &&
+                self.mutatingMethods == other.mutatingMethods &&
+                self.initializers == other.initializers &&
+                self.getters == other.getters &&
+                self.setters == other.setters &&
+                self.staticGetters == other.staticGetters &&
+                self.staticSetters == other.staticSetters &&
+                self.subscriptGetters == other.subscriptGetters &&
+                self.subscriptSetters == other.subscriptSetters
+        }
+
+        return false
+    }
+
+    var name : String
 
     var instanceMethods : Array<MethodDeclaration>
     var staticMethods : Array<MethodDeclaration>

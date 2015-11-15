@@ -185,6 +185,32 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
         });
     });
 
+    context(@"when a protocol with no methods is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        beforeEach(^{
+            NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"EmptyProtocol"
+                                                                    ofType:@"swift"];
+            fixturePath should_not be_nil;
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
+        });
+
+        it(@"should parse it as an empty protocol declaration", ^{
+            protocolDeclaration should equal([[ProtocolDeclaration alloc] initWithName:@"Empty"
+                                                                         usesTypealias:NO
+                                                                     includedProtocols:@[]
+                                                                       instanceMethods:@[]
+                                                                         staticMethods:@[]
+                                                                       mutatingMethods:@[]
+                                                                          initializers:@[]
+                                                                               getters:@[]
+                                                                               setters:@[]
+                                                                         staticGetters:@[]
+                                                                         staticSetters:@[]
+                                                                      subscriptGetters:@[]
+                                                                      subscriptSetters:@[]]);
+        });
+    });
+
     context(@"when no protocol is selected", ^{
         it(@"should return nil", ^{
             [subject selectedProtocolInFile:fixturePath] should be_nil;
