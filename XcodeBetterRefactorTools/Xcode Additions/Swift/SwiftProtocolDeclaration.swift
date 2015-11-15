@@ -67,7 +67,7 @@ typealias ReturnType = String
 
     init(name: String,
         usesTypeAlias: Bool,
-        includedProtocols: Array<ProtocolDeclaration>,
+        includedProtocols: Array<String>,
         instanceMethods: Array<MethodDeclaration>,
         staticMethods: Array<MethodDeclaration>,
         mutatingMethods: Array<MethodDeclaration>,
@@ -110,7 +110,7 @@ typealias ReturnType = String
     var subscriptGetters : Array<Accessor>
     var subscriptSetters : Array<Accessor>
 
-    var includedProtocols : Array<ProtocolDeclaration>
+    var includedProtocols : Array<String>
 
     var usesTypealias : Bool
 }

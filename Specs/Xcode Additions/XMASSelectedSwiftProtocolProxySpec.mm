@@ -104,10 +104,30 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
         });
     });
 
+    context(@"when a swift protocol which includes other protocols is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        beforeEach(^{
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1150, 0));
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
+        });
+
+        it(@"should parse the name of the selected protocol", ^{
+            protocolDeclaration.name should equal(@"IncludesOtherProtocol");
+        });
+
+        it(@"should include the names of the other protocols", ^{
+            protocolDeclaration.includedProtocols should equal(@[@"MyOptionalProtocol", @"NSObjectProtocol"]);
+        });
+
+        it(@"should indicate that the protocol does not use typealias", ^{
+            protocolDeclaration.usesTypealias should be_falsy;
+        });
+    });
+
     context(@"when a swift protocol with mutating methods is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1155, 0));
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1165, 0));
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
         });
 
@@ -131,7 +151,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol with methods that throw is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1620, 0));
+            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1630, 0));
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath];
         });
 

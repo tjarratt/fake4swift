@@ -34,6 +34,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                 }
 
                 let protocolName = protocolDict["key.name"] as! String
+                let inheritedProtocols = inheritedTypesForProtocol(protocolDict)
 
                 let protocolRange = NSMakeRange(
                     Int.init(truncatingBitPattern: protocolDict["key.offset"] as! Int64),
@@ -67,7 +68,7 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
                     return ProtocolDeclaration.init(
                         name: protocolName,
                         usesTypeAlias: usesTypeAlias,
-                        includedProtocols: [],
+                        includedProtocols: inheritedProtocols,
                         instanceMethods: instanceMethods,
                         staticMethods: staticMethods,
                         mutatingMethods: mutatingMethods,
@@ -293,5 +294,22 @@ class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
         let rangeOfString : NSRange = NSRange.init(location: 0, length: lengthOfProtocolBody)
         let matches = regex.matchesInString(protocolString, options: NSMatchingOptions.init(rawValue: 0), range: rangeOfString)
         return matches.count > 0
+    }
+
+    func inheritedTypesForProtocol(protocolDict: XPCDictionary) -> Array<String> {
+        var inheritedProtocols : [String] = []
+        let inheritedTypes = protocolDict["key.inheritedtypes"] as? [XPCRepresentable]
+
+        if inheritedTypes != nil {
+            for type in inheritedTypes! {
+                guard let typedDict = type as? XPCDictionary else {
+                    continue
+                }
+
+                inheritedProtocols.append(typedDict["key.name"] as! String)
+            }
+        }
+
+        return inheritedProtocols
     }
 }

@@ -33,7 +33,7 @@ protocol MySpecialProtocol {
 }
 
 protocol IncludesOtherProtocol : MyOptionalProtocol, NSObjectProtocol { // this is right annoying
-
+    func noWai()
 }
 
 protocol ImplementableByStructsOnly {
