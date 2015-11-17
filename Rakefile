@@ -1,5 +1,6 @@
 PROJECT_NAME = "XcodeBetterRefactorTools"
 CONFIGURATION = "Release"
+PLUGINS_DIR = "~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins"
 
 task :default => :install
 
@@ -31,10 +32,28 @@ task :install => :clean do
   BASH
 end
 
+desc "Cut a new Release"
+task :release => :install do
+  system_or_exit <<-BASH, output_file("cut-release")
+    rm -rf build/tmp-release/*
+    mkdir -p build/tmp-release/artifacts &&
+    ditto #{PLUGINS_DIR}/#{PROJECT_NAME}.xcplugin build/tmp-release/artifacts/#{PROJECT_NAME}.xcplugin &&
+    pkgbuild --analyze
+             --root build/tmp-release/artifacts
+             --identifier com.tomato.better-refactor-tools
+             --version 1.0
+             --ownership recommended
+             --install-location #{PLUGINS_DIR} build/tmp-release/better-refactor-tools.plist &&
+    pkgbuild --root build/tmp-release/artifacts
+             --component-plist build/tmp-release/better-refactor-tools.plist
+             --install-location #{PLUGINS_DIR} build/tmp-release/better-refactor-tools.pkg &&
+    echo "created release at build/tmp-release/better-refactor-tools.pkg"
+  BASH
+end
+
 desc "Uninstall"
 task :uninstall do
-  plugins_dir = "~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins"
-  system_or_exit "rm -rf #{plugins_dir}/#{PROJECT_NAME}.xcplugin"
+  system_or_exit "rm -rf #{PLUGINS_DIR}/#{PROJECT_NAME}.xcplugin"
 end
 
 desc "Clean"
