@@ -1,6 +1,5 @@
 PROJECT_NAME = "XcodeBetterRefactorTools"
 CONFIGURATION = "Release"
-SDK_VERSION = "6.0"
 
 task :default => :install
 
