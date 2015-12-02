@@ -1,6 +1,9 @@
 BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD and refactoring.
 
-# Installation
+# Installation (the easy way)
+* [download the most recent release](https://github.com/tjarratt/Xcode-Better-Refactor-Tools/releases)
+
+# Build from source (ie: "Installation the hard way")
 * `git clone https://github.com/tjarratt/Xcode-Better-Refactor-Tools.git`
 * `cd Xcode-Better-Refactor-Tools`
 * `git submodule update --init --recursive`
