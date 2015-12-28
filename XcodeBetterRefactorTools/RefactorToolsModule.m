@@ -1,4 +1,5 @@
 @import BetterRefactorToolsKit;
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
 #import "RefactorToolsModule.h"
 #import "XMASRefactorMethodAction.h"

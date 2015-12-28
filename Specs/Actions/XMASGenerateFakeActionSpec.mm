@@ -1,5 +1,6 @@
 #import <Cedar/Cedar.h>
 #import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
 #import "XMASGenerateFakeAction.h"
 

@@ -1,6 +1,7 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
 #import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
 #import "RefactorToolsModule.h"
 
@@ -19,7 +20,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(InjectorSpec)
 
-describe(@"Injector", ^{
+describe(@"the better refactor tools Xcode Plugin module", ^{
     __block id<BSInjector, BSBinder> injector;
     __block XMASXcodeRepository *xcodeRepository;
 
