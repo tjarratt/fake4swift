@@ -1,5 +1,6 @@
+@import BetterRefactorToolsKit;
+
 #import "XMASRefactorMethodAction.h"
-#import "XMASAlert.h"
 #import "XcodeInterfaces.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodDeclarationParser.h"
@@ -13,7 +14,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 @interface XMASRefactorMethodAction () <XMASChangeMethodSignatureControllerDelegate>
 
 @property (nonatomic) id currentEditor;
-@property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclParser;
 @property (nonatomic) XMASChangeMethodSignatureControllerProvider *controllerProvider;
@@ -24,7 +25,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 @implementation XMASRefactorMethodAction
 
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                       tokenizer:(XMASTokenizer *)tokenizer
              controllerProvider:(XMASChangeMethodSignatureControllerProvider *)controllerProvider
                methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser {

@@ -1,14 +1,15 @@
 #import <Cocoa/Cocoa.h>
-#import "XMASObjcMethodDeclaration.h"
 
-@class XMASAlert;
-@class XMASObjcMethodDeclaration;
 @class XMASWindowProvider;
+@class XMASObjcMethodDeclaration;
 @class XMASMethodOccurrencesRepository;
 @class XMASObjcCallExpressionRewriter;
 @class XMASObjcMethodDeclarationRewriter;
 @class XMASObjcMethodDeclarationStringWriter;
+
+@protocol XMASAlerter;
 @protocol XMASChangeMethodSignatureControllerDelegate;
+
 
 @interface XMASChangeMethodSignatureController : NSViewController <NSWindowDelegate, NSTextFieldDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
@@ -30,12 +31,12 @@
 @property (nonatomic, readonly) XMASObjcMethodDeclarationRewriter *methodDeclarationRewriter;
 @property (nonatomic, readonly) XMASWindowProvider *windowProvider;
 @property (nonatomic, readonly) XMASObjcMethodDeclaration *method;
-@property (nonatomic, readonly) XMASAlert *alerter;
+@property (nonatomic, readonly) id<XMASAlerter> alerter;
 
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
-                               alerter:(XMASAlert *)alerter
+                               alerter:(id<XMASAlerter>)alerter
                methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)objcCallExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter

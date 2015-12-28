@@ -1,5 +1,6 @@
+@import BetterRefactorToolsKit;
+
 #import "XMASGenerateFakeAction.h"
-#import "XMASAlert.h"
 #import "SwiftCompatibilityHeader.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
@@ -9,7 +10,7 @@ NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It incl
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
 
 @interface XMASGenerateFakeAction ()
-@property (nonatomic, strong) XMASAlert *alerter;
+@property (nonatomic, strong) id<XMASAlerter> alerter;
 @property (nonatomic, strong) XMASLogger *logger;
 @property (nonatomic, strong) id<XMASSelectedTextProxy> selectedTextProxy;
 @property (nonatomic, strong) XMASFakeProtocolPersister *fakeProtocolPersister;
@@ -18,7 +19,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 @implementation XMASGenerateFakeAction
 
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
               selectedTextProxy:(id <XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister

@@ -1,13 +1,14 @@
+@import BetterRefactorToolsKit;
+#import <ClangKit/ClangKit.h>
+
 #import "XMASObjcMethodDeclarationRewriter.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
 #import "XMASObjcMethodDeclarationParser.h"
-#import <ClangKit/ClangKit.h>
-#import "XMASAlert.h"
 #import "XMASTokenizer.h"
 
 @interface XMASObjcMethodDeclarationRewriter ()
-@property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASObjcMethodDeclarationParser *methodDeclarationParser;
 @property (nonatomic) XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
@@ -18,7 +19,7 @@
 - (instancetype)initWithMethodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
                               methodDeclarationParser:(XMASObjcMethodDeclarationParser *)methodDeclarationParser
                                             tokenizer:(XMASTokenizer *)tokenizer
-                                              alerter:(XMASAlert *)alerter {
+                                              alerter:(id<XMASAlerter>)alerter {
     if (self = [super init]) {
         self.alerter = alerter;
         self.tokenizer = tokenizer;

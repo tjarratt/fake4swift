@@ -1,7 +1,8 @@
+@import BetterRefactorToolsKit;
+
 #import "RefactorToolsModule.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASTokenizer.h"
-#import "XMASAlert.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASXcodeTargetSearchPathResolver.h"
@@ -20,12 +21,18 @@
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "XMASSelectedTextProxy.h"
 #import "SwiftCompatibilityHeader.h"
+#import "XMASXcodeBezelAlertPanel.h"
 
 static XMASRefactorMethodAction *action;
 
 @implementation RefactorToolsModule
 
 - (void)configure:(id<BSBinder>)binder {
+    [binder bind:@protocol(XMASAlerter) toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        return [[XMASXcodeBezelAlertPanel alloc] init];
+    }];
+    [binder bind:@protocol(XMASAlerter) withScope:[BSSingleton scope]];
+
     [binder bind:[XMASRefactorMethodAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
         id editor = [xcodeRepository currentEditor];
@@ -35,7 +42,7 @@ static XMASRefactorMethodAction *action;
             return action;
         }
 
-        action = [[XMASRefactorMethodAction alloc] initWithAlerter:[injector getInstance:[XMASAlert class]]
+        action = [[XMASRefactorMethodAction alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
                                                          tokenizer:[injector getInstance:[XMASTokenizer class]]
                                                 controllerProvider:[injector getInstance:[XMASChangeMethodSignatureControllerProvider class]]
                                                   methodDeclParser:[injector getInstance:[XMASObjcMethodDeclarationParser class]]];
@@ -45,7 +52,7 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:[XMASGenerateFakeAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        return [[XMASGenerateFakeAction alloc] initWithAlerter:[injector getInstance:[XMASAlert class]]
+        return [[XMASGenerateFakeAction alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
                                                         logger:[injector getInstance:[XMASLogger class]]
                                              selectedTextProxy:[injector getInstance:@protocol(XMASSelectedTextProxy)]
                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
@@ -65,7 +72,7 @@ static XMASRefactorMethodAction *action;
 
     [binder bind:[XMASChangeMethodSignatureControllerProvider class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         return [[XMASChangeMethodSignatureControllerProvider alloc] initWithWindowProvider:[injector getInstance:[XMASWindowProvider class]]
-                                                                                   alerter:[injector getInstance:[XMASAlert class]]
+                                                                                   alerter:[injector getInstance:@protocol(XMASAlerter)]
                                                                methodOccurrencesRepository:[injector getInstance:[XMASMethodOccurrencesRepository class]]
                                                                     callExpressionRewriter:[injector getInstance:[XMASObjcCallExpressionRewriter class]]
                                                              methodDeclarationStringWriter:[injector getInstance:[XMASObjcMethodDeclarationStringWriter class]]
@@ -81,7 +88,7 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:[XMASObjcCallExpressionRewriter class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        return [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:[injector getInstance:[XMASAlert class]]
+        return [[XMASObjcCallExpressionRewriter alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
                                                              tokenizer:[injector getInstance:[XMASTokenizer class]]
                                                   callExpressionParser:[injector getInstance:[XMASObjcMethodCallParser class]]
                                             callExpressionStringWriter:[injector getInstance:[XMASObjcCallExpressionStringWriter class]]];
@@ -91,7 +98,7 @@ static XMASRefactorMethodAction *action;
         return [[XMASObjcMethodDeclarationRewriter alloc] initWithMethodDeclarationStringWriter:[injector getInstance:[XMASObjcMethodDeclarationStringWriter class]]
                                                                         methodDeclarationParser:[injector getInstance:[XMASObjcMethodDeclarationParser class]]
                                                                                       tokenizer:[injector getInstance:[XMASTokenizer class]]
-                                                                                        alerter:[injector getInstance:[XMASAlert class]]];
+                                                                                        alerter:[injector getInstance:@protocol(XMASAlerter)]];
     }];
 
     [binder bind:[XMASObjcMethodCallParser class] toBlock:^id(NSArray * args, id<BSInjector> injector) {

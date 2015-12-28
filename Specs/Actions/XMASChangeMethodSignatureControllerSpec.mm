@@ -1,12 +1,14 @@
 #import <Cedar/Cedar.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+
 #import "XMASChangeMethodSignatureController.h"
-#import "XMASObjcMethodDeclaration.h"
-#import "XMASObjcMethodDeclarationParameter.h"
+
 #import "XMASWindowProvider.h"
-#import "XMASAlert.h"
-#import "XMASMethodOccurrencesRepository.h"
+#import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcCallExpressionRewriter.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
 
 using namespace Cedar::Matchers;
@@ -16,7 +18,7 @@ SPEC_BEGIN(XMASChangeMethodSignatureControllerSpec)
 
 describe(@"XMASChangeMethodSignatureController", ^{
     __block NSWindow *window;
-    __block XMASAlert *alerter;
+    __block id<XMASAlerter> alerter;
     __block XMASWindowProvider <CedarDouble> *windowProvider;
     __block XMASChangeMethodSignatureController *subject;
     __block XMASMethodOccurrencesRepository *methodOccurrencesRepository;
@@ -26,7 +28,7 @@ describe(@"XMASChangeMethodSignatureController", ^{
     __block id<XMASChangeMethodSignatureControllerDelegate> delegate;
 
     beforeEach(^{
-        alerter = nice_fake_for([XMASAlert class]);
+        alerter = nice_fake_for(@protocol(XMASAlerter));
 
         window = nice_fake_for([NSWindow class]);
 

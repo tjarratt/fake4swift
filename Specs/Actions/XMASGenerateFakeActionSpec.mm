@@ -1,9 +1,10 @@
 #import <Cedar/Cedar.h>
-#import "PluginSpecs-Swift.h"
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
 
-#import "XMASAlert.h"
-#import "XMASSelectedTextProxy.h"
 #import "XMASGenerateFakeAction.h"
+
+#import "PluginSpecs-Swift.h"
+#import "XMASSelectedTextProxy.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 
@@ -15,14 +16,14 @@ SPEC_BEGIN(XMASGenerateFakeActionSpec)
 describe(@"XMASGenerateFakeAction", ^{
     __block XMASGenerateFakeAction *subject;
 
-    __block XMASAlert *alerter;
+    __block id<XMASAlerter> alerter;
     __block XMASLogger *logger;
     __block id<XMASSelectedTextProxy> selectedTextProxy;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 
     beforeEach(^{
-        alerter = nice_fake_for([XMASAlert class]);
+        alerter = nice_fake_for(@protocol(XMASAlerter));
         logger = nice_fake_for([XMASLogger class]);
         selectedTextProxy = nice_fake_for(@protocol(XMASSelectedTextProxy));
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);

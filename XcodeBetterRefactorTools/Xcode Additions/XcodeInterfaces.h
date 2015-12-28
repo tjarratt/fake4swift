@@ -3,6 +3,15 @@
 #define XCP(type) XMASXcode_##type
 #define XC(type) id<XMASXcode_##type>
 
+#pragma mark - UI
+@protocol XCP(DVTBezelAlertPanel)
+- (id)initWithIcon:(id)icon
+           message:(id)message
+      parentWindow:(id)window
+          duration:(double)duration;
+- (void)orderFront:(id)sender;
+@end
+
 #pragma mark - Search Paths
 
 @protocol XCP(XCStringList)

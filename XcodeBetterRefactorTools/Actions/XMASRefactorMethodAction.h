@@ -12,7 +12,7 @@ extern NSString * const noMethodSelected;
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                       tokenizer:(XMASTokenizer *)tokenizer
              controllerProvider:(XMASChangeMethodSignatureControllerProvider *)contollerProvider
                methodDeclParser:(XMASObjcMethodDeclarationParser *)methodDeclParser NS_DESIGNATED_INITIALIZER;
@@ -23,7 +23,7 @@ extern NSString * const noMethodSelected;
 - (void)safelyRefactorMethodUnderCursor;
 
 @property (nonatomic, readonly) id currentEditor;
-@property (nonatomic, readonly) XMASAlert *alerter;
+@property (nonatomic, readonly) id<XMASAlerter> alerter;
 @property (nonatomic, readonly) XMASTokenizer *tokenizer;
 @property (nonatomic, readonly) XMASObjcMethodDeclarationParser *methodDeclParser;
 @property (nonatomic, readonly) XMASChangeMethodSignatureControllerProvider *controllerProvider;

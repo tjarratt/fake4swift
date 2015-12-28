@@ -1,14 +1,14 @@
-#import "XMASAlert.h"
+@import BetterRefactorToolsKit;
 
-@interface XMASAlert (AlertClassDump)
-- (id)initWithIcon:(id)icon
-           message:(id)message
-      parentWindow:(id)window
-          duration:(double)duration;
-- (void)orderFront:(id)sender;
+#import "XMASXcodeBezelAlertPanel.h"
+#import "XcodeInterfaces.h"
+
+@interface XMASXcodeBezelAlertPanel () <XMASAlerter>
+
 @end
 
-@implementation XMASAlert
+
+@implementation XMASXcodeBezelAlertPanel
 
 - (void)flashMessage:(NSString *)message {
     [self flashMessage:message withLogging:NO];

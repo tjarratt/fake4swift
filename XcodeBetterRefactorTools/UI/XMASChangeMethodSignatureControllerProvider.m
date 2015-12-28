@@ -7,7 +7,7 @@
 #import "XMASObjcMethodDeclarationStringWriter.h"
 
 @interface XMASChangeMethodSignatureControllerProvider ()
-@property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASMethodOccurrencesRepository *methodOccurrencesRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
@@ -18,7 +18,7 @@
 @implementation XMASChangeMethodSignatureControllerProvider
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
-                               alerter:(XMASAlert *)alerter
+                               alerter:(id<XMASAlerter>)alerter
                methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter

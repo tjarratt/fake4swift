@@ -8,16 +8,18 @@
 
 @protocol XMASSelectedTextProxy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface XMASGenerateFakeAction : NSObject
 
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
               selectedTextProxy:(id<XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy NS_DESIGNATED_INITIALIZER;
 - (void)safelyGenerateFakeForSelectedProtocol;
 
-@property (nonatomic, strong, readonly) XMASAlert *alerter;
+@property (nonatomic, strong, readonly) id<XMASAlerter> alerter;
 @property (nonatomic, strong, readonly) XMASLogger *logger;
 @property (nonatomic, strong, readonly) id<XMASSelectedTextProxy> selectedTextProxy;
 @property (nonatomic, strong, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
@@ -29,3 +31,5 @@
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 @end
+
+NS_ASSUME_NONNULL_END;

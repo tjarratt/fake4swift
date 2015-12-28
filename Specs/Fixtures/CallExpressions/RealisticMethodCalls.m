@@ -1,7 +1,7 @@
 #import "XMASEditMenu.h"
 #import "XMASXcodeRepository.h"
 #import "XMASRefactorMethodAction.h"
-#import "XMASAlert.h"
+#import "XMASXcodeBezelAlertPanel.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 #import "XMASWindowProvider.h"

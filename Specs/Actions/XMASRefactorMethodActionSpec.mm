@@ -1,12 +1,14 @@
 #import <Cedar/Cedar.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+
 #import "XMASRefactorMethodAction.h"
+
+#import "XMASTokenizer.h"
 #import "XcodeInterfaces.h"
-#import "XMASObjcMethodDeclarationParser.h"
 #import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParser.h"
 #import "XMASChangeMethodSignatureController.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
-#import "XMASAlert.h"
-#import "XMASTokenizer.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -16,14 +18,14 @@ SPEC_BEGIN(XMASRefactorMethodActionSpec)
 describe(@"XMASRefactorMethodAction", ^{
     __block XMASRefactorMethodAction *subject;
     __block id editor;
-    __block XMASAlert *alerter;
+    __block id<XMASAlerter> alerter;
     __block XMASTokenizer *tokenizer;
     __block XMASObjcMethodDeclarationParser *methodDeclParser;
     __block NSRange cursorRange;
     __block XMASChangeMethodSignatureControllerProvider *controllerProvider;
 
     beforeEach(^{
-        alerter = nice_fake_for([XMASAlert class]);
+        alerter = nice_fake_for(@protocol(XMASAlerter));
         editor = nice_fake_for(@protocol(XCP(IDESourceCodeEditor)));
         tokenizer = nice_fake_for([XMASTokenizer class]);
         controllerProvider = nice_fake_for([XMASChangeMethodSignatureControllerProvider class]);

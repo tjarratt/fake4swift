@@ -1,16 +1,18 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+
 #import "RefactorToolsModule.h"
-#import "XMASRefactorMethodAction.h"
-#import "XMASChangeMethodSignatureControllerProvider.h"
-#import "XMASAlert.h"
-#import "XMASXcodeRepository.h"
+
 #import "XMASTokenizer.h"
-#import "XMASObjcMethodDeclarationParser.h"
-#import "XMASGenerateFakeAction.h"
-#import "XMASFakeProtocolPersister.h"
-#import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "PluginSpecs-Swift.h"
+#import "XMASXcodeRepository.h"
+#import "XMASGenerateFakeAction.h"
+#import "XMASRefactorMethodAction.h"
+#import "XMASFakeProtocolPersister.h"
+#import "XMASObjcMethodDeclarationParser.h"
+#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASChangeMethodSignatureControllerProvider.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -34,7 +36,7 @@ describe(@"Injector", ^{
 
     it(@"should provide a Refactor Action", ^{
         XMASRefactorMethodAction *refactorAction = [injector getInstance:[XMASRefactorMethodAction class]];
-        refactorAction.alerter should be_instance_of([XMASAlert class]);
+        refactorAction.alerter should conform_to(@protocol(XMASAlerter));
         refactorAction.tokenizer should be_instance_of([XMASTokenizer class]);
         refactorAction.methodDeclParser should be_instance_of([XMASObjcMethodDeclarationParser class]);
         refactorAction.controllerProvider should be_instance_of([XMASChangeMethodSignatureControllerProvider class]);
@@ -43,7 +45,7 @@ describe(@"Injector", ^{
 
     it(@"should provide a Generate Fake Action", ^{
         XMASGenerateFakeAction *generateFakeAction = [injector getInstance:[XMASGenerateFakeAction class]];
-        generateFakeAction.alerter should be_instance_of([XMASAlert class]);
+        generateFakeAction.alerter should conform_to(@protocol(XMASAlerter));
         generateFakeAction.logger should be_instance_of([XMASLogger class]);
         generateFakeAction.selectedTextProxy should conform_to(@protocol(XMASSelectedTextProxy));
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);

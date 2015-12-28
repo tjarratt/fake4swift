@@ -11,7 +11,7 @@
 
 @property (nonatomic, readonly) XMASObjcMethodCallParser *methodCallParser;
 
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                       tokenizer:(XMASTokenizer *)tokenizer
            callExpressionParser:(XMASObjcMethodCallParser *)callExpressionParser
      callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter NS_DESIGNATED_INITIALIZER;

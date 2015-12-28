@@ -1,15 +1,17 @@
 #import <Cedar/Cedar.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+
 #import "XMASObjcMethodDeclarationRewriter.h"
+
+#import "XMASTokenizer.h"
+#import "TempFileHelper.h"
+#import "XcodeInterfaces.h"
+#import "XMASSearchPathExpander.h"
 #import "XMASObjcMethodDeclaration.h"
+#import "XMASObjcMethodDeclarationParser.h"
+#import "XMASXcodeTargetSearchPathResolver.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
-#import "XMASObjcMethodDeclarationParser.h"
-#import "XcodeInterfaces.h"
-#import "TempFileHelper.h"
-#import "XMASAlert.h"
-#import "XMASXcodeTargetSearchPathResolver.h"
-#import "XMASTokenizer.h"
-#import "XMASSearchPathExpander.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -18,12 +20,12 @@ SPEC_BEGIN(XMASObjcMethodDeclarationRewriterSpec)
 
 describe(@"XMASObjcMethodDeclarationRewriter", ^{
     __block XMASObjcMethodDeclarationRewriter *subject;
-    __block XMASAlert *alerter;
+    __block id<XMASAlerter> alerter;
     __block XMASObjcMethodDeclarationParser *methodDeclarationParser;
     __block XMASObjcMethodDeclarationStringWriter *methodDeclarationStringWriter;
 
     beforeEach(^{
-        alerter = nice_fake_for([XMASAlert class]);
+        alerter = nice_fake_for(@protocol(XMASAlerter));
         XMASSearchPathExpander *searchPathExpander = [[XMASSearchPathExpander alloc] init];
         XMASXcodeTargetSearchPathResolver *targetSearchPathResolver = [[XMASXcodeTargetSearchPathResolver alloc] initWithPathExpander:searchPathExpander];
         XMASTokenizer *tokenizer = [[XMASTokenizer alloc] initWithTargetSearchPathResolver:targetSearchPathResolver

@@ -1,13 +1,17 @@
+@import BetterRefactorToolsKit;
+
 #import "XMASChangeMethodSignatureController.h"
-#import "XMASObjcMethodDeclarationParameter.h"
+
+#import "XcodeInterfaces.h"
 #import "XMASWindowProvider.h"
 #import "XMASXcodeRepository.h"
-#import "XcodeInterfaces.h"
-#import "XMASAlert.h"
-#import "XMASMethodOccurrencesRepository.h"
+#import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcCallExpressionRewriter.h"
+#import "XMASMethodOccurrencesRepository.h"
 #import "XMASObjcMethodDeclarationRewriter.h"
+#import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcMethodDeclarationStringWriter.h"
+
 
 static NSString * const tableViewColumnRowIdentifier = @"";
 
@@ -25,7 +29,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 @property (nonatomic, weak) IBOutlet NSButton *refactorButton;
 @property (nonatomic, weak) IBOutlet NSTextField *previewTextField;
 
-@property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASWindowProvider *windowProvider;
 @property (nonatomic) XMASMethodOccurrencesRepository *methodOccurrencesRepository;
 @property (nonatomic) XMASObjcCallExpressionRewriter *callExpressionRewriter;
@@ -43,7 +47,7 @@ static NSString * const tableViewColumnRowIdentifier = @"";
 
 - (instancetype)initWithWindowProvider:(XMASWindowProvider *)windowProvider
                               delegate:(id<XMASChangeMethodSignatureControllerDelegate>)delegate
-                               alerter:(XMASAlert *)alerter
+                               alerter:(id<XMASAlerter>)alerter
                methodOccurrencesRepository:(XMASMethodOccurrencesRepository *)methodOccurrencesRepository
                 callExpressionRewriter:(XMASObjcCallExpressionRewriter *)callExpressionRewriter
          methodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter

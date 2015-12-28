@@ -12,7 +12,7 @@
 - (instancetype)initWithMethodDeclarationStringWriter:(XMASObjcMethodDeclarationStringWriter *)methodDeclarationStringWriter
                               methodDeclarationParser:(XMASObjcMethodDeclarationParser *)methodDeclarationParser
                                             tokenizer:(XMASTokenizer *)tokenizer
-                                              alerter:(XMASAlert *)alerter NS_DESIGNATED_INITIALIZER;
+                                              alerter:(id<XMASAlerter>)alerter NS_DESIGNATED_INITIALIZER;
 
 - (void)changeMethodDeclaration:(XMASObjcMethodDeclaration *)oldMethodDeclaration
                     toNewMethod:(XMASObjcMethodDeclaration *)newMethodDeclaration

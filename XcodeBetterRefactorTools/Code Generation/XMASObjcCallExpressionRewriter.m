@@ -1,15 +1,16 @@
+@import BetterRefactorToolsKit;
+
 #import "XMASObjcCallExpressionRewriter.h"
 #import "XMASObjcMethodDeclaration.h"
 #import "XMASObjcMethodCallParser.h"
 #import "XcodeInterfaces.h"
 #import "XMASObjcMethodCall.h"
-#import "XMASAlert.h"
 #import "XMASObjcMethodDeclarationParameter.h"
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASTokenizer.h"
 
 @interface XMASObjcCallExpressionRewriter ()
-@property (nonatomic) XMASAlert *alerter;
+@property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASTokenizer *tokenizer;
 @property (nonatomic) XMASObjcMethodCallParser *methodCallParser;
 @property (nonatomic) XMASObjcCallExpressionStringWriter *callExpressionStringWriter;
@@ -17,7 +18,7 @@
 
 @implementation XMASObjcCallExpressionRewriter
 
-- (instancetype)initWithAlerter:(XMASAlert *)alerter
+- (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                       tokenizer:(XMASTokenizer *)tokenizer
            callExpressionParser:(XMASObjcMethodCallParser *)callExpressionParser
      callExpressionStringWriter:(XMASObjcCallExpressionStringWriter *)callExpressionStringWriter {
