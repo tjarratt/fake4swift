@@ -53,7 +53,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     NSError *error = nil;
     ProtocolDeclaration *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath error:&error];
     if (error != nil) {
-        [self.alerter flashMessage:@"put your cursor on a swift protocol to generate a fake for it"];
+        [self.alerter flashMessage:@"put your cursor in a protocol declaration to generate a fake for it"];
         return;
     }
 

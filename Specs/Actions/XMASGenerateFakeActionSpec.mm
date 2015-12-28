@@ -184,7 +184,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
         it(@"should alert the user to select a protocol", ^{
             alerter should have_received(@selector(flashMessage:))
-                .with(@"put your cursor on a swift protocol to generate a fake for it");
+                .with(@"put your cursor in a protocol declaration to generate a fake for it");
         });
     });
 });
