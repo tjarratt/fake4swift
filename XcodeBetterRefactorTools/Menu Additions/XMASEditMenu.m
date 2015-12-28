@@ -63,7 +63,7 @@
 - (void)generateFakeAction:(id)sender {
     XMASGenerateFakeAction *generateFakeAction = [self.injector getInstance:[XMASGenerateFakeAction class]];
 
-    [generateFakeAction safelyGenerateFakeForProtocolUnderCursor];
+    [generateFakeAction safelyGenerateFakeForSelectedProtocol];
 }
 
 #pragma mark - NSObject

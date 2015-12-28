@@ -45,7 +45,7 @@ describe(@"XMASEditMenu", ^{
         });
 
         it(@"should attempt to safely generate a fake for the protocol under the cursor", ^{
-            action should have_received(@selector(safelyGenerateFakeForProtocolUnderCursor));
+            action should have_received(@selector(safelyGenerateFakeForSelectedProtocol));
         });
     });
 });

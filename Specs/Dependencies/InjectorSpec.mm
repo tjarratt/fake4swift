@@ -10,7 +10,7 @@
 #import "XMASGenerateFakeAction.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
-#import "Specs-Swift.h"
+#import "PluginSpecs-Swift.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

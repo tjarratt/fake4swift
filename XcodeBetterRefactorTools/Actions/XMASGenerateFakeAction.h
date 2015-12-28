@@ -15,7 +15,7 @@
               selectedTextProxy:(id<XMASSelectedTextProxy>)selectedTextProxy
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy NS_DESIGNATED_INITIALIZER;
-- (void)safelyGenerateFakeForProtocolUnderCursor;
+- (void)safelyGenerateFakeForSelectedProtocol;
 
 @property (nonatomic, strong, readonly) XMASAlert *alerter;
 @property (nonatomic, strong, readonly) XMASLogger *logger;

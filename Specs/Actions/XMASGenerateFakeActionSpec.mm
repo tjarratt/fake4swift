@@ -1,5 +1,5 @@
 #import <Cedar/Cedar.h>
-#import "Specs-Swift.h"
+#import "PluginSpecs-Swift.h"
 
 #import "XMASAlert.h"
 #import "XMASSelectedTextProxy.h"
@@ -36,7 +36,7 @@ describe(@"XMASGenerateFakeAction", ^{
     });
 
     subjectAction(^{
-        [subject safelyGenerateFakeForProtocolUnderCursor];
+        [subject safelyGenerateFakeForSelectedProtocol];
     });
 
     describe(@"when the cursor is inside a swift protocol declaration", ^{

@@ -1,6 +1,6 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
-#import "Specs-Swift.h"
+#import "PluginSpecs-Swift.h"
 #import "RefactorToolsModule.h"
 
 using namespace Cedar::Matchers;

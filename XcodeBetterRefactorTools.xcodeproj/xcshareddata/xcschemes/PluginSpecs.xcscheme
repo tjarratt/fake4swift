@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F7BA62271B223369005B99AF"
-               BuildableName = "Specs.app"
-               BlueprintName = "Specs"
+               BuildableName = "PluginSpecs.app"
+               BlueprintName = "PluginSpecs"
                ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7BA62271B223369005B99AF"
-            BuildableName = "Specs.app"
-            BlueprintName = "Specs"
+            BuildableName = "PluginSpecs.app"
+            BlueprintName = "PluginSpecs"
             ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7BA62271B223369005B99AF"
-            BuildableName = "Specs.app"
-            BlueprintName = "Specs"
+            BuildableName = "PluginSpecs.app"
+            BlueprintName = "PluginSpecs"
             ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F7BA62271B223369005B99AF"
-            BuildableName = "Specs.app"
-            BlueprintName = "Specs"
+            BuildableName = "PluginSpecs.app"
+            BlueprintName = "PluginSpecs"
             ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -34,7 +34,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     return self;
 }
 
-- (void)safelyGenerateFakeForProtocolUnderCursor {
+- (void)safelyGenerateFakeForSelectedProtocol {
     @try {
         [self generateFakeForProtocolUnderCursor];
     } @catch (NSException *e) {
