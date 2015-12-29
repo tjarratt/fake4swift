@@ -121,6 +121,11 @@ static XMASRefactorMethodAction *action;
         return [[XMASSwiftProtocolFaker alloc] initWithBundle:[injector getInstance:@"MainBundle"]];
     }];
 
+    [binder bind:@protocol(XMASSelectedProtocolOracle) toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
+        return [[XMASSelectedXcodeCursorProxy alloc] initWithXcodeRepo:xcodeRepository];
+    }];
+
     [binder bind:@"MainBundle" toInstance:[NSBundle bundleWithIdentifier:@"com.tomato.XcodeBetterRefactorTools"]];
 }
 

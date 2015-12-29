@@ -3,6 +3,8 @@
 @class XMASSwiftProtocolFaker;
 @class ProtocolDeclaration;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface XMASFakeProtocolPersister : NSObject
 
 @property (nonatomic, strong, readonly) NSFileManager *fileManager;
@@ -19,3 +21,5 @@
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 @end
+
+NS_ASSUME_NONNULL_END

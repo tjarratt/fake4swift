@@ -87,6 +87,8 @@ describe(@"XMASGenerateFakeAction", ^{
         context(@"but the protocol to stub includes additional protocols", ^{
             beforeEach(^{
                 ProtocolDeclaration *unsupportedProtocolDecl = [[ProtocolDeclaration alloc] initWithName:@"UnsupportedProtocol"
+                                                                                          containingFile:@"/some/fake/path.swift"
+                                                                                             rangeInFile:NSMakeRange(0, 0)
                                                                                            usesTypealias:NO
                                                                                        includedProtocols:@[@"This", @"Isn't", @"Supported"]
                                                                                          instanceMethods:@[]
@@ -124,6 +126,8 @@ describe(@"XMASGenerateFakeAction", ^{
         context(@"but the protocol to stub uses typealias", ^{
             beforeEach(^{
                 ProtocolDeclaration *unsupportedProtocolDecl = [[ProtocolDeclaration alloc] initWithName:@"UnsupportedProtocol"
+                                                                                          containingFile:@"/some/fake/path.swift"
+                                                                                             rangeInFile:NSMakeRange(0, 0)
                                                                                            usesTypealias:YES
                                                                                        includedProtocols:@[]
                                                                                          instanceMethods:@[]

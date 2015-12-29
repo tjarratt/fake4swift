@@ -64,6 +64,8 @@ typealias ReturnType = String
 // does source kitten give us that? (PLEASE SAY YES)
 @objc class ProtocolDeclaration : NSObject {
     init(name: String,
+        containingFile: String,
+        rangeInFile: NSRange,
         usesTypealias: Bool,
         includedProtocols: Array<String>,
         instanceMethods: Array<MethodDeclaration>,
@@ -78,6 +80,8 @@ typealias ReturnType = String
         subscriptSetters: Array<Accessor>
         ) {
             self.name = name
+            self.containingFile = containingFile
+            self.rangeInFile = rangeInFile
             self.usesTypealias = usesTypealias
             self.includedProtocols = includedProtocols
             self.instanceMethods = instanceMethods
@@ -96,6 +100,8 @@ typealias ReturnType = String
     override func isEqual(object: AnyObject?) -> Bool {
         if let other = object as? ProtocolDeclaration {
             return self.name == other.name &&
+                self.containingFile == other.containingFile &&
+                NSEqualRanges(self.rangeInFile, other.rangeInFile) &&
                 self.usesTypealias == other.usesTypealias &&
                 self.includedProtocols == other.includedProtocols &&
                 self.instanceMethods == other.instanceMethods &&
@@ -114,6 +120,9 @@ typealias ReturnType = String
     }
 
     var name : String
+
+    var containingFile : String
+    var rangeInFile : NSRange
 
     var instanceMethods : Array<MethodDeclaration>
     var staticMethods : Array<MethodDeclaration>

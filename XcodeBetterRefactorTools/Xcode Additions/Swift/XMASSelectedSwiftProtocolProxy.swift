@@ -18,14 +18,14 @@ let errorDomain : String = "parse-swift-protocol-domain"
         xcodeRepository = xcodeRepo
     }
 
-    @objc func selectedProtocolInFile(fileName : String!) throws -> ProtocolDeclaration {
+    @objc func selectedProtocolInFile(filePath : String!) throws -> ProtocolDeclaration {
         let selectedRange : NSRange = xcodeRepository.cursorSelectionRange()
 
         var fileContents : NSString
-        try fileContents = NSString.init(contentsOfFile: fileName, encoding:NSUTF8StringEncoding)
+        try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)
 
-        guard let sourceFile = File.init(path: fileName) as File! else {
-            throw NSError.init(domain: errorDomain, code: 5, userInfo: [NSLocalizedFailureReasonErrorKey: "could not read " + fileName])
+        guard let sourceFile = File.init(path: filePath) as File! else {
+            throw NSError.init(domain: errorDomain, code: 5, userInfo: [NSLocalizedFailureReasonErrorKey: "could not read " + filePath])
         }
 
         let fileStructure = Structure.init(file: sourceFile)
@@ -70,6 +70,8 @@ let errorDomain : String = "parse-swift-protocol-domain"
 
                     return ProtocolDeclaration.init(
                         name: protocolName,
+                        containingFile: filePath,
+                        rangeInFile: protocolRange,
                         usesTypealias: usesTypeAlias,
                         includedProtocols: inheritedProtocols,
                         instanceMethods: instanceMethods,

@@ -218,6 +218,8 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
 
         it(@"should parse it as an empty protocol declaration", ^{
             protocolDeclaration should equal([[ProtocolDeclaration alloc] initWithName:@"Empty"
+                                                                        containingFile:@"/some/fake/path.swift"
+                                                                           rangeInFile:NSMakeRange(0, 0)
                                                                          usesTypealias:NO
                                                                      includedProtocols:@[]
                                                                        instanceMethods:@[]
