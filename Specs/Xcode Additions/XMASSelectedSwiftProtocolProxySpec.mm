@@ -10,14 +10,14 @@ SPEC_BEGIN(XMASSelectedSwiftProtocolProxySpec)
 
 describe(@"XMASSelectedSwiftProtocolProxy", ^{
     __block XMASSelectedSwiftProtocolProxy *subject;
-    __block XMASXcodeRepository *fakeXcodeRepository;
+    __block id<XMASSelectedProtocolOracle> fakeSelectedProtocolOracle;
 
     beforeEach(^{
         NSArray *modules = @[[[RefactorToolsModule alloc] init]];
         id<BSInjector, BSBinder> injector = (id<BSInjector, BSBinder>)[Blindside injectorWithModules:modules];
 
-        fakeXcodeRepository = nice_fake_for([XMASXcodeRepository class]);
-        [injector bind:[XMASXcodeRepository class] toInstance:fakeXcodeRepository];
+        fakeSelectedProtocolOracle = nice_fake_for(@protocol(XMASSelectedProtocolOracle));
+        [injector bind:@protocol(XMASSelectedProtocolOracle) toInstance:fakeSelectedProtocolOracle];
 
         subject = [injector getInstance:@protocol(XMASSelectedTextProxy)];
     });
@@ -28,8 +28,8 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange))
-                .and_return(NSMakeRange(21, 0));
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_return(YES);
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
@@ -111,8 +111,10 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol which includes other protocols is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange))
-                .and_return(NSMakeRange(1150, 0));
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
+                    return [protocolDecl.name isEqualToString:@"IncludesOtherProtocol"];
+                });
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
@@ -135,7 +137,10 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol with mutating methods is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(1165, 0));
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+            .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
+                return [protocolDecl.name isEqualToString:@"ImplementableByStructsOnly"];
+            });
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
@@ -162,12 +167,18 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when a swift protocol with methods that throw is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange))
-            .and_return(NSMakeRange(1630, 0));
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
+                    return [protocolDecl.name isEqualToString:@"ThingsThatGoBoom"];
+                });
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
             error should be_nil;
+        });
+
+        it(@"should select the correct protocol", ^{
+            protocolDeclaration.name should equal(@"ThingsThatGoBoom");
         });
 
         it(@"should have methods that throws errors", ^{
@@ -191,12 +202,18 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     context(@"when the swift protocol uses typealias", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
-            fakeXcodeRepository stub_method(@selector(cursorSelectionRange))
-                .and_return(NSMakeRange(1500, 0));
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
+                    return [protocolDecl.name isEqualToString:@"GenericProtocolWithTypeAlias"];
+                });
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
             error should be_nil;
+        });
+
+        it(@"should parse the correct protocol", ^{
+            protocolDeclaration.name should equal(@"GenericProtocolWithTypeAlias");
         });
 
         it(@"should indicate that the protocol uses typealias", ^{
@@ -206,10 +223,13 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
 
     context(@"when a protocol with no methods is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"EmptyProtocol"
+                                                                ofType:@"swift"];
         beforeEach(^{
-            NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"EmptyProtocol"
-                                                                    ofType:@"swift"];
             fixturePath should_not be_nil;
+
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_return(YES);
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
@@ -218,8 +238,8 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
 
         it(@"should parse it as an empty protocol declaration", ^{
             protocolDeclaration should equal([[ProtocolDeclaration alloc] initWithName:@"Empty"
-                                                                        containingFile:@"/some/fake/path.swift"
-                                                                           rangeInFile:NSMakeRange(0, 0)
+                                                                        containingFile:fixturePath
+                                                                           rangeInFile:NSMakeRange(0, 19)
                                                                          usesTypealias:NO
                                                                      includedProtocols:@[]
                                                                        instanceMethods:@[]
@@ -236,7 +256,10 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
     });
 
     context(@"when no protocol is selected", ^{
-        it(@"should return throw an error", ^{
+        it(@"should throw an error", ^{
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_return(NO);
+
             NSError *error = nil;
             [subject selectedProtocolInFile:fixturePath error:&error];
             error should_not be_nil;

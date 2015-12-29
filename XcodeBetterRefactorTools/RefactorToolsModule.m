@@ -107,8 +107,8 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:@protocol(XMASSelectedTextProxy) toBlock:^id (NSArray *args, id<BSInjector> injector) {
-        XMASXcodeRepository *xcodeRepo = [injector getInstance:[XMASXcodeRepository class]];
-        return [[XMASSelectedSwiftProtocolProxy alloc] initWithXcodeRepo:xcodeRepo];
+        id<XMASSelectedProtocolOracle> oracle = [injector getInstance:@protocol(XMASSelectedProtocolOracle)];
+        return [[XMASSelectedSwiftProtocolProxy alloc] initWithProtocolOracle:oracle];
     }];
 
     [binder bind:[XMASFakeProtocolPersister class] toBlock:^id (NSArray *args, id<BSInjector> injector) {

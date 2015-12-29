@@ -12,15 +12,13 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
 let errorDomain : String = "parse-swift-protocol-domain"
 
 @objc class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
-    var xcodeRepository : XMASXcodeRepository
+    var selectedProtocolOracle : XMASSelectedProtocolOracle
 
-    init(xcodeRepo : XMASXcodeRepository) {
-        xcodeRepository = xcodeRepo
+    init(protocolOracle : XMASSelectedProtocolOracle) {
+        selectedProtocolOracle = protocolOracle
     }
 
     @objc func selectedProtocolInFile(filePath : String!) throws -> ProtocolDeclaration {
-        let selectedRange : NSRange = xcodeRepository.cursorSelectionRange()
-
         var fileContents : NSString
         try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)
 
@@ -59,50 +57,40 @@ let errorDomain : String = "parse-swift-protocol-domain"
                 subscript anything -> TOTALLY UNAVAILABLE
                 */
 
-                if rangesOverlap(selectedRange, protocolRange: protocolRange) {
-                    let usesTypeAlias = findTypealiasInProtocolDecl(protocolDict, fileContents: fileContents)
-                    let (getters, setters) = accessorsFromProtocolDecl(protocolDict, kind: instanceVarKind)
-                    let (staticGetters, staticSetters) = accessorsFromProtocolDecl(protocolDict, kind: staticVarKind)
-                    let methods = methodsFromProtocolDecl(protocolDict, fileContents: fileContents)
-                    let instanceMethods = methods.instanceM
-                    let staticMethods = methods.staticM
-                    let mutatingMethods = methods.mutableM
+                let usesTypeAlias = findTypealiasInProtocolDecl(protocolDict, fileContents: fileContents)
+                let (getters, setters) = accessorsFromProtocolDecl(protocolDict, kind: instanceVarKind)
+                let (staticGetters, staticSetters) = accessorsFromProtocolDecl(protocolDict, kind: staticVarKind)
+                let methods = methodsFromProtocolDecl(protocolDict, fileContents: fileContents)
+                let instanceMethods = methods.instanceM
+                let staticMethods = methods.staticM
+                let mutatingMethods = methods.mutableM
 
-                    return ProtocolDeclaration.init(
-                        name: protocolName,
-                        containingFile: filePath,
-                        rangeInFile: protocolRange,
-                        usesTypealias: usesTypeAlias,
-                        includedProtocols: inheritedProtocols,
-                        instanceMethods: instanceMethods,
-                        staticMethods: staticMethods,
-                        mutatingMethods: mutatingMethods,
-                        initializers: [],
-                        getters: getters,
-                        setters: setters,
-                        staticGetters: staticGetters,
-                        staticSetters: staticSetters,
-                        subscriptGetters: [],
-                        subscriptSetters: []
-                    )
+                let protocolDecl = ProtocolDeclaration.init(
+                    name: protocolName,
+                    containingFile: filePath,
+                    rangeInFile: protocolRange,
+                    usesTypealias: usesTypeAlias,
+                    includedProtocols: inheritedProtocols,
+                    instanceMethods: instanceMethods,
+                    staticMethods: staticMethods,
+                    mutatingMethods: mutatingMethods,
+                    initializers: [],
+                    getters: getters,
+                    setters: setters,
+                    staticGetters: staticGetters,
+                    staticSetters: staticSetters,
+                    subscriptGetters: [],
+                    subscriptSetters: []
+                )
+
+                if selectedProtocolOracle.isProtocolSelected(protocolDecl) {
+                    return protocolDecl
                 }
             }
         }
 
         let userInfo = [NSLocalizedFailureReasonErrorKey: "No protocol was selected"]
         throw NSError.init(domain: errorDomain, code: 1, userInfo: userInfo)
-    }
-
-    func rangesOverlap(cursorRange : NSRange, protocolRange : NSRange) -> Bool {
-        if cursorRange.location < protocolRange.location {
-            return false
-        }
-
-        if cursorRange.location > protocolRange.location + protocolRange.length {
-            return false
-        }
-
-        return true
     }
 
     func accessorsFromProtocolDecl(protocolDict : XPCDictionary, kind : String) -> (Array<Accessor>, Array<Accessor>) {

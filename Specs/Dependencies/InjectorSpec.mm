@@ -70,6 +70,11 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         fakeProtocolPersister.fileManager should be_instance_of([NSFileManager class]);
     });
 
+    it(@"should provide a selected protocol proxy", ^{
+        XMASSelectedSwiftProtocolProxy *selectedProtocolProxy = [injector getInstance:@protocol(XMASSelectedTextProxy)];
+        selectedProtocolProxy.selectedProtocolOracle should conform_to(@protocol(XMASSelectedProtocolOracle));
+    });
+
     it(@"should have a selected protocol oracle", ^{
         id oracle = [injector getInstance:@protocol(XMASSelectedProtocolOracle)];
         oracle should_not be_nil;

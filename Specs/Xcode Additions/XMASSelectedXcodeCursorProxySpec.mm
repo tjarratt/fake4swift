@@ -8,7 +8,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(XMASSelectedXcodeCursorProxySpec)
 
-fdescribe(@"XMASSelectedXcodeCursorProxy", ^{
+describe(@"XMASSelectedXcodeCursorProxy", ^{
     __block XMASSelectedXcodeCursorProxy *subject;
     __block XMASXcodeRepository *fakeXcodeRepository;
 
