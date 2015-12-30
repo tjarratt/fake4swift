@@ -6,10 +6,10 @@
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(XMASSelectedXcodeCursorProxySpec)
+SPEC_BEGIN(XMASXcodeCursorSelectionOracleSpec)
 
-describe(@"XMASSelectedXcodeCursorProxy", ^{
-    __block XMASSelectedXcodeCursorProxy *subject;
+describe(@"XMASXcodeCursorSelectionOracle", ^{
+    __block XMASXcodeCursorSelectionOracle *subject;
     __block XMASXcodeRepository *fakeXcodeRepository;
 
     beforeEach(^{

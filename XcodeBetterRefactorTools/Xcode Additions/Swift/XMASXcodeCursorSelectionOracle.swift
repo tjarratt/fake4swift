@@ -4,7 +4,7 @@ import Foundation
     @objc func isProtocolSelected(protocolDecl : ProtocolDeclaration) -> Bool
 }
 
-@objc class XMASSelectedXcodeCursorProxy : NSObject, XMASSelectedProtocolOracle {
+@objc class XMASXcodeCursorSelectionOracle : NSObject, XMASSelectedProtocolOracle {
     var xcodeRepository : XMASXcodeRepository
 
     init(xcodeRepo : XMASXcodeRepository) {
