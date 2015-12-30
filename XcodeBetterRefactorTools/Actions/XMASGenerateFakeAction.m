@@ -50,7 +50,8 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     }
 
     NSError *error = nil;
-    ProtocolDeclaration *selectedProtocol = [self.selectedProtocolUseCase selectedProtocolInFile:currentFilePath error:&error];
+    ProtocolDeclaration *selectedProtocol = [self.selectedProtocolUseCase selectedProtocolInFile:currentFilePath
+                                                                                           error:&error];
     if (error != nil) {
         [self.alerter flashMessage:@"put your cursor in a protocol declaration to generate a fake for it"];
         return;
@@ -59,7 +60,9 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     if (selectedProtocol.includedProtocols.count > 0) {
         [self.alerter flashMessage:@"FAILED. Check Console.app"];
 
-        NSString *logMessage = [[NSString alloc] initWithFormat:protocolIncludesOtherMessage, selectedProtocol.name, selectedProtocol.includedProtocols.count];
+        NSString *logMessage = [NSString stringWithFormat:protocolIncludesOtherMessage,
+                                selectedProtocol.name,
+                                selectedProtocol.includedProtocols.count];
         [self.logger logMessage:logMessage];
         return;
     }
@@ -67,13 +70,17 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     if (selectedProtocol.usesTypealias) {
         [self.alerter flashMessage:@"FAILED. Check Console.app"];
 
-        NSString *logMessage = [[NSString alloc] initWithFormat:protocolUsesTypealiasMessage, selectedProtocol.name];
+        NSString *logMessage = [NSString stringWithFormat:protocolUsesTypealiasMessage,
+                                selectedProtocol.name];
         [self.logger logMessage:logMessage];
         return;
     }
 
-    [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol nearSourceFile:currentFilePath];
-    [self.alerter flashMessage:[NSString stringWithFormat:@"Generated Fake%@ successfully!", selectedProtocol.name]];
+    [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol
+                                        nearSourceFile:currentFilePath];
+    NSString *success = [NSString stringWithFormat:@"Generated Fake%@ successfully!",
+                         selectedProtocol.name];
+    [self.alerter flashMessage:success];
 }
 
 #pragma mark - NSObject
