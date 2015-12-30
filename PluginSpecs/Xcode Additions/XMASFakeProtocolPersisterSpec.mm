@@ -1,4 +1,6 @@
 #import <Cedar/Cedar.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
+
 #import "XMASFakeProtocolPersister.h"
 #import "SwiftCompatibilityHeader.h"
 

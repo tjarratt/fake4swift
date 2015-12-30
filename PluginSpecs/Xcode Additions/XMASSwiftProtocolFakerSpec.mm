@@ -1,5 +1,7 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
+
 #import "PluginSpecs-Swift.h"
 #import "RefactorToolsModule.h"
 #import "XMASXcodeRepository.h"

@@ -8,13 +8,17 @@
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
 
+
 @interface XMASGenerateFakeAction ()
-@property (nonatomic, strong) id<XMASAlerter> alerter;
-@property (nonatomic, strong) XMASLogger *logger;
-@property (nonatomic, strong) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
-@property (nonatomic, strong) XMASFakeProtocolPersister *fakeProtocolPersister;
-@property (nonatomic, strong) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+
+@property (nonatomic) XMASLogger *logger;
+@property (nonatomic) id<XMASAlerter> alerter;
+@property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
+@property (nonatomic) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
+@property (nonatomic) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+
 @end
+
 
 @implementation XMASGenerateFakeAction
 
@@ -24,10 +28,10 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy {
     if (self = [super init]) {
-        self.alerter = alerter;
         self.logger = logger;
-        self.selectedProtocolUseCase = selectedProtocolUseCase;
+        self.alerter = alerter;
         self.fakeProtocolPersister = fakeProtocolPersister;
+        self.selectedProtocolUseCase = selectedProtocolUseCase;
         self.sourceCodeDocumentProxy = sourceCodeDocumentProxy;
     }
 
@@ -36,13 +40,13 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 - (void)safelyGenerateFakeForSelectedProtocol {
     @try {
-        [self generateFakeForProtocolUnderCursor];
+        [self generateFakeForSelectedProtocol];
     } @catch (NSException *e) {
         [self.alerter flashComfortingMessageForException:e];
     }
 }
 
-- (void)generateFakeForProtocolUnderCursor {
+- (void)generateFakeForSelectedProtocol {
     NSString *currentFilePath = [self.sourceCodeDocumentProxy currentSourceCodeFilePath];
     if (![currentFilePath.pathExtension.lowercaseString isEqual: @"swift"]) {
         [self.alerter flashMessage:@"generate-fake only works with Swift source files"];

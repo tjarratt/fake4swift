@@ -1,7 +1,7 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
-#import "PluginSpecs-Swift.h"
-#import "RefactorToolsModule.h"
+#import "BetterRefactorToolsKitSpecs-Swift.h"
+#import "BetterRefactorToolsKitModule.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -13,7 +13,7 @@ describe(@"XMASParseSelectedProtocolUseCase", ^{
     __block id<XMASSelectedProtocolOracle> fakeSelectedProtocolOracle;
 
     beforeEach(^{
-        NSArray *modules = @[[[RefactorToolsModule alloc] init]];
+        NSArray *modules = @[[[BetterRefactorToolsKitModule alloc] init]];
         id<BSInjector, BSBinder> injector = (id<BSInjector, BSBinder>)[Blindside injectorWithModules:modules];
 
         fakeSelectedProtocolOracle = nice_fake_for(@protocol(XMASSelectedProtocolOracle));

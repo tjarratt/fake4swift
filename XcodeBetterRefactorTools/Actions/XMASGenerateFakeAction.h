@@ -17,19 +17,22 @@ NS_ASSUME_NONNULL_BEGIN
               selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy NS_DESIGNATED_INITIALIZER;
+
 - (void)safelyGenerateFakeForSelectedProtocol;
 
-@property (nonatomic, strong, readonly) id<XMASAlerter> alerter;
-@property (nonatomic, strong, readonly) XMASLogger *logger;
-@property (nonatomic, strong, readonly) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
-@property (nonatomic, strong, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
-@property (nonatomic, strong, readonly) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+@property (nonatomic, readonly) XMASLogger *logger;
+@property (nonatomic, readonly) id<XMASAlerter> alerter;
+@property (nonatomic, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
+@property (nonatomic, readonly) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
+@property (nonatomic, readonly) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 
 @end
 
 @interface XMASGenerateFakeAction (UnavailableInitializers)
+
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
+
 @end
 
 NS_ASSUME_NONNULL_END;

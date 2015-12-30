@@ -63,7 +63,7 @@ public typealias ReturnType = String
 // random thought :: we should PROBABLY `import` everything from the file, right?
 // does source kitten give us that? (PLEASE SAY YES)
 @objc public class ProtocolDeclaration : NSObject {
-    init(name: String,
+    public init(name: String,
         containingFile: String,
         rangeInFile: NSRange,
         usesTypealias: Bool,

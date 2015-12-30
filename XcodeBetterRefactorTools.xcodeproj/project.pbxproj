@@ -62,6 +62,38 @@
 		F71E82C41B59F6B400BE93DC /* RefactorMethodExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */; };
 		F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
 		F72749601B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
+		F72C17B01C33C366002B7FD9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C17AF1C33C366002B7FD9 /* main.mm */; };
+		F72C17EE1C33C3C2002B7FD9 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
+		F72C17EF1C33C3CA002B7FD9 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BA625A1B2233D0005B99AF /* Cedar.framework */; };
+		F72C17F01C33C3CF002B7FD9 /* SwiftXPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; };
+		F72C17F11C33C3D4002B7FD9 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
+		F72C17FA1C33C62E002B7FD9 /* Mustache.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */; };
+		F72C18021C33C82D002B7FD9 /* XMASParseSelectedProtocolUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F8161C33BE7C0040827B /* XMASParseSelectedProtocolUseCase.swift */; };
+		F72C18031C33C837002B7FD9 /* XMASSwiftParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F8111C33BC980040827B /* XMASSwiftParser.swift */; };
+		F72C18041C33C839002B7FD9 /* XMASSelectedProtocolOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */; };
+		F72C18051C33C844002B7FD9 /* SwiftProtocolDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F80F1C33BBAB0040827B /* SwiftProtocolDeclaration.swift */; };
+		F72C18091C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h in Headers */ = {isa = PBXBuildFile; fileRef = F72C18071C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h */; };
+		F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F72C18081C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m */; };
+		F72C180D1C33CA43002B7FD9 /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
+		F72C180E1C33CA54002B7FD9 /* SourceKittenFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F72C18101C33CAF1002B7FD9 /* MethodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */; };
+		F72C18111C33CAF1002B7FD9 /* NestedCallExpressions.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */; };
+		F72C18121C33CAF1002B7FD9 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
+		F72C18131C33CAF1002B7FD9 /* RefactorMethodFixture.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */; };
+		F72C18141C33CAF1002B7FD9 /* RefactorMethodFixture.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */; };
+		F72C18151C33CAF1002B7FD9 /* Cedar.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AE0C00E91B717A670065C099 /* Cedar.h */; };
+		F72C18161C33CAF1002B7FD9 /* CedarSpecFixture.mm in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */; };
+		F72C18171C33CAF1002B7FD9 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
+		F72C18181C33CAF1002B7FD9 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift */; };
+		F72C18191C33CAF1002B7FD9 /* RefactorMethodDeclarationExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AE76355C1B68245B00F85396 /* RefactorMethodDeclarationExpected.m */; };
+		F72C181A1C33CAF1002B7FD9 /* RefactorMethodExpected.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */; };
+		F72C181B1C33CAF1002B7FD9 /* RefactorMethodExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */; };
+		F72C181C1C33CAF1002B7FD9 /* RefactorMethodExpected2.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */; };
+		F72C181D1C33CAF1002B7FD9 /* EmptyProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */; };
+		F72C181E1C33CAF1002B7FD9 /* MyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
+		F72C181F1C33CAF1002B7FD9 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
+		F72C18201C33CAF1002B7FD9 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
 		F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */; };
 		F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,7 +119,6 @@
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78655891BE4A77E00BB3026 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F78655901BE4AAD800BB3026 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F786558F1BE4AAD800BB3026 /* XMASParseSelectedProtocolUseCaseSpec.mm */; };
 		F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
 		F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
@@ -165,6 +196,7 @@
 		F7FC45821BE786DA00299694 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */; };
 		F7FC45831BE787E900299694 /* XMASFakeProtocolPersister.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45811BE786DA00299694 /* XMASFakeProtocolPersister.m */; };
 		F7FC45851BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */; };
+		F7FCC2321C33D05300263EED /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +236,34 @@
 			remoteInfo = MustacheOSX;
 		};
 		F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 561E725B1A8BDC2B004ED48B;
+			remoteInfo = MustacheOSX;
+		};
+		F72C17E41C33C390002B7FD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 29CAC6E3150292AD00731862;
+			remoteInfo = Blindside;
+		};
+		F72C17E61C33C394002B7FD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7BA62491B2233D0005B99AF /* Cedar.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AEEE1FB511DC271300029872;
+			remoteInfo = Cedar;
+		};
+		F72C17E81C33C39F002B7FD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E8FE43F61A01A8AF002672BD;
+			remoteInfo = SwiftXPC;
+		};
+		F72C17EA1C33C3A5002B7FD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
 			proxyType = 1;
@@ -581,6 +641,13 @@
 			remoteGlobalIDString = AE03FBE91B06C33B00013784;
 			remoteInfo = "Cedar-iOS-Framework Specs";
 		};
+		F7FCC2301C33D04C00263EED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 29CAC6E3150292AD00731862;
+			remoteInfo = Blindside;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -635,6 +702,45 @@
 				F70E1FC11B243AF000D971E6 /* MethodDeclaration.m in Copy Fixtures */,
 				F71E82A61B5974FC00BE93DC /* RefactorMethodFixture.m in Copy Fixtures */,
 				F71E82C41B59F6B400BE93DC /* RefactorMethodExpected.m in Copy Fixtures */,
+			);
+			name = "Copy Fixtures";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F72C17F41C33C49D002B7FD9 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F72C180E1C33CA54002B7FD9 /* SourceKittenFramework.framework in Copy Frameworks */,
+				F72C17FA1C33C62E002B7FD9 /* Mustache.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F72C180F1C33CAC5002B7FD9 /* Copy Fixtures */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F72C18101C33CAF1002B7FD9 /* MethodDeclaration.m in Copy Fixtures */,
+				F72C18111C33CAF1002B7FD9 /* NestedCallExpressions.m in Copy Fixtures */,
+				F72C18121C33CAF1002B7FD9 /* RealisticMethodCalls.m in Copy Fixtures */,
+				F72C18131C33CAF1002B7FD9 /* RefactorMethodFixture.h in Copy Fixtures */,
+				F72C18141C33CAF1002B7FD9 /* RefactorMethodFixture.m in Copy Fixtures */,
+				F72C18151C33CAF1002B7FD9 /* Cedar.h in Copy Fixtures */,
+				F72C18161C33CAF1002B7FD9 /* CedarSpecFixture.mm in Copy Fixtures */,
+				F72C18171C33CAF1002B7FD9 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */,
+				F72C18181C33CAF1002B7FD9 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */,
+				F72C18191C33CAF1002B7FD9 /* RefactorMethodDeclarationExpected.m in Copy Fixtures */,
+				F72C181A1C33CAF1002B7FD9 /* RefactorMethodExpected.h in Copy Fixtures */,
+				F72C181B1C33CAF1002B7FD9 /* RefactorMethodExpected.m in Copy Fixtures */,
+				F72C181C1C33CAF1002B7FD9 /* RefactorMethodExpected2.h in Copy Fixtures */,
+				F72C181D1C33CAF1002B7FD9 /* EmptyProtocol.swift in Copy Fixtures */,
+				F72C181E1C33CAF1002B7FD9 /* MyMutatingProtocol.swift in Copy Fixtures */,
+				F72C181F1C33CAF1002B7FD9 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
+				F72C18201C33CAF1002B7FD9 /* ProtocolEdgeCases.swift in Copy Fixtures */,
 			);
 			name = "Copy Fixtures";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,6 +819,14 @@
 		F71FFF401B85A8E800DC8A80 /* XMASChangeMethodSignatureController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMASChangeMethodSignatureController.xib; sourceTree = "<group>"; };
 		F727495D1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASMethodOccurrencesRepository.h; sourceTree = "<group>"; };
 		F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASMethodOccurrencesRepository.m; sourceTree = "<group>"; };
+		F72C17A91C33C366002B7FD9 /* BetterRefactorToolsKitSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterRefactorToolsKitSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F72C17AF1C33C366002B7FD9 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		F72C17B61C33C366002B7FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F72C17FB1C33C754002B7FD9 /* BetterRefactorToolsKitSpecs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BetterRefactorToolsKitSpecs-Bridging-Header.h"; sourceTree = "<group>"; };
+		F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASParseSelectedProtocolUseCaseSpec.mm; sourceTree = "<group>"; };
+		F72C18071C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetterRefactorToolsKitModule.h; sourceTree = "<group>"; };
+		F72C18081C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetterRefactorToolsKitModule.m; sourceTree = "<group>"; };
+		F72C180C1C33C9AF002B7FD9 /* KitSwiftCompatibilityHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitSwiftCompatibilityHeader.h; sourceTree = "<group>"; };
 		F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcTypeParserSpec.mm; sourceTree = "<group>"; };
 		F73A20BB1BDC2D54003BD1E5 /* SwiftCompatibilityHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCompatibilityHeader.h; sourceTree = "<group>"; };
 		F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedProtocolOracle.swift; sourceTree = "<group>"; };
@@ -732,7 +846,6 @@
 		F76511041BE9FAC800BFDAD8 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		F76511221BE9FAD100BFDAD8 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMySomewhatSpecialProtocolSpec.swift; sourceTree = "<group>"; };
-		F786558F1BE4AAD800BB3026 /* XMASParseSelectedProtocolUseCaseSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASParseSelectedProtocolUseCaseSpec.mm; sourceTree = "<group>"; };
 		F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEditMenuSpec.mm; sourceTree = "<group>"; };
 		F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InjectorSpec.mm; sourceTree = "<group>"; };
 		F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolEdgeCases.swift; sourceTree = "<group>"; };
@@ -819,10 +932,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F72C17A61C33C366002B7FD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F72C180D1C33CA43002B7FD9 /* SourceKittenFramework.framework in Frameworks */,
+				F72C17F11C33C3D4002B7FD9 /* Mustache.framework in Frameworks */,
+				F72C17F01C33C3CF002B7FD9 /* SwiftXPC.framework in Frameworks */,
+				F72C17EF1C33C3CA002B7FD9 /* Cedar.framework in Frameworks */,
+				F72C17EE1C33C3C2002B7FD9 /* Blindside.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F749C7401C310EBC00A0ACDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7FCC2321C33D05300263EED /* Blindside.framework in Frameworks */,
 				F747F8181C33BEC20040827B /* SourceKittenFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,11 +1002,12 @@
 			isa = PBXGroup;
 			children = (
 				F749C7451C310EBC00A0ACDC /* BetterRefactorToolsKit */,
+				F72C17AA1C33C366002B7FD9 /* BetterRefactorToolsKitSpecs */,
 				F7BA62481B2233B0005B99AF /* Externals */,
 				960FA0911605819F00923A87 /* Frameworks */,
 				F76510E61BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs */,
-				960FA0901605819F00923A87 /* Products */,
 				F7BA62291B223369005B99AF /* PluginSpecs */,
+				960FA0901605819F00923A87 /* Products */,
 				960FA0951605819F00923A87 /* Supporting Files */,
 				960FA0941605819F00923A87 /* XcodeBetterRefactorTools */,
 			);
@@ -893,6 +1020,7 @@
 				F7BA62281B223369005B99AF /* PluginSpecs.app */,
 				F76510E51BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs.xctest */,
 				F749C7441C310EBC00A0ACDC /* BetterRefactorToolsKit.framework */,
+				F72C17A91C33C366002B7FD9 /* BetterRefactorToolsKitSpecs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -940,7 +1068,6 @@
 			children = (
 				F7FC45841BE78A8600299694 /* XMASFakeProtocolPersisterSpec.mm */,
 				AE0C00CD1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm */,
-				F786558F1BE4AAD800BB3026 /* XMASParseSelectedProtocolUseCaseSpec.mm */,
 				F7FC45781BE74EC700299694 /* XMASSwiftProtocolFakerSpec.mm */,
 				F71308081C328466002D04E0 /* XMASXcodeCursorSelectionOracleSpec.mm */,
 				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
@@ -1070,6 +1197,50 @@
 			path = Indexes;
 			sourceTree = "<group>";
 		};
+		F72C17AA1C33C366002B7FD9 /* BetterRefactorToolsKitSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				F72C17FE1C33C795002B7FD9 /* Use Cases */,
+				F72C17AE1C33C366002B7FD9 /* Supporting Files */,
+			);
+			path = BetterRefactorToolsKitSpecs;
+			sourceTree = "<group>";
+		};
+		F72C17AE1C33C366002B7FD9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F72C17FB1C33C754002B7FD9 /* BetterRefactorToolsKitSpecs-Bridging-Header.h */,
+				F72C17B61C33C366002B7FD9 /* Info.plist */,
+				F72C17AF1C33C366002B7FD9 /* main.mm */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F72C17FE1C33C795002B7FD9 /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+				F72C17FF1C33C7A7002B7FD9 /* Parse Swift Protocol */,
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		F72C17FF1C33C7A7002B7FD9 /* Parse Swift Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */,
+			);
+			path = "Parse Swift Protocol";
+			sourceTree = "<group>";
+		};
+		F72C18061C33C8A9002B7FD9 /* Dependency Injection */ = {
+			isa = PBXGroup;
+			children = (
+				F72C18071C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h */,
+				F72C18081C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m */,
+			);
+			path = "Dependency Injection";
+			sourceTree = "<group>";
+		};
 		F747F8091C33BA860040827B /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
@@ -1083,6 +1254,7 @@
 			isa = PBXGroup;
 			children = (
 				F749C7481C310EBC00A0ACDC /* Info.plist */,
+				F72C180C1C33C9AF002B7FD9 /* KitSwiftCompatibilityHeader.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1109,6 +1281,7 @@
 			isa = PBXGroup;
 			children = (
 				F749C7461C310EBC00A0ACDC /* BetterRefactorToolsKit.h */,
+				F72C18061C33C8A9002B7FD9 /* Dependency Injection */,
 				F747F80E1C33BAF60040827B /* Entities */,
 				F7F670671C312B82007DDF2E /* Logging */,
 				F747F80A1C33BA950040827B /* Supporting Files */,
@@ -1443,6 +1616,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F72C18091C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h in Headers */,
 				F749C77E1C31218700A0ACDC /* XMASAlerter.h in Headers */,
 				F749C7471C310EBC00A0ACDC /* BetterRefactorToolsKit.h in Headers */,
 			);
@@ -1492,6 +1666,28 @@
 			productReference = 960FA08F1605819F00923A87 /* XcodeBetterRefactorTools.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
+		F72C17A81C33C366002B7FD9 /* BetterRefactorToolsKitSpecs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F72C17E11C33C366002B7FD9 /* Build configuration list for PBXNativeTarget "BetterRefactorToolsKitSpecs" */;
+			buildPhases = (
+				F72C17A51C33C366002B7FD9 /* Sources */,
+				F72C17A61C33C366002B7FD9 /* Frameworks */,
+				F72C17F41C33C49D002B7FD9 /* Copy Frameworks */,
+				F72C180F1C33CAC5002B7FD9 /* Copy Fixtures */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F72C17EB1C33C3A5002B7FD9 /* PBXTargetDependency */,
+				F72C17E91C33C39F002B7FD9 /* PBXTargetDependency */,
+				F72C17E71C33C394002B7FD9 /* PBXTargetDependency */,
+				F72C17E51C33C390002B7FD9 /* PBXTargetDependency */,
+			);
+			name = BetterRefactorToolsKitSpecs;
+			productName = BetterRefactorToolsKitSpecs;
+			productReference = F72C17A91C33C366002B7FD9 /* BetterRefactorToolsKitSpecs.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F749C7431C310EBC00A0ACDC /* BetterRefactorToolsKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F749C7731C310EBC00A0ACDC /* Build configuration list for PBXNativeTarget "BetterRefactorToolsKit" */;
@@ -1504,6 +1700,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F7FCC2311C33D04C00263EED /* PBXTargetDependency */,
 				F747F8141C33BCC50040827B /* PBXTargetDependency */,
 			);
 			name = BetterRefactorToolsKit;
@@ -1563,6 +1760,9 @@
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
+					F72C17A81C33C366002B7FD9 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					F749C7431C310EBC00A0ACDC = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -1622,6 +1822,7 @@
 				F7BA62271B223369005B99AF /* PluginSpecs */,
 				F76510E41BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs */,
 				F749C7431C310EBC00A0ACDC /* BetterRefactorToolsKit */,
+				F72C17A81C33C366002B7FD9 /* BetterRefactorToolsKitSpecs */,
 			);
 		};
 /* End PBXProject section */
@@ -2019,6 +2220,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F72C17A51C33C366002B7FD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F72C18041C33C839002B7FD9 /* XMASSelectedProtocolOracle.swift in Sources */,
+				F72C18021C33C82D002B7FD9 /* XMASParseSelectedProtocolUseCase.swift in Sources */,
+				F72C18051C33C844002B7FD9 /* SwiftProtocolDeclaration.swift in Sources */,
+				F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */,
+				F72C17B01C33C366002B7FD9 /* main.mm in Sources */,
+				F72C18031C33C837002B7FD9 /* XMASSwiftParser.swift in Sources */,
+				F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F749C73F1C310EBC00A0ACDC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2059,7 +2274,6 @@
 				F7BEDD1B1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */,
 				F7D321401B26C0A800729830 /* XMASRefactorMethodActionSpec.mm in Sources */,
 				F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */,
-				F78655901BE4AAD800BB3026 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */,
 				F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */,
 				AE0C00E81B7176630065C099 /* XMASTokenizer.m in Sources */,
 				F79FF6801BDF64DA0058EFE0 /* ProtocolEdgeCases.swift in Sources */,
@@ -2130,6 +2344,26 @@
 			name = MustacheOSX;
 			targetProxy = F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */;
 		};
+		F72C17E51C33C390002B7FD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Blindside;
+			targetProxy = F72C17E41C33C390002B7FD9 /* PBXContainerItemProxy */;
+		};
+		F72C17E71C33C394002B7FD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Cedar;
+			targetProxy = F72C17E61C33C394002B7FD9 /* PBXContainerItemProxy */;
+		};
+		F72C17E91C33C39F002B7FD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftXPC;
+			targetProxy = F72C17E81C33C39F002B7FD9 /* PBXContainerItemProxy */;
+		};
+		F72C17EB1C33C3A5002B7FD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MustacheOSX;
+			targetProxy = F72C17EA1C33C3A5002B7FD9 /* PBXContainerItemProxy */;
+		};
 		F747F8071C33B6D00040827B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F749C7431C310EBC00A0ACDC /* BetterRefactorToolsKit */;
@@ -2189,6 +2423,11 @@
 			isa = PBXTargetDependency;
 			name = Blindside;
 			targetProxy = F7E009451B7FDAA900B9E6E6 /* PBXContainerItemProxy */;
+		};
+		F7FCC2311C33D04C00263EED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Blindside;
+			targetProxy = F7FCC2301C33D04C00263EED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2354,6 +2593,101 @@
 			};
 			name = Release;
 		};
+		F72C17B71C33C366002B7FD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/**",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"SPECS=1",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = BetterRefactorToolsKitSpecs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks/ @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glg.BetterRefactorToolsKitSpecs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "BetterRefactorToolsKitSpecs/BetterRefactorToolsKitSpecs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F72C17B81C33C366002B7FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Externals/**",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "SPECS=1";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = BetterRefactorToolsKitSpecs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks/ @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glg.BetterRefactorToolsKitSpecs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "BetterRefactorToolsKitSpecs/BetterRefactorToolsKitSpecs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Release;
+		};
 		F749C7491C310EBC00A0ACDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2383,7 +2717,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Externals",
+					"$(PROJECT_DIR)/Externals/**",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2405,6 +2739,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.glg.BetterRefactorToolsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2439,7 +2774,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Externals",
+					"$(PROJECT_DIR)/Externals/**",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2456,6 +2791,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.glg.BetterRefactorToolsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2654,6 +2990,15 @@
 			buildConfigurations = (
 				96387014161815C600BE29E7 /* Debug */,
 				96387015161815C600BE29E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F72C17E11C33C366002B7FD9 /* Build configuration list for PBXNativeTarget "BetterRefactorToolsKitSpecs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F72C17B71C33C366002B7FD9 /* Debug */,
+				F72C17B81C33C366002B7FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
