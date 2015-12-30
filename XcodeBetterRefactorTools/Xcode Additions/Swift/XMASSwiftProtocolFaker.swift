@@ -1,5 +1,6 @@
-import Foundation
 import Mustache
+import Foundation
+import BetterRefactorToolsKit
 
 class XMASSwiftProtocolFaker: NSObject {
 

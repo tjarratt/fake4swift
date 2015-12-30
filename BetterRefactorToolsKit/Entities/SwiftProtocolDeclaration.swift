@@ -1,8 +1,8 @@
 import Foundation
 
-@objc class MethodParameter : NSObject {
-    var name : MethodName
-    var type : ReturnType
+@objc public class MethodParameter : NSObject {
+    public var name : MethodName
+    public var type : ReturnType
 
     init(name: MethodName, type: ReturnType) {
         self.name = name
@@ -10,11 +10,11 @@ import Foundation
     }
 }
 
-@objc class MethodDeclaration : NSObject {
-    var name : MethodName
-    var throwsError : Bool
-    var arguments : Array<MethodParameter>
-    var returnValueTypes : Array<ReturnType>
+@objc public class MethodDeclaration : NSObject {
+    public var name : MethodName
+    public var throwsError : Bool
+    public var arguments : Array<MethodParameter>
+    public var returnValueTypes : Array<ReturnType>
 
     init(name: String,
         throwsError: Bool,
@@ -26,15 +26,15 @@ import Foundation
             self.returnValueTypes = returnValueTypes
     }
 
-    func hasArguments() -> Bool {
+    public func hasArguments() -> Bool {
         return arguments.count > 0
     }
 
-    func hasReturnValues() -> Bool {
+    public func hasReturnValues() -> Bool {
         return returnValueTypes.count > 0
     }
 
-    override func isEqual(object: AnyObject?) -> Bool {
+    override public func isEqual(object: AnyObject?) -> Bool {
         if let other = object as? MethodDeclaration {
             return self.name == other.name &&
                 self.arguments == other.arguments &&
@@ -46,9 +46,9 @@ import Foundation
     }
 }
 
-@objc class Accessor : NSObject {
-    var name : MethodName
-    var returnType : ReturnType
+@objc public class Accessor : NSObject {
+    public var name : MethodName
+    public var returnType : ReturnType
 
     init(name: MethodName,
         returnType: ReturnType) {
@@ -57,12 +57,12 @@ import Foundation
     }
 }
 
-typealias MethodName = String
-typealias ReturnType = String
+public typealias MethodName = String
+public typealias ReturnType = String
 
 // random thought :: we should PROBABLY `import` everything from the file, right?
 // does source kitten give us that? (PLEASE SAY YES)
-@objc class ProtocolDeclaration : NSObject {
+@objc public class ProtocolDeclaration : NSObject {
     init(name: String,
         containingFile: String,
         rangeInFile: NSRange,
@@ -97,7 +97,7 @@ typealias ReturnType = String
             return
     }
 
-    override func isEqual(object: AnyObject?) -> Bool {
+    override public func isEqual(object: AnyObject?) -> Bool {
         if let other = object as? ProtocolDeclaration {
             return self.name == other.name &&
                 self.containingFile == other.containingFile &&
@@ -119,27 +119,27 @@ typealias ReturnType = String
         return false
     }
 
-    var name : String
+    public var name : String
 
-    var containingFile : String
-    var rangeInFile : NSRange
+    public var containingFile : String
+    public var rangeInFile : NSRange
 
-    var instanceMethods : Array<MethodDeclaration>
-    var staticMethods : Array<MethodDeclaration>
-    var mutatingMethods : Array<MethodDeclaration>
+    public var instanceMethods : Array<MethodDeclaration>
+    public var staticMethods : Array<MethodDeclaration>
+    public var mutatingMethods : Array<MethodDeclaration>
 
-    var initializers : Array<MethodDeclaration>
+    public var initializers : Array<MethodDeclaration>
 
-    var getters : Array<Accessor>
-    var setters : Array<Accessor>
+    public var getters : Array<Accessor>
+    public var setters : Array<Accessor>
 
-    var staticGetters : Array<Accessor>
-    var staticSetters : Array<Accessor>
+    public var staticGetters : Array<Accessor>
+    public var staticSetters : Array<Accessor>
 
-    var subscriptGetters : Array<Accessor>
-    var subscriptSetters : Array<Accessor>
+    public var subscriptGetters : Array<Accessor>
+    public var subscriptSetters : Array<Accessor>
 
-    var includedProtocols : Array<String>
+    public var includedProtocols : Array<String>
 
-    var usesTypealias : Bool
+    public var usesTypealias : Bool
 }

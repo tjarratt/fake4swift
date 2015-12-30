@@ -1,26 +1,19 @@
-import AppKit
 import SwiftXPC
+import Foundation
 import SourceKittenFramework
-
-let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
-let instanceVarKind    : String = "source.lang.swift.decl.var.instance"
-let staticVarKind      : String = "source.lang.swift.decl.var.static"
-let instanceMethodKind : String = "source.lang.swift.decl.function.method.instance"
-let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
-let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
 let errorDomain : String = "parse-swift-protocol-domain"
 
-@objc class XMASParseSelectedProtocolUseCase : NSObject {
+@objc public class XMASParseSelectedProtocolUseCase : NSObject {
     var swiftParser : XMASSwiftParser
     var selectedProtocolOracle : XMASSelectedProtocolOracle
 
-    init(protocolOracle : XMASSelectedProtocolOracle) {
+    public init(protocolOracle : XMASSelectedProtocolOracle) {
         swiftParser = XMASSwiftParser.init()
         selectedProtocolOracle = protocolOracle
     }
 
-    @objc func selectedProtocolInFile(filePath : String!) throws -> ProtocolDeclaration {
+    @objc public func selectedProtocolInFile(filePath : String!) throws -> ProtocolDeclaration {
         guard let sourceFile = File.init(path: filePath) as File! else {
             throw NSError.init(domain: errorDomain, code: 5, userInfo: [NSLocalizedFailureReasonErrorKey: "could not read " + filePath])
         }

@@ -2,6 +2,13 @@ import Foundation
 import SwiftXPC
 
 struct XMASSwiftParser {
+    let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
+    let instanceVarKind    : String = "source.lang.swift.decl.var.instance"
+    let staticVarKind      : String = "source.lang.swift.decl.var.static"
+    let instanceMethodKind : String = "source.lang.swift.decl.function.method.instance"
+    let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
+    let mutableMethodKind  : String = "source.decl.attribute.mutating"
+
     func parseProtocolDeclaration(dict: XPCDictionary, filePath: String) throws -> ProtocolDeclaration? {
         var fileContents : NSString
         try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)

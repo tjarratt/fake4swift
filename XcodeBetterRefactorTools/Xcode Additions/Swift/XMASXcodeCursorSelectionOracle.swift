@@ -1,8 +1,5 @@
 import Foundation
-
-@objc protocol XMASSelectedProtocolOracle {
-    @objc func isProtocolSelected(protocolDecl : ProtocolDeclaration) -> Bool
-}
+import BetterRefactorToolsKit
 
 @objc class XMASXcodeCursorSelectionOracle : NSObject, XMASSelectedProtocolOracle {
     var xcodeRepository : XMASXcodeRepository
