@@ -872,7 +872,7 @@
 				960FA0911605819F00923A87 /* Frameworks */,
 				F76510E61BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs */,
 				960FA0901605819F00923A87 /* Products */,
-				F7BA62291B223369005B99AF /* Specs */,
+				F7BA62291B223369005B99AF /* PluginSpecs */,
 				960FA0951605819F00923A87 /* Supporting Files */,
 				960FA0941605819F00923A87 /* XcodeBetterRefactorTools */,
 			);
@@ -1183,7 +1183,7 @@
 			path = "Xcode Additions";
 			sourceTree = "<group>";
 		};
-		F7BA62291B223369005B99AF /* Specs */ = {
+		F7BA62291B223369005B99AF /* PluginSpecs */ = {
 			isa = PBXGroup;
 			children = (
 				F7BA62741B22BFBE005B99AF /* Actions */,
@@ -1198,7 +1198,7 @@
 				AEE1B5911B69458F00CC8AFE /* Test Helpers */,
 				AE0C00C01B7134560065C099 /* Xcode Additions */,
 			);
-			path = Specs;
+			path = PluginSpecs;
 			sourceTree = "<group>";
 		};
 		F7BA622A1B223369005B99AF /* Supporting Files */ = {
@@ -2523,7 +2523,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = Specs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/PluginSpecs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks/ @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2569,7 +2569,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = Specs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/PluginSpecs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks/ @loader_path/../Frameworks/SourceKittenFramework.framework/Versions/Current/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
