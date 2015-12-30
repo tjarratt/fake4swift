@@ -2,6 +2,7 @@
 #import <Blindside/Blindside.h>
 #import "PluginSpecs-Swift.h"
 #import "RefactorToolsModule.h"
+#import "XMASXcodeRepository.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

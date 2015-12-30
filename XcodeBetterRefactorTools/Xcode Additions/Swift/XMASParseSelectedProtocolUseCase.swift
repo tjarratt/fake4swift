@@ -11,7 +11,7 @@ let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
 let errorDomain : String = "parse-swift-protocol-domain"
 
-@objc class XMASSelectedSwiftProtocolProxy: NSObject, XMASSelectedTextProxy {
+@objc class XMASParseSelectedProtocolUseCase : NSObject {
     var swiftParser : XMASSwiftParser
     var selectedProtocolOracle : XMASSelectedProtocolOracle
 

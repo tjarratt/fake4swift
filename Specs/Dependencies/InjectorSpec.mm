@@ -48,7 +48,7 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         XMASGenerateFakeAction *generateFakeAction = [injector getInstance:[XMASGenerateFakeAction class]];
         generateFakeAction.alerter should conform_to(@protocol(XMASAlerter));
         generateFakeAction.logger should be_instance_of([XMASLogger class]);
-        generateFakeAction.selectedTextProxy should conform_to(@protocol(XMASSelectedTextProxy));
+        generateFakeAction.selectedProtocolUseCase should be_instance_of([XMASParseSelectedProtocolUseCase class]);
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
         generateFakeAction.sourceCodeDocumentProxy should be_instance_of([XMASCurrentSourceCodeDocumentProxy class]);
     });
@@ -70,9 +70,9 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         fakeProtocolPersister.fileManager should be_instance_of([NSFileManager class]);
     });
 
-    it(@"should provide a selected protocol proxy", ^{
-        XMASSelectedSwiftProtocolProxy *selectedProtocolProxy = [injector getInstance:@protocol(XMASSelectedTextProxy)];
-        selectedProtocolProxy.selectedProtocolOracle should conform_to(@protocol(XMASSelectedProtocolOracle));
+    it(@"should provide a use case to parse a selected swift protocol from a file", ^{
+        XMASParseSelectedProtocolUseCase *selectedProtocolUseCase = [injector getInstance:[XMASParseSelectedProtocolUseCase class]];
+        selectedProtocolUseCase.selectedProtocolOracle should conform_to(@protocol(XMASSelectedProtocolOracle));
     });
 
     it(@"should have a selected protocol oracle", ^{

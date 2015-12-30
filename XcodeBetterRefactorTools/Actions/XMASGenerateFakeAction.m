@@ -4,7 +4,6 @@
 #import "SwiftCompatibilityHeader.h"
 #import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
-#import "XMASSelectedTextProxy.h"
 
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
@@ -12,7 +11,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @interface XMASGenerateFakeAction ()
 @property (nonatomic, strong) id<XMASAlerter> alerter;
 @property (nonatomic, strong) XMASLogger *logger;
-@property (nonatomic, strong) id<XMASSelectedTextProxy> selectedTextProxy;
+@property (nonatomic, strong) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
 @property (nonatomic, strong) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, strong) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
 @end
@@ -21,13 +20,13 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
-              selectedTextProxy:(id <XMASSelectedTextProxy>)selectedTextProxy
+              selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
         sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy {
     if (self = [super init]) {
         self.alerter = alerter;
         self.logger = logger;
-        self.selectedTextProxy = selectedTextProxy;
+        self.selectedProtocolUseCase = selectedProtocolUseCase;
         self.fakeProtocolPersister = fakeProtocolPersister;
         self.sourceCodeDocumentProxy = sourceCodeDocumentProxy;
     }
@@ -51,7 +50,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     }
 
     NSError *error = nil;
-    ProtocolDeclaration *selectedProtocol = [self.selectedTextProxy selectedProtocolInFile:currentFilePath error:&error];
+    ProtocolDeclaration *selectedProtocol = [self.selectedProtocolUseCase selectedProtocolInFile:currentFilePath error:&error];
     if (error != nil) {
         [self.alerter flashMessage:@"put your cursor in a protocol declaration to generate a fake for it"];
         return;

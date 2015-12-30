@@ -6,10 +6,10 @@
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(XMASSelectedSwiftProtocolProxySpec)
+SPEC_BEGIN(XMASParseSelectedProtocolUseCaseSpec)
 
-describe(@"XMASSelectedSwiftProtocolProxy", ^{
-    __block XMASSelectedSwiftProtocolProxy *subject;
+describe(@"XMASParseSelectedProtocolUseCase", ^{
+    __block XMASParseSelectedProtocolUseCase *subject;
     __block id<XMASSelectedProtocolOracle> fakeSelectedProtocolOracle;
 
     beforeEach(^{
@@ -19,7 +19,7 @@ describe(@"XMASSelectedSwiftProtocolProxy", ^{
         fakeSelectedProtocolOracle = nice_fake_for(@protocol(XMASSelectedProtocolOracle));
         [injector bind:@protocol(XMASSelectedProtocolOracle) toInstance:fakeSelectedProtocolOracle];
 
-        subject = [injector getInstance:@protocol(XMASSelectedTextProxy)];
+        subject = [injector getInstance:[XMASParseSelectedProtocolUseCase class]];
     });
 
     NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolEdgeCases"

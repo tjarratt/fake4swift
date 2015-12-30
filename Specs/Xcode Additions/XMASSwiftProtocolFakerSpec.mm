@@ -2,6 +2,7 @@
 #import <Blindside/Blindside.h>
 #import "PluginSpecs-Swift.h"
 #import "RefactorToolsModule.h"
+#import "XMASXcodeRepository.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -12,7 +13,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
     __block XMASSwiftProtocolFaker *subject;
     __block ProtocolDeclaration *protocolDeclaration;
     __block XMASXcodeRepository *fakeXcodeRepository;
-    __block id<XMASSelectedTextProxy> selectedTextProxy;
+    __block XMASParseSelectedProtocolUseCase *parseProtocolUseCase;
 
     beforeEach(^{
         NSArray *modules = @[[[RefactorToolsModule alloc] init]];
@@ -24,7 +25,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
         subject = [injector getInstance:[XMASSwiftProtocolFaker class]];
 
-        selectedTextProxy = [injector getInstance:@protocol(XMASSelectedTextProxy)];
+        parseProtocolUseCase = [injector getInstance:[XMASParseSelectedProtocolUseCase class]];
     });
 
     describe(@"given a protocol that can only be implemented by a class", ^{
@@ -33,7 +34,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
             NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"MySomewhatSpecialProtocol"
                                                                     ofType:@"swift"];
-            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath error:nil];
+            protocolDeclaration = [parseProtocolUseCase selectedProtocolInFile:fixturePath error:nil];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySomewhatSpecialProtocol" ofType:@"swift"];
@@ -53,7 +54,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                                     ofType:@"swift"];
 
             fakeXcodeRepository stub_method(@selector(cursorSelectionRange)).and_return(NSMakeRange(11, 0));
-            protocolDeclaration = [selectedTextProxy selectedProtocolInFile:fixturePath error:nil];
+            protocolDeclaration = [parseProtocolUseCase selectedProtocolInFile:fixturePath error:nil];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];
