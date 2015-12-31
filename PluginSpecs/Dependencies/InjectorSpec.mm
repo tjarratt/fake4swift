@@ -10,7 +10,6 @@
 #import "XMASXcodeRepository.h"
 #import "XMASGenerateFakeAction.h"
 #import "XMASRefactorMethodAction.h"
-#import "XMASFakeProtocolPersister.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
@@ -66,16 +65,14 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
 
     it(@"should provide a fake protocol persister", ^{
         XMASFakeProtocolPersister *fakeProtocolPersister = [injector getInstance:[XMASFakeProtocolPersister class]];
-        fakeProtocolPersister.protocolFaker should be_instance_of([XMASSwiftProtocolFaker class]);
-        fakeProtocolPersister.fileManager should be_instance_of([NSFileManager class]);
+        fakeProtocolPersister.protocolFaker should conform_to(@protocol(XMASSwiftProtocolFaking));
+        fakeProtocolPersister.fileManager should conform_to(@protocol(XMASFileManager));
     });
 
     it(@"should provide a use case to parse a selected swift protocol from a file", ^{
         XMASParseSelectedProtocolUseCase *selectedProtocolUseCase = [injector getInstance:[XMASParseSelectedProtocolUseCase class]];
         selectedProtocolUseCase should_not be_nil;
-
-        // TODO: bring this back if / when we have injection specs for the kit
-        //        selectedProtocolUseCase.selectedProtocolOracle should conform_to(@protocol(XMASSelectedProtocolOracle));
+        selectedProtocolUseCase.selectedProtocolOracle should conform_to(@protocol(XMASSelectedProtocolOracle));
     });
 
     it(@"should have a selected protocol oracle", ^{

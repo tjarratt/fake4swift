@@ -1,8 +1,6 @@
 #import <Cedar/Cedar.h>
-#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
-#import "XMASFakeProtocolPersister.h"
-#import "SwiftCompatibilityHeader.h"
+#import "BetterRefactorToolsKitSpecs-Swift.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -12,34 +10,56 @@ SPEC_BEGIN(XMASFakeProtocolPersisterSpec)
 describe(@"XMASFakeProtocolPersister", ^{
     __block XMASFakeProtocolPersister *subject;
 
-    __block NSFileManager <CedarDouble>*fileManager;
-    __block XMASSwiftProtocolFaker *protocolFaker;
+    __block id<XMASSwiftProtocolFaking> protocolFaker;
+    __block id<XMASFileManager, CedarDouble> fileManager;
 
     beforeEach(^{
-        fileManager = fake_for([NSFileManager class]);
-        protocolFaker = nice_fake_for([XMASSwiftProtocolFaker class]);
-        protocolFaker stub_method(@selector(fakeForProtocol:error:)).and_return(@"this-that-fake");
+        fileManager = nice_fake_for(@protocol(XMASFileManager));
+        protocolFaker = nice_fake_for(@protocol(XMASSwiftProtocolFaking));
+        protocolFaker stub_method(@selector(fakeForProtocol:error:))
+            .and_return(@"this-that-fake");
 
         subject = [[XMASFakeProtocolPersister alloc] initWithProtocolFaker:protocolFaker
                                                                fileManager:fileManager];
     });
 
     NSString *pathToFixture = @"/tmp/pretend/this/is/real";
-    ProtocolDeclaration *protocolDecl = nice_fake_for([ProtocolDeclaration class]);
-    protocolDecl stub_method(@selector(name)).and_return(@"SpecialTester");
+    ProtocolDeclaration *protocolDecl = [[ProtocolDeclaration alloc] initWithName:@"SpecialTester"
+                                                                   containingFile:@""
+                                                                      rangeInFile:NSMakeRange(0, 0)
+                                                                    usesTypealias:NO
+                                                                includedProtocols:@[]
+                                                                  instanceMethods:@[]
+                                                                    staticMethods:@[]
+                                                                  mutatingMethods:@[]
+                                                                     initializers:@[]
+                                                                          getters:@[]
+                                                                          setters:@[]
+                                                                    staticGetters:@[]
+                                                                    staticSetters:@[]
+                                                                 subscriptGetters:@[]
+                                                                 subscriptSetters:@[]];
 
     describe(@"when the fakes directory does not yet exist", ^{
         NSString *expectedFakesDir = [pathToFixture.stringByDeletingLastPathComponent stringByAppendingPathComponent:@"fakes"];
 
         beforeEach(^{
             fileManager stub_method(@selector(fileExistsAtPath:isDirectory:)).and_return(NO);
-            fileManager stub_method(@selector(createDirectoryAtPath:withIntermediateDirectories:attributes:error:));
+            fileManager stub_method(@selector(createDirectoryAtPath:withIntermediateDirectories:attributes:error:))
+                .and_return(YES);
             fileManager stub_method(@selector(createFileAtPath:contents:attributes:));
         });
 
         context(@"when the fake can be created", ^{
+            __block NSError *error;
+
             beforeEach(^{
-                [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture];
+                error = nil;
+                [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:&error];
+            });
+
+            it(@"should have completed successfully", ^{
+                error should be_nil;
             });
 
             it(@"should create the directory through its file manager", ^{
@@ -69,17 +89,21 @@ describe(@"XMASFakeProtocolPersister", ^{
 
         context(@"when creating the fake fails", ^{
             beforeEach(^{
-                protocolFaker stub_method(@selector(fakeForProtocol:error:)).again().and_do_block(^NSString *(id something, NSError **error) {
-                    NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"could not burgle the burglars"};
-                    *error = [NSError errorWithDomain:@"my-domain" code:5 userInfo:userInfo];
-                    return nil;
-                });
+                protocolFaker stub_method(@selector(fakeForProtocol:error:))
+                    .again()
+                    .and_do_block(^NSString *(id something, NSError **error) {
+                        NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"could not burgle the burglars"};
+                        *error = [NSError errorWithDomain:@"my-domain" code:5 userInfo:userInfo];
+                        return nil;
+                    });
             });
 
-            it(@"should raise an exception", ^{
-                expect(^{
-                    [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture];
-                }).to(raise_exception.with_reason(@"could not burgle the burglars"));
+            it(@"should return an error", ^{
+                NSError *error = nil;
+                [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:&error];
+
+                error should_not be_nil;
+                error.localizedFailureReason should equal(@"could not burgle the burglars");
             });
 
             it(@"should not create a directory", ^{
@@ -95,10 +119,11 @@ describe(@"XMASFakeProtocolPersister", ^{
     describe(@"when the fakes directory does exist", ^{
         beforeEach(^{
             fileManager stub_method(@selector(fileExistsAtPath:isDirectory:)).and_return(YES);
-            fileManager stub_method(@selector(createDirectoryAtPath:withIntermediateDirectories:attributes:error:));
+            fileManager stub_method(@selector(createDirectoryAtPath:withIntermediateDirectories:attributes:error:))
+                .and_return(YES);
             fileManager stub_method(@selector(createFileAtPath:contents:attributes:));
 
-            [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture];
+            [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:nil];
         });
 
         it(@"should not create a directory", ^{

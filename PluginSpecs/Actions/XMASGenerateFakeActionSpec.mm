@@ -5,7 +5,6 @@
 #import "XMASGenerateFakeAction.h"
 
 #import "PluginSpecs-Swift.h"
-#import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 
 using namespace Cedar::Matchers;
@@ -56,9 +55,10 @@ describe(@"XMASGenerateFakeAction", ^{
 
         context(@"and the fake can be persisted to disk", ^{
             it(@"should write out a new file using its fakeProtocolPersister", ^{
-                fakeProtocolPersister should have_received(@selector(persistFakeForProtocol:nearSourceFile:))
+                fakeProtocolPersister should have_received(@selector(persistFakeForProtocol:nearSourceFile:error:))
                     .with(fakeProtocol)
-                    .and_with(@"/path/to/something.swift");
+                    .and_with(@"/path/to/something.swift")
+                    .and_with(Arguments::anything);
             });
 
             it(@"should alert the user the action succeeded", ^{
@@ -69,7 +69,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
         context(@"but an error occurs persisting the fake", ^{
             beforeEach(^{
-                fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:))
+                fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:error:))
                     .and_raise_exception();
             });
 
@@ -113,7 +113,7 @@ describe(@"XMASGenerateFakeAction", ^{
             });
 
             it(@"should not attempt to persist any files", ^{
-                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:));
+                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:error:));
             });
 
             it(@"should log a more detailed message", ^{
@@ -152,7 +152,7 @@ describe(@"XMASGenerateFakeAction", ^{
             });
 
             it(@"should not attempt to persist any files", ^{
-                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:));
+                fakeProtocolPersister should_not have_received(@selector(persistFakeForProtocol:nearSourceFile:error:));
             });
 
             it(@"should log a more detailed message", ^{

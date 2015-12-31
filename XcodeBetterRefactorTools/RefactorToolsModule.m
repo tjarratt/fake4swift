@@ -18,7 +18,6 @@
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
 #import "XMASGenerateFakeAction.h"
-#import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 #import "SwiftCompatibilityHeader.h"
 #import "XMASXcodeBezelAlertPanel.h"

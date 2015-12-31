@@ -1,15 +1,18 @@
 import Mustache
 import Foundation
-import BetterRefactorToolsKit
 
-class XMASSwiftProtocolFaker: NSObject {
+@objc public protocol XMASSwiftProtocolFaking {
+    @objc func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String
+}
 
-    var bundle : NSBundle
-    init(bundle: NSBundle) {
+@objc public class XMASSwiftProtocolFaker: NSObject, XMASSwiftProtocolFaking {
+
+    private(set) public var bundle : NSBundle
+    @objc public init(bundle: NSBundle) {
         self.bundle = bundle
     }
 
-    func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String {
+    @objc public func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String {
         let templateName = protocolDecl.mutatingMethods.isEmpty ? "SwiftCounterfeitClass" : "SwiftCounterfeitStruct"
         let path : String! = self.bundle.pathForResource(templateName, ofType: "mustache")
 

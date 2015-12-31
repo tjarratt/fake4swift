@@ -6,7 +6,7 @@ let errorDomain : String = "parse-swift-protocol-domain"
 
 @objc public class XMASParseSelectedProtocolUseCase : NSObject {
     var swiftParser : XMASSwiftParser
-    var selectedProtocolOracle : XMASSelectedProtocolOracle
+    private(set) public var selectedProtocolOracle : XMASSelectedProtocolOracle
 
     public init(protocolOracle : XMASSelectedProtocolOracle) {
         swiftParser = XMASSwiftParser.init()

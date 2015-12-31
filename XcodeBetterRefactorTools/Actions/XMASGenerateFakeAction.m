@@ -2,7 +2,6 @@
 
 #import "XMASGenerateFakeAction.h"
 #import "SwiftCompatibilityHeader.h"
-#import "XMASFakeProtocolPersister.h"
 #import "XMASCurrentSourceCodeDocumentProxy.h"
 
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
@@ -81,7 +80,8 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     }
 
     [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol
-                                        nearSourceFile:currentFilePath];
+                                        nearSourceFile:currentFilePath
+                                                 error:nil]; // TODO :: check err
     NSString *success = [NSString stringWithFormat:@"Generated Fake%@ successfully!",
                          selectedProtocol.name];
     [self.alerter flashMessage:success];
