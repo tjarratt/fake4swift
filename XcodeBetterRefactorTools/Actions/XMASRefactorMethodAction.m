@@ -54,7 +54,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 - (void)refactorMethodUnderCursor {
     NSUInteger cursorLocation = [self cursorLocation];
-    NSString *currentFilePath = [self currentSourceCodeFilePath];
+    NSString *currentFilePath = [self selectedFilePath];
 
     NSArray *tokens = [self.tokenizer tokensForFilePath:currentFilePath];
     NSArray *selectors = [self.methodDeclParser parseMethodDeclarationsFromTokens:tokens];
@@ -84,7 +84,7 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
 
 #pragma mark - editor helpers
 
-- (NSString *)currentSourceCodeFilePath {
+- (NSString *)selectedFilePath {
     if ([self.currentEditor respondsToSelector:@selector(sourceCodeDocument)]) {
         return [[[self.currentEditor sourceCodeDocument] fileURL] path];
     }

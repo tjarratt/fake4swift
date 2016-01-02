@@ -5,7 +5,7 @@
 @class XMASSelectedTextProxy;
 @class XMASFakeProtocolPersister;
 @class XMASParseSelectedProtocolUseCase;
-@class XMASCurrentSourceCodeDocumentProxy;
+@class XMASSelectedSourceFileOracle;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                          logger:(XMASLogger *)logger
               selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-        sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy NS_DESIGNATED_INITIALIZER;
+        sourceCodeDocumentProxy:(XMASSelectedSourceFileOracle *)sourceCodeDocumentProxy NS_DESIGNATED_INITIALIZER;
 
 - (void)safelyGenerateFakeForSelectedProtocol;
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) id<XMASAlerter> alerter;
 @property (nonatomic, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, readonly) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
-@property (nonatomic, readonly) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+@property (nonatomic, readonly) XMASSelectedSourceFileOracle *sourceCodeDocumentProxy;
 
 @end
 

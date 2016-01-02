@@ -18,7 +18,7 @@
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
 #import "XMASGenerateFakeAction.h"
-#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedSourceFileOracle.h"
 #import "SwiftCompatibilityHeader.h"
 #import "XMASXcodeBezelAlertPanel.h"
 
@@ -55,7 +55,7 @@ static XMASRefactorMethodAction *action;
                                                         logger:[injector getInstance:[XMASLogger class]]
                                              selectedTextProxy:[injector getInstance:[XMASParseSelectedProtocolUseCase class]]
                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
-                                       sourceCodeDocumentProxy:[injector getInstance:[XMASCurrentSourceCodeDocumentProxy class]]];
+                                       sourceCodeDocumentProxy:[injector getInstance:[XMASSelectedSourceFileOracle class]]];
     }];
 
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {

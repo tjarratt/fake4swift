@@ -5,7 +5,7 @@
 #import "XMASGenerateFakeAction.h"
 
 #import "PluginSpecs-Swift.h"
-#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedSourceFileOracle.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -19,14 +19,14 @@ describe(@"XMASGenerateFakeAction", ^{
     __block XMASLogger *logger;
     __block XMASParseSelectedProtocolUseCase *parseProtocolUseCase;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
-    __block XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+    __block XMASSelectedSourceFileOracle *sourceCodeDocumentProxy;
 
     beforeEach(^{
         alerter = nice_fake_for(@protocol(XMASAlerter));
         logger = nice_fake_for([XMASLogger class]);
         parseProtocolUseCase = nice_fake_for([XMASParseSelectedProtocolUseCase class]);
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
-        sourceCodeDocumentProxy = nice_fake_for([XMASCurrentSourceCodeDocumentProxy class]);
+        sourceCodeDocumentProxy = nice_fake_for([XMASSelectedSourceFileOracle class]);
 
         subject = [[XMASGenerateFakeAction alloc] initWithAlerter:alerter
                                                            logger:logger
@@ -49,7 +49,7 @@ describe(@"XMASGenerateFakeAction", ^{
                 .with(@"/path/to/something.swift", Arguments::anything)
                 .and_return(fakeProtocol);
 
-            sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
+            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
         });
 
@@ -164,7 +164,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the file is not a swift file", ^{
         beforeEach(^{
-            sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
+            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/whoops.my_bad");
         });
 
@@ -176,7 +176,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the cursor is not inside a protocol declaration", ^{
         beforeEach(^{
-            sourceCodeDocumentProxy stub_method(@selector(currentSourceCodeFilePath))
+            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
             parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
                 .and_do_block(^NSString *(id something, NSError **error) {

@@ -2,7 +2,7 @@
 
 #import "XMASGenerateFakeAction.h"
 #import "SwiftCompatibilityHeader.h"
-#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedSourceFileOracle.h"
 
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
@@ -14,7 +14,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
-@property (nonatomic) XMASCurrentSourceCodeDocumentProxy *sourceCodeDocumentProxy;
+@property (nonatomic) XMASSelectedSourceFileOracle *sourceCodeDocumentProxy;
 
 @end
 
@@ -25,7 +25,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
                          logger:(XMASLogger *)logger
               selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-        sourceCodeDocumentProxy:(XMASCurrentSourceCodeDocumentProxy *)sourceCodeDocumentProxy {
+        sourceCodeDocumentProxy:(XMASSelectedSourceFileOracle *)sourceCodeDocumentProxy {
     if (self = [super init]) {
         self.logger = logger;
         self.alerter = alerter;
@@ -46,7 +46,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 }
 
 - (void)generateFakeForSelectedProtocol {
-    NSString *currentFilePath = [self.sourceCodeDocumentProxy currentSourceCodeFilePath];
+    NSString *currentFilePath = [self.sourceCodeDocumentProxy selectedFilePath];
     if (![currentFilePath.pathExtension.lowercaseString isEqual: @"swift"]) {
         [self.alerter flashMessage:@"generate-fake only works with Swift source files"];
         return;

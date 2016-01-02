@@ -1,9 +1,9 @@
-#import "XMASCurrentSourceCodeDocumentProxy.h"
+#import "XMASSelectedSourceFileOracle.h"
 #import "XMASXcodeRepository.h"
 
-@implementation XMASCurrentSourceCodeDocumentProxy
+@implementation XMASSelectedSourceFileOracle
 
-- (NSString *)currentSourceCodeFilePath {
+- (NSString *)selectedFilePath {
     XMASXcodeRepository *xcodeRepository = [[XMASXcodeRepository alloc] init];
     id editor = [xcodeRepository currentEditor];
     
