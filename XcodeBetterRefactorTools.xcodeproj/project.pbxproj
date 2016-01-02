@@ -193,6 +193,8 @@
 		F7F09FF41B281A1F00727AD7 /* XMASWindowProviderSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7F09FF31B281A1F00727AD7 /* XMASWindowProviderSpec.mm */; };
 		F7F670691C312B96007DDF2E /* XMASLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F670681C312B96007DDF2E /* XMASLogger.swift */; };
 		F7F9F3411B85A90A0096252D /* XMASChangeMethodSignatureController.xib in Sources */ = {isa = PBXBuildFile; fileRef = F71FFF401B85A8E800DC8A80 /* XMASChangeMethodSignatureController.xib */; };
+		F7FB6F241C37C35900BC75AF /* XMASFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */; };
+		F7FB6F251C37C35900BC75AF /* XMASFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */; };
 		F7FC457B1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift */; };
 		F7FC457D1BE7515C00299694 /* MySomewhatSpecialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
 		F7FC457E1BE7525500299694 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift */; };
@@ -950,6 +952,7 @@
 		F7EA8A5F1B5AB7FF00367014 /* XMASObjcCallExpressionStringWriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionStringWriterSpec.mm; sourceTree = "<group>"; };
 		F7F09FF31B281A1F00727AD7 /* XMASWindowProviderSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASWindowProviderSpec.mm; sourceTree = "<group>"; };
 		F7F670681C312B96007DDF2E /* XMASLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASLogger.swift; sourceTree = "<group>"; };
+		F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASFileManager.swift; sourceTree = "<group>"; };
 		F7FC457A1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeForMySomewhatSpecialProtocol.swift; sourceTree = "<group>"; };
 		F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySomewhatSpecialProtocol.swift; sourceTree = "<group>"; };
 		F7FCC2391C3519F900263EED /* XMASFakeProtocolPersisterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASFakeProtocolPersisterSpec.mm; sourceTree = "<group>"; };
@@ -1304,6 +1307,7 @@
 			isa = PBXGroup;
 			children = (
 				F7FCC2481C35226F00263EED /* XMASFakeProtocolPersister.swift */,
+				F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */,
 				F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */,
 				F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */,
 				F747F8161C33BE7C0040827B /* XMASParseSelectedProtocolWorkFlow.swift */,
@@ -2275,6 +2279,7 @@
 				F72C18021C33C82D002B7FD9 /* XMASParseSelectedProtocolWorkFlow.swift in Sources */,
 				F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */,
 				F72C18051C33C844002B7FD9 /* SwiftProtocolDeclaration.swift in Sources */,
+				F7FB6F251C37C35900BC75AF /* XMASFileManager.swift in Sources */,
 				F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */,
 				F7FCC24A1C35227000263EED /* XMASFakeProtocolPersister.swift in Sources */,
 				F72C17B01C33C366002B7FD9 /* main.mm in Sources */,
@@ -2301,6 +2306,7 @@
 				F747F8121C33BC980040827B /* XMASSwiftParser.swift in Sources */,
 				F7FCC2491C35227000263EED /* XMASFakeProtocolPersister.swift in Sources */,
 				F70354131C37B18600936B55 /* XMASSelectedSourceFileOracle.swift in Sources */,
+				F7FB6F241C37C35900BC75AF /* XMASFileManager.swift in Sources */,
 				F7FCC23C1C351A5E00263EED /* XMASSwiftProtocolFaker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
