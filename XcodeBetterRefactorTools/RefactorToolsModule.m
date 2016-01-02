@@ -17,7 +17,6 @@
 #import "XMASObjcMethodCallParser.h"
 #import "XMASObjcCallExpressionStringWriter.h"
 #import "XMASObjcCallExpressionTokenFilter.h"
-#import "GenerateFakeForSwiftProtocolUseCase.h"
 #import "XMASOpenXcodeFileOracle.h"
 #import "SwiftCompatibilityHeader.h"
 #import "XMASXcodeBezelAlertPanel.h"
@@ -50,8 +49,8 @@ static XMASRefactorMethodAction *action;
         return action;
     }];
 
-    [binder bind:[GenerateFakeForSwiftProtocolUseCase class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        return [[GenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
+    [binder bind:[XMASGenerateFakeForSwiftProtocolUseCase class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
+        return [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
                                                         logger:[injector getInstance:[XMASLogger class]]
                                              selectedTextProxy:[injector getInstance:[XMASParseSelectedProtocolWorkFlow class]]
                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]

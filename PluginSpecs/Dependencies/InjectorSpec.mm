@@ -8,7 +8,7 @@
 #import "XMASTokenizer.h"
 #import "PluginSpecs-Swift.h"
 #import "XMASXcodeRepository.h"
-#import "GenerateFakeForSwiftProtocolUseCase.h"
+#import "XMASGenerateFakeForSwiftProtocolUseCase.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASOpenXcodeFileOracle.h"
@@ -44,7 +44,7 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
     });
 
     it(@"should provide a Generate Fake Action", ^{
-        GenerateFakeForSwiftProtocolUseCase *generateFakeAction = [injector getInstance:[GenerateFakeForSwiftProtocolUseCase class]];
+        XMASGenerateFakeForSwiftProtocolUseCase *generateFakeAction = [injector getInstance:[XMASGenerateFakeForSwiftProtocolUseCase class]];
         generateFakeAction.alerter should conform_to(@protocol(XMASAlerter));
         generateFakeAction.logger should be_instance_of([XMASLogger class]);
         generateFakeAction.selectedProtocolUseCase should be_instance_of([XMASParseSelectedProtocolWorkFlow class]);

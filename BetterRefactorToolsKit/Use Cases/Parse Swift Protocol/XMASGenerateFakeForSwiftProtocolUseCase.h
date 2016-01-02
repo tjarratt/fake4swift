@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 
-@class XMASAlert;
 @class XMASLogger;
 @class XMASSelectedTextProxy;
 @class XMASFakeProtocolPersister;
 @class XMASParseSelectedProtocolWorkFlow;
 
+@protocol XMASAlerter;
 @protocol XMASSelectedSourceFileOracle;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GenerateFakeForSwiftProtocolUseCase : NSObject
+@interface XMASGenerateFakeForSwiftProtocolUseCase : NSObject
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface GenerateFakeForSwiftProtocolUseCase (UnavailableInitializers)
+@interface XMASGenerateFakeForSwiftProtocolUseCase (UnavailableInitializers)
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

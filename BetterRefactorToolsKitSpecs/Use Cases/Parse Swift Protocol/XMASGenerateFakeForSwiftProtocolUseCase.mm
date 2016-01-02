@@ -1,17 +1,16 @@
 #import <Cedar/Cedar.h>
 #import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
-#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
-#import "GenerateFakeForSwiftProtocolUseCase.h"
-#import "PluginSpecs-Swift.h"
+#import "XMASGenerateFakeForSwiftProtocolUseCase.h"
+#import "BetterRefactorToolsKitSpecs-Swift.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(GenerateFakeForSwiftProtocolUseCaseSpec)
+SPEC_BEGIN(XMASGenerateFakeForSwiftProtocolUseCaseSpec)
 
-describe(@"GenerateFakeForSwiftProtocolUseCase", ^{
-    __block GenerateFakeForSwiftProtocolUseCase *subject;
+describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
+    __block XMASGenerateFakeForSwiftProtocolUseCase *subject;
 
     __block id<XMASAlerter> alerter;
     __block XMASLogger *logger;
@@ -26,7 +25,7 @@ describe(@"GenerateFakeForSwiftProtocolUseCase", ^{
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
 
-        subject = [[GenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
+        subject = [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
                                                            logger:logger
                                                 selectedTextProxy:parseProtocolUseCase
                                             fakeProtocolPersister:fakeProtocolPersister

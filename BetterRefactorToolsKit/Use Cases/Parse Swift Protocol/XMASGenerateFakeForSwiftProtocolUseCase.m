@@ -1,13 +1,14 @@
-@import BetterRefactorToolsKit;
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
-#import "GenerateFakeForSwiftProtocolUseCase.h"
-#import "SwiftCompatibilityHeader.h"
+#import "XMASGenerateFakeForSwiftProtocolUseCase.h"
+#import "BetterRefactorToolsKitModule.h"
+#import "XMASAlerter.h"
 
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
 
 
-@interface GenerateFakeForSwiftProtocolUseCase ()
+@interface XMASGenerateFakeForSwiftProtocolUseCase ()
 
 @property (nonatomic) XMASLogger *logger;
 @property (nonatomic) id<XMASAlerter> alerter;
@@ -18,7 +19,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @end
 
 
-@implementation GenerateFakeForSwiftProtocolUseCase
+@implementation XMASGenerateFakeForSwiftProtocolUseCase
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger

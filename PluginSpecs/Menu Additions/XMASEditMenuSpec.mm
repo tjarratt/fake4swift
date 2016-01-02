@@ -1,9 +1,10 @@
 #import <Cedar/Cedar.h>
 #import <Blindside/Blindside.h>
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
+
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "RefactorToolsModule.h"
-#import "GenerateFakeForSwiftProtocolUseCase.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -35,11 +36,11 @@ describe(@"XMASEditMenu", ^{
     });
 
     describe(@"-generateFakeForSwiftProtocol:", ^{
-        __block GenerateFakeForSwiftProtocolUseCase *action;
+        __block XMASGenerateFakeForSwiftProtocolUseCase *action;
 
         beforeEach(^{
-            action = nice_fake_for([GenerateFakeForSwiftProtocolUseCase class]);
-            [injector bind:[GenerateFakeForSwiftProtocolUseCase class] toInstance:action];
+            action = nice_fake_for([XMASGenerateFakeForSwiftProtocolUseCase class]);
+            [injector bind:[XMASGenerateFakeForSwiftProtocolUseCase class] toInstance:action];
 
             [subject generateFakeAction:nil];
         });
