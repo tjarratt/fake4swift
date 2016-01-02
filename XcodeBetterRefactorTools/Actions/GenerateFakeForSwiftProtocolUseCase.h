@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XMASGenerateFakeAction : NSObject
+@interface GenerateFakeForSwiftProtocolUseCase : NSObject
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface XMASGenerateFakeAction (UnavailableInitializers)
+@interface GenerateFakeForSwiftProtocolUseCase (UnavailableInitializers)
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

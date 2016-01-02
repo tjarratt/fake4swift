@@ -1,7 +1,7 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASXcodeRepository.h"
-#import "XMASGenerateFakeAction.h"
+#import "GenerateFakeForSwiftProtocolUseCase.h"
 
 @interface XMASEditMenu ()
 
@@ -61,7 +61,7 @@
 }
 
 - (void)generateFakeAction:(id)sender {
-    XMASGenerateFakeAction *generateFakeAction = [self.injector getInstance:[XMASGenerateFakeAction class]];
+    GenerateFakeForSwiftProtocolUseCase *generateFakeAction = [self.injector getInstance:[GenerateFakeForSwiftProtocolUseCase class]];
 
     [generateFakeAction safelyGenerateFakeForSelectedProtocol];
 }
