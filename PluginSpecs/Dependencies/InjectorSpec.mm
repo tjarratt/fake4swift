@@ -11,7 +11,7 @@
 #import "XMASGenerateFakeAction.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASObjcMethodDeclarationParser.h"
-#import "XMASSelectedSourceFileOracle.h"
+#import "XMASOpenXcodeFileOracle.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
 
 using namespace Cedar::Matchers;
@@ -49,7 +49,7 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         generateFakeAction.logger should be_instance_of([XMASLogger class]);
         generateFakeAction.selectedProtocolUseCase should be_instance_of([XMASParseSelectedProtocolUseCase class]);
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
-        generateFakeAction.sourceCodeDocumentProxy should be_instance_of([XMASSelectedSourceFileOracle class]);
+        generateFakeAction.selectedSourceFileOracle should conform_to(@protocol(XMASSelectedSourceFileOracle));
     });
 
     it(@"should provide a Swift Protocol Faker", ^{

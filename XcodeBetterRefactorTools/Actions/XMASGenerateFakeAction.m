@@ -2,7 +2,6 @@
 
 #import "XMASGenerateFakeAction.h"
 #import "SwiftCompatibilityHeader.h"
-#import "XMASSelectedSourceFileOracle.h"
 
 NSString *protocolIncludesOtherMessage = @"Unable to generate fake '%@'. It includes %lu other protocols -- this is not supported yet. Sorry!";
 NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses a typealias -- this is not supported yet. Sorry!";
@@ -13,8 +12,8 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @property (nonatomic) XMASLogger *logger;
 @property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
+@property (nonatomic) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
 @property (nonatomic) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
-@property (nonatomic) XMASSelectedSourceFileOracle *sourceCodeDocumentProxy;
 
 @end
 
@@ -25,13 +24,13 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
                          logger:(XMASLogger *)logger
               selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-        sourceCodeDocumentProxy:(XMASSelectedSourceFileOracle *)sourceCodeDocumentProxy {
+       selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle {
     if (self = [super init]) {
         self.logger = logger;
         self.alerter = alerter;
         self.fakeProtocolPersister = fakeProtocolPersister;
         self.selectedProtocolUseCase = selectedProtocolUseCase;
-        self.sourceCodeDocumentProxy = sourceCodeDocumentProxy;
+        self.selectedSourceFileOracle = selectedSourceFileOracle;
     }
 
     return self;
@@ -46,7 +45,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 }
 
 - (void)generateFakeForSelectedProtocol {
-    NSString *currentFilePath = [self.sourceCodeDocumentProxy selectedFilePath];
+    NSString *currentFilePath = [self.selectedSourceFileOracle selectedFilePath];
     if (![currentFilePath.pathExtension.lowercaseString isEqual: @"swift"]) {
         [self.alerter flashMessage:@"generate-fake only works with Swift source files"];
         return;
@@ -81,10 +80,15 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
     [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol
                                         nearSourceFile:currentFilePath
-                                                 error:nil]; // TODO :: check err
-    NSString *success = [NSString stringWithFormat:@"Generated Fake%@ successfully!",
+                                                 error:&error];
+    if (error != nil) {
+        [self.alerter flashComfortingMessageForError:error];
+        return;
+    }
+
+    NSString *successMessage = [NSString stringWithFormat:@"Generated Fake%@ successfully!",
                          selectedProtocol.name];
-    [self.alerter flashMessage:success];
+    [self.alerter flashMessage:successMessage];
 }
 
 #pragma mark - NSObject

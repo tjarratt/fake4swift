@@ -1,7 +1,7 @@
-#import "XMASSelectedSourceFileOracle.h"
+#import "XMASOpenXcodeFileOracle.h"
 #import "XMASXcodeRepository.h"
 
-@implementation XMASSelectedSourceFileOracle
+@implementation XMASOpenXcodeFileOracle
 
 - (NSString *)selectedFilePath {
     XMASXcodeRepository *xcodeRepository = [[XMASXcodeRepository alloc] init];

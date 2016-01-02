@@ -3,9 +3,7 @@
 #import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
 #import "XMASGenerateFakeAction.h"
-
 #import "PluginSpecs-Swift.h"
-#import "XMASSelectedSourceFileOracle.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,22 +15,22 @@ describe(@"XMASGenerateFakeAction", ^{
 
     __block id<XMASAlerter> alerter;
     __block XMASLogger *logger;
-    __block XMASParseSelectedProtocolUseCase *parseProtocolUseCase;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
-    __block XMASSelectedSourceFileOracle *sourceCodeDocumentProxy;
+    __block id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
+    __block XMASParseSelectedProtocolUseCase *parseProtocolUseCase;
 
     beforeEach(^{
         alerter = nice_fake_for(@protocol(XMASAlerter));
         logger = nice_fake_for([XMASLogger class]);
         parseProtocolUseCase = nice_fake_for([XMASParseSelectedProtocolUseCase class]);
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
-        sourceCodeDocumentProxy = nice_fake_for([XMASSelectedSourceFileOracle class]);
+        selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
 
         subject = [[XMASGenerateFakeAction alloc] initWithAlerter:alerter
                                                            logger:logger
                                                 selectedTextProxy:parseProtocolUseCase
                                             fakeProtocolPersister:fakeProtocolPersister
-                                          sourceCodeDocumentProxy:sourceCodeDocumentProxy];
+                                         selectedSourceFileOracle:selectedSourceFileOracle];
     });
 
     subjectAction(^{
@@ -49,7 +47,7 @@ describe(@"XMASGenerateFakeAction", ^{
                 .with(@"/path/to/something.swift", Arguments::anything)
                 .and_return(fakeProtocol);
 
-            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
+            selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
         });
 
@@ -70,7 +68,10 @@ describe(@"XMASGenerateFakeAction", ^{
         context(@"but an error occurs persisting the fake", ^{
             beforeEach(^{
                 fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:error:))
-                    .and_raise_exception();
+                    .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl, NSString *file, NSError **error) {
+                        *error = [NSError errorWithDomain:@"SpecsDomain" code:12 userInfo:nil];
+                        return NO;
+                    });
             });
 
             it(@"should not alert the user that it generated the fake", ^{
@@ -79,7 +80,7 @@ describe(@"XMASGenerateFakeAction", ^{
             });
 
             it(@"should alert the user that something went wrong", ^{
-                alerter should have_received(@selector(flashComfortingMessageForException:));
+                alerter should have_received(@selector(flashComfortingMessageForError:));
             });
         });
 
@@ -164,7 +165,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the file is not a swift file", ^{
         beforeEach(^{
-            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
+            selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/whoops.my_bad");
         });
 
@@ -176,7 +177,7 @@ describe(@"XMASGenerateFakeAction", ^{
 
     describe(@"when the cursor is not inside a protocol declaration", ^{
         beforeEach(^{
-            sourceCodeDocumentProxy stub_method(@selector(selectedFilePath))
+            selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
             parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
                 .and_do_block(^NSString *(id something, NSError **error) {

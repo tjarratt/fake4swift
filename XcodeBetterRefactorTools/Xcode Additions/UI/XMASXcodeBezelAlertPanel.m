@@ -27,8 +27,17 @@
     }
 }
 
+- (void)flashComfortingMessageForError:(NSError *)error {
+    [self flashMessage:@"Aww shucks. Something bad happened. Check Console.app"];
+
+    NSLog(@"================> something bad happened. Perhaps this error will help explain it?");
+    NSLog(@"================> %@", error.localizedFailureReason);
+    NSLog(@"================> %@", error);
+}
+
 - (void)flashComfortingMessageForException:(NSException *)exception {
     [self flashMessage:@"Aww shucks. Something bad happened. Check Console.app"];
+
     NSLog(@"================> something bad happened. Perhaps this exception will help explain it?");
     NSLog(@"================> %@", [exception description]);
     NSLog(@"================> %@", [exception callStackSymbols]);
