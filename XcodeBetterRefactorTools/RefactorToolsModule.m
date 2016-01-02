@@ -53,7 +53,7 @@ static XMASRefactorMethodAction *action;
     [binder bind:[XMASGenerateFakeAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         return [[XMASGenerateFakeAction alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
                                                         logger:[injector getInstance:[XMASLogger class]]
-                                             selectedTextProxy:[injector getInstance:[XMASParseSelectedProtocolUseCase class]]
+                                             selectedTextProxy:[injector getInstance:[XMASParseSelectedProtocolWorkFlow class]]
                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
                                       selectedSourceFileOracle:[injector getInstance:[XMASOpenXcodeFileOracle class]]];
     }];
@@ -104,9 +104,9 @@ static XMASRefactorMethodAction *action;
         return [[XMASObjcMethodCallParser alloc] initWithCallExpressionTokenFilter:[injector getInstance:[XMASObjcCallExpressionTokenFilter class]]];
     }];
 
-    [binder bind:[XMASParseSelectedProtocolUseCase class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
+    [binder bind:[XMASParseSelectedProtocolWorkFlow class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
         id<XMASSelectedProtocolOracle> oracle = [injector getInstance:@protocol(XMASSelectedProtocolOracle)];
-        return [[XMASParseSelectedProtocolUseCase alloc] initWithProtocolOracle:oracle];
+        return [[XMASParseSelectedProtocolWorkFlow alloc] initWithProtocolOracle:oracle];
     }];
 
     [binder bind:[XMASFakeProtocolPersister class] toBlock:^id (NSArray *args, id<BSInjector> injector) {

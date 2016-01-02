@@ -2,7 +2,7 @@ import Foundation
 import BetterRefactorToolsKit
 
 @objc class XMASXcodeCursorSelectionOracle : NSObject, XMASSelectedProtocolOracle {
-    var xcodeRepository : XMASXcodeRepository
+    private(set) var xcodeRepository : XMASXcodeRepository
 
     init(xcodeRepo : XMASXcodeRepository) {
         xcodeRepository = xcodeRepo

@@ -13,7 +13,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
-@property (nonatomic) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
+@property (nonatomic) XMASParseSelectedProtocolWorkFlow *selectedProtocolUseCase;
 
 @end
 
@@ -22,7 +22,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
-              selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
+              selectedTextProxy:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
        selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle {
     if (self = [super init]) {

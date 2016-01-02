@@ -4,7 +4,7 @@ import SourceKittenFramework
 
 let errorDomain : String = "parse-swift-protocol-domain"
 
-@objc public class XMASParseSelectedProtocolUseCase : NSObject {
+@objc public class XMASParseSelectedProtocolWorkFlow : NSObject {
     var swiftParser : XMASSwiftParser
     private(set) public var selectedProtocolOracle : XMASSelectedProtocolOracle
 

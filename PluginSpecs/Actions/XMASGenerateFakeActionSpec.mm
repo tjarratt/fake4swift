@@ -17,12 +17,12 @@ describe(@"XMASGenerateFakeAction", ^{
     __block XMASLogger *logger;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
-    __block XMASParseSelectedProtocolUseCase *parseProtocolUseCase;
+    __block XMASParseSelectedProtocolWorkFlow *parseProtocolUseCase;
 
     beforeEach(^{
         alerter = nice_fake_for(@protocol(XMASAlerter));
         logger = nice_fake_for([XMASLogger class]);
-        parseProtocolUseCase = nice_fake_for([XMASParseSelectedProtocolUseCase class]);
+        parseProtocolUseCase = nice_fake_for([XMASParseSelectedProtocolWorkFlow class]);
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
 

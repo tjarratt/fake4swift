@@ -16,9 +16,7 @@ import Foundation
         attributes: [String : AnyObject]?) -> Bool
 }
 
-extension NSFileManager : XMASFileManager {
-
-}
+extension NSFileManager : XMASFileManager {}
 
 @objc public class XMASFakeProtocolPersister : NSObject {
     private(set) public var fileManager : XMASFileManager

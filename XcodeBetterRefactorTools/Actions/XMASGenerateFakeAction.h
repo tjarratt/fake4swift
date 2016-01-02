@@ -4,7 +4,7 @@
 @class XMASLogger;
 @class XMASSelectedTextProxy;
 @class XMASFakeProtocolPersister;
-@class XMASParseSelectedProtocolUseCase;
+@class XMASParseSelectedProtocolWorkFlow;
 
 @protocol XMASSelectedSourceFileOracle;
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
-              selectedTextProxy:(XMASParseSelectedProtocolUseCase *)selectedProtocolUseCase
+              selectedTextProxy:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolUseCase
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
        selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle NS_DESIGNATED_INITIALIZER;
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) id<XMASAlerter> alerter;
 @property (nonatomic, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, readonly) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
-@property (nonatomic, readonly) XMASParseSelectedProtocolUseCase *selectedProtocolUseCase;
+@property (nonatomic, readonly) XMASParseSelectedProtocolWorkFlow *selectedProtocolUseCase;
 
 @end
 
