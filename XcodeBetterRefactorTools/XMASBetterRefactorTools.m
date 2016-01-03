@@ -1,13 +1,17 @@
-#import "XMASBetterRefactorTools.h"
 #import <Blindside/Blindside.h>
-#import "XMASXcodeRepository.h"
-#import "XMASEditMenu.h"
-#import "XcodeInterfaces.h"
+
+#import "XMASBetterRefactorTools.h"
 #import "RefactorToolsModule.h"
+#import "XMASXcodeRepository.h"
+#import "XcodeInterfaces.h"
+#import "XMASEditMenu.h"
 
 @interface XMASBetterRefactorTools ()
+
 @property (nonatomic, retain) XMASEditMenu *editMenu;
+
 @end
+
 
 @implementation XMASBetterRefactorTools
 
