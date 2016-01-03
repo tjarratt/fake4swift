@@ -17,7 +17,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
         NSArray *modules = @[[[BetterRefactorToolsKitModule alloc] init]];
         id<BSInjector, BSBinder> injector = (id<BSInjector, BSBinder>)[Blindside injectorWithModules:modules];
 
-        [injector bind:@"MainBundle" toInstance:[NSBundle mainBundle]];
+        [injector bind:@"mustacheTemplateBundle" toInstance:[NSBundle mainBundle]];
 
         subject = [injector getInstance:[XMASSwiftProtocolFaker class]];
     });

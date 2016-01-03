@@ -115,7 +115,8 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:[XMASSwiftProtocolFaker class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
-        return [[XMASSwiftProtocolFaker alloc] initWithBundle:[injector getInstance:@"MainBundle"]];
+        NSBundle *templateBundle = [injector getInstance:@"mustacheTemplateBundle"];
+        return [[XMASSwiftProtocolFaker alloc] initWithBundle:templateBundle];
     }];
 
     [binder bind:@protocol(XMASSelectedProtocolOracle) toBlock:^id (NSArray *args, id<BSInjector> injector) {
@@ -123,7 +124,8 @@ static XMASRefactorMethodAction *action;
         return [[XMASXcodeCursorSelectionOracle alloc] initWithXcodeRepo:xcodeRepository];
     }];
 
-    [binder bind:@"MainBundle" toInstance:[NSBundle bundleWithIdentifier:@"com.tomato.XcodeBetterRefactorTools"]];
+    NSBundle *templateBundle = [NSBundle bundleForClass:[XMASSwiftProtocolFaker class]];
+    [binder bind:@"mustacheTemplateBundle" toInstance:templateBundle];
 }
 
 @end

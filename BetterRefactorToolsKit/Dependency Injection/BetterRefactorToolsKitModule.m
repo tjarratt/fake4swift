@@ -11,10 +11,11 @@
     }];
 
     [binder bind:[XMASSwiftProtocolFaker class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
-        return [[XMASSwiftProtocolFaker alloc] initWithBundle:[injector getInstance:@"MainBundle"]];
+        return [[XMASSwiftProtocolFaker alloc] initWithBundle:[injector getInstance:@"mustacheTemplateBundle"]];
     }];
 
-    [binder bind:@"MainBundle" toInstance:[NSBundle bundleWithIdentifier:@"com.tomato.XcodeBetterRefactorTools"]];
+    NSBundle *templateBundle = [NSBundle bundleForClass:[XMASSwiftProtocolFaker class]];
+    [binder bind:@"mustacheTemplateBundle" toInstance:templateBundle];
 }
 
 @end

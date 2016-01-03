@@ -34,11 +34,7 @@
 		AEE1B5941B6945B700CC8AFE /* TempFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */; };
 		AEE1B5961B6947B200CC8AFE /* RefactorMethodExpected.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */; };
 		F70346301BEF3FF300A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
-		F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
-		F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F70346391BEF443700A8FD27 /* SwiftCounterfeitClass.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */; };
-		F703463A1BEF444300A8FD27 /* SwiftCounterfeitClass.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */; };
+		F70346351BEF401400A8FD27 /* Mustache.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F70354131C37B18600936B55 /* XMASSelectedSourceFileOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */; };
 		F70354171C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F70354181C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
@@ -77,26 +73,15 @@
 		F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F72C18081C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m */; };
 		F72C180D1C33CA43002B7FD9 /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
 		F72C180E1C33CA54002B7FD9 /* SourceKittenFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F72C18101C33CAF1002B7FD9 /* MethodDeclaration.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F70E1FBE1B243A7A00D971E6 /* MethodDeclaration.m */; };
-		F72C18111C33CAF1002B7FD9 /* NestedCallExpressions.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E8341B1B4CEB15006DB442 /* NestedCallExpressions.m */; };
-		F72C18121C33CAF1002B7FD9 /* RealisticMethodCalls.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D5140A1B79DA1C00B28AB4 /* RealisticMethodCalls.m */; };
-		F72C18131C33CAF1002B7FD9 /* RefactorMethodFixture.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5831B69453600CC8AFE /* RefactorMethodFixture.h */; };
-		F72C18141C33CAF1002B7FD9 /* RefactorMethodFixture.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */; };
-		F72C18151C33CAF1002B7FD9 /* Cedar.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AE0C00E91B717A670065C099 /* Cedar.h */; };
-		F72C18161C33CAF1002B7FD9 /* CedarSpecFixture.mm in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEC0B0EC1B6AA37F00567D93 /* CedarSpecFixture.mm */; };
 		F72C18171C33CAF1002B7FD9 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
 		F72C18181C33CAF1002B7FD9 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457A1BE7510900299694 /* FakeForMySomewhatSpecialProtocol.swift */; };
-		F72C18191C33CAF1002B7FD9 /* RefactorMethodDeclarationExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AE76355C1B68245B00F85396 /* RefactorMethodDeclarationExpected.m */; };
-		F72C181A1C33CAF1002B7FD9 /* RefactorMethodExpected.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AEE1B5951B69479600CC8AFE /* RefactorMethodExpected.h */; };
-		F72C181B1C33CAF1002B7FD9 /* RefactorMethodExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */; };
-		F72C181C1C33CAF1002B7FD9 /* RefactorMethodExpected2.h in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7E651511B71E45B006D35EE /* RefactorMethodExpected2.h */; };
 		F72C181D1C33CAF1002B7FD9 /* EmptyProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7D4806B1BF9402C00A37765 /* EmptyProtocol.swift */; };
 		F72C181E1C33CAF1002B7FD9 /* MyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
 		F72C181F1C33CAF1002B7FD9 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7FC457C1BE7515C00299694 /* MySomewhatSpecialProtocol.swift */; };
 		F72C18201C33CAF1002B7FD9 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
-		F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F72FA7881B81AFA200DC2221 /* Blindside.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F73511B61B2559F100104F8C /* XMASObjcTypeParserSpec.mm */; };
-		F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F747F8081C33B6D40040827B /* BetterRefactorToolsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F749C7441C310EBC00A0ACDC /* BetterRefactorToolsKit.framework */; };
 		F747F80D1C33BAD50040827B /* XMASSelectedProtocolOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */; };
 		F747F8101C33BBAB0040827B /* SwiftProtocolDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F80F1C33BBAB0040827B /* SwiftProtocolDeclaration.swift */; };
@@ -109,7 +94,7 @@
 		F74BBB501B273D760092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */; };
-		F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F749C7441C310EBC00A0ACDC /* BetterRefactorToolsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F749C7441C310EBC00A0ACDC /* BetterRefactorToolsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F670681C312B96007DDF2E /* XMASLogger.swift */; };
 		F75C4B1D1C37C01A00615FFF /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
 		F75C4B1F1C37C08D00615FFF /* XMASAlerter.h in Headers */ = {isa = PBXBuildFile; fileRef = F749C77D1C31218700A0ACDC /* XMASAlerter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -123,8 +108,7 @@
 		F765113B1BE9FAE900BFDAD8 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76511111BE9FAC800BFDAD8 /* Quick.framework */; };
 		F765113C1BE9FAF000BFDAD8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F76511301BE9FAD200BFDAD8 /* Nimble.framework */; };
 		F765113E1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */; };
-		F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F78655891BE4A77E00BB3026 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F76B9B781B23F3050028AC9A /* ClangKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
 		F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
@@ -148,8 +132,8 @@
 		F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */; };
 		F7BEDD1A1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
 		F7BEDD1B1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
-		F7C0348F1BDDF3BF00C7DC86 /* SwiftXPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; };
 		F7C49EC91BDA19CF00DEDACF /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
+		F7C928C81C3906BB0057BA19 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01C051B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01C001B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m */; };
@@ -179,8 +163,6 @@
 		F7DB975B1BF00FF200A9C474 /* MyMutatingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
 		F7DB975C1BF0109800A9C474 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB972F1BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift */; };
 		F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB97591BF00FF200A9C474 /* MyMutatingProtocol.swift */; };
-		F7DB975F1BF0135000A9C474 /* SwiftCounterfeitStruct.mustache in Copy Mustache Templates */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
-		F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */; };
 		F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F7E0094B1B7FDBE900B9E6E6 /* RefactorToolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E0094A1B7FDBE900B9E6E6 /* RefactorToolsModule.m */; };
@@ -243,13 +225,6 @@
 			remoteInfo = MustacheOSXTests;
 		};
 		F703462E1BEF3FEB00A8FD27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 561E725B1A8BDC2B004ED48B;
-			remoteInfo = MustacheOSX;
-		};
-		F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F70345FD1BEF3FDE00A8FD27 /* Mustache.xcodeproj */;
 			proxyType = 1;
@@ -431,13 +406,6 @@
 			remoteGlobalIDString = DAEB6B8D1943873100289F44;
 			remoteInfo = "Quick-OSX";
 		};
-		F786558D1BE4A8D100BB3026 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7C034701BDDF3A100C7DC86 /* SwiftXPC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E8FE43F61A01A8AF002672BD;
-			remoteInfo = SwiftXPC;
-		};
 		F78BDE431BC3A00000AFB7D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
@@ -592,13 +560,6 @@
 			remoteGlobalIDString = E8FE43F61A01A8AF002672BD;
 			remoteInfo = SwiftXPC;
 		};
-		F7D0B6571BF40EAC00DAAB43 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CD9D052B1A757D8B003CCB21;
-			remoteInfo = SWXMLHashOSX;
-		};
 		F7E0092C1B7FDA8A00B9E6E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F7E009221B7FDA8900B9E6E6 /* Blindside.xcodeproj */;
@@ -679,26 +640,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F70346381BEF441700A8FD27 /* Copy Mustache Templates */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-				F7DB975F1BF0135000A9C474 /* SwiftCounterfeitStruct.mustache in Copy Mustache Templates */,
-				F70346391BEF443700A8FD27 /* SwiftCounterfeitClass.mustache in Copy Mustache Templates */,
-			);
-			name = "Copy Mustache Templates";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F70B5EE61B2435E900AA32BB /* Copy frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F70346341BEF400B00A8FD27 /* Mustache.framework in Copy frameworks */,
-				F78655891BE4A77E00BB3026 /* SourceKittenFramework.framework in Copy frameworks */,
+				F7C928C81C3906BB0057BA19 /* SourceKittenFramework.framework in Copy frameworks */,
 				F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */,
 				F70B5EE71B2435F800AA32BB /* ClangKit.framework in Copy frameworks */,
 			);
@@ -712,10 +660,8 @@
 			dstSubfolderSpec = 7;
 			files = (
 				F7D4806D1BF9407600A37765 /* EmptyProtocol.swift in Copy Fixtures */,
-				F7DB97601BF0135B00A9C474 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
 				F7DB975C1BF0109800A9C474 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */,
 				F7DB975D1BF0109800A9C474 /* MyMutatingProtocol.swift in Copy Fixtures */,
-				F703463A1BEF444300A8FD27 /* SwiftCounterfeitClass.mustache in Copy Fixtures */,
 				F7FC457E1BE7525500299694 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */,
 				F7FC457F1BE7525500299694 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
 				F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */,
@@ -754,19 +700,8 @@
 			files = (
 				F7FCC2461C351E2600263EED /* SwiftCounterfeitClass.mustache in Copy Fixtures */,
 				F7FCC2471C351E2600263EED /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
-				F72C18101C33CAF1002B7FD9 /* MethodDeclaration.m in Copy Fixtures */,
-				F72C18111C33CAF1002B7FD9 /* NestedCallExpressions.m in Copy Fixtures */,
-				F72C18121C33CAF1002B7FD9 /* RealisticMethodCalls.m in Copy Fixtures */,
-				F72C18131C33CAF1002B7FD9 /* RefactorMethodFixture.h in Copy Fixtures */,
-				F72C18141C33CAF1002B7FD9 /* RefactorMethodFixture.m in Copy Fixtures */,
-				F72C18151C33CAF1002B7FD9 /* Cedar.h in Copy Fixtures */,
-				F72C18161C33CAF1002B7FD9 /* CedarSpecFixture.mm in Copy Fixtures */,
 				F72C18171C33CAF1002B7FD9 /* FakeForMyMutatingProtocol.swift in Copy Fixtures */,
 				F72C18181C33CAF1002B7FD9 /* FakeForMySomewhatSpecialProtocol.swift in Copy Fixtures */,
-				F72C18191C33CAF1002B7FD9 /* RefactorMethodDeclarationExpected.m in Copy Fixtures */,
-				F72C181A1C33CAF1002B7FD9 /* RefactorMethodExpected.h in Copy Fixtures */,
-				F72C181B1C33CAF1002B7FD9 /* RefactorMethodExpected.m in Copy Fixtures */,
-				F72C181C1C33CAF1002B7FD9 /* RefactorMethodExpected2.h in Copy Fixtures */,
 				F72C181D1C33CAF1002B7FD9 /* EmptyProtocol.swift in Copy Fixtures */,
 				F72C181E1C33CAF1002B7FD9 /* MyMutatingProtocol.swift in Copy Fixtures */,
 				F72C181F1C33CAF1002B7FD9 /* MySomewhatSpecialProtocol.swift in Copy Fixtures */,
@@ -775,18 +710,19 @@
 			name = "Copy Fixtures";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F76B9B6B1B23F2F90028AC9A /* CopyFiles */ = {
+		F76B9B6B1B23F2F90028AC9A /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in CopyFiles */,
-				F70346351BEF401400A8FD27 /* Mustache.framework in CopyFiles */,
-				F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in CopyFiles */,
-				F72FA7881B81AFA200DC2221 /* Blindside.framework in CopyFiles */,
-				F76B9B781B23F3050028AC9A /* ClangKit.framework in CopyFiles */,
+				F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in Copy Frameworks */,
+				F70346351BEF401400A8FD27 /* Mustache.framework in Copy Frameworks */,
+				F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in Copy Frameworks */,
+				F72FA7881B81AFA200DC2221 /* Blindside.framework in Copy Frameworks */,
+				F76B9B781B23F3050028AC9A /* ClangKit.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F7FCC2431C351E1200263EED /* Copy Templates */ = {
@@ -968,7 +904,6 @@
 			files = (
 				F749C77C1C311A1300A0ACDC /* BetterRefactorToolsKit.framework in Frameworks */,
 				F70346301BEF3FF300A8FD27 /* Mustache.framework in Frameworks */,
-				F7C0348F1BDDF3BF00C7DC86 /* SwiftXPC.framework in Frameworks */,
 				960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */,
 				F7E009471B7FDAB000B9E6E6 /* Blindside.framework in Frameworks */,
 				F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */,
@@ -1012,7 +947,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F747F8081C33B6D40040827B /* BetterRefactorToolsKit.framework in Frameworks */,
-				F70346331BEF3FFD00A8FD27 /* Mustache.framework in Frameworks */,
 				F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */,
 				F7E009441B7FDAA000B9E6E6 /* Blindside.framework in Frameworks */,
 				F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */,
@@ -1706,9 +1640,8 @@
 			buildPhases = (
 				960FA08B1605819F00923A87 /* Sources */,
 				960FA08C1605819F00923A87 /* Frameworks */,
-				F76B9B6B1B23F2F90028AC9A /* CopyFiles */,
+				F76B9B6B1B23F2F90028AC9A /* Copy Frameworks */,
 				F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */,
-				F70346381BEF441700A8FD27 /* Copy Mustache Templates */,
 			);
 			buildRules = (
 			);
@@ -1801,9 +1734,6 @@
 			);
 			dependencies = (
 				F747F8071C33B6D00040827B /* PBXTargetDependency */,
-				F7D0B6581BF40EAC00DAAB43 /* PBXTargetDependency */,
-				F70346321BEF3FF900A8FD27 /* PBXTargetDependency */,
-				F786558E1BE4A8D100BB3026 /* PBXTargetDependency */,
 				F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */,
 				F7BA62721B2233E5005B99AF /* PBXTargetDependency */,
 			);
@@ -2398,11 +2328,6 @@
 			name = MustacheOSX;
 			targetProxy = F703462E1BEF3FEB00A8FD27 /* PBXContainerItemProxy */;
 		};
-		F70346321BEF3FF900A8FD27 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MustacheOSX;
-			targetProxy = F70346311BEF3FF900A8FD27 /* PBXContainerItemProxy */;
-		};
 		F72C17E51C33C390002B7FD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Blindside;
@@ -2453,11 +2378,6 @@
 			name = "Quick-OSX";
 			targetProxy = F76511391BE9FADF00BFDAD8 /* PBXContainerItemProxy */;
 		};
-		F786558E1BE4A8D100BB3026 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftXPC;
-			targetProxy = F786558D1BE4A8D100BB3026 /* PBXContainerItemProxy */;
-		};
 		F7A556EC1BF138B6006B9741 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SWXMLHashOSX;
@@ -2472,11 +2392,6 @@
 			isa = PBXTargetDependency;
 			name = SwiftXPC;
 			targetProxy = F7C0348D1BDDF3B800C7DC86 /* PBXContainerItemProxy */;
-		};
-		F7D0B6581BF40EAC00DAAB43 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SWXMLHashOSX;
-			targetProxy = F7D0B6571BF40EAC00DAAB43 /* PBXContainerItemProxy */;
 		};
 		F7E009431B7FDA9700B9E6E6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2773,7 +2688,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2830,7 +2745,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2882,7 +2797,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2924,7 +2839,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
