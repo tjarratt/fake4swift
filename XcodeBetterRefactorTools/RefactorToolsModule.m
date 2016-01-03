@@ -51,10 +51,10 @@ static XMASRefactorMethodAction *action;
 
     [binder bind:[XMASGenerateFakeForSwiftProtocolUseCase class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         return [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
-                                                        logger:[injector getInstance:[XMASLogger class]]
-                                             selectedTextProxy:[injector getInstance:[XMASParseSelectedProtocolWorkFlow class]]
-                                         fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
-                                      selectedSourceFileOracle:[injector getInstance:[XMASOpenXcodeFileOracle class]]];
+                                                                         logger:[injector getInstance:[XMASLogger class]]
+                                                  parseSelectedProtocolWorkFlow:[injector getInstance:[XMASParseSelectedProtocolWorkFlow class]]
+                                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
+                                                       selectedSourceFileOracle:[injector getInstance:[XMASOpenXcodeFileOracle class]]];
     }];
 
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
@@ -111,7 +111,7 @@ static XMASRefactorMethodAction *action;
     [binder bind:[XMASFakeProtocolPersister class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
         XMASSwiftProtocolFaker *protocolFaker = [injector getInstance:[XMASSwiftProtocolFaker class]];
         return [[XMASFakeProtocolPersister alloc] initWithProtocolFaker:protocolFaker
-                fileManager:[NSFileManager defaultManager]];
+                                                            fileManager:[NSFileManager defaultManager]];
     }];
 
     [binder bind:[XMASSwiftProtocolFaker class] toBlock:^id (NSArray *args, id<BSInjector> injector) {

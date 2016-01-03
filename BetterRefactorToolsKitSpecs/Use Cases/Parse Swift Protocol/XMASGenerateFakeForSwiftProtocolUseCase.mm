@@ -16,18 +16,18 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
     __block XMASLogger *logger;
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
-    __block XMASParseSelectedProtocolWorkFlow *parseProtocolUseCase;
+    __block XMASParseSelectedProtocolWorkFlow *parseProtocolWorkFlow;
 
     beforeEach(^{
         alerter = nice_fake_for(@protocol(XMASAlerter));
         logger = nice_fake_for([XMASLogger class]);
-        parseProtocolUseCase = nice_fake_for([XMASParseSelectedProtocolWorkFlow class]);
+        parseProtocolWorkFlow = nice_fake_for([XMASParseSelectedProtocolWorkFlow class]);
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
 
         subject = [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
                                                            logger:logger
-                                                selectedTextProxy:parseProtocolUseCase
+                                                parseSelectedProtocolWorkFlow:parseProtocolWorkFlow
                                             fakeProtocolPersister:fakeProtocolPersister
                                          selectedSourceFileOracle:selectedSourceFileOracle];
     });
@@ -42,7 +42,7 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             fakeProtocol = nice_fake_for([ProtocolDeclaration class]);
             fakeProtocol stub_method(@selector(name)).and_return(@"MySpecialProtocol");
 
-            parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
+            parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                 .with(@"/path/to/something.swift", Arguments::anything)
                 .and_return(fakeProtocol);
 
@@ -101,7 +101,7 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                                                                                         subscriptGetters:@[]
                                                                                         subscriptSetters:@[]];
 
-                parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
+                parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                     .again()
                     .with(@"/path/to/something.swift", Arguments::anything)
                     .and_return(unsupportedProtocolDecl);
@@ -140,7 +140,7 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                                                                                         subscriptGetters:@[]
                                                                                         subscriptSetters:@[]];
 
-                parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
+                parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                     .again()
                     .with(@"/path/to/something.swift", Arguments::anything)
                     .and_return(unsupportedProtocolDecl);
@@ -178,7 +178,7 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
         beforeEach(^{
             selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
-            parseProtocolUseCase stub_method(@selector(selectedProtocolInFile:error:))
+            parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                 .and_do_block(^NSString *(id something, NSError **error) {
                     *error = [[NSError alloc] initWithDomain:@"some-domain" code:1 userInfo:nil];
                     return nil;
