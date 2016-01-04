@@ -74,7 +74,7 @@
 		F72C17F01C33C3CF002B7FD9 /* SwiftXPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; };
 		F72C17F11C33C3D4002B7FD9 /* Mustache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; };
 		F72C17FA1C33C62E002B7FD9 /* Mustache.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F703461D1BEF3FDE00A8FD27 /* Mustache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */; };
+		F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm */; };
 		F72C18021C33C82D002B7FD9 /* XMASParseSelectedProtocolWorkFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F8161C33BE7C0040827B /* XMASParseSelectedProtocolWorkFlow.swift */; };
 		F72C18031C33C837002B7FD9 /* XMASSwiftParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F8111C33BC980040827B /* XMASSwiftParser.swift */; };
 		F72C18041C33C839002B7FD9 /* XMASSelectedProtocolOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */; };
@@ -868,7 +868,7 @@
 		F72C17AF1C33C366002B7FD9 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		F72C17B61C33C366002B7FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F72C17FB1C33C754002B7FD9 /* BetterRefactorToolsKitSpecs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BetterRefactorToolsKitSpecs-Bridging-Header.h"; sourceTree = "<group>"; };
-		F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASParseSelectedProtocolUseCaseSpec.mm; sourceTree = "<group>"; };
+		F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASParseSelectedProtocolWorkFlowSpec.mm; sourceTree = "<group>"; };
 		F72C18071C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetterRefactorToolsKitModule.h; sourceTree = "<group>"; };
 		F72C18081C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetterRefactorToolsKitModule.m; sourceTree = "<group>"; };
 		F72C180C1C33C9AF002B7FD9 /* KitSwiftCompatibilityHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitSwiftCompatibilityHeader.h; sourceTree = "<group>"; };
@@ -1289,7 +1289,7 @@
 			children = (
 				F7FCC2391C3519F900263EED /* XMASFakeProtocolPersisterSpec.mm */,
 				F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm */,
-				F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm */,
+				F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm */,
 				F7FCC23E1C351A9F00263EED /* XMASSwiftProtocolFakerSpec.mm */,
 			);
 			path = "Parse Swift Protocol";
@@ -2331,7 +2331,7 @@
 				F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */,
 				F72C18051C33C844002B7FD9 /* SwiftProtocolDeclaration.swift in Sources */,
 				F7FB6F251C37C35900BC75AF /* XMASFileManager.swift in Sources */,
-				F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolUseCaseSpec.mm in Sources */,
+				F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm in Sources */,
 				F7FCC24A1C35227000263EED /* XMASFakeProtocolPersister.swift in Sources */,
 				F72C17B01C33C366002B7FD9 /* main.mm in Sources */,
 				F7FCC23F1C351A9F00263EED /* XMASSwiftProtocolFakerSpec.mm in Sources */,

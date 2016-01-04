@@ -180,14 +180,15 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                 .and_return(@"/path/to/something.swift");
             parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                 .and_do_block(^NSString *(id something, NSError **error) {
-                    *error = [[NSError alloc] initWithDomain:@"some-domain" code:1 userInfo:nil];
+                    NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"ruh roh"};
+                    *error = [[NSError alloc] initWithDomain:@"some-domain" code:1 userInfo:userInfo];
                     return nil;
                 });
         });
 
         it(@"should alert the user to select a protocol", ^{
             alerter should have_received(@selector(flashMessage:))
-                .with(@"put your cursor in a protocol declaration to generate a fake for it");
+                .with(@"ruh roh");
         });
     });
 });
