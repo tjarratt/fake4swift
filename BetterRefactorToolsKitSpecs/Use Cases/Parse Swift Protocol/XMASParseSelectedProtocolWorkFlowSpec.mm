@@ -9,7 +9,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(XMASParseSelectedProtocolWorkFlowSpec)
 
-describe(@"XMASParseSelectedProtocolWorkFlow", ^{
+fdescribe(@"XMASParseSelectedProtocolWorkFlow", ^{
     __block XMASParseSelectedProtocolWorkFlow *subject;
     __block id<XMASSelectedProtocolOracle> fakeSelectedProtocolOracle;
 
