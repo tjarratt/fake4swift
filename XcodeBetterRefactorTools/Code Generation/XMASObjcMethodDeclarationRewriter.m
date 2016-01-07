@@ -65,7 +65,9 @@
 
     if (!methodDeclarationToRewrite) {
         NSString *helpfulMessage = [NSString stringWithFormat:@"Aww shucks. Couldn't find '%@' in '%@' at line %lu column %lu", newMethodDeclaration.selectorString, fileToRewrite.lastPathComponent, symbol.lineNumber, symbol.column];
-        [self.alerter flashMessage:helpfulMessage];
+        [self.alerter flashMessage:helpfulMessage
+                         withImage:XMASAlertImageAbjectFailure
+                  shouldLogMessage:NO];
         return;
     }
 

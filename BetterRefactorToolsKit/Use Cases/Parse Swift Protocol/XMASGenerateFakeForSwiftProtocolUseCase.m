@@ -14,7 +14,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @property (nonatomic) id<XMASAlerter> alerter;
 @property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
-@property (nonatomic) XMASParseSelectedProtocolWorkFlow *selectedProtocolUseCase;
+@property (nonatomic) XMASParseSelectedProtocolWorkFlow *selectedProtocolWorkFlow;
 
 @end
 
@@ -23,14 +23,14 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
-              parseSelectedProtocolWorkFlow:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolUseCase
+              parseSelectedProtocolWorkFlow:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolWorkFlow
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
        selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle {
     if (self = [super init]) {
         self.logger = logger;
         self.alerter = alerter;
         self.fakeProtocolPersister = fakeProtocolPersister;
-        self.selectedProtocolUseCase = selectedProtocolUseCase;
+        self.selectedProtocolWorkFlow = selectedProtocolWorkFlow;
         self.selectedSourceFileOracle = selectedSourceFileOracle;
     }
 
@@ -48,20 +48,24 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 - (void)generateFakeForSelectedProtocol {
     NSString *currentFilePath = [self.selectedSourceFileOracle selectedFilePath];
     if (![currentFilePath.pathExtension.lowercaseString isEqual: @"swift"]) {
-        [self.alerter flashMessage:@"generate-fake only works with Swift source files"];
+        [self.alerter flashMessage:@"Select a Swift protocol"
+                         withImage:XMASAlertImageNoSwiftFileSelected
+                  shouldLogMessage:NO];
         return;
     }
 
     NSError *error = nil;
-    ProtocolDeclaration *selectedProtocol = [self.selectedProtocolUseCase selectedProtocolInFile:currentFilePath
+    ProtocolDeclaration *selectedProtocol = [self.selectedProtocolWorkFlow selectedProtocolInFile:currentFilePath
                                                                                            error:&error];
     if (error != nil) {
-        [self.alerter flashMessage:error.localizedFailureReason];
+        [self.alerter flashComfortingMessageForError:error];
         return;
     }
 
     if (selectedProtocol.includedProtocols.count > 0) {
-        [self.alerter flashMessage:@"FAILED. Check Console.app"];
+        [self.alerter flashMessage:@"Check Console.app"
+                         withImage:XMASAlertImageAbjectFailure
+                  shouldLogMessage:NO];
 
         NSString *logMessage = [NSString stringWithFormat:protocolIncludesOtherMessage,
                                 selectedProtocol.name,
@@ -71,7 +75,9 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
     }
 
     if (selectedProtocol.usesTypealias) {
-        [self.alerter flashMessage:@"FAILED. Check Console.app"];
+        [self.alerter flashMessage:@"Check Console.app"
+                         withImage:XMASAlertImageAbjectFailure
+                  shouldLogMessage:NO];
 
         NSString *logMessage = [NSString stringWithFormat:protocolUsesTypealiasMessage,
                                 selectedProtocol.name];
@@ -87,9 +93,9 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
         return;
     }
 
-    NSString *successMessage = [NSString stringWithFormat:@"Generated Fake%@ successfully!",
-                         selectedProtocol.name];
-    [self.alerter flashMessage:successMessage];
+    [self.alerter flashMessage:@"Success!"
+                     withImage:XMASAlertImageGeneratedFake
+              shouldLogMessage:NO];
 }
 
 #pragma mark - NSObject

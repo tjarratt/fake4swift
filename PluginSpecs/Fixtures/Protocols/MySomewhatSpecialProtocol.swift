@@ -9,3 +9,4 @@ protocol MySomewhatSpecialProtocol {
 
     func soulOfAFunky(drummer: String?) throws -> String?
 }
+

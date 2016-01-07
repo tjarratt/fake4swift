@@ -47,7 +47,7 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         XMASGenerateFakeForSwiftProtocolUseCase *generateFakeAction = [injector getInstance:[XMASGenerateFakeForSwiftProtocolUseCase class]];
         generateFakeAction.alerter should conform_to(@protocol(XMASAlerter));
         generateFakeAction.logger should be_instance_of([XMASLogger class]);
-        generateFakeAction.selectedProtocolUseCase should be_instance_of([XMASParseSelectedProtocolWorkFlow class]);
+        generateFakeAction.selectedProtocolWorkFlow should be_instance_of([XMASParseSelectedProtocolWorkFlow class]);
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
         generateFakeAction.selectedSourceFileOracle should conform_to(@protocol(XMASSelectedSourceFileOracle));
     });

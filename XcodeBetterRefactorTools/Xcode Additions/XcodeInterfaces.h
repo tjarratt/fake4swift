@@ -4,12 +4,26 @@
 #define XC(type) id<XMASXcode_##type>
 
 #pragma mark - UI
+
 @protocol XCP(DVTBezelAlertPanel)
+
 - (id)initWithIcon:(id)icon
            message:(id)message
       parentWindow:(id)window
           duration:(double)duration;
 - (void)orderFront:(id)sender;
+
+@end
+
+@protocol XCP(IDEDetailedAlert)
+
++ (id)detailedAlertWithMessageText:(id)arg1
+                     defaultButton:(id)arg2
+                   alternateButton:(id)arg3
+                   informativeText:(id)arg4
+         attributedDetailedMessage:(id)arg5;
+- (void)layout;
+
 @end
 
 #pragma mark - Search Paths

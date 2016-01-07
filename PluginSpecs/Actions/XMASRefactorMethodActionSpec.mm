@@ -81,10 +81,6 @@ describe(@"XMASRefactorMethodAction", ^{
                 .with(subject);
         });
 
-        it(@"should show the selector of the current method under the cursor", ^{
-            alerter should_not have_received(@selector(flashMessage:));
-        });
-
         it(@"should present a change method signature controller", ^{
             controller should have_received(@selector(refactorMethod:inFile:))
                 .with(methodDeclaration)
@@ -116,7 +112,8 @@ describe(@"XMASRefactorMethodAction", ^{
         });
 
         it(@"alert the user", ^{
-            alerter should have_received(@selector(flashMessage:)).with(noMethodSelected);
+            alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                .with(noMethodSelected, Arguments::anything, Arguments::anything);
         });
     });
 

@@ -1,9 +1,16 @@
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, XMASAlertImage) {
+    XMASAlertImageGeneratedFake,
+    XMASAlertImageNoSwiftFileSelected,
+    XMASAlertImageAbjectFailure
+};
+
 @protocol XMASAlerter <NSObject>
 
-- (void)flashMessage:(NSString *)message;
-- (void)flashMessage:(NSString *)message withLogging:(BOOL)shouldLogMessage;
+- (void)flashMessage:(NSString *)message
+           withImage:(XMASAlertImage)imageName
+    shouldLogMessage:(BOOL)shouldLogMessage;
 
 - (void)flashComfortingMessageForError:(NSError *)error;
 - (void)flashComfortingMessageForException:(NSException *)exception;

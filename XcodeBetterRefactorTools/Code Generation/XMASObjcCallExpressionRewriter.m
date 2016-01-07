@@ -56,7 +56,9 @@
     if (!callExpressionToRewrite) {
         NSString *fileName = callsite.file.pathString.lastPathComponent;
         NSString *sadMessage = [NSString stringWithFormat:@"Aww shucks. Couldn't find '%@' at line %lu column %lu in %@", oldSelector.selectorString, callsite.lineNumber, callsite.column, fileName];
-        [self.alerter flashMessage:sadMessage withLogging:YES];
+        [self.alerter flashMessage:sadMessage
+                         withImage:XMASAlertImageAbjectFailure
+                  shouldLogMessage:YES];
         return;
     }
 

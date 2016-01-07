@@ -121,8 +121,8 @@ describe(@"XMASObjcCallExpressionRewriter", ^{
 
         it(@"should show the user a sad alert", ^{
             NSString *expectedMessage = @"Aww shucks. Couldn't find 'blurgle:withSpoo:andBruce:' at line 12 column 24 in fake_file.m";
-            alerter should have_received(@selector(flashMessage:withLogging:))
-                .with(expectedMessage, YES);
+            alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                .with(expectedMessage, XMASAlertImageAbjectFailure, YES);
         });
     });
 });

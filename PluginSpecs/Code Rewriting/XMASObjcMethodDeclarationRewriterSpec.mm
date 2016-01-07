@@ -185,8 +185,10 @@ describe(@"XMASObjcMethodDeclarationRewriter", ^{
             });
 
             it(@"should alert the user", ^{
-                alerter should have_received(@selector(flashMessage:))
-                    .with(@"Aww shucks. Couldn't find 'thisMethod:does:not:exist:' in 'fake_file.m' at line 55 column 222");
+                alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                    .with(@"Aww shucks. Couldn't find 'thisMethod:does:not:exist:' in 'fake_file.m' at line 55 column 222")
+                    .and_with(XMASAlertImageAbjectFailure)
+                    .and_with(NO);
             });
         });
     });

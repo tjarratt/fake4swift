@@ -38,7 +38,7 @@
 		F70354131C37B18600936B55 /* XMASSelectedSourceFileOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */; };
 		F70354171C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F70354181C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
-		F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm */; };
+		F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm */; };
 		F70A034C1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */; };
 		F70A03721B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */; };
 		F70B5ED91B2435B300AA32BB /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
@@ -66,6 +66,7 @@
 		F71E82BF1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F71E82BD1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m */; };
 		F71E82C11B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F71E82C01B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm */; };
 		F71E82C41B59F6B400BE93DC /* RefactorMethodExpected.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */; };
+		F7259C8B1C3CFC5400FB317C /* fake_mustache.png in Copy Images */ = {isa = PBXBuildFile; fileRef = F7259C891C3CFC2F00FB317C /* fake_mustache.png */; };
 		F727495F1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
 		F72749601B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */; };
 		F72C17B01C33C366002B7FD9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C17AF1C33C366002B7FD9 /* main.mm */; };
@@ -125,7 +126,9 @@
 		F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */; };
 		F79837621B365DC2000F1EBD /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
 		F79AAFAE1B819EF800F7D2C5 /* InjectorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */; };
+		F79EE4281C3D05D500AE83F0 /* swift.png in Copy Images */ = {isa = PBXBuildFile; fileRef = F79EE3FF1C3D05CC00AE83F0 /* swift.png */; };
 		F79FF6801BDF64DA0058EFE0 /* ProtocolEdgeCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
+		F7A6D9A21C3E4CFA00AF3A17 /* ide_alert_bezel_test_failure.pdf in Copy Images */ = {isa = PBXBuildFile; fileRef = F7A6D9791C3E4CEA00AF3A17 /* ide_alert_bezel_test_failure.pdf */; };
 		F7B1D28A1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */; };
 		F7B1D28B1B5C5F7900C28AE7 /* XMASXcodeRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */; };
 		F7B4B4C91B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B4B4C81B8AF25800A71960 /* XMASObjcClassForwardDeclarationWriter.m */; };
@@ -141,6 +144,7 @@
 		F7BEDD191B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD131B5C5FB800A4704B /* XMASChangeMethodSignatureControllerProvider.m */; };
 		F7BEDD1A1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
 		F7BEDD1B1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BEDD151B5C5FB800A4704B /* XMASWindowProvider.m */; };
+		F7C008CD1C3D0B5300A38273 /* crushed_hand.png in Copy Images */ = {isa = PBXBuildFile; fileRef = F79EE4291C3D062F00AE83F0 /* crushed_hand.png */; };
 		F7C49EC91BDA19CF00DEDACF /* SourceKittenFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; };
 		F7C928C81C3906BB0057BA19 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
@@ -741,6 +745,20 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F7259C8A1C3CFC4100FB317C /* Copy Images */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F7A6D9A21C3E4CFA00AF3A17 /* ide_alert_bezel_test_failure.pdf in Copy Images */,
+				F7C008CD1C3D0B5300A38273 /* crushed_hand.png in Copy Images */,
+				F79EE4281C3D05D500AE83F0 /* swift.png in Copy Images */,
+				F7259C8B1C3CFC5400FB317C /* fake_mustache.png in Copy Images */,
+			);
+			name = "Copy Images";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F72C17F41C33C49D002B7FD9 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -841,7 +859,7 @@
 		F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedSourceFileOracle.swift; sourceTree = "<group>"; };
 		F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASGenerateFakeForSwiftProtocolUseCase.h; sourceTree = "<group>"; };
 		F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASGenerateFakeForSwiftProtocolUseCase.m; sourceTree = "<group>"; };
-		F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASGenerateFakeForSwiftProtocolUseCase.mm; sourceTree = "<group>"; };
+		F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm; sourceTree = "<group>"; };
 		F70A034B1B49D0910009B348 /* XMASMethodOccurrencesRepositorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASMethodOccurrencesRepositorySpec.mm; sourceTree = "<group>"; };
 		F70A03711B4B98820009B348 /* XMASObjcMethodCallParserSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcMethodCallParserSpec.mm; sourceTree = "<group>"; };
 		F70C9FE21BC8F33300E9C019 /* XMASGenerateFakeActionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASGenerateFakeActionSpec.mm; sourceTree = "<group>"; };
@@ -862,6 +880,7 @@
 		F71E82C01B59F67600BE93DC /* XMASObjcCallExpressionRewriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionRewriterSpec.mm; sourceTree = "<group>"; };
 		F71E82C21B59F6A800BE93DC /* RefactorMethodExpected.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefactorMethodExpected.m; sourceTree = "<group>"; };
 		F71FFF401B85A8E800DC8A80 /* XMASChangeMethodSignatureController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMASChangeMethodSignatureController.xib; sourceTree = "<group>"; };
+		F7259C891C3CFC2F00FB317C /* fake_mustache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fake_mustache.png; sourceTree = "<group>"; };
 		F727495D1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASMethodOccurrencesRepository.h; sourceTree = "<group>"; };
 		F727495E1B4901AE00BB8483 /* XMASMethodOccurrencesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASMethodOccurrencesRepository.m; sourceTree = "<group>"; };
 		F72C17A91C33C366002B7FD9 /* BetterRefactorToolsKitSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterRefactorToolsKitSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -893,8 +912,11 @@
 		F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMySomewhatSpecialProtocolSpec.swift; sourceTree = "<group>"; };
 		F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEditMenuSpec.mm; sourceTree = "<group>"; };
 		F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InjectorSpec.mm; sourceTree = "<group>"; };
+		F79EE3FF1C3D05CC00AE83F0 /* swift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swift.png; sourceTree = "<group>"; };
+		F79EE4291C3D062F00AE83F0 /* crushed_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crushed_hand.png; sourceTree = "<group>"; };
 		F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolEdgeCases.swift; sourceTree = "<group>"; };
 		F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = SWXMLHash/SWXMLHash.xcodeproj; sourceTree = "<group>"; };
+		F7A6D9791C3E4CEA00AF3A17 /* ide_alert_bezel_test_failure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ide_alert_bezel_test_failure.pdf; sourceTree = "<group>"; };
 		F7B1D2831B5C5F7900C28AE7 /* XcodeInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeInterfaces.h; sourceTree = "<group>"; };
 		F7B1D2861B5C5F7900C28AE7 /* XMASXcodeRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASXcodeRepository.h; sourceTree = "<group>"; };
 		F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcodeRepository.m; sourceTree = "<group>"; };
@@ -1089,18 +1111,19 @@
 		960FA0941605819F00923A87 /* XcodeBetterRefactorTools */ = {
 			isa = PBXGroup;
 			children = (
-				F70346361BEF43A900A8FD27 /* Templates */,
 				9608A8FD1622755B00763892 /* Actions */,
 				F71E828A1B59715500BE93DC /* Code Generation */,
 				F7E009481B7FDBCB00B9E6E6 /* Dependencies */,
 				F72749501B49016D00BB8483 /* Indexes */,
 				9608A8FB1622754500763892 /* Menu Additions */,
 				F7D01BF81B5C5FE300FE62DA /* Parser */,
+				F7259C601C3CFBE500FB317C /* Resources */,
+				F73A20BB1BDC2D54003BD1E5 /* SwiftCompatibilityHeader.h */,
+				F70346361BEF43A900A8FD27 /* Templates */,
 				F7BEDD0E1B5C5F9700A4704B /* UI */,
 				F7B1D2821B5C5F6200C28AE7 /* Xcode Additions */,
 				960FA0A0160584AC00923A87 /* XMASBetterRefactorTools.h */,
 				960FA0A1160584AC00923A87 /* XMASBetterRefactorTools.m */,
-				F73A20BB1BDC2D54003BD1E5 /* SwiftCompatibilityHeader.h */,
 			);
 			path = XcodeBetterRefactorTools;
 			sourceTree = "<group>";
@@ -1248,6 +1271,17 @@
 			path = "Code Rewriting";
 			sourceTree = "<group>";
 		};
+		F7259C601C3CFBE500FB317C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F7A6D9791C3E4CEA00AF3A17 /* ide_alert_bezel_test_failure.pdf */,
+				F79EE4291C3D062F00AE83F0 /* crushed_hand.png */,
+				F7259C891C3CFC2F00FB317C /* fake_mustache.png */,
+				F79EE3FF1C3D05CC00AE83F0 /* swift.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		F72749501B49016D00BB8483 /* Indexes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,7 +1322,7 @@
 			isa = PBXGroup;
 			children = (
 				F7FCC2391C3519F900263EED /* XMASFakeProtocolPersisterSpec.mm */,
-				F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm */,
+				F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm */,
 				F72C18001C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm */,
 				F7FCC23E1C351A9F00263EED /* XMASSwiftProtocolFakerSpec.mm */,
 			);
@@ -1726,6 +1760,7 @@
 				960FA08B1605819F00923A87 /* Sources */,
 				960FA08C1605819F00923A87 /* Frameworks */,
 				F76B9B6B1B23F2F90028AC9A /* Copy Frameworks */,
+				F7259C8A1C3CFC4100FB317C /* Copy Images */,
 				F76B9B791B2413220028AC9A /* Rewrite ClangKit runtime search path */,
 			);
 			buildRules = (
@@ -2336,7 +2371,7 @@
 				F72C17B01C33C366002B7FD9 /* main.mm in Sources */,
 				F7FCC23F1C351A9F00263EED /* XMASSwiftProtocolFakerSpec.mm in Sources */,
 				F72C18031C33C837002B7FD9 /* XMASSwiftParser.swift in Sources */,
-				F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.mm in Sources */,
+				F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm in Sources */,
 				F75C4B1D1C37C01A00615FFF /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */,
 				F75C4B231C37C0F500615FFF /* XMASSelectedSourceFileOracle.swift in Sources */,
 				F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */,

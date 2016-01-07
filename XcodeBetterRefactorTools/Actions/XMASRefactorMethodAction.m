@@ -68,7 +68,9 @@ NSString * const noMethodSelected = @"No method selected. Put your cursor inside
     }
 
     if (!selectedMethod) {
-        [self.alerter flashMessage:noMethodSelected];
+        [self.alerter flashMessage:noMethodSelected
+                         withImage:XMASAlertImageAbjectFailure
+                  shouldLogMessage:NO];
         return;
     }
 

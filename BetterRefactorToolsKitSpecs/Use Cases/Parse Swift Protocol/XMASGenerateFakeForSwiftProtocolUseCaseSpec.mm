@@ -26,10 +26,10 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
         selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
 
         subject = [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
-                                                           logger:logger
-                                                parseSelectedProtocolWorkFlow:parseProtocolWorkFlow
-                                            fakeProtocolPersister:fakeProtocolPersister
-                                         selectedSourceFileOracle:selectedSourceFileOracle];
+                                                                            logger:logger
+                                                     parseSelectedProtocolWorkFlow:parseProtocolWorkFlow
+                                                             fakeProtocolPersister:fakeProtocolPersister
+                                                          selectedSourceFileOracle:selectedSourceFileOracle];
     });
 
     subjectAction(^{
@@ -59,8 +59,10 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             });
 
             it(@"should alert the user the action succeeded", ^{
-                alerter should have_received(@selector(flashMessage:))
-                    .with(@"Generated FakeMySpecialProtocol successfully!");
+                alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                    .with(@"Success!",
+                          XMASAlertImageGeneratedFake,
+                          NO);
             });
         });
 
@@ -74,8 +76,8 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             });
 
             it(@"should not alert the user that it generated the fake", ^{
-                alerter should_not have_received(@selector(flashMessage:))
-                    .with(@"Generated FakeMySpecialProtocol successfully!");
+                alerter should_not have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                    .with(@"Success!", Arguments::anything, Arguments::anything);
             });
 
             it(@"should alert the user that something went wrong", ^{
@@ -108,8 +110,8 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             });
 
             it(@"should alert the user this can't be generated", ^{
-                alerter should have_received(@selector(flashMessage:))
-                    .with(@"FAILED. Check Console.app");
+                alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                    .with(@"Check Console.app", XMASAlertImageAbjectFailure, NO);
             });
 
             it(@"should not attempt to persist any files", ^{
@@ -147,8 +149,8 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             });
 
             it(@"should alert the user this can't be generated", ^{
-                alerter should have_received(@selector(flashMessage:))
-                    .with(@"FAILED. Check Console.app");
+                alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                    .with(@"Check Console.app", XMASAlertImageAbjectFailure, NO);
             });
 
             it(@"should not attempt to persist any files", ^{
@@ -169,26 +171,29 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
         });
 
         it(@"should alert the user this only works with swift", ^{
-            alerter should have_received(@selector(flashMessage:))
-                .with(@"generate-fake only works with Swift source files");
+            alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
+                .with(@"Select a Swift protocol", XMASAlertImageNoSwiftFileSelected, NO);
         });
     });
 
-    describe(@"when the cursor is not inside a protocol declaration", ^{
+    describe(@"when determining the selected protocol throws an error", ^{
+        NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"ruh roh"};
+        NSError *expectedError = [[NSError alloc] initWithDomain:@"some-domain"
+                                                            code:1
+                                                        userInfo:userInfo];
         beforeEach(^{
             selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
             parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                 .and_do_block(^NSString *(id something, NSError **error) {
-                    NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: @"ruh roh"};
-                    *error = [[NSError alloc] initWithDomain:@"some-domain" code:1 userInfo:userInfo];
+                    *error = expectedError;
                     return nil;
                 });
         });
 
-        it(@"should alert the user to select a protocol", ^{
-            alerter should have_received(@selector(flashMessage:))
-                .with(@"ruh roh");
+        it(@"should show the user the error message", ^{
+            alerter should have_received(@selector(flashComfortingMessageForError:))
+                .with(expectedError);
         });
     });
 });
