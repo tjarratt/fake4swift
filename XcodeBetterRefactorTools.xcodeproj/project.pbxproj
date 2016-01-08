@@ -244,6 +244,13 @@
 			remoteGlobalIDString = 561E725B1A8BDC2B004ED48B;
 			remoteInfo = MustacheOSX;
 		};
+		F7161C5E1C405A8D00703D88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7A556DC1BF138A6006B9741 /* SWXMLHash.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CD9D052B1A757D8B003CCB21;
+			remoteInfo = SWXMLHashOSX;
+		};
 		F71749011C390F5800A1D7EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 960FA0861605819F00923A87 /* Project object */;
@@ -1835,6 +1842,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F7161C5F1C405A8D00703D88 /* PBXTargetDependency */,
 				F7FCC2411C351B4E00263EED /* PBXTargetDependency */,
 				F7FCC2311C33D04C00263EED /* PBXTargetDependency */,
 				F747F8141C33BCC50040827B /* PBXTargetDependency */,
@@ -2483,6 +2491,11 @@
 			isa = PBXTargetDependency;
 			name = MustacheOSX;
 			targetProxy = F703462E1BEF3FEB00A8FD27 /* PBXContainerItemProxy */;
+		};
+		F7161C5F1C405A8D00703D88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SWXMLHashOSX;
+			targetProxy = F7161C5E1C405A8D00703D88 /* PBXContainerItemProxy */;
 		};
 		F71749021C390F5800A1D7EA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
