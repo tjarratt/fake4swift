@@ -2,11 +2,7 @@ import Foundation
 import BetterRefactorToolsKit
 
 @objc class TerminalAlerter : NSObject, XMASAlerter {
-    @objc func flashMessage(message: String!) {
-        print(message)
-    }
-
-    @objc func flashMessage(message: String!, withLogging shouldLogMessage: Bool) {
+    @objc func flashMessage(message: String!, withImage imageName: XMASAlertImage, shouldLogMessage: Bool) {
         print(message)
     }
 
