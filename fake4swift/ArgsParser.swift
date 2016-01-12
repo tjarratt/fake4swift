@@ -1,18 +1,30 @@
 import Foundation
-import BetterRefactorToolsKit
 
-@objc class SelectedProtocolFromArgs : NSObject, XMASSelectedProtocolOracle {
-    @objc func isProtocolSelected(protocolDecl : ProtocolDeclaration) -> Bool {
-        let args = [String](Process.arguments)
-        let protocolToFake = String.fromCString(args[2])
+class ArgsParser {
+    enum Error: String, ErrorType, CustomStringConvertible {
+        case InsufficientArguments
+        case ExtraArguments
 
-        return protocolToFake == protocolDecl.name
+        var description: String {
+            switch self {
+            case .InsufficientArguments: return "Not enough arguments provided."
+            case .ExtraArguments: return "Too many arguments provided."
+            }
+        }
     }
-}
 
-@objc class SelectedClassFromArgs : NSObject, XMASSelectedSourceFileOracle {
-    @objc func selectedFilePath() -> String {
-        let args = [String](Process.arguments)
-        return String.fromCString(args[1])! // FIXME :: raises
+    let args: [String]
+
+    init(args: [String] = Process.arguments) {
+        self.args = args
+    }
+
+    func parse() throws -> (fileName: String, protocolName: String?) {
+        switch args.count {
+        case 0...1: throw Error.InsufficientArguments
+        case 2: return (args[1], nil)
+        case 3: return (args[1], args[2])
+        default: throw Error.ExtraArguments
+        }
     }
 }
