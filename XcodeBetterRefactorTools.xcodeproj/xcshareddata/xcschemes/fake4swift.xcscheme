@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "960FA08E1605819F00923A87"
-               BuildableName = "XcodeBetterRefactorTools.xcplugin"
-               BlueprintName = "XcodeBetterRefactorTools"
+               BlueprintIdentifier = "34A32EBF1C433A2B009D3FA6"
+               BuildableName = "fake4swift.app"
+               BlueprintName = "fake4swift"
                ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "34A32EBF1C433A2B009D3FA6"
+            BuildableName = "fake4swift.app"
+            BlueprintName = "fake4swift"
+            ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,12 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/usr/local/bin/fake4swift">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "960FA08E1605819F00923A87"
-            BuildableName = "XcodeBetterRefactorTools.xcplugin"
-            BlueprintName = "XcodeBetterRefactorTools"
+            BlueprintIdentifier = "34A32EBF1C433A2B009D3FA6"
+            BuildableName = "fake4swift.app"
+            BlueprintName = "fake4swift"
             ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,15 +73,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "960FA08E1605819F00923A87"
-            BuildableName = "XcodeBetterRefactorTools.xcplugin"
-            BlueprintName = "XcodeBetterRefactorTools"
+            BlueprintIdentifier = "34A32EBF1C433A2B009D3FA6"
+            BuildableName = "fake4swift.app"
+            BlueprintName = "fake4swift"
             ReferencedContainer = "container:XcodeBetterRefactorTools.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
