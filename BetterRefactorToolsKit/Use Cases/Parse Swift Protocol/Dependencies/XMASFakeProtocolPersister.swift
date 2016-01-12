@@ -9,12 +9,14 @@ import Foundation
         self.protocolFaker = protocolFaker
     }
 
+    let generatedFakesDir = "fakes"
+
     @objc public func persistFakeForProtocol(
         protocolDecl : ProtocolDeclaration,
-        nearSourceFile: String) throws
+        nearSourceFile: String) throws -> FakeProtocolPersistResults
     {
         let dirContainingSource = (nearSourceFile as NSString).stringByDeletingLastPathComponent
-        let fakesDir = (dirContainingSource as NSString).stringByAppendingPathComponent("fakes")
+        let fakesDir = (dirContainingSource as NSString).stringByAppendingPathComponent(generatedFakesDir)
 
         let fakeFileName = ["Fake", protocolDecl.name, ".swift"].joinWithSeparator("")
         let pathToFake = (fakesDir as NSString).stringByAppendingPathComponent(fakeFileName)
@@ -35,5 +37,22 @@ import Foundation
         } catch let error as NSError {
             throw error
         }
+
+        return FakeProtocolPersistResults.init(
+            path: pathToFake,
+            containingDir: generatedFakesDir
+        )
+    }
+}
+
+@objc public class FakeProtocolPersistResults : NSObject {
+    private(set) public var pathToFake : String
+    private(set) public var directoryName : String
+
+    public init(path: String, containingDir: String) {
+        pathToFake = path
+        directoryName = containingDir
+
+        super.init()
     }
 }

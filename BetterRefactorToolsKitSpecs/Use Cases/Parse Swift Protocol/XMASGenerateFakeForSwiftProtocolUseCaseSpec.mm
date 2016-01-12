@@ -69,9 +69,9 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
         context(@"but an error occurs persisting the fake", ^{
             beforeEach(^{
                 fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:error:))
-                    .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl, NSString *file, NSError **error) {
+                    .and_do_block(^FakeProtocolPersistResults *(ProtocolDeclaration *protocolDecl, NSString *file, NSError **error) {
                         *error = [NSError errorWithDomain:@"SpecsDomain" code:12 userInfo:nil];
-                        return NO;
+                        return nil;
                     });
             });
 

@@ -23,7 +23,7 @@ describe(@"XMASFakeProtocolPersister", ^{
                                                                fileManager:fileManager];
     });
 
-    NSString *pathToFixture = @"/tmp/pretend/this/is/real";
+    NSString *pathToFixture = @"/tmp/pretend/this/is/real/SpecialTester.swift";
     ProtocolDeclaration *protocolDecl = [[ProtocolDeclaration alloc] initWithName:@"SpecialTester"
                                                                    containingFile:@""
                                                                       rangeInFile:NSMakeRange(0, 0)
@@ -45,21 +45,30 @@ describe(@"XMASFakeProtocolPersister", ^{
 
         beforeEach(^{
             fileManager stub_method(@selector(fileExistsAtPath:isDirectory:)).and_return(NO);
-            fileManager stub_method(@selector(createDirectoryAtPath:withIntermediateDirectories:attributes:error:))
-                .and_return(YES);
+            fileManager stub_method(@selector(createDirectoryAtPath:
+                                              withIntermediateDirectories:
+                                              attributes:error:)).and_return(YES);
             fileManager stub_method(@selector(createFileAtPath:contents:attributes:));
         });
 
         context(@"when the fake can be created", ^{
             __block NSError *error;
+            __block FakeProtocolPersistResults *result;
 
             beforeEach(^{
                 error = nil;
-                [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:&error];
+                result = [subject persistFakeForProtocol:protocolDecl
+                                          nearSourceFile:pathToFixture
+                                                   error:&error];
             });
 
             it(@"should have completed successfully", ^{
                 error should be_nil;
+            });
+
+            it(@"should return the path to the fake and its containing dir", ^{
+                result.pathToFake should equal(@"/tmp/pretend/this/is/real/fakes/FakeSpecialTester.swift");
+                result.directoryName should equal(@"fakes");
             });
 
             it(@"should create the directory through its file manager", ^{
@@ -77,7 +86,9 @@ describe(@"XMASFakeProtocolPersister", ^{
                 fileManager should have_received(@selector(createFileAtPath:contents:attributes:))
                     .with(expectedPath, Arguments::anything, Arguments::anything);
 
-                NSArray *messages = [fileManager sent_messages_with_selector:@selector(createFileAtPath:contents:attributes:)];
+                NSArray *messages = [fileManager sent_messages_with_selector:@selector(createFileAtPath:
+                                                                                       contents:
+                                                                                       attributes:)];
                 NSInvocation *invocation = messages.firstObject;
 
                 __unsafe_unretained NSData *receivedData;
