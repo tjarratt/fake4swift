@@ -1359,15 +1359,9 @@
 		F747F80B1C33BAA60040827B /* Parse Swift Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				F7FCC2481C35226F00263EED /* XMASFakeProtocolPersister.swift */,
-				F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */,
+				F787437D1C457204001DCFE7 /* Dependencies */,
 				F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */,
 				F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */,
-				F747F8161C33BE7C0040827B /* XMASParseSelectedProtocolWorkFlow.swift */,
-				F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */,
-				F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */,
-				F747F8111C33BC980040827B /* XMASSwiftParser.swift */,
-				F7FCC23B1C351A5E00263EED /* XMASSwiftProtocolFaker.swift */,
 			);
 			name = "Parse Swift Protocol";
 			sourceTree = "<group>";
@@ -1439,6 +1433,21 @@
 				F76511361BE9FAD200BFDAD8 /* NimbleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F787437D1C457204001DCFE7 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F7FCC2481C35226F00263EED /* XMASFakeProtocolPersister.swift */,
+				F7FB6F231C37C35900BC75AF /* XMASFileManager.swift */,
+				F747F8161C33BE7C0040827B /* XMASParseSelectedProtocolWorkFlow.swift */,
+				F747F80C1C33BAD50040827B /* XMASSelectedProtocolOracle.swift */,
+				F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */,
+				F747F8111C33BC980040827B /* XMASSwiftParser.swift */,
+				F7FCC23B1C351A5E00263EED /* XMASSwiftProtocolFaker.swift */,
+				F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		F798374F1B365C8F000F1EBD /* Menu Additions */ = {
