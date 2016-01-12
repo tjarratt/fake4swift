@@ -7,7 +7,7 @@ import BetterRefactorToolsKit
     }
 
     @objc func flashComfortingMessageForError(error: NSError!) {
-        print("ruh roh!")
+        print("Error: \(error.localizedDescription)")
     }
 
     @objc func flashComfortingMessageForException(exception: NSException!) {
