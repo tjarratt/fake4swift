@@ -16,7 +16,7 @@ import Foundation
         let dirContainingSource = (nearSourceFile as NSString).stringByDeletingLastPathComponent
         let fakesDir = (dirContainingSource as NSString).stringByAppendingPathComponent("fakes")
 
-        let fakeFileName : String = "Fake".stringByAppendingString(protocolDecl.name).stringByAppendingString(".swift")
+        let fakeFileName = ["Fake", protocolDecl.name, ".swift"].joinWithSeparator("")
         let pathToFake = (fakesDir as NSString).stringByAppendingPathComponent(fakeFileName)
 
         if !fileManager.fileExistsAtPath(fakesDir as String, isDirectory: nil) {
