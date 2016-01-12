@@ -1,28 +1,39 @@
 import Foundation
 import BetterRefactorToolsKit
 
-let alerter = TerminalAlerter.init()
-let logger = XMASLogger.init()
-let bundle = NSBundle.init(forClass: XMASSwiftProtocolFaker.self)
+let selectedFile: String
+let selectedProtocol: String?
 
-let selectedProtocolOracle = SelectedProtocolFromArgs.init()
-let selectedTextWorkflow = XMASParseSelectedProtocolWorkFlow.init(
-    protocolOracle: selectedProtocolOracle
+do {
+    (selectedFile, selectedProtocol) = try ArgsParser(args: Process.arguments).parse()
+} catch let e {
+    print(
+        e,
+        "",
+        "Usage:",
+        "fake4swift source_file.swift [protocol_name]",
+        "",
+        separator: "\n"
+    )
+    exit(1)
+}
+
+let selectedTextWorkflow = XMASParseSelectedProtocolWorkFlow(
+    protocolOracle: SelectedProtocolOracle(protocolToFake: selectedProtocol)
 )
 
-let protocolFaker = XMASSwiftProtocolFaker.init(bundle: bundle)
-let fakeProtocolPersister = XMASFakeProtocolPersister.init(
+let bundle = NSBundle(forClass: XMASSwiftProtocolFaker.self)
+let protocolFaker = XMASSwiftProtocolFaker(bundle: bundle)
+let fakeProtocolPersister = XMASFakeProtocolPersister(
     protocolFaker: protocolFaker,
-    fileManager: NSFileManager.init()
+    fileManager: NSFileManager()
 )
 
-let selectedFileOracle = SelectedClassFromArgs.init()
-
-let useCase = XMASGenerateFakeForSwiftProtocolUseCase.init(
-    alerter: alerter,
-    logger: logger,
+let useCase = XMASGenerateFakeForSwiftProtocolUseCase(
+    alerter: TerminalAlerter(),
+    logger: XMASLogger(),
     parseSelectedProtocolWorkFlow: selectedTextWorkflow,
     fakeProtocolPersister: fakeProtocolPersister,
-    selectedSourceFileOracle: selectedFileOracle)
+    selectedSourceFileOracle: SelectedSourceFileOracle(selectedSourceFilePath: selectedFile))
 
 useCase.safelyGenerateFakeForSelectedProtocol()
