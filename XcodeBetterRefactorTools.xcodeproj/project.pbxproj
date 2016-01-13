@@ -16,6 +16,7 @@
 		34A32EDC1C433DCC009D3FA6 /* Blindside.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34A32EDF1C433DDC009D3FA6 /* SourceKittenFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34A32EE01C433DE1009D3FA6 /* SwiftXPC.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		34C263731C44977B00CCBDBB /* Oracles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C263721C44977B00CCBDBB /* Oracles.swift */; };
 		960FA0A2160584AC00923A87 /* XMASBetterRefactorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 960FA0A1160584AC00923A87 /* XMASBetterRefactorTools.m */; };
 		960FA0A51605858E00923A87 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
 		969FAA5216224F4700E48B0A /* XMASEditMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969FAA5116224F4700E48B0A /* XMASEditMenu.m */; };
@@ -819,6 +820,7 @@
 /* Begin PBXFileReference section */
 		34A32EC01C433A2B009D3FA6 /* fake4swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fake4swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A32EC91C433A2B009D3FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34C263721C44977B00CCBDBB /* Oracles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Oracles.swift; sourceTree = "<group>"; };
 		960FA08F1605819F00923A87 /* XcodeBetterRefactorTools.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeBetterRefactorTools.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		960FA0921605819F00923A87 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		960FA0961605819F00923A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1234,9 +1236,10 @@
 		F71748FB1C390F4800A1D7EA /* fake4swift */ = {
 			isa = PBXGroup;
 			children = (
-				F71748FC1C390F4900A1D7EA /* main.swift */,
-				F71749121C3A47CE00A1D7EA /* TerminalAlerter.swift */,
 				F71749141C3A47FA00A1D7EA /* ArgsParser.swift */,
+				F71748FC1C390F4900A1D7EA /* main.swift */,
+				34C263721C44977B00CCBDBB /* Oracles.swift */,
+				F71749121C3A47CE00A1D7EA /* TerminalAlerter.swift */,
 				34A32EC91C433A2B009D3FA6 /* Info.plist */,
 			);
 			path = fake4swift;
@@ -2339,6 +2342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34A32ECD1C433BE8009D3FA6 /* main.swift in Sources */,
+				34C263731C44977B00CCBDBB /* Oracles.swift in Sources */,
 				34A32ECF1C433BE8009D3FA6 /* ArgsParser.swift in Sources */,
 				34A32ECE1C433BE8009D3FA6 /* TerminalAlerter.swift in Sources */,
 			);
