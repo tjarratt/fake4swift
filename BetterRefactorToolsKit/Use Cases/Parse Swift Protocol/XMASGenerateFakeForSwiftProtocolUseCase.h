@@ -7,6 +7,7 @@
 
 @protocol XMASAlerter;
 @protocol XMASSelectedSourceFileOracle;
+@protocol XMASAddFileToXcodeProjectWorkflow;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
                          logger:(XMASLogger *)logger
               parseSelectedProtocolWorkFlow:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolWorkFlow
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-       selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle NS_DESIGNATED_INITIALIZER;
+       selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle
+                addFileWorkflow:(nullable id<XMASAddFileToXcodeProjectWorkflow>)addFileWorkflow NS_DESIGNATED_INITIALIZER;
 
 - (void)safelyGenerateFakeForSelectedProtocol;
 
@@ -25,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic, readonly) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
 @property (nonatomic, readonly) XMASParseSelectedProtocolWorkFlow *selectedProtocolWorkFlow;
+@property (nonatomic, readonly, nullable) id<XMASAddFileToXcodeProjectWorkflow> addFileWorkflow;
 
 @end
 

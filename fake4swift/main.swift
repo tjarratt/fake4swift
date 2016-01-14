@@ -23,6 +23,7 @@ let useCase = XMASGenerateFakeForSwiftProtocolUseCase.init(
     logger: logger,
     parseSelectedProtocolWorkFlow: selectedTextWorkflow,
     fakeProtocolPersister: fakeProtocolPersister,
-    selectedSourceFileOracle: selectedFileOracle)
+    selectedSourceFileOracle: selectedFileOracle,
+    addFileWorkflow: nil)
 
 useCase.safelyGenerateFakeForSelectedProtocol()

@@ -13,6 +13,7 @@
 #import "XMASObjcMethodDeclarationParser.h"
 #import "XMASOpenXcodeFileOracle.h"
 #import "XMASChangeMethodSignatureControllerProvider.h"
+#import "XMASXcodeProjectFileRepository.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -50,6 +51,7 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         generateFakeAction.selectedProtocolWorkFlow should be_instance_of([XMASParseSelectedProtocolWorkFlow class]);
         generateFakeAction.fakeProtocolPersister should be_instance_of([XMASFakeProtocolPersister class]);
         generateFakeAction.selectedSourceFileOracle should conform_to(@protocol(XMASSelectedSourceFileOracle));
+        generateFakeAction.addFileWorkflow should conform_to(@protocol(XMASAddFileToXcodeProjectWorkflow));
     });
 
     it(@"should provide a Swift Protocol Faker", ^{
@@ -80,6 +82,11 @@ describe(@"the better refactor tools Xcode Plugin module", ^{
         oracle should_not be_nil;
         oracle should conform_to(@protocol(XMASSelectedProtocolOracle));
         oracle.xcodeRepository should be_instance_of([XMASXcodeRepository class]);
+    });
+
+    it(@"should provide a workflow for adding files to xcode", ^{
+        XMASXcodeProjectFileRepository *projectFileRepository = [injector getInstance:[XMASXcodeProjectFileRepository class]];
+        projectFileRepository.xcodeRepository should be_instance_of([XMASXcodeRepository class]);
     });
 });
 

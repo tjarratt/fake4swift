@@ -20,6 +20,7 @@
 #import "XMASOpenXcodeFileOracle.h"
 #import "SwiftCompatibilityHeader.h"
 #import "XMASXcodeBezelAlertPanel.h"
+#import "XMASXcodeProjectFileRepository.h"
 
 static XMASRefactorMethodAction *action;
 
@@ -30,6 +31,11 @@ static XMASRefactorMethodAction *action;
         return [[XMASXcodeBezelAlertPanel alloc] init];
     }];
     [binder bind:@protocol(XMASAlerter) withScope:[BSSingleton scope]];
+
+    [binder bind:[XMASXcodeProjectFileRepository class] toBlock:^id(NSArray * args, id<BSInjector>  injector) {
+        XMASXcodeRepository *repo = [injector getInstance:[XMASXcodeRepository class]];
+        return [[XMASXcodeProjectFileRepository alloc] initWithXcodeRepository:repo];
+    }];
 
     [binder bind:[XMASRefactorMethodAction class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
@@ -50,11 +56,19 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:[XMASGenerateFakeForSwiftProtocolUseCase class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
-        return [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:[injector getInstance:@protocol(XMASAlerter)]
-                                                                         logger:[injector getInstance:[XMASLogger class]]
-                                                  parseSelectedProtocolWorkFlow:[injector getInstance:[XMASParseSelectedProtocolWorkFlow class]]
-                                                          fakeProtocolPersister:[injector getInstance:[XMASFakeProtocolPersister class]]
-                                                       selectedSourceFileOracle:[injector getInstance:[XMASOpenXcodeFileOracle class]]];
+        id<XMASAlerter> alerter = [injector getInstance:@protocol(XMASAlerter)];
+        XMASLogger *logger = [injector getInstance:[XMASLogger class]];
+        XMASParseSelectedProtocolWorkFlow *parseProtocolWorkflow = [injector getInstance:[XMASParseSelectedProtocolWorkFlow class]];
+        XMASFakeProtocolPersister *protocolPersister = [injector getInstance:[XMASFakeProtocolPersister class]];
+        XMASOpenXcodeFileOracle *selectedFileOracle = [injector getInstance:[XMASOpenXcodeFileOracle class]];
+        id<XMASAddFileToXcodeProjectWorkflow> addFileWorkflow = [injector getInstance:[XMASXcodeProjectFileRepository class]];
+
+        return [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
+                                                                         logger:logger
+                                                  parseSelectedProtocolWorkFlow:parseProtocolWorkflow
+                                                          fakeProtocolPersister:protocolPersister
+                                                       selectedSourceFileOracle:selectedFileOracle
+                                                                addFileWorkflow:addFileWorkflow];
     }];
 
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {

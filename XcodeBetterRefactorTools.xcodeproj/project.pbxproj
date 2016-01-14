@@ -121,6 +121,11 @@
 		F76B9B781B23F3050028AC9A /* ClangKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F786558A1BE4A77E00BB3026 /* Blindside.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78655911BE4AD4500BB3026 /* ProtocolEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F79FF67F1BDF64DA0058EFE0 /* ProtocolEdgeCases.swift */; };
+		F78743A71C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */; };
+		F78743A81C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */; };
+		F78743BB1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F78743BA1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m */; };
+		F78743BC1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F78743BA1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m */; };
+		F78743E61C463754001DCFE7 /* XMASXcodeProjectFileRepositorySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F78743E51C463754001DCFE7 /* XMASXcodeProjectFileRepositorySpec.mm */; };
 		F78BDE551BC3A05C00AFB7D9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960FA0A31605858400923A87 /* AppKit.framework */; };
 		F78E4F551B23F29000FC845C /* ClangKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E491F61B23EBC400BE3A61 /* ClangKit.framework */; };
 		F798375D1B365CAE000F1EBD /* XMASEditMenuSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */; };
@@ -909,6 +914,10 @@
 		F76511041BE9FAC800BFDAD8 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		F76511221BE9FAD100BFDAD8 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeMySomewhatSpecialProtocolSpec.swift; sourceTree = "<group>"; };
+		F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASAddFileToXcodeProjectWorkflow.swift; sourceTree = "<group>"; };
+		F78743B91C46323C001DCFE7 /* XMASXcodeProjectFileRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASXcodeProjectFileRepository.h; sourceTree = "<group>"; };
+		F78743BA1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASXcodeProjectFileRepository.m; sourceTree = "<group>"; };
+		F78743E51C463754001DCFE7 /* XMASXcodeProjectFileRepositorySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASXcodeProjectFileRepositorySpec.mm; sourceTree = "<group>"; };
 		F798375C1B365CAE000F1EBD /* XMASEditMenuSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEditMenuSpec.mm; sourceTree = "<group>"; };
 		F79AAFAD1B819EF800F7D2C5 /* InjectorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InjectorSpec.mm; sourceTree = "<group>"; };
 		F79EE3FF1C3D05CC00AE83F0 /* swift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swift.png; sourceTree = "<group>"; };
@@ -1142,6 +1151,7 @@
 			children = (
 				AE0C00CD1B7134A70065C099 /* XMASSearchPathExpanderSpec.mm */,
 				F71308081C328466002D04E0 /* XMASXcodeCursorSelectionOracleSpec.mm */,
+				F78743E51C463754001DCFE7 /* XMASXcodeProjectFileRepositorySpec.mm */,
 				AE2FC66C1B74101700194E4C /* XMASXcodeTargetSearchPathResolverSpec.mm */,
 			);
 			path = "Xcode Additions";
@@ -1294,8 +1304,8 @@
 		F72C17AA1C33C366002B7FD9 /* BetterRefactorToolsKitSpecs */ = {
 			isa = PBXGroup;
 			children = (
-				F72C17FE1C33C795002B7FD9 /* Use Cases */,
 				F72C17AE1C33C366002B7FD9 /* Supporting Files */,
+				F72C17FE1C33C795002B7FD9 /* Use Cases */,
 			);
 			path = BetterRefactorToolsKitSpecs;
 			sourceTree = "<group>";
@@ -1503,6 +1513,8 @@
 				F7B1D2871B5C5F7900C28AE7 /* XMASXcodeRepository.m */,
 				AEDD2DFA1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.h */,
 				AEDD2DFB1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m */,
+				F78743B91C46323C001DCFE7 /* XMASXcodeProjectFileRepository.h */,
+				F78743BA1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m */,
 			);
 			path = "Xcode Additions";
 			sourceTree = "<group>";
@@ -2355,6 +2367,7 @@
 				F7BEDD1A1B5C5FB800A4704B /* XMASWindowProvider.m in Sources */,
 				F7D01C071B5C602700FE62DA /* XMASObjcMethodCall.m in Sources */,
 				F7D01C131B5C603700FE62DA /* XMASComponentSwapper.m in Sources */,
+				F78743BB1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m in Sources */,
 				F7D01C051B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,
 				F7D01C091B5C602700FE62DA /* XMASObjcMethodCallParser.m in Sources */,
 				F71E82BE1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m in Sources */,
@@ -2398,6 +2411,7 @@
 				F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm in Sources */,
 				F75C4B1D1C37C01A00615FFF /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */,
 				F75C4B231C37C0F500615FFF /* XMASSelectedSourceFileOracle.swift in Sources */,
+				F78743A81C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */,
 				F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */,
 				F7FCC23D1C351A6300263EED /* XMASSwiftProtocolFaker.swift in Sources */,
 				F7FCC23A1C3519F900263EED /* XMASFakeProtocolPersisterSpec.mm in Sources */,
@@ -2409,6 +2423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F70354181C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */,
+				F78743A71C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */,
 				F747F80D1C33BAD50040827B /* XMASSelectedProtocolOracle.swift in Sources */,
 				F7F670691C312B96007DDF2E /* XMASLogger.swift in Sources */,
 				F747F8101C33BBAB0040827B /* SwiftProtocolDeclaration.swift in Sources */,
@@ -2450,6 +2465,7 @@
 				F73511B71B2559F100104F8C /* XMASObjcTypeParserSpec.mm in Sources */,
 				F7B550811B294CEB006E59F9 /* XMASChangeMethodSignatureControllerProviderSpec.mm in Sources */,
 				AE0C00E81B7176630065C099 /* XMASTokenizer.m in Sources */,
+				F78743BC1C46323C001DCFE7 /* XMASXcodeProjectFileRepository.m in Sources */,
 				F79FF6801BDF64DA0058EFE0 /* ProtocolEdgeCases.swift in Sources */,
 				F71308071C327679002D04E0 /* XMASXcodeCursorSelectionOracle.swift in Sources */,
 				F7B4B4DE1B8AF27B00A71960 /* XMASObjcClassForwardDeclarationWriterSpec.mm in Sources */,
@@ -2490,6 +2506,7 @@
 				AE0C00D21B7134DF0065C099 /* XMASSearchPathExpander.m in Sources */,
 				F7D01C1A1B5C603700FE62DA /* XMASObjcMethodDeclarationParser.m in Sources */,
 				AEDD2DFD1B6FF65300E736A8 /* XMASXcodeTargetSearchPathResolver.m in Sources */,
+				F78743E61C463754001DCFE7 /* XMASXcodeProjectFileRepositorySpec.mm in Sources */,
 				F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */,
 				F7DB97301BEFFC3000A9C474 /* FakeForMyMutatingProtocol.swift in Sources */,
 				F7D01C061B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.m in Sources */,

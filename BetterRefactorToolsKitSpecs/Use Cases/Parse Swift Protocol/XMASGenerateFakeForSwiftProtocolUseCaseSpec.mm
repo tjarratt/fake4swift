@@ -17,6 +17,7 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
     __block XMASFakeProtocolPersister *fakeProtocolPersister;
     __block id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
     __block XMASParseSelectedProtocolWorkFlow *parseProtocolWorkFlow;
+    __block id<XMASAddFileToXcodeProjectWorkflow> addFileWorkflow;
 
     beforeEach(^{
         alerter = nice_fake_for(@protocol(XMASAlerter));
@@ -24,12 +25,14 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
         parseProtocolWorkFlow = nice_fake_for([XMASParseSelectedProtocolWorkFlow class]);
         fakeProtocolPersister = nice_fake_for([XMASFakeProtocolPersister class]);
         selectedSourceFileOracle = nice_fake_for(@protocol(XMASSelectedSourceFileOracle));
+        addFileWorkflow = nice_fake_for(@protocol(XMASAddFileToXcodeProjectWorkflow));
 
         subject = [[XMASGenerateFakeForSwiftProtocolUseCase alloc] initWithAlerter:alerter
                                                                             logger:logger
                                                      parseSelectedProtocolWorkFlow:parseProtocolWorkFlow
                                                              fakeProtocolPersister:fakeProtocolPersister
-                                                          selectedSourceFileOracle:selectedSourceFileOracle];
+                                                          selectedSourceFileOracle:selectedSourceFileOracle
+                                                                   addFileWorkflow:addFileWorkflow];
     });
 
     subjectAction(^{
@@ -48,6 +51,11 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
 
             selectedSourceFileOracle stub_method(@selector(selectedFilePath))
                 .and_return(@"/path/to/something.swift");
+
+            FakeProtocolPersistResults *result = [[FakeProtocolPersistResults alloc] initWithPath:@"/this/that/fake/cool.swift"
+                                                                                    containingDir:@"fake"];
+            fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:error:))
+                .and_return(result);
         });
 
         context(@"and the fake can be persisted to disk", ^{
@@ -58,6 +66,17 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                     .and_with(Arguments::anything);
             });
 
+            it(@"should add the file and its group to the xcode project", ^{
+                addFileWorkflow should have_received(@selector(addFileToXcode:
+                                                               alongsideFileNamed:
+                                                               directory:
+                                                               error:)).with(
+                                                                             @"/this/that/fake/cool.swift",
+                                                                             @"/path/to/something.swift",
+                                                                             @"fake",
+                                                                             Arguments::anything);
+            });
+
             it(@"should alert the user the action succeeded", ^{
                 alerter should have_received(@selector(flashMessage:withImage:shouldLogMessage:))
                     .with(@"Success!",
@@ -66,9 +85,29 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
             });
         });
 
+        context(@"but an error occurs adding the project to xcode", ^{
+            NSError *expectedError = [NSError errorWithDomain:@"whoops" code:999 userInfo:nil];
+            beforeEach(^{
+                addFileWorkflow stub_method(@selector(addFileToXcode:
+                                                      alongsideFileNamed:
+                                                      directory:
+                                                      error:))
+                    .and_do_block(^BOOL(NSString *file, NSString *nearFile, NSString *directory, NSError **error) {
+                        *error = expectedError;
+                        return NO;
+                    });
+            });
+
+            it(@"should alert the user the action failed", ^{
+                alerter should have_received(@selector(flashComfortingMessageForError:))
+                    .with(expectedError);
+            });
+        });
+
         context(@"but an error occurs persisting the fake", ^{
             beforeEach(^{
                 fakeProtocolPersister stub_method(@selector(persistFakeForProtocol:nearSourceFile:error:))
+                    .again()
                     .and_do_block(^FakeProtocolPersistResults *(ProtocolDeclaration *protocolDecl, NSString *file, NSError **error) {
                         *error = [NSError errorWithDomain:@"SpecsDomain" code:12 userInfo:nil];
                         return nil;

@@ -3,7 +3,7 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASXcodeRepository.h"
-
+#import <objc/runtime.h>
 
 @interface XMASEditMenu ()
 

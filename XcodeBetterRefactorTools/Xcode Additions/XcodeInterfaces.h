@@ -34,12 +34,19 @@
 
 #pragma mark - File References
 
-@protocol XCP(DVTFilePath)
+@protocol XCP(DVTFilePath)<NSCopying>
+- (NSString *)name;
 - (NSString *)pathString;
+@end
+
+@protocol XCP(PBXGroup)
+- (void)addFiles:(id)files copy:(BOOL)shouldCopy createGroupsRecursively:(BOOL)shouldCreateGroups;
+- (id)itemNamed:(NSString *)name;
 @end
 
 @protocol XCP(Xcode3FileReference)
 - (XC(DVTFilePath))resolvedFilePath;
+- (XC(PBXGroup))reference;
 @end
 
 #pragma mark - Run contexts and destinations
@@ -111,6 +118,7 @@
 - (XC(RunContextManager))runContextManager;
 - (XC(DVTFilePath))representingFilePath;
 - (id)referencedBlueprints;
+- (NSDictionary *)_fileRefsToResolvedFilePaths;
 @end
 
 @protocol XCP(IDEWorkspace);

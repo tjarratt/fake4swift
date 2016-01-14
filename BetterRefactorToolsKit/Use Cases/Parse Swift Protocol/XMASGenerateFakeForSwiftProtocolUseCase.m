@@ -1,3 +1,4 @@
+#import <BetterRefactorToolsKit/BetterRefactorToolsKit.h>
 #import <BetterRefactorToolsKit/BetterRefactorToolsKit-Swift.h>
 
 #import "XMASGenerateFakeForSwiftProtocolUseCase.h"
@@ -15,6 +16,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 @property (nonatomic) XMASFakeProtocolPersister *fakeProtocolPersister;
 @property (nonatomic) id<XMASSelectedSourceFileOracle> selectedSourceFileOracle;
 @property (nonatomic) XMASParseSelectedProtocolWorkFlow *selectedProtocolWorkFlow;
+@property (nonatomic, nullable) id<XMASAddFileToXcodeProjectWorkflow> addFileWorkflow;
 
 @end
 
@@ -23,15 +25,17 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
 - (instancetype)initWithAlerter:(id<XMASAlerter>)alerter
                          logger:(XMASLogger *)logger
-              parseSelectedProtocolWorkFlow:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolWorkFlow
+  parseSelectedProtocolWorkFlow:(XMASParseSelectedProtocolWorkFlow *)selectedProtocolWorkFlow
           fakeProtocolPersister:(XMASFakeProtocolPersister *)fakeProtocolPersister
-       selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle {
+       selectedSourceFileOracle:(id<XMASSelectedSourceFileOracle>)selectedSourceFileOracle
+                addFileWorkflow:(id<XMASAddFileToXcodeProjectWorkflow>)addFileWorkflow {
     if (self = [super init]) {
         self.logger = logger;
         self.alerter = alerter;
         self.fakeProtocolPersister = fakeProtocolPersister;
         self.selectedProtocolWorkFlow = selectedProtocolWorkFlow;
         self.selectedSourceFileOracle = selectedSourceFileOracle;
+        self.addFileWorkflow = addFileWorkflow;
     }
 
     return self;
@@ -85,9 +89,18 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
         return;
     }
 
-    [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol
-                                        nearSourceFile:currentFilePath
-                                                 error:&error];
+    FakeProtocolPersistResults *results = [self.fakeProtocolPersister persistFakeForProtocol:selectedProtocol
+                                                                              nearSourceFile:currentFilePath
+                                                                                       error:&error];
+    if (error != nil) {
+        [self.alerter flashComfortingMessageForError:error];
+        return;
+    }
+
+    [self.addFileWorkflow addFileToXcode:results.pathToFake
+                      alongsideFileNamed:currentFilePath
+                               directory:results.directoryName
+                                   error:&error];
     if (error != nil) {
         [self.alerter flashComfortingMessageForError:error];
         return;
