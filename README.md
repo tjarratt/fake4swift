@@ -104,3 +104,8 @@ Plugin can be uninstalled by removing `XcodeBetterRefactorTools.xcplugin` from `
 or
 
 `rake uninstall`
+
+# Would not have been possible without the hard work of
+* Brian Croom -- fixed obnoxious `fake4swift` CLI warnings
+* Helen Tang -- created the 'fake mustache' icon (disguise by Helen Tseng from the Noun Project)
+* Ludmil -- created the 'swift' icon (swallow by ludmil from the Noun Project)
