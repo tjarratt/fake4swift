@@ -3,6 +3,7 @@ import Nimble
 
 class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
     override func spec() {
+
         describe("a generated fake for a contrived protocol") {
             var subject : FakeMySomewhatSpecialProtocol!
 
@@ -175,7 +176,6 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     beforeEach() {
                         subject.soulOfAFunkyStub = {(_ : String?) throws -> String? in
                             throw NSError.init(domain: "", code: 0, userInfo: nil)
-                            return "hai"
                         }
                     }
 
@@ -184,6 +184,12 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                             try subject.soulOfAFunky("sup")
                         }.to(throwError())
                     }
+                }
+            }
+
+            describe("equality") {
+                it("should be equal to itself") {
+                    expect(subject).to(equal(subject));
                 }
             }
         }
