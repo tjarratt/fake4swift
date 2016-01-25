@@ -41,6 +41,12 @@ class FakeMyMutatingProtocolSpec: QuickSpec {
                     "UP FROM THE THIRTY SIX CHAMBERS. IT'S THE GHOST"
                 ))
             }
+
+            describe("equality") {
+                it("should be equal to itself") {
+                    expect(subject).to(equal(subject));
+                }
+            }
         }
     }
 }
