@@ -169,6 +169,8 @@
 		F7C74C161C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C74C151C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm */; };
 		F7C74C181C57E864001F9CE6 /* MySpecialStruct+Equatable.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7C74C171C57E82E001F9CE6 /* MySpecialStruct+Equatable.swift */; };
 		F7C74C1A1C57EF17001F9CE6 /* MySpecialStructEquatableExtension.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7C74C191C57EEFF001F9CE6 /* MySpecialStructEquatableExtension.swift */; };
+		F7C74C2A1C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C74C291C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm */; };
+		F7C74C5D1C580821001F9CE6 /* TempFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE1B5931B6945B700CC8AFE /* TempFileHelper.m */; };
 		F7C928C81C3906BB0057BA19 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
@@ -982,6 +984,7 @@
 		F7C74C151C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEquatableTemplateStamperSpec.mm; sourceTree = "<group>"; };
 		F7C74C171C57E82E001F9CE6 /* MySpecialStruct+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySpecialStruct+Equatable.swift"; sourceTree = "<group>"; };
 		F7C74C191C57EEFF001F9CE6 /* MySpecialStructEquatableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpecialStructEquatableExtension.swift; sourceTree = "<group>"; };
+		F7C74C291C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASEquatableWriterSpec.mm; sourceTree = "<group>"; };
 		F7D01BFB1B5C601700FE62DA /* XMASObjcTypeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcTypeParser.h; sourceTree = "<group>"; };
 		F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcTypeParser.m; sourceTree = "<group>"; };
 		F7D01BFF1B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcCallExpressionTokenFilter.h; sourceTree = "<group>"; };
@@ -1680,6 +1683,7 @@
 			children = (
 				F7C74C041C57570C001F9CE6 /* XMASParseSelectedStructWorkflowSpec.mm */,
 				F7C74C151C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm */,
+				F7C74C291C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm */,
 			);
 			path = "Implement Equatable";
 			sourceTree = "<group>";
@@ -2482,6 +2486,7 @@
 				F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */,
 				F7C74C161C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm in Sources */,
 				F72C18051C33C844002B7FD9 /* SwiftProtocolDeclaration.swift in Sources */,
+				F7C74C5D1C580821001F9CE6 /* TempFileHelper.m in Sources */,
 				F7FB6F251C37C35900BC75AF /* XMASFileManager.swift in Sources */,
 				F72C18011C33C7FB002B7FD9 /* XMASParseSelectedProtocolWorkFlowSpec.mm in Sources */,
 				F7C74C111C57E42C001F9CE6 /* XMASEquatableWriter.swift in Sources */,
@@ -2493,6 +2498,7 @@
 				F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm in Sources */,
 				F75C4B1D1C37C01A00615FFF /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */,
 				F75C4B231C37C0F500615FFF /* XMASSelectedSourceFileOracle.swift in Sources */,
+				F7C74C2A1C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm in Sources */,
 				F7C74BFF1C57550C001F9CE6 /* XMASSelectedStructOracle.swift in Sources */,
 				F78743A81C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */,
 				F7C74C141C57E4B2001F9CE6 /* XMASEquatableTemplateStamper.swift in Sources */,
