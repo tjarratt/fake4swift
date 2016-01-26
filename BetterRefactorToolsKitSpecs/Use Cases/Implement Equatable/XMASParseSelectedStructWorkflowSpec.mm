@@ -43,13 +43,13 @@ describe(@"XMASParseSelectedStructWorkflow", ^{
         });
 
         it(@"should parse the field names in the struct", ^{
-            structDeclaration.fieldNames should equal(@[@"name"]);
+            structDeclaration.fieldNames should equal(@[@"name", @"age"]);
         });
 
         it(@"should ask its selected struct oracle if each struct is selected", ^{
             StructDeclaration *expectedStructDecl = [[StructDeclaration alloc] initWithName:@"MySpecialStruct"
                                                                                    filePath:fixturePath
-                                                                                     fields:@[@"name"]];
+                                                                                     fields:@[@"name", @"age"]];
             selectedStructOracle should have_received(@selector(isStructSelected:))
                 .with(expectedStructDecl);
         });
