@@ -1354,10 +1354,10 @@
 		F747F8091C33BA860040827B /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
+				F7C74BC51C57516B001F9CE6 /* Implement Equatable */,
 				F747F80B1C33BAA60040827B /* Parse Swift Protocol */,
 			);
-			name = "Use Cases";
-			path = "Use Cases/Parse Swift Protocol";
+			path = "Use Cases";
 			sourceTree = "<group>";
 		};
 		F747F80A1C33BA950040827B /* Supporting Files */ = {
@@ -1376,7 +1376,7 @@
 				F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */,
 				F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */,
 			);
-			name = "Parse Swift Protocol";
+			path = "Parse Swift Protocol";
 			sourceTree = "<group>";
 		};
 		F747F80E1C33BAF60040827B /* Entities */ = {
