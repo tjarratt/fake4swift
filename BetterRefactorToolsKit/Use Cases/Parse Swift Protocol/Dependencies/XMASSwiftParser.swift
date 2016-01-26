@@ -3,12 +3,50 @@ import SwiftXPC
 
 struct XMASSwiftParser {
     let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
+    let structDeclKind     : String = "source.lang.swift.decl.struct"
     let instanceVarKind    : String = "source.lang.swift.decl.var.instance"
     let staticVarKind      : String = "source.lang.swift.decl.var.static"
     let instanceMethodKind : String = "source.lang.swift.decl.function.method.instance"
     let staticMethodKind   : String = "source.lang.swift.decl.function.method.static"
     let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
+    // MARK: Structs
+    func parseStructDeclaration(dict: XPCDictionary, filePath: String) throws -> StructDeclaration? {
+        if dict["key.kind"] == nil || dict["key.kind"]! != structDeclKind {
+            return nil;
+        }
+
+        let structName = dict["key.name"] as! String
+        let fields : [String] = findFieldsInStructDeclaration(dict)
+
+        return StructDeclaration.init(
+            name: structName,
+            filePath: filePath,
+            fields: fields
+        )
+    }
+
+    func findFieldsInStructDeclaration(dict: XPCDictionary) -> [String] {
+        var fields : [String] = []
+
+        guard let fileSubStructure = dict["key.substructure"] as? XPCArray else {
+            return fields
+        }
+
+        for item in fileSubStructure {
+            if let child = item as? XPCDictionary {
+                if child["key.kind"] == nil || child["key.kind"]! != instanceVarKind {
+                    continue
+                }
+
+                fields.append(child["key.name"] as! String)
+            }
+        }
+
+        return fields
+    }
+
+    // MARK: Protocols
     func parseProtocolDeclaration(dict: XPCDictionary, filePath: String) throws -> ProtocolDeclaration? {
         var fileContents : NSString
         try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)
