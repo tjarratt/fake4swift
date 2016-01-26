@@ -160,6 +160,8 @@
 		F7C74C021C57554C001F9CE6 /* SwiftStructDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C74C001C57554C001F9CE6 /* SwiftStructDeclaration.swift */; };
 		F7C74C051C57570C001F9CE6 /* XMASParseSelectedStructWorkflowSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C74C041C57570C001F9CE6 /* XMASParseSelectedStructWorkflowSpec.mm */; };
 		F7C74C081C575971001F9CE6 /* MySpecialStruct.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7C74C071C57594B001F9CE6 /* MySpecialStruct.swift */; };
+		F7C74C0A1C5769B1001F9CE6 /* SwiftEquatableStruct.mustache in Copy Templates */ = {isa = PBXBuildFile; fileRef = F7C74C091C57689E001F9CE6 /* SwiftEquatableStruct.mustache */; };
+		F7C74C0B1C5769C1001F9CE6 /* SwiftEquatableStruct.mustache in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F7C74C091C57689E001F9CE6 /* SwiftEquatableStruct.mustache */; };
 		F7C928C81C3906BB0057BA19 /* SourceKittenFramework.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = F7C49EC81BDA19C300DEDACF /* SourceKittenFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7D01BFD1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
 		F7D01BFE1B5C601700FE62DA /* XMASObjcTypeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */; };
@@ -789,6 +791,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F7C74C0B1C5769C1001F9CE6 /* SwiftEquatableStruct.mustache in Copy Fixtures */,
 				F7C74C081C575971001F9CE6 /* MySpecialStruct.swift in Copy Fixtures */,
 				F7FCC2461C351E2600263EED /* SwiftCounterfeitClass.mustache in Copy Fixtures */,
 				F7FCC2471C351E2600263EED /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
@@ -823,6 +826,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F7C74C0A1C5769B1001F9CE6 /* SwiftEquatableStruct.mustache in Copy Templates */,
 				F7FCC2441C351E1D00263EED /* SwiftCounterfeitClass.mustache in Copy Templates */,
 				F7FCC2451C351E1D00263EED /* SwiftCounterfeitStruct.mustache in Copy Templates */,
 			);
@@ -963,6 +967,7 @@
 		F7C74C001C57554C001F9CE6 /* SwiftStructDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftStructDeclaration.swift; sourceTree = "<group>"; };
 		F7C74C041C57570C001F9CE6 /* XMASParseSelectedStructWorkflowSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASParseSelectedStructWorkflowSpec.mm; sourceTree = "<group>"; };
 		F7C74C071C57594B001F9CE6 /* MySpecialStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpecialStruct.swift; sourceTree = "<group>"; };
+		F7C74C091C57689E001F9CE6 /* SwiftEquatableStruct.mustache */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftEquatableStruct.mustache; sourceTree = "<group>"; };
 		F7D01BFB1B5C601700FE62DA /* XMASObjcTypeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcTypeParser.h; sourceTree = "<group>"; };
 		F7D01BFC1B5C601700FE62DA /* XMASObjcTypeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASObjcTypeParser.m; sourceTree = "<group>"; };
 		F7D01BFF1B5C602700FE62DA /* XMASObjcCallExpressionTokenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASObjcCallExpressionTokenFilter.h; sourceTree = "<group>"; };
@@ -1207,6 +1212,7 @@
 			children = (
 				F70346371BEF440000A8FD27 /* SwiftCounterfeitClass.mustache */,
 				F7DB975E1BF0127000A9C474 /* SwiftCounterfeitStruct.mustache */,
+				F7C74C091C57689E001F9CE6 /* SwiftEquatableStruct.mustache */,
 			);
 			name = Templates;
 			sourceTree = "<group>";
@@ -1650,7 +1656,7 @@
 				F7C74BFA1C57541F001F9CE6 /* XMASParseSelectedStructWorkflow.swift */,
 				F7C74BFD1C57550C001F9CE6 /* XMASSelectedStructOracle.swift */,
 			);
-			name = Dependencies;
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		F7C74C031C5756D7001F9CE6 /* Implement Equatable */ = {
