@@ -61,8 +61,8 @@
     item.target = self;
     item.action = @selector(implementEquatableAction:);
 
-//    item.keyEquivalent = @"g";
-//    item.keyEquivalentModifierMask = NSControlKeyMask;
+    item.keyEquivalent = @"=";
+    item.keyEquivalentModifierMask = NSControlKeyMask;
     return item;
 }
 
