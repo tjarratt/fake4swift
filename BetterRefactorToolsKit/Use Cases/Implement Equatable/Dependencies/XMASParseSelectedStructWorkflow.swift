@@ -11,7 +11,7 @@ import SourceKittenFramework
         selectedStructOracle = structOracle
     }
 
-    @objc public func selectedStructInFile(filePath : String!) throws -> StructDeclaration {
+    @objc dynamic public func selectedStructInFile(filePath : String!) throws -> StructDeclaration {
         guard let sourceFile = File.init(path: filePath) as File! else {
             let userInfo = [NSLocalizedFailureReasonErrorKey: "could not read " + filePath]
             throw NSError.init(domain: errorDomain, code: 5, userInfo: userInfo)

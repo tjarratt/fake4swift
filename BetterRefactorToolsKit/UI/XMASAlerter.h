@@ -2,6 +2,7 @@
 
 typedef NS_ENUM(NSInteger, XMASAlertImage) {
     XMASAlertImageGeneratedFake,
+    XMASAlertImageImplementEquatable,
     XMASAlertImageNoSwiftFileSelected,
     XMASAlertImageAbjectFailure
 };

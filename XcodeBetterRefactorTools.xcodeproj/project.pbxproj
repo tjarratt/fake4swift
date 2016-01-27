@@ -105,6 +105,9 @@
 		F74BBB501B273D760092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74BBB5D1B273D810092AED9 /* XMASRefactorMethodAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */; };
 		F74C39D61B3D1A280002FC97 /* XMASComponentSwapperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */; };
+		F75404071C580B480040749F /* XMASImplementEquatableUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75404061C580B480040749F /* XMASImplementEquatableUseCase.swift */; };
+		F75404081C580B480040749F /* XMASImplementEquatableUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75404061C580B480040749F /* XMASImplementEquatableUseCase.swift */; };
+		F75404321C580E7C0040749F /* XMASImplementEquatableUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F75404311C580E7C0040749F /* XMASImplementEquatableUseCaseSpec.mm */; };
 		F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F749C7441C310EBC00A0ACDC /* BetterRefactorToolsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F670681C312B96007DDF2E /* XMASLogger.swift */; };
 		F75C4B1D1C37C01A00615FFF /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
@@ -934,6 +937,8 @@
 		F74BBB4E1B273D760092AED9 /* XMASRefactorMethodAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASRefactorMethodAction.h; sourceTree = "<group>"; };
 		F74BBB4F1B273D760092AED9 /* XMASRefactorMethodAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASRefactorMethodAction.m; sourceTree = "<group>"; };
 		F74C39D51B3D1A280002FC97 /* XMASComponentSwapperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASComponentSwapperSpec.mm; sourceTree = "<group>"; };
+		F75404061C580B480040749F /* XMASImplementEquatableUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASImplementEquatableUseCase.swift; sourceTree = "<group>"; };
+		F75404311C580E7C0040749F /* XMASImplementEquatableUseCaseSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASImplementEquatableUseCaseSpec.mm; sourceTree = "<group>"; };
 		F761C3DA1B56E2D200A41589 /* XMASObjcCallExpressionTokenFilterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMASObjcCallExpressionTokenFilterSpec.mm; sourceTree = "<group>"; };
 		F76510E51BE9FA5800BFDAD8 /* GeneratedFakesBehavioralSpecs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratedFakesBehavioralSpecs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F76510E91BE9FA5800BFDAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1663,6 +1668,7 @@
 			isa = PBXGroup;
 			children = (
 				F7C74BF61C5753D5001F9CE6 /* Dependencies */,
+				F75404061C580B480040749F /* XMASImplementEquatableUseCase.swift */,
 			);
 			path = "Implement Equatable";
 			sourceTree = "<group>";
@@ -1684,6 +1690,7 @@
 				F7C74C041C57570C001F9CE6 /* XMASParseSelectedStructWorkflowSpec.mm */,
 				F7C74C151C57E617001F9CE6 /* XMASEquatableTemplateStamperSpec.mm */,
 				F7C74C291C57FACB001F9CE6 /* XMASEquatableWriterSpec.mm */,
+				F75404311C580E7C0040749F /* XMASImplementEquatableUseCaseSpec.mm */,
 			);
 			path = "Implement Equatable";
 			sourceTree = "<group>";
@@ -2481,6 +2488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F75404321C580E7C0040749F /* XMASImplementEquatableUseCaseSpec.mm in Sources */,
 				F72C18041C33C839002B7FD9 /* XMASSelectedProtocolOracle.swift in Sources */,
 				F72C18021C33C82D002B7FD9 /* XMASParseSelectedProtocolWorkFlow.swift in Sources */,
 				F75C4AF41C37BFAA00615FFF /* XMASLogger.swift in Sources */,
@@ -2506,6 +2514,7 @@
 				F72C180B1C33C8E7002B7FD9 /* BetterRefactorToolsKitModule.m in Sources */,
 				F7FCC23D1C351A6300263EED /* XMASSwiftProtocolFaker.swift in Sources */,
 				F7FCC23A1C3519F900263EED /* XMASFakeProtocolPersisterSpec.mm in Sources */,
+				F75404081C580B480040749F /* XMASImplementEquatableUseCase.swift in Sources */,
 				F7C74C021C57554C001F9CE6 /* SwiftStructDeclaration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2522,6 +2531,7 @@
 				F7C74BFE1C57550C001F9CE6 /* XMASSelectedStructOracle.swift in Sources */,
 				F7C74C101C57E42C001F9CE6 /* XMASEquatableWriter.swift in Sources */,
 				F7F670691C312B96007DDF2E /* XMASLogger.swift in Sources */,
+				F75404071C580B480040749F /* XMASImplementEquatableUseCase.swift in Sources */,
 				F747F8101C33BBAB0040827B /* SwiftProtocolDeclaration.swift in Sources */,
 				F747F8171C33BE7C0040827B /* XMASParseSelectedProtocolWorkFlow.swift in Sources */,
 				F7C74C131C57E4B2001F9CE6 /* XMASEquatableTemplateStamper.swift in Sources */,

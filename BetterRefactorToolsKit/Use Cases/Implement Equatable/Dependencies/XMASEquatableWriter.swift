@@ -7,7 +7,7 @@ import Foundation
         self.templateStamper = templateStamper
     }
 
-    @objc public func addEquatableImplForStruct(
+    @objc dynamic public func addEquatableImplForStruct(
         structDecl : StructDeclaration) throws {
             // open file, get contents
             let contents = try NSString(
