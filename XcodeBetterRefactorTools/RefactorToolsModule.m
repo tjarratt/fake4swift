@@ -71,6 +71,26 @@ static XMASRefactorMethodAction *action;
                                                                 addFileWorkflow:addFileWorkflow];
     }];
 
+    [binder bind:[XMASImplementEquatableUseCase class] toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        id<XMASAlerter> alerter = [injector getInstance:@protocol(XMASAlerter)];
+        XMASLogger *logger = [injector getInstance:[XMASLogger class]];
+
+        NSBundle *templateBundle = [injector getInstance:@"mustacheTemplateBundle"];
+        XMASEquatableTemplateStamper *templateStamper = [[XMASEquatableTemplateStamper alloc] initWithBundle:templateBundle];
+
+        XMASEquatableWriter *equatableWriter = [[XMASEquatableWriter alloc] initWithTemplateStamper:templateStamper];
+        XMASOpenXcodeFileOracle *selectedFileOracle = [injector getInstance:[XMASOpenXcodeFileOracle class]];
+
+        id<XMASSelectedStructOracle> selectedStructOracle = [injector getInstance:@protocol(XMASSelectedStructOracle)];
+        XMASParseSelectedStructWorkflow *parseStructWorkflow = [[XMASParseSelectedStructWorkflow alloc] initWithStructOracle:selectedStructOracle];
+
+        return [[XMASImplementEquatableUseCase alloc] initWithLogger:logger
+                                                             alerter:alerter
+                                                     equatableWriter:equatableWriter
+                                                  selectedFileOracle:selectedFileOracle
+                                                 parseStructWorkflow:parseStructWorkflow];
+    }];
+
     [binder bind:[XMASTokenizer class] toBlock:^id(NSArray *args, id<BSInjector> injector) {
         XMASXcodeTargetSearchPathResolver *searchPathResolver = [injector getInstance:[XMASXcodeTargetSearchPathResolver class]];
         return [[XMASTokenizer alloc] initWithTargetSearchPathResolver:searchPathResolver
@@ -134,6 +154,11 @@ static XMASRefactorMethodAction *action;
     }];
 
     [binder bind:@protocol(XMASSelectedProtocolOracle) toBlock:^id (NSArray *args, id<BSInjector> injector) {
+        XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
+        return [[XMASXcodeCursorSelectionOracle alloc] initWithXcodeRepo:xcodeRepository];
+    }];
+
+    [binder bind:@protocol(XMASSelectedStructOracle) toBlock:^id (NSArray *args, id<BSInjector> injector) {
         XMASXcodeRepository *xcodeRepository = [injector getInstance:[XMASXcodeRepository class]];
         return [[XMASXcodeCursorSelectionOracle alloc] initWithXcodeRepo:xcodeRepository];
     }];

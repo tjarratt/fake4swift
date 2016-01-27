@@ -48,6 +48,7 @@ describe(@"XMASParseSelectedStructWorkflow", ^{
 
         it(@"should ask its selected struct oracle if each struct is selected", ^{
             StructDeclaration *expectedStructDecl = [[StructDeclaration alloc] initWithName:@"MySpecialStruct"
+                                                                                      range:NSMakeRange(19, 66)
                                                                                    filePath:fixturePath
                                                                                      fields:@[@"name", @"age"]];
             selectedStructOracle should have_received(@selector(isStructSelected:))

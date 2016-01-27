@@ -27,6 +27,7 @@ describe(@"XMASEquatableWriter", ^{
 
     it(@"should rewrite a file to include an Equatable implementation", ^{
         StructDeclaration *myStruct = [[StructDeclaration alloc] initWithName:@"MySpecialStruct"
+                                                                        range:NSMakeRange(10, 50)
                                                                      filePath:temporaryFixturePath
                                                                        fields:@[@"name", @"age"]];
         NSError *error = nil;

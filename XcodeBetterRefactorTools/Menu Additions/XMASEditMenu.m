@@ -3,7 +3,7 @@
 #import "XMASEditMenu.h"
 #import "XMASRefactorMethodAction.h"
 #import "XMASXcodeRepository.h"
-#import <objc/runtime.h>
+
 
 @interface XMASEditMenu ()
 
@@ -11,13 +11,13 @@
 
 @end
 
+
 @implementation XMASEditMenu
 
 - (instancetype)initWithInjector:(id<BSInjector>)injector {
     if (self = [super init]) {
         self.injector = injector;
     }
-
     return self;
 }
 
@@ -27,6 +27,7 @@
     [editMenu addItem:NSMenuItem.separatorItem];
     [editMenu addItem:self.refactorCurrentMethodItem];
     [editMenu addItem:self.generateFakeForSwiftProtocolItem];
+    [editMenu addItem:self.implementEquatableForSwiftStructItem];
 }
 
 #pragma mark - Menu items
@@ -54,6 +55,17 @@
     return item;
 }
 
+- (NSMenuItem *)implementEquatableForSwiftStructItem {
+    NSMenuItem *item = [[NSMenuItem alloc] init];
+    item.title = @"Implement Equatable for Struct";
+    item.target = self;
+    item.action = @selector(implementEquatableAction:);
+
+//    item.keyEquivalent = @"g";
+//    item.keyEquivalentModifierMask = NSControlKeyMask;
+    return item;
+}
+
 #pragma mark - Menu Actions
 
 - (void)refactorCurrentMethodAction:(id)sender {
@@ -66,6 +78,12 @@
     XMASGenerateFakeForSwiftProtocolUseCase *generateFakeAction = [self.injector getInstance:[XMASGenerateFakeForSwiftProtocolUseCase class]];
 
     [generateFakeAction safelyGenerateFakeForSelectedProtocol];
+}
+
+- (void)implementEquatableAction:(id)sender {
+    XMASImplementEquatableUseCase *addEquatableUseCase = [self.injector getInstance:[XMASImplementEquatableUseCase class]];
+
+    [addEquatableUseCase safelyAddEquatableToSelectedStruct];
 }
 
 #pragma mark - NSObject

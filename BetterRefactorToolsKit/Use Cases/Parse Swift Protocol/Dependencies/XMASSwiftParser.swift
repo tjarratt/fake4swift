@@ -18,9 +18,14 @@ struct XMASSwiftParser {
 
         let structName = dict["key.name"] as! String
         let fields : [String] = findFieldsInStructDeclaration(dict)
+        let range = NSMakeRange(
+            Int.init(truncatingBitPattern: dict["key.offset"] as! Int64),
+            Int.init(truncatingBitPattern: dict["key.length"] as! Int64)
+        )
 
         return StructDeclaration.init(
             name: structName,
+            range: range,
             filePath: filePath,
             fields: fields
         )

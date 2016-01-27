@@ -27,43 +27,64 @@ describe(@"XMASXcodeCursorSelectionOracle", ^{
         subject = [injector getInstance:@protocol(XMASSelectedProtocolOracle)];
     });
 
-    ProtocolDeclaration *selectedProtocol = [[ProtocolDeclaration alloc] initWithName:@""
-                                                                       containingFile:@""
-                                                                          rangeInFile:NSMakeRange(50, 20)
-                                                                        usesTypealias:NO
-                                                                    includedProtocols:@[]
-                                                                      instanceMethods:@[]
-                                                                        staticMethods:@[]
-                                                                      mutatingMethods:@[]
-                                                                         initializers:@[]
-                                                                              getters:@[]
-                                                                              setters:@[]
-                                                                        staticGetters:@[]
-                                                                        staticSetters:@[]
-                                                                     subscriptGetters:@[]
-                                                                     subscriptSetters:@[]];
-    ProtocolDeclaration *otherProtocol = [[ProtocolDeclaration alloc] initWithName:@""
-                                                                    containingFile:@""
-                                                                       rangeInFile:NSMakeRange(10, 20)
-                                                                     usesTypealias:NO
-                                                                 includedProtocols:@[]
-                                                                   instanceMethods:@[]
-                                                                     staticMethods:@[]
-                                                                   mutatingMethods:@[]
-                                                                      initializers:@[]
-                                                                           getters:@[]
-                                                                           setters:@[]
-                                                                     staticGetters:@[]
-                                                                     staticSetters:@[]
-                                                                  subscriptGetters:@[]
-                                                                  subscriptSetters:@[]];
+    describe(@"protocols", ^{
+        ProtocolDeclaration *selectedProtocol = [[ProtocolDeclaration alloc] initWithName:@""
+                                                                           containingFile:@""
+                                                                              rangeInFile:NSMakeRange(50, 20)
+                                                                            usesTypealias:NO
+                                                                        includedProtocols:@[]
+                                                                          instanceMethods:@[]
+                                                                            staticMethods:@[]
+                                                                          mutatingMethods:@[]
+                                                                             initializers:@[]
+                                                                                  getters:@[]
+                                                                                  setters:@[]
+                                                                            staticGetters:@[]
+                                                                            staticSetters:@[]
+                                                                         subscriptGetters:@[]
+                                                                         subscriptSetters:@[]];
+        ProtocolDeclaration *otherProtocol = [[ProtocolDeclaration alloc] initWithName:@""
+                                                                        containingFile:@""
+                                                                           rangeInFile:NSMakeRange(10, 20)
+                                                                         usesTypealias:NO
+                                                                     includedProtocols:@[]
+                                                                       instanceMethods:@[]
+                                                                         staticMethods:@[]
+                                                                       mutatingMethods:@[]
+                                                                          initializers:@[]
+                                                                               getters:@[]
+                                                                               setters:@[]
+                                                                         staticGetters:@[]
+                                                                         staticSetters:@[]
+                                                                      subscriptGetters:@[]
+                                                                      subscriptSetters:@[]];
 
-    it(@"returns YES when the protocol's range overlaps with xcode's cursor", ^{
-        [subject isProtocolSelected:selectedProtocol] should be_truthy;
+        it(@"knows they are selected when the protocol's range overlaps with xcode's cursor", ^{
+            [subject isProtocolSelected:selectedProtocol] should be_truthy;
+        });
+
+        it(@"knows they are not seleted when the protocol's range does not overlap with xcode's cursor", ^{
+            [subject isProtocolSelected:otherProtocol] should be_falsy;
+        });
     });
 
-    it(@"returns NO when the protocol's range does not overlap with xcode's cursor", ^{
-        [subject isProtocolSelected:otherProtocol] should be_falsy;
+    describe(@"structs", ^{
+        StructDeclaration *selectedStruct = [[StructDeclaration alloc] initWithName:@"MySpecialStruct"
+                                                                              range:NSMakeRange(50, 20)
+                                                                           filePath:@"sup"
+                                                                             fields:@[]];
+        StructDeclaration *otherStruct = [[StructDeclaration alloc] initWithName:@"Whoops"
+                                                                           range:NSMakeRange(20, 20)
+                                                                        filePath:@"sup"
+                                                                          fields:@[]];
+
+        it(@"knows they are selected when the struct's range overlaps with xcode's cursor", ^{
+            [subject isStructSelected:selectedStruct] should be_truthy;
+        });
+
+        it(@"knows they are not seleted when the structs's range does not overlap with xcode's cursor", ^{
+            [subject isStructSelected:otherStruct] should be_falsy;
+        });
     });
 });
 

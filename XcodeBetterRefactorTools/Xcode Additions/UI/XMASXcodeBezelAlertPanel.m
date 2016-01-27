@@ -64,6 +64,8 @@
         case XMASAlertImageGeneratedFake:
             return [[NSBundle bundleForClass:[self class]] pathForResource:@"fake_mustache"
                                                                     ofType:@"png"];
+        case XMASAlertImageImplementEquatable:
+            return nil;
         case XMASAlertImageAbjectFailure:
             return [[NSBundle bundleForClass:[self class]] pathForResource:@"crushed_hand"
                                                                     ofType:@"png"];

@@ -19,6 +19,7 @@ describe(@"XMASImplementEquatableUseCase", ^{
     __block XMASParseSelectedStructWorkflow *parseStructWorkflow;
 
     StructDeclaration *selectedStruct = [[StructDeclaration alloc] initWithName:@"MyStruct"
+                                                                          range:NSMakeRange(10, 50)
                                                                        filePath:@"some/fake/path"
                                                                          fields:@[@"bigtime"]];
 

@@ -4,11 +4,13 @@ import Foundation
     public var fieldNames : Array<String>
     public var name : String
     public var filePath : String
+    public var rangeInFile : NSRange
 
-    public init(name : String, filePath: String, fields: Array<String>) {
+    public init(name : String, range: NSRange, filePath: String, fields: Array<String>) {
         self.name = name
         self.filePath = filePath
         self.fieldNames = fields
+        self.rangeInFile = range
     }
 
     override public func isEqual(object: AnyObject?) -> Bool {
@@ -23,5 +25,6 @@ import Foundation
 func ==(a: StructDeclaration, b: StructDeclaration) -> Bool {
     return a.name == b.name &&
            a.filePath == b.filePath &&
-           b.fieldNames == b.fieldNames
+           a.fieldNames == b.fieldNames &&
+           NSEqualRanges(a.rangeInFile, b.rangeInFile)
 }

@@ -27,6 +27,7 @@ describe(@"XMASEquatableTemplateStamper", ^{
         error should be_nil;
 
         StructDeclaration *specialStruct = [[StructDeclaration alloc] initWithName:@"MySpecialStruct"
+                                                                             range:NSMakeRange(10, 50)
                                                                           filePath:@"/fake/path"
                                                                             fields:@[@"name", @"age"]];
         error = nil;
