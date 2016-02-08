@@ -61,7 +61,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
 
     private(set) var doesNothingCallCount : Int = 0
     func doesNothing() {
-        self.doesNothingCallCount++
+        self.doesNothingCallCount += 1
     }
 
     private(set) var doesStuffCallCount : Int = 0
@@ -76,7 +76,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.doesStuffArgs[callIndex]
     }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
-        self.doesStuffCallCount++
+        self.doesStuffCallCount += 1
         self.doesStuffArgs.append((stuff, otherStuff))
         return self.doesStuffStub!(stuff, otherStuff)
     }
@@ -93,7 +93,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.soulOfAFunkyArgs[callIndex]
     }
     func soulOfAFunky(drummer: String?) throws -> (String?) {
-        self.soulOfAFunkyCallCount++
+        self.soulOfAFunkyCallCount += 1
         self.soulOfAFunkyArgs.append((drummer))
         return try self.soulOfAFunkyStub!(drummer)
     }
@@ -110,7 +110,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.staticMethodArgs[callIndex]
     }
     static func staticMethod(isStatic: String, soStatic: Bool) -> (Array<String>) {
-        self.staticMethodCallCount++
+        self.staticMethodCallCount += 1
         self.staticMethodArgs.append((isStatic, soStatic))
         return self.staticMethodStub!(isStatic, soStatic)
     }
