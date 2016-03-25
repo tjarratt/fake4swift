@@ -96,7 +96,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_arguments }}
     func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
-        self.{{name}}CallCount++
+        self.{{name}}CallCount += 1
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}
@@ -127,7 +127,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_arguments }}
     static func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
-        self.{{name}}CallCount++
+        self.{{name}}CallCount += 1
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}

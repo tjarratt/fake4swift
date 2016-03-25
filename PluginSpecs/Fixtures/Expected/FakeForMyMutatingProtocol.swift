@@ -21,7 +21,7 @@ struct FakeMyMutatingProtocol : MyMutatingProtocol, Equatable {
         return self.mutableMethodArgs[callIndex]
     }
     mutating func mutableMethod(arg: String, arg2: String) -> (String) {
-        self.mutableMethodCallCount++
+        self.mutableMethodCallCount += 1
         self.mutableMethodArgs.append((arg, arg2))
         return self.mutableMethodStub!(arg, arg2)
     }
