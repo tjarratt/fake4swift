@@ -1,5 +1,6 @@
 import Foundation
 import SwiftXPC
+import SourceKittenFramework
 
 struct XMASSwiftParser {
     let protocolDeclKind   : String = "source.lang.swift.decl.protocol"
@@ -11,9 +12,12 @@ struct XMASSwiftParser {
     let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
     // MARK: Structs
-    func parseStructDeclaration(dict: XPCDictionary, filePath: String) throws -> StructDeclaration? {
-        if dict["key.kind"] == nil || dict["key.kind"]! != structDeclKind {
-            return nil;
+    func parseStructDeclaration(dict: [String: SourceKitRepresentable], filePath: String) throws -> StructDeclaration? {
+        guard let kind = dict["key.kind"] as? String else {
+            return nil
+        }
+        if kind != structDeclKind {
+            return nil
         }
 
         let structName = dict["key.name"] as! String
@@ -31,16 +35,19 @@ struct XMASSwiftParser {
         )
     }
 
-    func findFieldsInStructDeclaration(dict: XPCDictionary) -> [String] {
+    func findFieldsInStructDeclaration(dict: [String: SourceKitRepresentable]) -> [String] {
         var fields : [String] = []
 
-        guard let fileSubStructure = dict["key.substructure"] as? XPCArray else {
+        guard let fileSubStructure = dict["key.substructure"] as? [SourceKitRepresentable] else {
             return fields
         }
 
         for item in fileSubStructure {
-            if let child = item as? XPCDictionary {
-                if child["key.kind"] == nil || child["key.kind"]! != instanceVarKind {
+            if let child = item as? [String: SourceKitRepresentable] {
+                guard let kind = child["key.kind"] as? String else {
+                    continue
+                }
+                if kind != instanceVarKind {
                     continue
                 }
 
@@ -52,12 +59,15 @@ struct XMASSwiftParser {
     }
 
     // MARK: Protocols
-    func parseProtocolDeclaration(dict: XPCDictionary, filePath: String) throws -> ProtocolDeclaration? {
+    func parseProtocolDeclaration(dict: [String: SourceKitRepresentable], filePath: String) throws -> ProtocolDeclaration? {
         var fileContents : NSString
         try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)
 
-        if dict["key.kind"] == nil || dict["key.kind"]! != protocolDeclKind {
-            return nil;
+        guard let kind = dict["key.kind"] as? String else {
+            return nil
+        }
+        if kind != protocolDeclKind {
+            return nil
         }
 
         let protocolName = dict["key.name"] as! String
@@ -109,17 +119,17 @@ struct XMASSwiftParser {
 
     // mark - Private
 
-    func accessorsFromProtocolDecl(protocolDict : XPCDictionary, kind : String) -> (Array<Accessor>, Array<Accessor>) {
+    func accessorsFromProtocolDecl(protocolDict : [String: SourceKitRepresentable], kind : String) -> (Array<Accessor>, Array<Accessor>) {
         var getters : Array<Accessor> = []
         var setters : Array<Accessor> = []
 
-        guard let fileSubStructure = protocolDict["key.substructure"] as? XPCArray else {
+        guard let fileSubStructure = protocolDict["key.substructure"] as? [SourceKitRepresentable] else {
             return (getters, setters)
         }
 
         for item in fileSubStructure {
-            if let protocolDict = item as? XPCDictionary {
-                if protocolDict["key.kind"] == nil || protocolDict["key.kind"]! != kind {
+            if let protocolDict = item as? [String: SourceKitRepresentable] {
+                if protocolDict["key.kind"] == nil || !protocolDict["key.kind"]!.isEqualTo(kind) {
                     continue
                 }
 
@@ -128,7 +138,7 @@ struct XMASSwiftParser {
                     returnType: protocolDict["key.typename"] as! String
                 )
 
-                let accessibility : XPCRepresentable? = protocolDict["key.setter_accessibility"]
+                let accessibility : SourceKitRepresentable? = protocolDict["key.setter_accessibility"]
                 if let _ = accessibility as? String {
                     setters.append(accessor)
                 } else {
@@ -146,19 +156,23 @@ struct XMASSwiftParser {
         mutableM: [MethodDeclaration]
     )
 
-    func methodsFromProtocolDecl(protocolDict: XPCDictionary, fileContents : NSString) -> MethodDecls {
+    func methodsFromProtocolDecl(protocolDict: [String: SourceKitRepresentable], fileContents : NSString) -> MethodDecls {
         var instanceMethods : Array<MethodDeclaration> = []
         var staticMethods : Array<MethodDeclaration> = []
         var mutableMethods : Array<MethodDeclaration> = []
 
-        guard let substructure = protocolDict["key.substructure"] as? XPCArray else {
+        guard let substructure = protocolDict["key.substructure"] as? [SourceKitRepresentable] else {
             return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
         }
 
         for item in substructure {
-            if let protocolBodyItem = item as? XPCDictionary {
-                let isInstanceMethod = protocolBodyItem["key.kind"]! == instanceMethodKind
-                let isStaticMethod = protocolBodyItem["key.kind"]! == staticMethodKind
+            if let protocolBodyItem = item as? [String: SourceKitRepresentable] {
+                guard let kind = protocolBodyItem["key.kind"] as? String else {
+                    continue
+                }
+
+                let isInstanceMethod = kind == instanceMethodKind
+                let isStaticMethod = kind == staticMethodKind
                 let isMutableMethod = hasMatchingAttribute(protocolBodyItem, attributeName: mutableMethodKind)
                 if  !isInstanceMethod && !isStaticMethod {
                     continue
@@ -190,11 +204,15 @@ struct XMASSwiftParser {
         return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
     }
 
-    func hasMatchingAttribute(protocolBodyItem : XPCDictionary, attributeName: String) -> Bool {
-        if let attributes = protocolBodyItem["key.attributes"] as? [XPCRepresentable] {
-            for attribute : XPCRepresentable in attributes {
-                if let attrs = attribute as? XPCDictionary {
-                    if attrs["key.attribute"] != nil && attrs["key.attribute"]! == attributeName {
+    func hasMatchingAttribute(protocolBodyItem : [String: SourceKitRepresentable], attributeName: String) -> Bool {
+        if let attributes = protocolBodyItem["key.attributes"] as? [SourceKitRepresentable] {
+            for attribute : SourceKitRepresentable in attributes {
+                if let attrs = attribute as? [String: SourceKitRepresentable] {
+                    guard let attrsString = attrs["key.attribute"] as? String else {
+                        continue
+                    }
+
+                    if attrsString == attributeName {
                         return true
                     }
                 }
@@ -204,7 +222,7 @@ struct XMASSwiftParser {
         return false
     }
 
-    func methodNameFromMethodDict(protocolBodyItem : XPCDictionary) -> String {
+    func methodNameFromMethodDict(protocolBodyItem : [String: SourceKitRepresentable]) -> String {
         let methodName : String = protocolBodyItem["key.name"] as! String
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpressionOptions.CaseInsensitive)
@@ -217,15 +235,15 @@ struct XMASSwiftParser {
         )
     }
 
-    func argumentsFromMethodDict(dict : XPCDictionary) -> Array<MethodParameter> {
+    func argumentsFromMethodDict(dict : [String: SourceKitRepresentable]) -> Array<MethodParameter> {
         var parameters : Array<MethodParameter> = []
 
-        guard let substructure = dict["key.substructure"] as? XPCArray else {
+        guard let substructure = dict["key.substructure"] as? [SourceKitRepresentable] else {
             return parameters
         }
 
         for item in substructure {
-            let innerDict : XPCDictionary = item as! XPCDictionary
+            let innerDict : [String: SourceKitRepresentable] = item as! [String: SourceKitRepresentable]
             if innerDict["key.kind"] as! String != "source.lang.swift.decl.var.parameter" {
                 continue
             }
@@ -239,7 +257,7 @@ struct XMASSwiftParser {
         return parameters
     }
 
-    func returnTypesFromMethodDict(dict : XPCDictionary, fileContents : NSString) -> Array<ReturnType> {
+    func returnTypesFromMethodDict(dict : [String: SourceKitRepresentable], fileContents : NSString) -> Array<ReturnType> {
         var types : Array<ReturnType> = []
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: ".*\\s+->\\s+\\(?([^\\)]*)\\)?", options: NSRegularExpressionOptions.CaseInsensitive)
@@ -268,7 +286,7 @@ struct XMASSwiftParser {
         return types
     }
 
-    func methodCanThrowError(methodItem : XPCDictionary, fileContents: NSString) -> Bool {
+    func methodCanThrowError(methodItem : [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: ".*\\)\\sthrows\\s", options: NSRegularExpressionOptions.CaseInsensitive)
 
@@ -295,7 +313,7 @@ struct XMASSwiftParser {
         return numberOfMatches > 0
     }
 
-    func findTypealiasInProtocolDecl(protocolBody: XPCDictionary, fileContents: NSString) -> Bool {
+    func findTypealiasInProtocolDecl(protocolBody: [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
         // read from body offset - body length
         // regex for " typealias "
         let startOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodyoffset"] as! Int64)
@@ -311,14 +329,14 @@ struct XMASSwiftParser {
         return matches.count > 0
     }
 
-    func inheritedTypesForProtocol(protocolDict: XPCDictionary) -> Array<String> {
+    func inheritedTypesForProtocol(protocolDict: [String: SourceKitRepresentable]) -> Array<String> {
         var inheritedProtocols : [String] = []
-        guard let inheritedTypes = protocolDict["key.inheritedtypes"] as? XPCArray else {
+        guard let inheritedTypes = protocolDict["key.inheritedtypes"] as? [SourceKitRepresentable] else {
             return inheritedProtocols
         }
         
         for type in inheritedTypes {
-            guard let typedDict = type as? XPCDictionary else {
+            guard let typedDict = type as? [String: SourceKitRepresentable] else {
                 continue
             }
             

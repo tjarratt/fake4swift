@@ -19,12 +19,12 @@ let errorDomain : String = "parse-swift-protocol-domain"
         }
 
         let fileStructure = Structure.init(file: sourceFile)
-        guard let substructure = fileStructure.dictionary["key.substructure"] as? XPCArray else {
+        guard let substructure = fileStructure.dictionary["key.substructure"] as? [SourceKitRepresentable] else {
             throw NSError.init(domain: errorDomain, code: 55, userInfo: nil)
         }
 
         for item in substructure {
-            guard let protocolDict = item as? XPCDictionary else {
+            guard let protocolDict = item as? [String: SourceKitRepresentable] else {
                 continue
             }
 
