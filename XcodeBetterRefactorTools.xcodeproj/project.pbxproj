@@ -62,6 +62,7 @@
 		F71308071C327679002D04E0 /* XMASXcodeCursorSelectionOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71308051C327679002D04E0 /* XMASXcodeCursorSelectionOracle.swift */; };
 		F71308091C328466002D04E0 /* XMASXcodeCursorSelectionOracleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F71308081C328466002D04E0 /* XMASXcodeCursorSelectionOracleSpec.mm */; };
 		F71550CC1B8C3A6900F3418E /* XMASChangeMethodSignatureController.xib in Sources */ = {isa = PBXBuildFile; fileRef = F71FFF401B85A8E800DC8A80 /* XMASChangeMethodSignatureController.xib */; };
+		F716426A1CB243B7007227D9 /* SwiftXPC.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7C0348A1BDDF3A100C7DC86 /* SwiftXPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F71E82A61B5974FC00BE93DC /* RefactorMethodFixture.m in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F71E82A41B5974C700BE93DC /* RefactorMethodFixture.m */; };
 		F71E82BE1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F71E82BD1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m */; };
 		F71E82BF1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F71E82BD1B59F65800BE93DC /* XMASObjcCallExpressionRewriter.m */; };
@@ -825,6 +826,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F716426A1CB243B7007227D9 /* SwiftXPC.framework in Copy Frameworks */,
 				F7578C041C3127C600411543 /* BetterRefactorToolsKit.framework in Copy Frameworks */,
 				F70346351BEF401400A8FD27 /* Mustache.framework in Copy Frameworks */,
 				F745A3AB1BDA230A00A5F040 /* SourceKittenFramework.framework in Copy Frameworks */,
