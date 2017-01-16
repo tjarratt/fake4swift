@@ -1,28 +1,28 @@
 import Foundation
 
-@objc public class XMASEquatableWriter : NSObject {
-    private(set) public var templateStamper : XMASEquatableTemplateStamper
+@objc open class XMASEquatableWriter : NSObject {
+    fileprivate(set) open var templateStamper : XMASEquatableTemplateStamper
 
     @objc public init(templateStamper: XMASEquatableTemplateStamper) {
         self.templateStamper = templateStamper
     }
 
-    @objc dynamic public func addEquatableImplForStruct(
-        structDecl : StructDeclaration) throws {
+    @objc dynamic open func addEquatableImplForStruct(
+        _ structDecl : StructDeclaration) throws {
             // open file, get contents
             let contents = try NSString(
                 contentsOfFile: structDecl.filePath,
-                encoding: NSUTF8StringEncoding
+                encoding: String.Encoding.utf8.rawValue
             )
 
             // stamp template
             let equatableImpl = try self.templateStamper.equatableImplementationForStruct(structDecl)
-            let newContents = contents.stringByAppendingString("\n" + equatableImpl)
+            let newContents = contents.appending("\n" + equatableImpl)
 
             // write out file contents
-            try newContents.writeToFile(structDecl.filePath,
+            try newContents.write(toFile: structDecl.filePath,
                 atomically: true,
-                encoding: NSUTF8StringEncoding
+                encoding: String.Encoding.utf8
             )
     }
 }

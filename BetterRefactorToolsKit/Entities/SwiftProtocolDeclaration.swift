@@ -1,8 +1,8 @@
 import Foundation
 
-@objc public class MethodParameter : NSObject {
-    public var name : MethodName
-    public var type : ReturnType
+@objc open class MethodParameter : NSObject {
+    open var name : MethodName
+    open var type : ReturnType
 
     init(name: MethodName, type: ReturnType) {
         self.name = name
@@ -10,11 +10,11 @@ import Foundation
     }
 }
 
-@objc public class MethodDeclaration : NSObject {
-    public var name : MethodName
-    public var throwsError : Bool
-    public var arguments : Array<MethodParameter>
-    public var returnValueTypes : Array<ReturnType>
+@objc open class MethodDeclaration : NSObject {
+    open var name : MethodName
+    open var throwsError : Bool
+    open var arguments : Array<MethodParameter>
+    open var returnValueTypes : Array<ReturnType>
 
     init(name: String,
         throwsError: Bool,
@@ -26,15 +26,15 @@ import Foundation
             self.returnValueTypes = returnValueTypes
     }
 
-    public func hasArguments() -> Bool {
+    open func hasArguments() -> Bool {
         return arguments.count > 0
     }
 
-    public func hasReturnValues() -> Bool {
+    open func hasReturnValues() -> Bool {
         return returnValueTypes.count > 0
     }
 
-    override public func isEqual(object: AnyObject?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         if let other = object as? MethodDeclaration {
             return self.name == other.name &&
                 self.arguments == other.arguments &&
@@ -46,9 +46,9 @@ import Foundation
     }
 }
 
-@objc public class Accessor : NSObject {
-    public var name : MethodName
-    public var returnType : ReturnType
+@objc open class Accessor : NSObject {
+    open var name : MethodName
+    open var returnType : ReturnType
 
     init(name: MethodName,
         returnType: ReturnType) {
@@ -62,7 +62,7 @@ public typealias ReturnType = String
 
 // random thought :: we should PROBABLY `import` everything from the file, right?
 // does source kitten give us that? (PLEASE SAY YES)
-@objc public class ProtocolDeclaration : NSObject {
+@objc open class ProtocolDeclaration : NSObject {
     public init(name: String,
         containingFile: String,
         rangeInFile: NSRange,
@@ -97,7 +97,7 @@ public typealias ReturnType = String
             return
     }
 
-    override public func isEqual(object: AnyObject?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         if let other = object as? ProtocolDeclaration {
             return self.name == other.name &&
                 self.containingFile == other.containingFile &&
@@ -119,27 +119,27 @@ public typealias ReturnType = String
         return false
     }
 
-    public var name : String
+    open var name : String
 
-    public var containingFile : String
-    public var rangeInFile : NSRange
+    open var containingFile : String
+    open var rangeInFile : NSRange
 
-    public var instanceMethods : Array<MethodDeclaration>
-    public var staticMethods : Array<MethodDeclaration>
-    public var mutatingMethods : Array<MethodDeclaration>
+    open var instanceMethods : Array<MethodDeclaration>
+    open var staticMethods : Array<MethodDeclaration>
+    open var mutatingMethods : Array<MethodDeclaration>
 
-    public var initializers : Array<MethodDeclaration>
+    open var initializers : Array<MethodDeclaration>
 
-    public var getters : Array<Accessor>
-    public var setters : Array<Accessor>
+    open var getters : Array<Accessor>
+    open var setters : Array<Accessor>
 
-    public var staticGetters : Array<Accessor>
-    public var staticSetters : Array<Accessor>
+    open var staticGetters : Array<Accessor>
+    open var staticSetters : Array<Accessor>
 
-    public var subscriptGetters : Array<Accessor>
-    public var subscriptSetters : Array<Accessor>
+    open var subscriptGetters : Array<Accessor>
+    open var subscriptSetters : Array<Accessor>
 
-    public var includedProtocols : Array<String>
+    open var includedProtocols : Array<String>
 
-    public var usesTypealias : Bool
+    open var usesTypealias : Bool
 }

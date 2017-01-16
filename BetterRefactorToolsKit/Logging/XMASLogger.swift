@@ -1,7 +1,7 @@
 import Foundation
 
-public class XMASLogger: NSObject {
-    public func logMessage(message: String) {
+open class XMASLogger: NSObject {
+    open func logMessage(_ message: String) {
         NSLog(message)
     }
 }

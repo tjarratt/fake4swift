@@ -1,10 +1,10 @@
 import Foundation
 
-@objc public class StructDeclaration : NSObject {
-    public var fieldNames : Array<String>
-    public var name : String
-    public var filePath : String
-    public var rangeInFile : NSRange
+@objc open class StructDeclaration : NSObject {
+    open var fieldNames : Array<String>
+    open var name : String
+    open var filePath : String
+    open var rangeInFile : NSRange
 
     public init(name : String, range: NSRange, filePath: String, fields: Array<String>) {
         self.name = name
@@ -13,7 +13,7 @@ import Foundation
         self.rangeInFile = range
     }
 
-    override public func isEqual(object: AnyObject?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         guard let other = object as? StructDeclaration else {
             return false
         }

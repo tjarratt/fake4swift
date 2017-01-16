@@ -2,7 +2,7 @@ import Foundation
 
 @objc public protocol XMASAddFileToXcodeProjectWorkflow {
     @objc func addFileToXcode(
-        file: String,
+        _ file: String,
         alongsideFileNamed: String,
         directory: String
     ) throws

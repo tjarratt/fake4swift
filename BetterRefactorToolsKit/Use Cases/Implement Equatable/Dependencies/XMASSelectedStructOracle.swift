@@ -1,5 +1,5 @@
 import Foundation
 
 @objc public protocol XMASSelectedStructOracle {
-    @objc func isStructSelected(structDecl : StructDeclaration) -> Bool
+    @objc func isStructSelected(_ structDecl : StructDeclaration) -> Bool
 }

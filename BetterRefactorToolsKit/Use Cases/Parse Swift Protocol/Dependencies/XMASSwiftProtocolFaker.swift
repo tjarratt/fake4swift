@@ -2,19 +2,19 @@ import Mustache
 import Foundation
 
 @objc public protocol XMASSwiftProtocolFaking {
-    @objc func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String
+    @objc func fakeForProtocol(_ protocolDecl: ProtocolDeclaration) throws -> String
 }
 
-@objc public class XMASSwiftProtocolFaker: NSObject, XMASSwiftProtocolFaking {
+@objc open class XMASSwiftProtocolFaker: NSObject, XMASSwiftProtocolFaking {
 
-    private(set) public var bundle : NSBundle
-    @objc public init(bundle: NSBundle) {
+    fileprivate(set) open var bundle : Bundle
+    @objc public init(bundle: Bundle) {
         self.bundle = bundle
     }
 
-    @objc public func fakeForProtocol(protocolDecl: ProtocolDeclaration) throws -> String {
+    @objc open func fakeForProtocol(_ protocolDecl: ProtocolDeclaration) throws -> String {
         let templateName = protocolDecl.mutatingMethods.isEmpty ? "SwiftCounterfeitClass" : "SwiftCounterfeitStruct"
-        let path : String! = self.bundle.pathForResource(templateName, ofType: "mustache")
+        let path : String! = self.bundle.path(forResource: templateName, ofType: "mustache")
 
         guard path != nil else {
             throw(NSError.init(
@@ -27,14 +27,14 @@ import Foundation
         let template = try Template(path: path)
         let result : String = try template.render(boxDataForProtocol(protocolDecl))
 
-        return result.componentsSeparatedByString("\n").filter( {
+        return result.components(separatedBy: "\n").filter( {
             !$0.hasPrefix("*")
-        }).joinWithSeparator("\n").stringByReplacingOccurrencesOfString("}\n\n\n", withString: "}\n")
+        }).joined(separator: "\n").replacingOccurrences(of: "}\n\n\n", with: "}\n")
     }
 
 // Mark - Private methods
 
-    private func boxDataForProtocol(protocolDecl: ProtocolDeclaration) -> MustacheBox {
+    fileprivate func boxDataForProtocol(_ protocolDecl: ProtocolDeclaration) -> MustacheBox {
         return Box([
             "protocol_name": protocolDecl.name,
             "getters": protocolDecl.getters.map(mapAccessorToDict),
@@ -45,46 +45,46 @@ import Foundation
             ])
     }
 
-    private func upcase(str : String) -> String {
-        return str.stringByReplacingCharactersInRange(str.startIndex...str.startIndex,
-            withString: String(str[str.startIndex]).capitalizedString)
+    fileprivate func upcase(_ str : String) -> String {
+        return str.replacingCharacters(in: str.startIndex...str.startIndex,
+            with: String(str[str.startIndex]).capitalized)
     }
 
-    private func namedArgumentsFor(methodDecl: MethodDeclaration) -> String {
-        return methodDecl.arguments.map { $0.name + ": " + $0.type }.joinWithSeparator(", ")
+    fileprivate func namedArgumentsFor(_ methodDecl: MethodDeclaration) -> String {
+        return methodDecl.arguments.map { $0.name + ": " + $0.type }.joined(separator: ", ")
     }
 
-    private func argumentNamesFor(methodDecl: MethodDeclaration) -> String {
-        return methodDecl.arguments.map { $0.name }.joinWithSeparator(", ")
+    fileprivate func argumentNamesFor(_ methodDecl: MethodDeclaration) -> String {
+        return methodDecl.arguments.map { $0.name }.joined(separator: ", ")
     }
-    private func argumentTypesFor(methodDecl: MethodDeclaration) -> String {
-        return methodDecl.arguments.map { $0.type }.joinWithSeparator(", ")
-    }
-
-    private func returnTypesFor(methodDecl: MethodDeclaration) -> String {
-        return methodDecl.returnValueTypes.joinWithSeparator(", ")
+    fileprivate func argumentTypesFor(_ methodDecl: MethodDeclaration) -> String {
+        return methodDecl.arguments.map { $0.type }.joined(separator: ", ")
     }
 
-    private func optionalReturnsFor(methodDecl: MethodDeclaration) -> String {
+    fileprivate func returnTypesFor(_ methodDecl: MethodDeclaration) -> String {
+        return methodDecl.returnValueTypes.joined(separator: ", ")
+    }
+
+    fileprivate func optionalReturnsFor(_ methodDecl: MethodDeclaration) -> String {
         return methodDecl.hasReturnValues() ? "-> (" + returnTypesFor(methodDecl) + ") " : ""
     }
 
-    private func mapAccessorToDict(accessor: Accessor) -> [String: AnyObject] {
+    fileprivate func mapAccessorToDict(_ accessor: Accessor) -> [String: AnyObject] {
         return [
-            "name": accessor.name,
-            "type": accessor.returnType,
-            "capitalized_name": upcase(accessor.name),
+            "name": accessor.name as AnyObject,
+            "type": accessor.returnType as AnyObject,
+            "capitalized_name": upcase(accessor.name) as AnyObject,
         ]
     }
 
-    private func mapMethodsToDict(method: MethodDeclaration) -> [String: AnyObject] {
+    fileprivate func mapMethodsToDict(_ method: MethodDeclaration) -> [String: AnyObject] {
         return [
-            "name":                         method.name,
-            "has_arguments":                method.hasArguments(),
-            "named_arguments":              namedArgumentsFor(method),
-            "comma_delimited_arg_names":    argumentNamesFor(method),
-            "comma_delimited_arg_types":    argumentTypesFor(method),
-            "throws":                       method.throwsError ? " throws " : " ",
+            "name":                         method.name as AnyObject,
+            "has_arguments":                method.hasArguments() as AnyObject,
+            "named_arguments":              namedArgumentsFor(method) as AnyObject,
+            "comma_delimited_arg_names":    argumentNamesFor(method) as AnyObject,
+            "comma_delimited_arg_types":    argumentTypesFor(method) as AnyObject,
+            "throws":                       method.throwsError ? " throws " : " " as AnyObject,
             "has_return_values":            method.hasReturnValues(),
             "comma_delimited_return_types": returnTypesFor(method),
             "optional_return_expression":   optionalReturnsFor(method),

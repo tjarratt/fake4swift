@@ -2,18 +2,18 @@ import Foundation
 
 @objc public protocol XMASFileManager {
     func fileExistsAtPath(
-        path: String,
+        _ path: String,
         isDirectory: UnsafeMutablePointer<ObjCBool>) -> Bool
 
     func createDirectoryAtPath(
-        path: String,
+        _ path: String,
         withIntermediateDirectories: Bool,
         attributes: [String : AnyObject]?) throws
 
     func createFileAtPath(
-        path: String,
-        contents: NSData?,
+        _ path: String,
+        contents: Data?,
         attributes: [String : AnyObject]?) -> Bool
 }
 
-extension NSFileManager : XMASFileManager {}
+extension FileManager : XMASFileManager {}

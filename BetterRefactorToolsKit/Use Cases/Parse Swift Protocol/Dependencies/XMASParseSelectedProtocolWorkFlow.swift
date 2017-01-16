@@ -4,16 +4,16 @@ import SourceKittenFramework
 
 let errorDomain : String = "parse-swift-protocol-domain"
 
-@objc public class XMASParseSelectedProtocolWorkFlow : NSObject {
+@objc open class XMASParseSelectedProtocolWorkFlow : NSObject {
     var swiftParser : XMASSwiftParser
-    private(set) public var selectedProtocolOracle : XMASSelectedProtocolOracle
+    fileprivate(set) open var selectedProtocolOracle : XMASSelectedProtocolOracle
 
     public init(protocolOracle : XMASSelectedProtocolOracle) {
         swiftParser = XMASSwiftParser.init()
         selectedProtocolOracle = protocolOracle
     }
 
-    @objc public func selectedProtocolInFile(filePath : String!) throws -> ProtocolDeclaration {
+    @objc open func selectedProtocolInFile(_ filePath : String!) throws -> ProtocolDeclaration {
         guard let sourceFile = File.init(path: filePath) as File! else {
             throw NSError.init(domain: errorDomain, code: 5, userInfo: [NSLocalizedFailureReasonErrorKey: "could not read " + filePath])
         }

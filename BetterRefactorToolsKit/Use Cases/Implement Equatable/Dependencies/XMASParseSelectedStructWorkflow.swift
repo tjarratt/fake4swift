@@ -2,16 +2,16 @@ import SwiftXPC
 import Foundation
 import SourceKittenFramework
 
-@objc public class XMASParseSelectedStructWorkflow : NSObject {
+@objc open class XMASParseSelectedStructWorkflow : NSObject {
     var swiftParser : XMASSwiftParser
-    private(set) public var selectedStructOracle: XMASSelectedStructOracle
+    fileprivate(set) open var selectedStructOracle: XMASSelectedStructOracle
 
     public init(structOracle : XMASSelectedStructOracle) {
         swiftParser = XMASSwiftParser.init()
         selectedStructOracle = structOracle
     }
 
-    @objc dynamic public func selectedStructInFile(filePath : String!) throws -> StructDeclaration {
+    @objc dynamic open func selectedStructInFile(_ filePath : String!) throws -> StructDeclaration {
         guard let sourceFile = File.init(path: filePath) as File! else {
             let userInfo = [NSLocalizedFailureReasonErrorKey: "could not read " + filePath]
             throw NSError.init(domain: errorDomain, code: 5, userInfo: userInfo)

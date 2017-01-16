@@ -1,12 +1,12 @@
 import Foundation
 import BetterRefactorToolsKit
 
-@objc public class XMASImplementEquatableUseCase : NSObject {
-    private(set) public var logger: XMASLogger
-    private(set) public var alerter: XMASAlerter
-    private(set) public var equatableWriter: XMASEquatableWriter
-    private(set) public var selectedFileOracle: XMASSelectedSourceFileOracle
-    dynamic private(set) public var parseStructWorkflow: XMASParseSelectedStructWorkflow
+@objc open class XMASImplementEquatableUseCase : NSObject {
+    fileprivate(set) open var logger: XMASLogger
+    fileprivate(set) open var alerter: XMASAlerter
+    fileprivate(set) open var equatableWriter: XMASEquatableWriter
+    fileprivate(set) open var selectedFileOracle: XMASSelectedSourceFileOracle
+    dynamic fileprivate(set) open var parseStructWorkflow: XMASParseSelectedStructWorkflow
 
     @objc public init(
         logger: XMASLogger,
@@ -21,12 +21,12 @@ import BetterRefactorToolsKit
             self.parseStructWorkflow = parseStructWorkflow
     }
 
-    @objc public func safelyAddEquatableToSelectedStruct() {
+    @objc open func safelyAddEquatableToSelectedStruct() {
         let filePath = self.selectedFileOracle.selectedFilePath() as NSString
-        if filePath.pathExtension.lowercaseString != "swift" {
+        if filePath.pathExtension.lowercased() != "swift" {
             self.alerter.flashMessage(
                 "Select a Swift struct",
-                withImage: .NoSwiftFileSelected,
+                with: .noSwiftFileSelected,
                 shouldLogMessage: false
             )
         }
@@ -40,36 +40,36 @@ import BetterRefactorToolsKit
             } else {
                 self.alerter.flashMessage(
                     "Select a swift struct",
-                    withImage: .NoSwiftFileSelected,
+                    with: .noSwiftFileSelected,
                     shouldLogMessage: false
                 )
             }
 
         } catch let error as NSError {
-            self.alerter.flashComfortingMessageForError(error)
+            self.alerter.flashComfortingMessage(forError: error)
         } catch {
             self.alerter.flashMessage(
                 "Something unexpected happened",
-                withImage: .AbjectFailure,
+                with: .abjectFailure,
                 shouldLogMessage: true
             )
         }
     }
 
-    private func addEquatableImplPossiblyThrowingError(selectedStruct : StructDeclaration) {
+    fileprivate func addEquatableImplPossiblyThrowingError(_ selectedStruct : StructDeclaration) {
         do {
             try self.equatableWriter.addEquatableImplForStruct(selectedStruct)
             self.alerter.flashMessage(
                 "Success!",
-                withImage: .ImplementEquatable,
+                with: .implementEquatable,
                 shouldLogMessage: false
             )
         } catch let error as NSError {
-            self.alerter.flashComfortingMessageForError(error)
+            self.alerter.flashComfortingMessage(forError: error)
         } catch {
             self.alerter.flashMessage(
                 "Something unexpected happened",
-                withImage: .AbjectFailure,
+                with: .abjectFailure,
                 shouldLogMessage: true
             )
         }

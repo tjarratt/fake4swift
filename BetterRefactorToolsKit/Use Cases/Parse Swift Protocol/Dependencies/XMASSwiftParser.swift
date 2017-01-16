@@ -12,7 +12,7 @@ struct XMASSwiftParser {
     let mutableMethodKind  : String = "source.decl.attribute.mutating"
 
     // MARK: Structs
-    func parseStructDeclaration(dict: [String: SourceKitRepresentable], filePath: String) throws -> StructDeclaration? {
+    func parseStructDeclaration(_ dict: [String: SourceKitRepresentable], filePath: String) throws -> StructDeclaration? {
         guard let kind = dict["key.kind"] as? String else {
             return nil
         }
@@ -35,7 +35,7 @@ struct XMASSwiftParser {
         )
     }
 
-    func findFieldsInStructDeclaration(dict: [String: SourceKitRepresentable]) -> [String] {
+    func findFieldsInStructDeclaration(_ dict: [String: SourceKitRepresentable]) -> [String] {
         var fields : [String] = []
 
         guard let fileSubStructure = dict["key.substructure"] as? [SourceKitRepresentable] else {
@@ -59,9 +59,9 @@ struct XMASSwiftParser {
     }
 
     // MARK: Protocols
-    func parseProtocolDeclaration(dict: [String: SourceKitRepresentable], filePath: String) throws -> ProtocolDeclaration? {
+    func parseProtocolDeclaration(_ dict: [String: SourceKitRepresentable], filePath: String) throws -> ProtocolDeclaration? {
         var fileContents : NSString
-        try fileContents = NSString.init(contentsOfFile: filePath, encoding:NSUTF8StringEncoding)
+        try fileContents = NSString.init(contentsOfFile: filePath, encoding:String.Encoding.utf8.rawValue)
 
         guard let kind = dict["key.kind"] as? String else {
             return nil
@@ -119,7 +119,7 @@ struct XMASSwiftParser {
 
     // mark - Private
 
-    func accessorsFromProtocolDecl(protocolDict : [String: SourceKitRepresentable], kind : String) -> (Array<Accessor>, Array<Accessor>) {
+    func accessorsFromProtocolDecl(_ protocolDict : [String: SourceKitRepresentable], kind : String) -> (Array<Accessor>, Array<Accessor>) {
         var getters : Array<Accessor> = []
         var setters : Array<Accessor> = []
 
@@ -156,7 +156,7 @@ struct XMASSwiftParser {
         mutableM: [MethodDeclaration]
     )
 
-    func methodsFromProtocolDecl(protocolDict: [String: SourceKitRepresentable], fileContents : NSString) -> MethodDecls {
+    func methodsFromProtocolDecl(_ protocolDict: [String: SourceKitRepresentable], fileContents : NSString) -> MethodDecls {
         var instanceMethods : Array<MethodDeclaration> = []
         var staticMethods : Array<MethodDeclaration> = []
         var mutableMethods : Array<MethodDeclaration> = []
@@ -204,7 +204,7 @@ struct XMASSwiftParser {
         return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
     }
 
-    func hasMatchingAttribute(protocolBodyItem : [String: SourceKitRepresentable], attributeName: String) -> Bool {
+    func hasMatchingAttribute(_ protocolBodyItem : [String: SourceKitRepresentable], attributeName: String) -> Bool {
         if let attributes = protocolBodyItem["key.attributes"] as? [SourceKitRepresentable] {
             for attribute : SourceKitRepresentable in attributes {
                 if let attrs = attribute as? [String: SourceKitRepresentable] {
@@ -222,10 +222,10 @@ struct XMASSwiftParser {
         return false
     }
 
-    func methodNameFromMethodDict(protocolBodyItem : [String: SourceKitRepresentable]) -> String {
+    func methodNameFromMethodDict(_ protocolBodyItem : [String: SourceKitRepresentable]) -> String {
         let methodName : String = protocolBodyItem["key.name"] as! String
         var regex : NSRegularExpression
-        try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpressionOptions.CaseInsensitive)
+        try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpression.Options.caseInsensitive)
 
         return regex.stringByReplacingMatchesInString(
             methodName,
@@ -235,7 +235,7 @@ struct XMASSwiftParser {
         )
     }
 
-    func argumentsFromMethodDict(dict : [String: SourceKitRepresentable]) -> Array<MethodParameter> {
+    func argumentsFromMethodDict(_ dict : [String: SourceKitRepresentable]) -> Array<MethodParameter> {
         var parameters : Array<MethodParameter> = []
 
         guard let substructure = dict["key.substructure"] as? [SourceKitRepresentable] else {
@@ -257,79 +257,79 @@ struct XMASSwiftParser {
         return parameters
     }
 
-    func returnTypesFromMethodDict(dict : [String: SourceKitRepresentable], fileContents : NSString) -> Array<ReturnType> {
+    func returnTypesFromMethodDict(_ dict : [String: SourceKitRepresentable], fileContents : NSString) -> Array<ReturnType> {
         var types : Array<ReturnType> = []
         var regex : NSRegularExpression
-        try! regex = NSRegularExpression(pattern: ".*\\s+->\\s+\\(?([^\\)]*)\\)?", options: NSRegularExpressionOptions.CaseInsensitive)
+        try! regex = NSRegularExpression(pattern: ".*\\s+->\\s+\\(?([^\\)]*)\\)?", options: NSRegularExpression.Options.caseInsensitive)
 
         let start : Int = Int.init(truncatingBitPattern: dict["key.offset"] as! Int64)
         let end : Int = Int.init(truncatingBitPattern: dict["key.length"] as! Int64)
         let range = NSMakeRange(start, end)
 
-        let funcDeclarationString = fileContents.substringWithRange(range) as String
+        let funcDeclarationString = fileContents.substring(with: range) as String
 
-        let matches = regex.matchesInString(
-            funcDeclarationString,
-            options: NSMatchingOptions.Anchored,
+        let matches = regex.matches(
+            in: funcDeclarationString,
+            options: NSRegularExpression.MatchingOptions.anchored,
             range: NSRange.init(location: 0, length: funcDeclarationString.characters.count)
         )
 
-        let whitespace : NSCharacterSet = NSCharacterSet(charactersInString: " \t")
+        let whitespace : CharacterSet = CharacterSet(charactersIn: " \t")
         for match : NSTextCheckingResult in matches {
-            let substring : String = (funcDeclarationString as NSString).substringWithRange(match.rangeAtIndex(1))
-            let components : [String] = substring.componentsSeparatedByString(",")
+            let substring : String = (funcDeclarationString as NSString).substring(with: match.rangeAt(1))
+            let components : [String] = substring.components(separatedBy: ",")
             for type in components {
-                types.append(type.stringByTrimmingCharactersInSet(whitespace))
+                types.append(type.trimmingCharacters(in: whitespace))
             }
         }
 
         return types
     }
 
-    func methodCanThrowError(methodItem : [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
+    func methodCanThrowError(_ methodItem : [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
         var regex : NSRegularExpression
-        try! regex = NSRegularExpression(pattern: ".*\\)\\sthrows\\s", options: NSRegularExpressionOptions.CaseInsensitive)
+        try! regex = NSRegularExpression(pattern: ".*\\)\\sthrows\\s", options: NSRegularExpression.Options.caseInsensitive)
 
         let startOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.offset"] as! Int64)
         let lengthOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.length"] as! Int64)
         let endOfMethodDecl : Int = startOfMethodDecl + lengthOfMethodDecl
 
         let rangeOfFileAfterMethodDecl : NSRange = NSRange.init(location: endOfMethodDecl, length: fileContents.length - endOfMethodDecl)
-        var indexOfNextNewline : NSInteger = fileContents.rangeOfString("\n", options: NSStringCompareOptions.LiteralSearch, range: rangeOfFileAfterMethodDecl).location
+        var indexOfNextNewline : NSInteger = fileContents.range(of: "\n", options: NSString.CompareOptions.literal, range: rangeOfFileAfterMethodDecl).location
 
         if indexOfNextNewline == NSNotFound {
             indexOfNextNewline = endOfMethodDecl
         }
 
         let range = NSMakeRange(startOfMethodDecl, indexOfNextNewline - startOfMethodDecl + 1)
-        let funcDeclarationString = fileContents.substringWithRange(range) as String
+        let funcDeclarationString = fileContents.substring(with: range) as String
 
-        let numberOfMatches = regex.numberOfMatchesInString(
-            funcDeclarationString,
-            options: NSMatchingOptions.Anchored,
+        let numberOfMatches = regex.numberOfMatches(
+            in: funcDeclarationString,
+            options: NSRegularExpression.MatchingOptions.anchored,
             range: NSRange.init(location: 0, length: funcDeclarationString.characters.count)
         )
 
         return numberOfMatches > 0
     }
 
-    func findTypealiasInProtocolDecl(protocolBody: [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
+    func findTypealiasInProtocolDecl(_ protocolBody: [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
         // read from body offset - body length
         // regex for " typealias "
         let startOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodyoffset"] as! Int64)
         let lengthOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodylength"] as! Int64)
         let range : NSRange = NSRange.init(location: startOfProtocolBody, length: lengthOfProtocolBody)
-        let protocolString : String = fileContents.substringWithRange(range)
+        let protocolString : String = fileContents.substring(with: range)
 
         var regex : NSRegularExpression
-        try! regex = NSRegularExpression(pattern: "\\stypealias\\s", options: NSRegularExpressionOptions.AnchorsMatchLines)
+        try! regex = NSRegularExpression(pattern: "\\stypealias\\s", options: NSRegularExpression.Options.anchorsMatchLines)
 
         let rangeOfString : NSRange = NSRange.init(location: 0, length: lengthOfProtocolBody)
-        let matches = regex.matchesInString(protocolString, options: NSMatchingOptions.init(rawValue: 0), range: rangeOfString)
+        let matches = regex.matches(in: protocolString, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: rangeOfString)
         return matches.count > 0
     }
 
-    func inheritedTypesForProtocol(protocolDict: [String: SourceKitRepresentable]) -> Array<String> {
+    func inheritedTypesForProtocol(_ protocolDict: [String: SourceKitRepresentable]) -> Array<String> {
         var inheritedProtocols : [String] = []
         guard let inheritedTypes = protocolDict["key.inheritedtypes"] as? [SourceKitRepresentable] else {
             return inheritedProtocols
