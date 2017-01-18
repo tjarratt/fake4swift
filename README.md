@@ -23,23 +23,23 @@ BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD 
 
 # swift-fakes
    <kbd>CTRL</kbd> + <kbd>g</kbd>
-   
+
    (Edit > Generate Fake Protocol)
 
    Generates a file in your project with a test double that implements the Swift protocol under your cursor. Inspired by [counterfeiter](https://github.com/maxbrunsfeld/counterfeiter).
 
    ![Boom](/generate-fake.gif?raw=true)
-   
+
    Given a swift protocol...
-   
+
    ```swift
    protocol MySomewhatSpecialProtocol {
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int)
 }
    ```
-   
+
    After you generate a fake and add the new file to your project, you can use the generated fake in tests like so...
-   
+
    ```swift
    describe("a generated fake for a contrived protocol") {
       var subject : FakeMySomewhatSpecialProtocol!
@@ -53,7 +53,7 @@ BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD 
           test = subject
           expect(test).toNot(beNil())
       }
-      
+
       it("allows you to stub the return value for methods that return values") {
          subject.doesStuffReturns((["test-yo"], 5))
 
@@ -81,9 +81,9 @@ BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD 
 
 # change-method-signature
    <kbd>CMD</kbd> + <kbd>F6</kbd>
-   
+
    Refactor the method under the cursor. Add, remove and re-order selector components, change types and names.
-   
+
    (Edit > Refactor Current Method)
 
 # Known defects
