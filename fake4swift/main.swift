@@ -5,7 +5,7 @@ let selectedFile: String
 let selectedProtocol: String?
 
 do {
-    (selectedFile, selectedProtocol) = try ArgsParser(args: Process.arguments).parse()
+    (selectedFile, selectedProtocol) = try ArgsParser(args: CommandLine.arguments).parse()
 } catch let e {
     print(
         e,
@@ -22,11 +22,11 @@ let selectedTextWorkflow = XMASParseSelectedProtocolWorkFlow(
     protocolOracle: SelectedProtocolOracle(protocolToFake: selectedProtocol)
 )
 
-let bundle = NSBundle(forClass: XMASSwiftProtocolFaker.self)
+let bundle = Bundle(for: XMASSwiftProtocolFaker.self)
 let protocolFaker = XMASSwiftProtocolFaker(bundle: bundle)
 let fakeProtocolPersister = XMASFakeProtocolPersister(
     protocolFaker: protocolFaker,
-    fileManager: NSFileManager()
+    fileManager: FileManager()
 )
 let selectedFileOracle = SelectedSourceFileOracle(selectedSourceFilePath: selectedFile)
 

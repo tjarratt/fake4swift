@@ -21,9 +21,9 @@ import Foundation
         let fakeFileName = ["Fake", protocolDecl.name, ".swift"].joined(separator: "")
         let pathToFake = (fakesDir as NSString).appendingPathComponent(fakeFileName)
 
-        if !fileManager.fileExistsAtPath(fakesDir as String, isDirectory: nil) {
-            try self.fileManager.createDirectoryAtPath(
-                fakesDir,
+        if !fileManager.fileExists(atPath: fakesDir as String, isDirectory: nil) {
+            try self.fileManager.createDirectory(
+                atPath: fakesDir,
                 withIntermediateDirectories: true,
                 attributes: nil)
         }
@@ -32,7 +32,7 @@ import Foundation
             let fileContents = try self.protocolFaker.fakeForProtocol(protocolDecl)
 
             let fileData : Data = fileContents.data(using: String.Encoding.utf8)!
-            fileManager.createFileAtPath(pathToFake, contents: fileData, attributes: nil)
+            fileManager.createFile(atPath: pathToFake, contents: fileData, attributes: nil)
 
         } catch let error as NSError {
             throw error

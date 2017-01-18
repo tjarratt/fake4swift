@@ -46,8 +46,9 @@ import Foundation
     }
 
     fileprivate func upcase(_ str : String) -> String {
-        return str.replacingCharacters(in: str.startIndex...str.startIndex,
-            with: String(str[str.startIndex]).capitalized)
+        let first = String(str.characters.prefix(1)).capitalized
+        let other = String(str.characters.dropFirst())
+        return first + other
     }
 
     fileprivate func namedArgumentsFor(_ methodDecl: MethodDeclaration) -> String {
@@ -84,11 +85,11 @@ import Foundation
             "named_arguments":              namedArgumentsFor(method) as AnyObject,
             "comma_delimited_arg_names":    argumentNamesFor(method) as AnyObject,
             "comma_delimited_arg_types":    argumentTypesFor(method) as AnyObject,
-            "throws":                       method.throwsError ? " throws " : " " as AnyObject,
-            "has_return_values":            method.hasReturnValues(),
-            "comma_delimited_return_types": returnTypesFor(method),
-            "optional_return_expression":   optionalReturnsFor(method),
-            "pre_stub_invocation":          method.throwsError ? "try " : "",
+            "throws":                       (method.throwsError ? " throws " : " ") as AnyObject,
+            "has_return_values":            method.hasReturnValues() as AnyObject,
+            "comma_delimited_return_types": returnTypesFor(method) as AnyObject,
+            "optional_return_expression":   optionalReturnsFor(method) as AnyObject,
+            "pre_stub_invocation":          (method.throwsError ? "try " : "") as AnyObject,
         ]
     }
 }

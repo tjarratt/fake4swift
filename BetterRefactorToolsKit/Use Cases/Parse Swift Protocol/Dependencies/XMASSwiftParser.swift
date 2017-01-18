@@ -1,5 +1,4 @@
 import Foundation
-import SwiftXPC
 import SourceKittenFramework
 
 struct XMASSwiftParser {
@@ -227,9 +226,9 @@ struct XMASSwiftParser {
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpression.Options.caseInsensitive)
 
-        return regex.stringByReplacingMatchesInString(
-            methodName,
-            options: NSMatchingOptions.WithoutAnchoringBounds,
+        return regex.stringByReplacingMatches(
+            in: methodName,
+            options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds,
             range: NSRange.init(location: 0, length: methodName.characters.count),
             withTemplate: ""
         )

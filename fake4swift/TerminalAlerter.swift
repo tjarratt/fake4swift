@@ -2,15 +2,15 @@ import Foundation
 import BetterRefactorToolsKit
 
 @objc class TerminalAlerter : NSObject, XMASAlerter {
-    @objc func flashMessage(message: String!, withImage imageName: XMASAlertImage, shouldLogMessage: Bool) {
+    @objc func flashMessage(_ message: String!, with imageName: XMASAlertImage, shouldLogMessage: Bool) {
         print(message)
     }
 
-    @objc func flashComfortingMessageForError(error: NSError!) {
+    @objc public func flashComfortingMessage(forError error: Error!) {
         print("Error: \(error.localizedDescription)")
     }
 
-    @objc func flashComfortingMessageForException(exception: NSException!) {
+    @objc func flashComfortingMessage(for exception: NSException!) {
         print("2spooky5me")
     }
 }

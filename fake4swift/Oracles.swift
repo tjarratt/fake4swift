@@ -8,7 +8,7 @@ import BetterRefactorToolsKit
         self.protocolToFake = protocolToFake
     }
 
-    @objc func isProtocolSelected(protocolDecl : ProtocolDeclaration) -> Bool {
+    @objc func isProtocolSelected(_ protocolDecl : ProtocolDeclaration) -> Bool {
         return protocolToFake == nil || protocolToFake == protocolDecl.name
     }
 }
