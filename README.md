@@ -1,11 +1,6 @@
-Deprecated
-==========
+`fake4swift` is a command line tool that generates type-safe test doubles for Swift.
 
-This Xcode Plugin (and all others) cannot work with Xcode 8 and above. If you care deeply about Xcode plugins such as this, please (PLEASE!) file Radars to Apple asking for the XcodeKit API to expand to allow support for extensions like this one.
-
-BetterRefactorTools
--------------------
-BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD and refactoring.
+This is handy if you want to easily generate mocks for protocols in Swift.
 
 # Installation (the easy way)
 * [download the most recent release](https://github.com/tjarratt/Xcode-Better-Refactor-Tools/releases)
@@ -19,7 +14,6 @@ BetterRefactorTools is an Xcode plugin that adds handy utilities related to TDD 
 # Features
 
 * [Generate test-doubles for Swift Protocols](#swift-fakes)
-* [Change an obj-c method's signature](#change-method-signature) (add, remove, edit selector components)
 
 # swift-fakes
    <kbd>CTRL</kbd> + <kbd>g</kbd>
@@ -113,6 +107,8 @@ or
 `rake uninstall`
 
 # Would not have been possible without the hard work of
-* Brian Croom -- fixed obnoxious `fake4swift` CLI warnings
+* Brian Croom -- fixed obnoxious `fake4swift` CLI warnings and added build infrastructure
+* Rachel Brindle -- contributed expertise with Carthage, linking of frameworks for the fake4swift cli
+
 * Helen Tang -- created the 'fake mustache' icon (disguise by Helen Tseng from the Noun Project)
 * Ludmil -- created the 'swift' icon (swallow by ludmil from the Noun Project)
