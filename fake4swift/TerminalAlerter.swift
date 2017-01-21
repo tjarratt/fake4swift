@@ -1,5 +1,5 @@
 import Foundation
-import BetterRefactorToolsKit
+import Fake4SwiftKit
 
 @objc class TerminalAlerter : NSObject, XMASAlerter {
     @objc func flashMessage(_ message: String!, with imageName: XMASAlertImage, shouldLogMessage: Bool) {

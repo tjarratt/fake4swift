@@ -4,21 +4,10 @@
 [submodule "Externals/Blindside"]
 	path = Externals/Blindside
 	url = https://github.com/jbsf/blindside.git
-[submodule "Externals/SourceKitten"]
-	path = Externals/SourceKitten
-	url = https://github.com/jpsim/SourceKitten.git
-[submodule "Externals/SwiftXPC"]
-	path = Externals/SwiftXPC
-	url = https://github.com/jpsim/SwiftXPC.git
 [submodule "Externals/Quick"]
 	path = Externals/Quick
 	url = https://github.com/quick/quick.git
 [submodule "Externals/Nimble"]
 	path = Externals/Nimble
 	url = https://github.com/quick/nimble.git
-[submodule "Externals/GRMustacheSwift"]
-	path = Externals/GRMustacheSwift
-	url = https://github.com/groue/GRMustache.swift.git
-[submodule "Externals/SWXMLHash"]
-	path = Externals/SWXMLHash
-	url = https://github.com/drmohundro/SWXMLHash
+

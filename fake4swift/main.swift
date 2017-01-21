@@ -1,5 +1,5 @@
 import Foundation
-import BetterRefactorToolsKit
+import Fake4SwiftKit
 
 let selectedFile: String
 let selectedProtocol: String?

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -ex
-
-ln -s /Library/Application\ Support/BetterRefactorTools/XcodeBetterRefactorTools.xcplugin ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/XcodeBetterRefactorTools.xcplugin
-

@@ -1,5 +1,5 @@
 import Foundation
-import BetterRefactorToolsKit
+import Fake4SwiftKit
 
 @objc class SelectedProtocolOracle : NSObject, XMASSelectedProtocolOracle {
     let protocolToFake: String?
