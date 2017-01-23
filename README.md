@@ -2,28 +2,18 @@
 
 This is handy if you want to easily generate mocks for protocols in Swift.
 
-# Installation (the easy way)
-* [download the most recent release](https://github.com/tjarratt/Xcode-Better-Refactor-Tools/releases)
+# Installation (ie: the "easy" way)
+* brew install tjarratt/fake4swift/fake4swift --HEAD
 
 # Build from source (ie: "Installation the hard way")
-* `git clone https://github.com/tjarratt/Xcode-Better-Refactor-Tools.git`
-* `cd Xcode-Better-Refactor-Tools`
+* `git clone https://github.com/tjarratt/fake4swift.git`
 * `git submodule update --init --recursive`
-* `rake install`
+* `make prefix_install`
 
 # Features
-
 * [Generate test-doubles for Swift Protocols](#swift-fakes)
 
 # swift-fakes
-   <kbd>CTRL</kbd> + <kbd>g</kbd>
-
-   (Edit > Generate Fake Protocol)
-
-   Generates a file in your project with a test double that implements the Swift protocol under your cursor. Inspired by [counterfeiter](https://github.com/maxbrunsfeld/counterfeiter).
-
-   ![Boom](/generate-fake.gif?raw=true)
-
    Given a swift protocol...
 
    ```swift
@@ -31,8 +21,14 @@ This is handy if you want to easily generate mocks for protocols in Swift.
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int)
 }
    ```
+   
+   Run the fake4swift cli
+   `fake4swift path/to/MySomewhatSpecialProtocol.swift MySomewhatSpecialProtocol`
+   
+   It will generate a test double near it
+   `ls path/to/fakes/FakeMySomewhatSpecialProtocol.swift`
 
-   After you generate a fake and add the new file to your project, you can use the generated fake in tests like so...
+   You can use the generated fake in tests like so...
 
    ```swift
    describe("a generated fake for a contrived protocol") {
@@ -73,23 +69,11 @@ This is handy if you want to easily generate mocks for protocols in Swift.
    }
    ```
 
-# change-method-signature
-   <kbd>CMD</kbd> + <kbd>F6</kbd>
-
-   Refactor the method under the cursor. Add, remove and re-order selector components, change types and names.
-
-   (Edit > Refactor Current Method)
-
 # Known defects
 
-* Generate Fake   : Does not support initializers
-* Generate Fake   : Does not support protocols that include other protocols
-* Generate Fake   : Does not handle protocols that use `typealias`
-* Refactor Method : Only supports instance methods
-* Refactor Method : ay get confused when an argument is a protocol type (e.g.: `id<AnyProtocol>`)
-* Refactor Method : Cannot find call sites of methods in all `.mm` files. (especially Cedar specs)
-* Refactor Method : Will rewrite **any** call site for selectors that match (e.g.: it will match any `-init` when rewriting call sites).
-* Refactor Method : Will not rewrite any matching @selector()
+* fake4swift   : Does not support initializers
+* fake4swift   : Does not support protocols that include other protocols
+* fake4swift   : Does not handle protocols that use `typealias` or `associatedtype`
 
 # Feature backlog
 
@@ -99,16 +83,12 @@ This is handy if you want to easily generate mocks for protocols in Swift.
 
 Found a bug? Have a feature request? Interested in submitting a pull request? Please open an issue on Github (or just issue a pull request directly if the fix is pretty clear).
 
-# Uninstalling the plugin
-Plugin can be uninstalled by removing `XcodeBetterRefactorTools.xcplugin` from `~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins`
-
-or
-
-`rake uninstall`
+# Uninstall
+`brew uninstall tjarratt/fake4swift/fake4swift`
 
 # Would not have been possible without the hard work of
 * Brian Croom -- fixed obnoxious `fake4swift` CLI warnings and added build infrastructure
-* Rachel Brindle -- contributed expertise with Carthage, linking of frameworks for the fake4swift cli
+* Rachel Brindle -- contributed expertise with Carthage, dynamic linking, homebrew
 
 * Helen Tang -- created the 'fake mustache' icon (disguise by Helen Tseng from the Noun Project)
 * Ludmil -- created the 'swift' icon (swallow by ludmil from the Noun Project)
