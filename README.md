@@ -3,7 +3,7 @@
 This is handy if you want to easily generate mocks for protocols in Swift.
 
 # Installation (ie: the "easy" way)
-* brew install tjarratt/fake4swift/fake4swift --HEAD
+* `brew install tjarratt/fake4swift/fake4swift --HEAD`
 
 # Build from source (ie: "Installation the hard way")
 * `git clone https://github.com/tjarratt/fake4swift.git`
@@ -22,11 +22,16 @@ This is handy if you want to easily generate mocks for protocols in Swift.
 }
    ```
    
-   Run the fake4swift cli
-   `fake4swift path/to/MySomewhatSpecialProtocol.swift MySomewhatSpecialProtocol`
+   Run the fake4swift cli...
    
-   It will generate a test double near it
-   `ls path/to/fakes/FakeMySomewhatSpecialProtocol.swift`
+   ```bash
+   fake4swift path/to/MySomewhatSpecialProtocol.swift MySomewhatSpecialProtocol
+   ```
+   
+   It will generate a test double near it...
+   ```bash
+   path/to/fakes/FakeMySomewhatSpecialProtocol.swift
+   ```
 
    You can use the generated fake in tests like so...
 
