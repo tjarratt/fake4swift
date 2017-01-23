@@ -1033,7 +1033,6 @@
 				34A32EBC1C433A2B009D3FA6 /* Sources */,
 				34A32EBD1C433A2B009D3FA6 /* Frameworks */,
 				34A32ED91C433C4B009D3FA6 /* Copy Frameworks */,
-				34A32EE11C433F9C009D3FA6 /* Extract CLI Tool */,
 			);
 			buildRules = (
 			);
@@ -1469,23 +1468,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		34A32EE11C433F9C009D3FA6 /* Extract CLI Tool */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Extract CLI Tool";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# Extracts the CLI tool and embedded frameworks from the application bundle.\nset -e\n\ncp -v \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${INSTALL_DIR}/${EXECUTABLE_NAME}\"\necho \"${INSTALL_DIR}/${EXECUTABLE_NAME}\"\necho \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\n\nfor FRAMEWORK in \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/\"*.framework; do\n  FRAMEWORK_NAME=$(basename \"${FRAMEWORK}\")\n  rm -rf \"${INSTALL_DIR}/${FRAMEWORK_NAME}\"\n  cp -R \"${FRAMEWORK}\" \"${INSTALL_DIR}/${FRAMEWORK_NAME}\"\ndone";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		34A32EBC1C433A2B009D3FA6 /* Sources */ = {
