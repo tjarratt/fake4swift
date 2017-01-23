@@ -16,7 +16,7 @@ clean:
 	rm -rf $(TEMPDIR)
 
 carthage_bootstrap:
-	carthage bootstrap --platform mac
+	/usr/local/bin/carthage bootstrap --platform mac
 
 prefix_install: clean carthage_bootstrap
 	xcodebuild $(XCODEFLAGS) install
