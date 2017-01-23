@@ -27,5 +27,4 @@ prefix_install: clean carthage_bootstrap
 	mkdir -p "$(PREFIX)/Frameworks" "$(PREFIX)/bin"
 	cp -Rf $(TEMPDIR)$(FRAMEWORKS_FOLDER)/*.framework "$(PREFIX)/Frameworks/"
 	cp -f "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift" "$(PREFIX)/bin/"
-	# install_name_tool -add_rpath "@executable_path/../Frameworks/$(OUTPUT_FRAMEWORK)/Versions/Current/Frameworks/"  "$(PREFIX)/bin/fake4swift"
 
