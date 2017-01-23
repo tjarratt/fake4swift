@@ -48,6 +48,7 @@
 		F765113E1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F765113D1BE9FB2400BFDAD8 /* FakeMySomewhatSpecialProtocolSpec.swift */; };
 		F774D63A1E32D7F80069D1A3 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F774D6391E32D7F80069D1A3 /* SWXMLHash.framework */; };
 		F774D63B1E32D7FE0069D1A3 /* SWXMLHash.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F774D6391E32D7F80069D1A3 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F774D63C1E3699E00069D1A3 /* SWXMLHash.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F774D6391E32D7F80069D1A3 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F78743A71C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */; };
 		F78743A81C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78743A61C4572F2001DCFE7 /* XMASAddFileToXcodeProjectWorkflow.swift */; };
 		F7C74BFB1C57541F001F9CE6 /* XMASParseSelectedStructWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C74BFA1C57541F001F9CE6 /* XMASParseSelectedStructWorkflow.swift */; };
@@ -457,6 +458,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F774D63C1E3699E00069D1A3 /* SWXMLHash.framework in Copy Frameworks */,
 				F7CCB03E1E2F03AC00AAA549 /* Yams.framework in Copy Frameworks */,
 				34A32EDC1C433DCC009D3FA6 /* Blindside.framework in Copy Frameworks */,
 				34A32EDA1C433C68009D3FA6 /* Fake4SwiftKit.framework in Copy Frameworks */,
