@@ -15,7 +15,10 @@ XCODEFLAGS=-project 'Fake4Swift.xcodeproj' -scheme 'fake4swift' DSTROOT=$(TEMPDI
 clean:
 	rm -rf $(TEMPDIR)
 
-prefix_install: clean
+carthage_bootstrap:
+	carthage bootstrap --platform mac
+
+prefix_install: clean carthage_bootstrap
 	xcodebuild $(XCODEFLAGS) install
 	mkdir -p "$(TEMPDIR)$(FRAMEWORKS_FOLDER)" "$(TEMPDIR)$(BINARIES_FOLDER)"
 	mv -f $(BUNDLED_FRAMEWORKS) $(TEMPDIR)$(FRAMEWORKS_FOLDER)
