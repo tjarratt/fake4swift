@@ -4,7 +4,7 @@ import Foundation
 // https://github.com/tjarratt/xcode-better-refactor-tools
 
 struct FakeMyMutatingProtocol : MyMutatingProtocol, Equatable {
-    private let hash: Int = Int(arc4random())
+    fileprivate let hash: Int = Int(arc4random())
 
     init() {
     }
@@ -20,7 +20,7 @@ struct FakeMyMutatingProtocol : MyMutatingProtocol, Equatable {
     func mutableMethodArgsForCall(callIndex: Int) -> (String, String) {
         return self.mutableMethodArgs[callIndex]
     }
-    mutating func mutableMethod(arg: String, arg2: String) -> (String) {
+    mutating func mutableMethod(_ arg: String, arg2: String) -> (String) {
         self.mutableMethodCallCount += 1
         self.mutableMethodArgs.append((arg, arg2))
         return self.mutableMethodStub!(arg, arg2)

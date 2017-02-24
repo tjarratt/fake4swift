@@ -2,7 +2,3 @@
 github "groue/GRMustache.swift"
 github "jpsim/SourceKitten"
 
-# spec dependencies
-github "quick/quick"
-github "quick/nimble"
-

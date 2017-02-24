@@ -41,7 +41,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return set_myAttributeArgs.count
     }
 
-    func setMyAttributeArgsForCall(index : Int) throws -> Int {
+    func setMyAttributeArgs(forCall index : Int) throws -> Int {
         if index < 0 || index >= set_myAttributeArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -52,7 +52,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return set_myNameArgs.count
     }
 
-    func setMyNameArgsForCall(index : Int) throws -> String {
+    func setMyNameArgs(forCall index : Int) throws -> String {
         if index < 0 || index >= set_myNameArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -72,7 +72,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
             return stubbedValues
         }
     }
-    func doesStuffArgsForCall(callIndex: Int) -> (String, [String]) {
+    func doesStuffArgs(forCall callIndex: Int) -> (String, [String]) {
         return self.doesStuffArgs[callIndex]
     }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
@@ -89,7 +89,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
             return stubbedValues
         }
     }
-    func soulOfAFunkyArgsForCall(callIndex: Int) -> (String?) {
+    func soulOfAFunkyArgs(forCall callIndex: Int) -> (String?) {
         return self.soulOfAFunkyArgs[callIndex]
     }
     func soulOfAFunky(drummer: String?) throws -> (String?) {
@@ -106,7 +106,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
             return stubbedValues
         }
     }
-    static func staticMethodArgsForCall(callIndex: Int) -> (String, Bool) {
+    static func staticMethodArgs(forCall callIndex: Int) -> (String, Bool) {
         return self.staticMethodArgs[callIndex]
     }
     static func staticMethod(isStatic: String, soStatic: Bool) -> (Array<String>) {

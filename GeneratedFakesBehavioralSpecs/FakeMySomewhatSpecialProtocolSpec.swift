@@ -8,7 +8,7 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
             var subject : FakeMySomewhatSpecialProtocol!
 
             beforeEach() {
-                subject = FakeMySomewhatSpecialProtocol.init()
+                subject = FakeMySomewhatS/pecialProtocol.init()
             }
 
             it("conforms to the MySomewhatSpecialProtocol protocol") {
@@ -31,17 +31,17 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                 }
 
                 it("records each invocation's arguments") {
-                    expect(try! subject.setMyAttributeArgsForCall(0)).to(equal(12))
+                    expect(try! subject.setMyAttributeArgs(forCall: 0)).to(equal(12))
 
                     subject.myAttribute = 666
                     expect(subject.myAttribute).to(equal(666))
-                    expect(try! subject.setMyAttributeArgsForCall(1)).to(equal(666))
+                    expect(try! subject.setMyAttributeArgs(forCall: 1)).to(equal(666))
                     expect(subject.setMyAttributeCallCount()).to(equal(2))
                 }
 
                 it("blows up if you ask for an invalid invocation") {
-                    expect { try subject.setMyAttributeArgsForCall(-1) }.to(throwError())
-                    expect { try subject.setMyAttributeArgsForCall(222) }.to(throwError())
+                    expect { try subject.setMyAttributeArgs(forCall: -1) }.to(throwError())
+                    expect { try subject.setMyAttributeArgs(forCall: 222) }.to(throwError())
                 }
             }
 
@@ -55,18 +55,18 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                 }
 
                 it("records each invocation") {
-                    expect(try! subject.setMyNameArgsForCall(0)).to(equal("Bobby BigTime!"))
+                    expect(try! subject.setMyNameArgs(forCall: 0)).to(equal("Bobby BigTime!"))
                     expect(subject.setMyNameCallCount()).to(equal(1))
 
                     subject.myName = "Doin it Big"
                     expect(subject.myName).to(equal("Doin it Big"))
-                    expect(try! subject.setMyNameArgsForCall(1)).to(equal("Doin it Big"))
+                    expect(try! subject.setMyNameArgs(forCall: 1)).to(equal("Doin it Big"))
                     expect(subject.setMyNameCallCount()).to(equal(2))
                 }
 
                 it("blows up if you ask for an invalid invocation") {
-                    expect { try subject.setMyNameArgsForCall(-1) }.to(throwError())
-                    expect { try subject.setMyNameArgsForCall(222) }.to(throwError())
+                    expect { try subject.setMyNameArgs(forCall: -1) }.to(throwError())
+                    expect { try subject.setMyNameArgs(forCall: 222) }.to(throwError())
                 }
             }
 
@@ -94,13 +94,13 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     subject.doesStuffReturns(([], 0))
                     subject.doesStuff("kool", otherStuff: ["keith"])
 
-                    var args = subject.doesStuffArgsForCall(0)
+                    var args = subject.doesStuffArgs(forCall: 0)
                     expect(args.0).to(equal("kool"))
                     expect(args.1).to(equal(["keith"]))
 
                     subject.doesStuff("dr", otherStuff: ["octogon"])
 
-                    args = subject.doesStuffArgsForCall(1)
+                    args = subject.doesStuffArgs(forCall: 1)
                     expect(args.0).to(equal("dr"))
                     expect(args.1).to(equal(["octogon"]))
                 }
@@ -133,12 +133,12 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                     FakeMySomewhatSpecialProtocol.staticMethodReturns(["dream", "a", "little", "dream", "of", "me"])
                     FakeMySomewhatSpecialProtocol.staticMethod("sup", soStatic: true)
 
-                    var args = FakeMySomewhatSpecialProtocol.staticMethodArgsForCall(0)
+                    var args = FakeMySomewhatSpecialProtocol.staticMethodArgs(forCall: 0)
                     expect(args.0).to(equal("sup"))
                     expect(args.1).to(equal(true))
 
                     FakeMySomewhatSpecialProtocol.staticMethod("republic-of-dave", soStatic: false)
-                    args = FakeMySomewhatSpecialProtocol.staticMethodArgsForCall(1)
+                    args = FakeMySomewhatSpecialProtocol.staticMethodArgs(forCall: 1)
                     expect(args.0).to(equal("republic-of-dave"))
                     expect(args.1).to(equal(false))
                 }
@@ -153,7 +153,7 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                 }
 
                 it("allows you to inspect the args that were passed in") {
-                    expect(subject.soulOfAFunkyArgsForCall(0)).to(beNil())
+                    expect(subject.soulOfAFunkyArgs(forCall: 0)).to(beNil())
                 }
 
                 it("allows you to call them and observe that they were invoked") {
@@ -168,7 +168,7 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
 
                     it("records the argument") {
                         expect(subject.soulOfAFunkyCallCount).to(equal(2))
-                        expect(subject.soulOfAFunkyArgsForCall(1)).to(equal("clyde stubblefield"))
+                        expect(subject.soulOfAFunkyArgs(forCall: 1)).to(equal("clyde stubblefield"))
                     }
                 }
 

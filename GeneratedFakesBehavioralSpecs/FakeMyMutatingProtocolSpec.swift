@@ -29,7 +29,7 @@ class FakeMyMutatingProtocolSpec: QuickSpec {
             it("allows you to observe the args that were passed in") {
                 let _ = subject.mutableMethod("this", arg2: "that")
 
-                let tuple = subject.mutableMethodArgsForCall(0)
+                let tuple = subject.mutableMethodArgs(forCall: 0)
                 expect(tuple.0).to(equal("this"))
                 expect(tuple.1).to(equal("that"))
             }

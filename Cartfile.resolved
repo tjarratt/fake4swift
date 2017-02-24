@@ -1,6 +1,6 @@
 github "groue/GRMustache.swift" "2.0.0"
 github "drmohundro/SWXMLHash" "3.0.3"
 github "jpsim/Yams" "0.1.4"
-github "quick/nimble" "v5.1.1"
+github "quick/nimble" "v6.0.0"
 github "quick/quick" "v1.0.0"
 github "jpsim/SourceKitten" "0.17.0"
