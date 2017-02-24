@@ -76,7 +76,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySomewhatSpecialProtocol" ofType:@"swift"];
 
-        it(@"should create a reasonably useful fake for the selected protocol", ^{
+        it(@"creates a reasonably useful fake for the selected protocol", ^{
             NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
 
             NSError *error;
@@ -118,7 +118,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];
 
-        it(@"should create a struct that implements the protocol", ^{
+        it(@"creates a struct that implements the protocol", ^{
             NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
 
             NSError *error;

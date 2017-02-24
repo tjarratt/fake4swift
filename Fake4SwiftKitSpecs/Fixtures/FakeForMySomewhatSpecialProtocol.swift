@@ -9,11 +9,11 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         self.set_myNameArgs = []
     }
 
-    private var _myAttribute : Int?
-    private var set_myAttributeArgs : Array<Int>
+    fileprivate var _myAttribute : Int?
+    fileprivate var set_myAttributeArgs : Array<Int>
 
-    private var _myName : String?
-    private var set_myNameArgs : Array<String>
+    fileprivate var _myName : String?
+    fileprivate var set_myNameArgs : Array<String>
 
     var myAttribute : Int {
         get {
@@ -41,7 +41,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return set_myAttributeArgs.count
     }
 
-    func setMyAttributeArgsForCall(index : Int) throws -> Int {
+    func setMyAttributeArgs(forCall index : Int) throws -> Int {
         if index < 0 || index >= set_myAttributeArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -52,27 +52,27 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return set_myNameArgs.count
     }
 
-    func setMyNameArgsForCall(index : Int) throws -> String {
+    func setMyNameArgs(forCall index : Int) throws -> String {
         if index < 0 || index >= set_myNameArgs.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
         return set_myNameArgs[index]
     }
 
-    private(set) var doesNothingCallCount : Int = 0
+    fileprivate(set) var doesNothingCallCount : Int = 0
     func doesNothing() {
         self.doesNothingCallCount += 1
     }
 
-    private(set) var doesStuffCallCount : Int = 0
+    fileprivate(set) var doesStuffCallCount : Int = 0
     var doesStuffStub : ((String, [String]) -> ([String], Int))?
-    private var doesStuffArgs : Array<(String, [String])> = []
+    fileprivate var doesStuffArgs : Array<(String, [String])> = []
     func doesStuffReturns(stubbedValues: ([String], Int)) {
         self.doesStuffStub = {(stuff: String, otherStuff: [String]) -> ([String], Int) in
             return stubbedValues
         }
     }
-    func doesStuffArgsForCall(callIndex: Int) -> (String, [String]) {
+    func doesStuffArgs(forCall callIndex: Int) -> (String, [String]) {
         return self.doesStuffArgs[callIndex]
     }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
@@ -81,15 +81,15 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.doesStuffStub!(stuff, otherStuff)
     }
 
-    private(set) var soulOfAFunkyCallCount : Int = 0
+    fileprivate(set) var soulOfAFunkyCallCount : Int = 0
     var soulOfAFunkyStub : ((String?) throws -> (String?))?
-    private var soulOfAFunkyArgs : Array<(String?)> = []
+    fileprivate var soulOfAFunkyArgs : Array<(String?)> = []
     func soulOfAFunkyReturns(stubbedValues: (String?)) {
         self.soulOfAFunkyStub = {(drummer: String?) -> (String?) in
             return stubbedValues
         }
     }
-    func soulOfAFunkyArgsForCall(callIndex: Int) -> (String?) {
+    func soulOfAFunkyArgs(forCall callIndex: Int) -> (String?) {
         return self.soulOfAFunkyArgs[callIndex]
     }
     func soulOfAFunky(drummer: String?) throws -> (String?) {
@@ -98,15 +98,15 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return try self.soulOfAFunkyStub!(drummer)
     }
 
-    private(set) static var staticMethodCallCount : Int = 0
+    fileprivate(set) static var staticMethodCallCount : Int = 0
     static var staticMethodStub : ((String, Bool) -> (Array<String>))?
-    static private var staticMethodArgs : Array<(String, Bool)> = []
+    static fileprivate var staticMethodArgs : Array<(String, Bool)> = []
     static func staticMethodReturns(stubbedValues: (Array<String>)) {
         self.staticMethodStub = {(isStatic: String, soStatic: Bool) -> (Array<String>) in
             return stubbedValues
         }
     }
-    static func staticMethodArgsForCall(callIndex: Int) -> (String, Bool) {
+    static func staticMethodArgs(forCall callIndex: Int) -> (String, Bool) {
         return self.staticMethodArgs[callIndex]
     }
     static func staticMethod(isStatic: String, soStatic: Bool) -> (Array<String>) {

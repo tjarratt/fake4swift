@@ -21,23 +21,23 @@ class FakeMyMutatingProtocolSpec: QuickSpec {
 
             it("allows you to observe that a method was called") {
                 expect(subject.mutableMethodCallCount).to(equal(0))
-                let _ = subject.mutableMethod("this", arg2: "that")
+                let _ = subject.mutableMethod(arg: "this", arg2: "that")
 
                 expect(subject.mutableMethodCallCount).to(equal(1))
             }
 
             it("allows you to observe the args that were passed in") {
-                let _ = subject.mutableMethod("this", arg2: "that")
+                let _ = subject.mutableMethod(arg: "this", arg2: "that")
 
-                let tuple = subject.mutableMethodArgsForCall(0)
+                let tuple = subject.mutableMethodArgs(forCall: 0)
                 expect(tuple.0).to(equal("this"))
                 expect(tuple.1).to(equal("that"))
             }
 
             it("allows you to stub the return value") {
-                subject.mutableMethodReturns("UP FROM THE THIRTY SIX CHAMBERS. IT'S THE GHOST")
+                subject.mutableMethodReturns(stubbedValues: "UP FROM THE THIRTY SIX CHAMBERS. IT'S THE GHOST")
 
-                expect(subject.mutableMethod("wu", arg2: "tang")).to(equal(
+                expect(subject.mutableMethod(arg: "wu", arg2: "tang")).to(equal(
                     "UP FROM THE THIRTY SIX CHAMBERS. IT'S THE GHOST"
                 ))
             }

@@ -14,13 +14,13 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 
 *   {{# getters }}
-    private var _{{ name  }} : {{ type }}?
-    private var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var set_{{ name }}Args : Array<{{ type }}>
 *   {{/ getters }}
 
 *   {{# setters }}
-    private var _{{ name  }} : {{ type }}?
-    private var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var set_{{ name }}Args : Array<{{ type }}>
 *   {{/ setters }}
 
 *   {{# getters }}
@@ -54,7 +54,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}ArgsForCall(index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -67,7 +67,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}ArgsForCall(index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -76,12 +76,12 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{/ setters }}
 *   {{# instance_methods }}
-    private(set) var {{ name }}CallCount : Int = 0
+    fileprivate(set) var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
     var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}){{throws}}-> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
-    private var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
+    fileprivate var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
 *   {{/ has_arguments }}
 *   {{# has_return_values }}
     func {{ name }}Returns(stubbedValues: ({{{ comma_delimited_return_types }}})) {
@@ -91,7 +91,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
-    func {{ name }}ArgsForCall(callIndex: Int) -> ({{{ comma_delimited_arg_types }}}) {
+    func {{ name }}Args(forCall callIndex: Int) -> ({{{ comma_delimited_arg_types }}}) {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
@@ -107,12 +107,12 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{/ instance_methods }}
 *   {{# static_methods }}
-    private(set) static var {{ name }}CallCount : Int = 0
+    fileprivate(set) static var {{ name }}CallCount : Int = 0
 *   {{# has_return_values }}
     static var {{ name }}Stub : (({{{ comma_delimited_arg_types }}}){{throws}}-> ({{{ comma_delimited_return_types }}}))?
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
-    static private var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
+    static fileprivate var {{ name }}Args : Array<({{{ comma_delimited_arg_types }}})> = []
 *   {{/ has_arguments }}
 *   {{# has_return_values }}
     static func {{ name }}Returns(stubbedValues: ({{{ comma_delimited_return_types }}})) {
@@ -122,7 +122,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_return_values }}
 *   {{# has_arguments }}
-    static func {{ name }}ArgsForCall(callIndex: Int) -> ({{{ comma_delimited_arg_types }}}) {
+    static func {{ name }}Args(forCall callIndex: Int) -> ({{{ comma_delimited_arg_types }}}) {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
