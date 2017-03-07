@@ -76,9 +76,12 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.doesStuffArgs[callIndex]
     }
     func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
+        guard let stub = self.doesStuffStub else {
+            fatalError("Fatal Error: You forgot to stub doesStuff. Crashing. 💥")
+        }
         self.doesStuffCallCount += 1
         self.doesStuffArgs.append((stuff, otherStuff))
-        return self.doesStuffStub!(stuff, otherStuff)
+        return stub(stuff, otherStuff)
     }
 
     fileprivate(set) var soulOfAFunkyCallCount : Int = 0
@@ -93,9 +96,12 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.soulOfAFunkyArgs[callIndex]
     }
     func soulOfAFunky(drummer: String?) throws -> (String?) {
+        guard let stub = self.soulOfAFunkyStub else {
+            fatalError("Fatal Error: You forgot to stub soulOfAFunky. Crashing. 💥")
+        }
         self.soulOfAFunkyCallCount += 1
         self.soulOfAFunkyArgs.append((drummer))
-        return try self.soulOfAFunkyStub!(drummer)
+        return try stub(drummer)
     }
 
     fileprivate(set) static var staticMethodCallCount : Int = 0
@@ -110,9 +116,12 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         return self.staticMethodArgs[callIndex]
     }
     static func staticMethod(isStatic: String, soStatic: Bool) -> (Array<String>) {
+        guard let stub = self.staticMethodStub else {
+            fatalError("Fatal Error: You forgot to stub staticMethod. Crashing. 💥")
+        }
         self.staticMethodCallCount += 1
         self.staticMethodArgs.append((isStatic, soStatic))
-        return self.staticMethodStub!(isStatic, soStatic)
+        return stub(isStatic, soStatic)
     }
 
     static func reset() {
