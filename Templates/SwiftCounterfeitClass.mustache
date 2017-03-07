@@ -96,12 +96,17 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_arguments }}
     func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
+*       {{# has_return_values }}
+        guard let stub = self.{{ name }}Stub else {
+            fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")
+        }
+*       {{/ has_return_values }}
         self.{{name}}CallCount += 1
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}
 *       {{# has_return_values }}
-        return {{pre_stub_invocation}}self.{{ name }}Stub!({{ comma_delimited_arg_names }})
+        return {{pre_stub_invocation}}stub({{ comma_delimited_arg_names }})
 *       {{/ has_return_values }}
     }
 
@@ -127,12 +132,17 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 *   {{/ has_arguments }}
     static func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
+*       {{# has_return_values }}
+        guard let stub = self.{{ name }}Stub else {
+            fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")
+        }
+*       {{/ has_return_values }}
         self.{{name}}CallCount += 1
 *       {{# has_arguments }}
         self.{{ name }}Args.append(({{ comma_delimited_arg_names }}))
 *       {{/ has_arguments }}
 *       {{# has_return_values }}
-        return {{pre_stub_invocation}}self.{{ name }}Stub!({{ comma_delimited_arg_names }})
+        return {{pre_stub_invocation}}stub({{ comma_delimited_arg_names }})
 *       {{/ has_return_values }}
     }
 
