@@ -26,6 +26,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
         beforeEach(^{
             Accessor *myAttrGetter = [[Accessor alloc] initWithName:@"myAttribute" returnType:@"Int"];
             Accessor *myNameGetterSetter = [[Accessor alloc] initWithName:@"myName" returnType:@"String"];
+            Accessor *optionalPropertySetter = [[Accessor alloc] initWithName:@"optionalProperty" returnType:@"Int?"];
 
             MethodDeclaration *doesNothing = [[MethodDeclaration alloc] initWithName:@"doesNothing"
                                                                          throwsError:NO
@@ -67,7 +68,7 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                             mutatingMethods:@[]
                                                                initializers:@[]
                                                                     getters:@[myAttrGetter]
-                                                                    setters:@[myNameGetterSetter]
+                                                                    setters:@[myNameGetterSetter, optionalPropertySetter]
                                                               staticGetters:@[]
                                                               staticSetters:@[]
                                                            subscriptGetters:@[]

@@ -16,19 +16,34 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
     }
 
 *   {{# getters }}
+*   {{# optional }}
+    fileprivate var _{{ name  }} : {{ type }}
+*   {{/ optional }}
+*   {{^ optional }}
     fileprivate var _{{ name  }} : {{ type }}?
+*   {{/ optional }}
     fileprivate var set_{{ name }}Args : Array<{{ type }}>
 *   {{/ getters }}
 
 *   {{# setters }}
+*   {{# optional }}
+    fileprivate var _{{ name  }} : {{ type }}
+*   {{/ optional }}
+*   {{^ optional }}
     fileprivate var _{{ name  }} : {{ type }}?
+*   {{/ optional }}
     fileprivate var set_{{ name }}Args : Array<{{ type }}>
 *   {{/ setters }}
 
 *   {{# getters }}
     var {{ name }} : {{ type }} {
         get {
+*           {{# optional }}
+            return _{{ name }}
+*           {{/ optional }}
+*           {{^ optional }}
             return _{{ name }}!
+*           {{/ optional }}
         }
 
         set {
@@ -41,7 +56,12 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 *   {{# setters }}
     var {{ name }} : {{ type }} {
         get {
+*           {{# optional }}
+            return _{{ name }}
+*           {{/ optional }}
+*           {{^ optional }}
             return _{{ name }}!
+*           {{/ optional }}
         }
 
         set {

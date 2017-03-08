@@ -70,6 +70,37 @@ class FakeMySomewhatSpecialProtocolSpec: QuickSpec {
                 }
             }
 
+            describe("optional properties") {
+                it("doesn't care if it's been set or not") {
+                    expect(subject.optionalProperty).to(beNil())
+                }
+
+                describe("after setting") {
+                    beforeEach {
+                        subject.optionalProperty = 1
+                    }
+
+                    it("can be set to a given value and read back") {
+                        expect(subject.optionalProperty).to(equal(1))
+                    }
+
+                    it("records each invocation, including the nils") {
+                        expect(try! subject.setOptionalPropertyArgs(forCall: 0)).to(equal(1))
+                        expect(subject.setOptionalPropertyCallCount()).to(equal(1))
+
+                        subject.optionalProperty = nil
+                        expect(subject.optionalProperty).to(beNil())
+                        expect(try! subject.setOptionalPropertyArgs(forCall: 1)).to(beNil())
+                        expect(subject.setOptionalPropertyCallCount()).to(equal(2))
+                    }
+
+                    it("blows up if you ask for an invalid invocation") {
+                        expect { try subject.setOptionalPropertyArgs(forCall: -1) }.to(throwError())
+                        expect { try subject.setOptionalPropertyArgs(forCall: 222) }.to(throwError())
+                    }
+                }
+            }
+
             describe("instance methods") {
                 beforeEach() {
                     subject.doesNothing()

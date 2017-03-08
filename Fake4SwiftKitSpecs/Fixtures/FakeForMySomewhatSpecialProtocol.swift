@@ -7,6 +7,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
     init() {
         self.set_myAttributeArgs = []
         self.set_myNameArgs = []
+        self.set_optionalPropertyArgs = []
     }
 
     fileprivate var _myAttribute : Int?
@@ -14,6 +15,8 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
 
     fileprivate var _myName : String?
     fileprivate var set_myNameArgs : Array<String>
+    fileprivate var _optionalProperty : Int?
+    fileprivate var set_optionalPropertyArgs : Array<Int?>
 
     var myAttribute : Int {
         get {
@@ -37,6 +40,17 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
         }
     }
 
+    var optionalProperty : Int? {
+        get {
+            return _optionalProperty
+        }
+
+        set {
+            _optionalProperty = newValue
+            set_optionalPropertyArgs.append(newValue)
+        }
+    }
+
     func setMyAttributeCallCount() -> Int {
         return set_myAttributeArgs.count
     }
@@ -57,6 +71,17 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
         return set_myNameArgs[index]
+    }
+
+    func setOptionalPropertyCallCount() -> Int {
+        return set_optionalPropertyArgs.count
+    }
+
+    func setOptionalPropertyArgs(forCall index : Int) throws -> Int? {
+        if index < 0 || index >= set_optionalPropertyArgs.count {
+            throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
+        }
+        return set_optionalPropertyArgs[index]
     }
 
     fileprivate(set) var doesNothingCallCount : Int = 0

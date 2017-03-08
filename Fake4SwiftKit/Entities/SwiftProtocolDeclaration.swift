@@ -49,16 +49,19 @@ import Foundation
 @objc open class Accessor : NSObject {
     open var name : MethodName
     open var returnType : ReturnType
+    open var optional : Optionality
 
     init(name: MethodName,
         returnType: ReturnType) {
             self.name = name
             self.returnType = returnType
+            self.optional = returnType.hasSuffix("?")
     }
 }
 
 public typealias MethodName = String
 public typealias ReturnType = String
+public typealias Optionality = Bool
 
 // random thought :: we should PROBABLY `import` everything from the file, right?
 // does source kitten give us that? (PLEASE SAY YES)

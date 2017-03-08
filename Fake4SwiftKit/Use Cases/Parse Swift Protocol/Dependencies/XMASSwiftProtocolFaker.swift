@@ -74,6 +74,7 @@ import Foundation
         return [
             "name": accessor.name as AnyObject,
             "type": accessor.returnType as AnyObject,
+            "optional": accessor.optional as AnyObject,
             "capitalized_name": upcase(accessor.name) as AnyObject,
         ]
     }
