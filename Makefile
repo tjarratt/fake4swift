@@ -18,7 +18,7 @@ clean:
 carthage_bootstrap:
 	/usr/local/bin/carthage bootstrap --platform mac
 
-prefix_install: clean carthage_bootstrap
+install:
 	xcodebuild $(XCODEFLAGS) install
 	mkdir -p "$(TEMPDIR)$(FRAMEWORKS_FOLDER)" "$(TEMPDIR)$(BINARIES_FOLDER)"
 	mv -f $(BUNDLED_FRAMEWORKS) $(TEMPDIR)$(FRAMEWORKS_FOLDER)
@@ -27,4 +27,6 @@ prefix_install: clean carthage_bootstrap
 	mkdir -p "$(PREFIX)/Frameworks" "$(PREFIX)/bin"
 	cp -Rf $(TEMPDIR)$(FRAMEWORKS_FOLDER)/*.framework "$(PREFIX)/Frameworks/"
 	cp -f "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift" "$(PREFIX)/bin/"
+
+prefix_install: clean carthage_bootstrap install
 
