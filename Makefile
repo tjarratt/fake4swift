@@ -25,7 +25,7 @@ install:
 	mv -f "$(FAKE4SWIFT_EXECUTABLE)" "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift"
 	rm -rf "$(BUILT_BUNDLE)"
 	mkdir -p "$(PREFIX)/Frameworks" "$(PREFIX)/bin"
-	cp -Rf $(TEMPDIR)$(FRAMEWORKS_FOLDER)/*.framework "$(PREFIX)/Frameworks/"
+	scripts/copy_frameworks.sh $(TEMPDIR)$(FRAMEWORKS_FOLDER)/ "$(PREFIX)/Frameworks/"
 	cp -f "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift" "$(PREFIX)/bin/"
 
 prefix_install: clean carthage_bootstrap install
