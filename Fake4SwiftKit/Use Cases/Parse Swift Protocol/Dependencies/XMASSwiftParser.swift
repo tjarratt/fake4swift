@@ -222,14 +222,14 @@ struct XMASSwiftParser {
     }
 
     func methodNameFromMethodDict(_ protocolBodyItem : [String: SourceKitRepresentable]) -> String {
-        let methodName : String = protocolBodyItem["key.name"] as! String
-        var regex : NSRegularExpression
-        try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: NSRegularExpression.Options.caseInsensitive)
+        let methodName = protocolBodyItem["key.name"] as! String
+        let regex : NSRegularExpression
+        try! regex = NSRegularExpression(pattern: "\\(.*\\)", options: .caseInsensitive)
 
         return regex.stringByReplacingMatches(
             in: methodName,
             options: NSRegularExpression.MatchingOptions.withoutAnchoringBounds,
-            range: NSRange.init(location: 0, length: methodName.characters.count),
+            range: NSRange(0..<methodName.utf16.count),
             withTemplate: ""
         )
     }
@@ -261,16 +261,15 @@ struct XMASSwiftParser {
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: ".*\\s+->\\s+\\(?([^\\)]*)\\)?", options: NSRegularExpression.Options.caseInsensitive)
 
-        let start : Int = Int.init(truncatingBitPattern: dict["key.offset"] as! Int64)
-        let end : Int = Int.init(truncatingBitPattern: dict["key.length"] as! Int64)
-        let range = NSMakeRange(start, end)
+        let start = Int(truncatingBitPattern: dict["key.offset"] as! Int64)
+        let length = Int(truncatingBitPattern: dict["key.length"] as! Int64)
 
-        let funcDeclarationString = fileContents.substring(with: range) as String
+        let funcDeclarationString = utf8Substring(string: fileContents, start: start, length: length)
 
         let matches = regex.matches(
             in: funcDeclarationString,
             options: NSRegularExpression.MatchingOptions.anchored,
-            range: NSRange.init(location: 0, length: funcDeclarationString.characters.count)
+            range: NSRange(0..<funcDeclarationString.utf16.count)
         )
 
         let whitespace : CharacterSet = CharacterSet(charactersIn: " \t")
@@ -289,42 +288,69 @@ struct XMASSwiftParser {
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: ".*\\)\\sthrows\\s", options: NSRegularExpression.Options.caseInsensitive)
 
-        let startOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.offset"] as! Int64)
-        let lengthOfMethodDecl : Int = Int.init(truncatingBitPattern: methodItem["key.length"] as! Int64)
-        let endOfMethodDecl : Int = startOfMethodDecl + lengthOfMethodDecl
+        let startOfMethodDecl = Int(truncatingBitPattern: methodItem["key.offset"] as! Int64)
+        let lengthOfMethodDecl = Int(truncatingBitPattern: methodItem["key.length"] as! Int64)
+        let endOfMethodDecl = startOfMethodDecl + lengthOfMethodDecl
 
-        let rangeOfFileAfterMethodDecl : NSRange = NSRange.init(location: endOfMethodDecl, length: fileContents.length - endOfMethodDecl)
-        var indexOfNextNewline : NSInteger = fileContents.range(of: "\n", options: NSString.CompareOptions.literal, range: rangeOfFileAfterMethodDecl).location
+        let utf8FileContents = String(fileContents).utf8
+
+        let utf8StartIndex = utf8FileContents.index(utf8FileContents.startIndex, offsetBy: startOfMethodDecl)
+        let utf8EndIndex = utf8FileContents.index(utf8StartIndex, offsetBy: lengthOfMethodDecl)
+
+        let stringFileContents = String(fileContents)
+
+        guard let characterStartIndex = String.Index(utf8StartIndex, within: stringFileContents),
+            let characterEndIndex = String.Index(utf8EndIndex, within: stringFileContents) else {
+                return false
+        }
+
+        let rangeLocation = stringFileContents.distance(from: stringFileContents.startIndex, to: characterStartIndex)
+        let rangeEnd = stringFileContents.distance(from: stringFileContents.startIndex, to: characterEndIndex)
+
+        let rangeOfFileAfterMethodDecl = NSRange(location: rangeLocation, length: fileContents.length - rangeEnd)
+        var indexOfNextNewline = fileContents.range(of: "\n", options: NSString.CompareOptions.literal, range: rangeOfFileAfterMethodDecl).location
+
 
         if indexOfNextNewline == NSNotFound {
             indexOfNextNewline = endOfMethodDecl
         }
 
-        let range = NSMakeRange(startOfMethodDecl, indexOfNextNewline - startOfMethodDecl + 1)
-        let funcDeclarationString = fileContents.substring(with: range) as String
+        let utf8IndexOfNextNewline = String.UTF8View.Index(stringFileContents.index(stringFileContents.startIndex, offsetBy: indexOfNextNewline), within: utf8FileContents)
+        let distanceToNextNewline = utf8FileContents.distance(from: utf8FileContents.startIndex, to: utf8IndexOfNextNewline)
+
+        let lengthOfMethodDeclIncludingNewline = distanceToNextNewline - startOfMethodDecl + 1
+
+
+        let funcDeclarationString = utf8Substring(
+            string: fileContents,
+            start: startOfMethodDecl,
+            length: lengthOfMethodDeclIncludingNewline
+        )
 
         let numberOfMatches = regex.numberOfMatches(
             in: funcDeclarationString,
             options: NSRegularExpression.MatchingOptions.anchored,
-            range: NSRange.init(location: 0, length: funcDeclarationString.characters.count)
+            range: NSRange(location: 0, length: funcDeclarationString.characters.count)
         )
 
         return numberOfMatches > 0
     }
 
     func findTypealiasInProtocolDecl(_ protocolBody: [String: SourceKitRepresentable], fileContents: NSString) -> Bool {
-        // read from body offset - body length
-        // regex for " typealias "
-        let startOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodyoffset"] as! Int64)
-        let lengthOfProtocolBody : Int = Int.init(truncatingBitPattern: protocolBody["key.bodylength"] as! Int64)
-        let range : NSRange = NSRange.init(location: startOfProtocolBody, length: lengthOfProtocolBody)
-        let protocolString : String = fileContents.substring(with: range)
+        let startOfProtocolBody = Int(truncatingBitPattern: protocolBody["key.bodyoffset"] as! Int64)
+        let lengthOfProtocolBody = Int(truncatingBitPattern: protocolBody["key.bodylength"] as! Int64)
+
+        let protocolString = utf8Substring(
+            string: fileContents,
+            start: startOfProtocolBody,
+            length: lengthOfProtocolBody
+        )
 
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: "\\stypealias\\s", options: NSRegularExpression.Options.anchorsMatchLines)
 
-        let rangeOfString : NSRange = NSRange.init(location: 0, length: lengthOfProtocolBody)
-        let matches = regex.matches(in: protocolString, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: rangeOfString)
+        let rangeOfString = NSRange(location: 0, length: protocolString.characters.count)
+        let matches = regex.matches(in: protocolString, options: [], range: rangeOfString)
         return matches.count > 0
     }
 
@@ -333,15 +359,25 @@ struct XMASSwiftParser {
         guard let inheritedTypes = protocolDict["key.inheritedtypes"] as? [SourceKitRepresentable] else {
             return inheritedProtocols
         }
-        
+
         for type in inheritedTypes {
             guard let typedDict = type as? [String: SourceKitRepresentable] else {
                 continue
             }
-            
+
             inheritedProtocols.append(typedDict["key.name"] as! String)
         }
-        
+
         return inheritedProtocols
+    }
+
+    private func utf8Substring(string: NSString, start: Int, length: Int) -> String {
+        let utf8String = String(string).utf8
+
+        let startIndex = utf8String.index(utf8String.startIndex, offsetBy: start)
+        let endIndex = utf8String.index(startIndex, offsetBy: length)
+
+        let range = startIndex..<endIndex
+        return String(describing: utf8String[range])
     }
 }

@@ -26,7 +26,7 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
     NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolEdgeCases"
                                                             ofType:@"swift"];
 
-    context(@"when a swift protocol is selected", ^{
+    context(@"when a simple swift protocol is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
             fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
@@ -109,6 +109,52 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
         });
     });
 
+    context(@"when a swift protocol containing unicode is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        NSString *unicodeFixturePath = [[NSBundle mainBundle] pathForResource:@"UnicodeEdgeCases"
+                                                                       ofType:@"swift"];
+
+        beforeEach(^{
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:)).and_return(YES);
+
+            NSError *error = nil;
+            protocolDeclaration = [subject selectedProtocolInFile:unicodeFixturePath error:&error];
+            error should be_nil;
+        });
+
+        it(@"should parse the name of the selected protocol", ^{
+            protocolDeclaration.name should equal(@"MyUnicodeAwareProtocol");
+        });
+
+        it(@"should parse instance getters and setters", ^{
+            protocolDeclaration.getters.count should equal(0);
+
+            [protocolDeclaration.setters.firstObject valueForKey:@"name"] should equal(@"🍌");
+            [protocolDeclaration.setters.firstObject valueForKey:@"returnType"] should equal(@"🍎");
+        });
+
+        it(@"should parse static getters and setters", ^{
+            protocolDeclaration.staticGetters.count should equal(0);
+
+            [protocolDeclaration.staticSetters.firstObject valueForKey:@"name"] should equal(@"🍊");
+            [protocolDeclaration.staticSetters.firstObject valueForKey:@"returnType"] should equal(@"🍍");
+        });
+
+        it(@"should parse instance methods", ^{
+            NSArray<NSString *> *expectedMethodNames = @[@"🥝"];
+            [protocolDeclaration.instanceMethods valueForKey:@"name"] should equal(expectedMethodNames);
+
+            NSArray<NSString *> *expectedArgumentNames = @[@[@"🍑"],];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"name"] should equal(expectedArgumentNames);
+
+            NSArray<NSString *> *expectedArgumentTypes = @[@[@"🍇"]];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"type"] should equal(expectedArgumentTypes);
+
+            NSArray<NSString *> *expectedReturnTypes = @[@[@"🍓"]];
+            [protocolDeclaration.instanceMethods valueForKey:@"returnValueTypes"] should equal(expectedReturnTypes);
+        });
+    });
+
     context(@"when a swift protocol which includes other protocols is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
@@ -139,9 +185,9 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         beforeEach(^{
             fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
-            .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
-                return [protocolDecl.name isEqualToString:@"ImplementableByStructsOnly"];
-            });
+                .and_do_block(^BOOL(ProtocolDeclaration *protocolDecl) {
+                    return [protocolDecl.name isEqualToString:@"ImplementableByStructsOnly"];
+                });
 
             NSError *error = nil;
             protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];

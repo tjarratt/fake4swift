@@ -14,6 +14,7 @@
 		34A32EDA1C433C68009D3FA6 /* Fake4SwiftKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F749C7441C310EBC00A0ACDC /* Fake4SwiftKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34A32EDC1C433DCC009D3FA6 /* Blindside.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34C263731C44977B00CCBDBB /* Oracles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C263721C44977B00CCBDBB /* Oracles.swift */; };
+		AE9850501E709E7F00C0B67D /* UnicodeEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = AE9850351E709AFD00C0B67D /* UnicodeEdgeCases.swift */; };
 		F70354131C37B18600936B55 /* XMASSelectedSourceFileOracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */; };
 		F70354171C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F70354181C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
@@ -375,6 +376,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				AE9850501E709E7F00C0B67D /* UnicodeEdgeCases.swift in Copy Fixtures */,
 				F7F8A66F1E2FEB1E00BB3050 /* SwiftCounterfeitClass.mustache in Copy Fixtures */,
 				F7F8A6701E2FEB1E00BB3050 /* SwiftCounterfeitStruct.mustache in Copy Fixtures */,
 				F7F8A6711E2FEB1E00BB3050 /* SwiftEquatableStruct.mustache in Copy Fixtures */,
@@ -422,6 +424,7 @@
 		960FA0921605819F00923A87 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		960FA0961605819F00923A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		960FA0A31605858400923A87 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AE9850351E709AFD00C0B67D /* UnicodeEdgeCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnicodeEdgeCases.swift; sourceTree = "<group>"; };
 		F70354121C37B18600936B55 /* XMASSelectedSourceFileOracle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMASSelectedSourceFileOracle.swift; sourceTree = "<group>"; };
 		F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMASGenerateFakeForSwiftProtocolUseCase.h; sourceTree = "<group>"; };
 		F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMASGenerateFakeForSwiftProtocolUseCase.m; sourceTree = "<group>"; };
@@ -828,12 +831,13 @@
 				F7CCB00A1E2F01B100AAA549 /* EmptyProtocol.swift */,
 				F7CCB03A1E2F022D00AAA549 /* FakeForMyMutatingProtocol.swift */,
 				F7ED4E801E2EFE4B00F482FF /* FakeForMySomewhatSpecialProtocol.swift */,
+				F754E9411E380AB1008CD743 /* MyMutatingProtocol.swift */,
+				F754E9431E380BB6008CD743 /* MySomewhatSpecialProtocol.swift */,
 				F7ED4E6A1E2EF9F800F482FF /* MySpecialStruct.swift */,
 				F7ED4E6B1E2EF9F800F482FF /* MySpecialStruct+Equatable.swift */,
 				F7ED4E761E2EFC9A00F482FF /* MySpecialStructEquatableExtension.swift */,
 				F7ED4E721E2EFB8100F482FF /* ProtocolEdgeCases.swift */,
-				F754E9411E380AB1008CD743 /* MyMutatingProtocol.swift */,
-				F754E9431E380BB6008CD743 /* MySomewhatSpecialProtocol.swift */,
+				AE9850351E709AFD00C0B67D /* UnicodeEdgeCases.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";

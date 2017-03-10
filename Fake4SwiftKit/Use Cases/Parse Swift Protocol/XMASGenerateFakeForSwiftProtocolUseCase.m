@@ -60,7 +60,7 @@ NSString *protocolUsesTypealiasMessage = @"Unable to generate fake '%@'. It uses
 
     NSError *error = nil;
     ProtocolDeclaration *selectedProtocol = [self.selectedProtocolWorkFlow selectedProtocolInFile:currentFilePath
-                                                                                           error:&error];
+                                                                                            error:&error];
     if (error != nil) {
         [self.alerter flashComfortingMessageForError:error];
         return;
