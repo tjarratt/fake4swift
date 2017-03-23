@@ -36,3 +36,4 @@ struct FakeMyMutatingProtocol : MyMutatingProtocol, Equatable {
 func == (a: FakeMyMutatingProtocol, b: FakeMyMutatingProtocol) -> Bool {
     return a.hash == b.hash
 }
+

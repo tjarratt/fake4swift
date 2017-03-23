@@ -29,7 +29,7 @@ import Foundation
 
         return result.components(separatedBy: "\n").filter( {
             !$0.hasPrefix("*")
-        }).joined(separator: "\n").replacingOccurrences(of: "}\n\n\n", with: "}\n")
+        }).joined(separator: "\n").replacingOccurrences(of: "}\n\n\n", with: "}\n").appending("\n")
     }
 
 // Mark - Private methods

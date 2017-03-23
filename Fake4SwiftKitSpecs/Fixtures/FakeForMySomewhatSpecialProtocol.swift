@@ -158,3 +158,4 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
 func == (a: FakeMySomewhatSpecialProtocol, b: FakeMySomewhatSpecialProtocol) -> Bool {
     return a === b
 }
+
