@@ -15,6 +15,9 @@ XCODEFLAGS=-project 'Fake4Swift.xcodeproj' -scheme 'fake4swift' DSTROOT=$(TEMPDI
 clean:
 	rm -rf $(TEMPDIR)
 
+ensure_carthage:
+        /usr/local/bin/brew install carthage
+
 carthage_bootstrap:
 	/usr/local/bin/carthage bootstrap --platform mac
 
@@ -28,5 +31,5 @@ install:
 	scripts/copy_frameworks.sh $(TEMPDIR)$(FRAMEWORKS_FOLDER)/ "$(PREFIX)/Frameworks/"
 	cp -f "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift" "$(PREFIX)/bin/"
 
-prefix_install: clean carthage_bootstrap install
+prefix_install: ensure_carthage clean carthage_bootstrap install
 
