@@ -16,7 +16,7 @@ clean:
 	rm -rf $(TEMPDIR)
 
 ensure_carthage:
-        /usr/local/bin/brew install carthage
+	/usr/local/bin/brew install carthage
 
 carthage_bootstrap:
 	/usr/local/bin/carthage bootstrap --platform mac
