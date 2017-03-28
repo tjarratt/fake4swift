@@ -16,13 +16,13 @@ clean:
 	rm -rf $(TEMPDIR)
 
 ensure_carthage:
-	brew install carthage
+	/usr/local/bin/brew install carthage
 
 carthage_bootstrap:
-	carthage bootstrap --platform mac --cache-builds
+	/usr/local/bin/carthage bootstrap --platform mac --cache-builds
 
 git_submodules:
-	git submodule update --init --recursive
+	/usr/local/bin/git submodule update --init --recursive
 
 install:
 	xcodebuild $(XCODEFLAGS) install
