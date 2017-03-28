@@ -16,10 +16,13 @@ clean:
 	rm -rf $(TEMPDIR)
 
 ensure_carthage:
-	/usr/local/bin/brew install carthage
+	brew install carthage
 
 carthage_bootstrap:
-	/usr/local/bin/carthage bootstrap --platform mac
+	carthage bootstrap --platform mac --cache-builds
+
+git_submodules:
+	git submodule update --init --recursive
 
 install:
 	xcodebuild $(XCODEFLAGS) install
@@ -31,5 +34,5 @@ install:
 	scripts/copy_frameworks.sh $(TEMPDIR)$(FRAMEWORKS_FOLDER)/ "$(PREFIX)/Frameworks/"
 	cp -f "$(TEMPDIR)$(BINARIES_FOLDER)/fake4swift" "$(PREFIX)/bin/"
 
-prefix_install: ensure_carthage clean carthage_bootstrap install
+prefix_install: ensure_carthage clean carthage_bootstrap git_submodules install
 
