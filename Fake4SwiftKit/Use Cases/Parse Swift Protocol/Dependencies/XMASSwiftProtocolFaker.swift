@@ -42,6 +42,7 @@ import Foundation
             "instance_methods": protocolDecl.instanceMethods.map(mapMethodsToDict),
             "static_methods": protocolDecl.staticMethods.map(mapMethodsToDict),
             "mutating_methods": protocolDecl.mutatingMethods.map(mapMethodsToDict),
+            "imports": protocolDecl.imports.map(mapImportsToDict)
             ])
     }
 
@@ -77,6 +78,10 @@ import Foundation
             "optional": accessor.optional as AnyObject,
             "capitalized_name": upcase(accessor.name) as AnyObject,
         ]
+    }
+
+    fileprivate func mapImportsToDict(_ importName: String) -> [String: AnyObject] {
+        return [ "name": importName as AnyObject ]
     }
 
     fileprivate func mapMethodsToDict(_ method: MethodDeclaration) -> [String: AnyObject] {

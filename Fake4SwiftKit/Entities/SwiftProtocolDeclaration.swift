@@ -80,7 +80,8 @@ public typealias Optionality = Bool
         staticGetters: Array<Accessor>,
         staticSetters: Array<Accessor>,
         subscriptGetters: Array<Accessor>,
-        subscriptSetters: Array<Accessor>
+        subscriptSetters: Array<Accessor>,
+        imports: Array<String>
         ) {
             self.name = name
             self.containingFile = containingFile
@@ -97,7 +98,7 @@ public typealias Optionality = Bool
             self.staticSetters = staticSetters
             self.subscriptGetters = subscriptGetters
             self.subscriptSetters = subscriptSetters
-            return
+            self.imports = imports
     }
 
     override open func isEqual(_ object: Any?) -> Bool {
@@ -116,7 +117,8 @@ public typealias Optionality = Bool
                 self.staticGetters == other.staticGetters &&
                 self.staticSetters == other.staticSetters &&
                 self.subscriptGetters == other.subscriptGetters &&
-                self.subscriptSetters == other.subscriptSetters
+                self.subscriptSetters == other.subscriptSetters &&
+                self.imports == other.imports
         }
 
         return false
@@ -145,4 +147,6 @@ public typealias Optionality = Bool
     open var includedProtocols : Array<String>
 
     open var usesTypealias : Bool
+
+    open let imports : Array<String>
 }

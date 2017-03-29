@@ -77,18 +77,6 @@ struct XMASSwiftParser {
             Int.init(truncatingBitPattern: dict["key.length"] as! Int64)
         )
 
-        /*
-
-        TODO (unimplemented features) notes :
-
-        initializers : instance.method where method name starts with init
-        seems to lose type information? (swiftc dump-ast still has it tho!)
-
-        (pretty shitty, we seem to lose information about whether these are just GET or SET or GET + Set)
-
-        subscript anything -> TOTALLY UNAVAILABLE
-        */
-
         let usesTypeAlias = findTypealiasInProtocolDecl(dict, fileContents: fileContents)
         let (getters, setters) = accessorsFromProtocolDecl(dict, kind: instanceVarKind)
         let (staticGetters, staticSetters) = accessorsFromProtocolDecl(dict, kind: staticVarKind)
@@ -96,6 +84,7 @@ struct XMASSwiftParser {
         let instanceMethods = methods.instanceM
         let staticMethods = methods.staticM
         let mutatingMethods = methods.mutableM
+        let imports = importsFrom(filePath)
 
         return ProtocolDeclaration.init(
             name: protocolName,
@@ -112,7 +101,8 @@ struct XMASSwiftParser {
             staticGetters: staticGetters,
             staticSetters: staticSetters,
             subscriptGetters: [],
-            subscriptSetters: []
+            subscriptSetters: [],
+            imports: imports
         )
     }
 
@@ -203,7 +193,38 @@ struct XMASSwiftParser {
         return (instanceM: instanceMethods, staticM: staticMethods, mutableM: mutableMethods)
     }
 
-    func hasMatchingAttribute(_ protocolBodyItem : [String: SourceKitRepresentable], attributeName: String) -> Bool {
+    fileprivate func importsFrom(_ filePath: String) -> [String] {
+        guard let file = File(path: filePath) else { return [] }
+
+        let fileContents: NSString
+        do {
+            try fileContents = NSString(contentsOfFile: filePath, encoding:String.Encoding.utf8.rawValue)
+        } catch {
+            return []
+        }
+
+        var possibleImportTokens: [SyntaxToken] = []
+        let fileSyntaxMap = SyntaxMap(file: file)
+        for (index, token) in fileSyntaxMap.tokens.enumerated() {
+            guard token.type == SyntaxKind.keyword.rawValue &&
+                index < fileSyntaxMap.tokens.count else {
+                    continue
+            }
+            let keyword = utf8Substring(string: fileContents, start: token.offset, length: token.length)
+            guard keyword == "import" else {
+                continue
+            }
+
+            let nextToken = fileSyntaxMap.tokens[index+1]
+            possibleImportTokens.append(nextToken)
+        }
+
+        return possibleImportTokens
+            .filter { $0.type == SyntaxKind.identifier.rawValue }
+            .map { utf8Substring(string: fileContents, start: $0.offset, length: $0.length) }
+    }
+
+    fileprivate func hasMatchingAttribute(_ protocolBodyItem : [String: SourceKitRepresentable], attributeName: String) -> Bool {
         if let attributes = protocolBodyItem["key.attributes"] as? [SourceKitRepresentable] {
             for attribute : SourceKitRepresentable in attributes {
                 if let attrs = attribute as? [String: SourceKitRepresentable] {

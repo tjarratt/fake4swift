@@ -38,7 +38,8 @@ describe(@"XMASFakeProtocolPersister", ^{
                                                                     staticGetters:@[]
                                                                     staticSetters:@[]
                                                                  subscriptGetters:@[]
-                                                                 subscriptSetters:@[]];
+                                                                 subscriptSetters:@[]
+                                                                          imports:@[]];
 
     describe(@"when the fakes directory does not yet exist", ^{
         NSString *expectedFakesDir = [pathToFixture.stringByDeletingLastPathComponent stringByAppendingPathComponent:@"fakes"];
@@ -51,7 +52,7 @@ describe(@"XMASFakeProtocolPersister", ^{
             fileManager stub_method(@selector(createFileAtPath:contents:attributes:));
         });
 
-        context(@"when the fake can be created", ^{
+        context(@"and the fake can be created", ^{
             __block NSError *error;
             __block FakeProtocolPersistResults *result;
 

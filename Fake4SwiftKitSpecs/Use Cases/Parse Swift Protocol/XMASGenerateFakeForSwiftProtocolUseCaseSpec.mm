@@ -140,7 +140,8 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                                                                                            staticGetters:@[]
                                                                                            staticSetters:@[]
                                                                                         subscriptGetters:@[]
-                                                                                        subscriptSetters:@[]];
+                                                                                        subscriptSetters:@[]
+                                                                                                 imports:@[]];
 
                 parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                     .again()
@@ -179,7 +180,8 @@ describe(@"XMASGenerateFakeForSwiftProtocolUseCase", ^{
                                                                                            staticGetters:@[]
                                                                                            staticSetters:@[]
                                                                                         subscriptGetters:@[]
-                                                                                        subscriptSetters:@[]];
+                                                                                        subscriptSetters:@[]
+                                                                                                 imports:@[]];
 
                 parseProtocolWorkFlow stub_method(@selector(selectedProtocolInFile:error:))
                     .again()

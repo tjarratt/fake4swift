@@ -32,7 +32,7 @@ import Foundation
             let fileContents = try self.protocolFaker.fakeForProtocol(protocolDecl)
 
             let fileData : Data = fileContents.data(using: String.Encoding.utf8)!
-            fileManager.createFile(atPath: pathToFake, contents: fileData, attributes: nil)
+            _ = fileManager.createFile(atPath: pathToFake, contents: fileData, attributes: nil)
 
         } catch let error as NSError {
             throw error

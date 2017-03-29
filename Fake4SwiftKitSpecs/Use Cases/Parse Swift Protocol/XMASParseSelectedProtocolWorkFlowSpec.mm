@@ -41,6 +41,10 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
             protocolDeclaration.name should equal(@"MySpecialProtocol");
         });
 
+        it(@"should parse the imported modules in the file", ^{
+            protocolDeclaration.imports should equal(@[@"Foundation"]);
+        });
+
         it(@"should parse instance getters and setters", ^{
             [protocolDeclaration.getters.firstObject valueForKey:@"name"] should equal(@"numberOfWheels");
             [protocolDeclaration.getters.firstObject valueForKey:@"returnType"] should equal(@"Int");
@@ -298,7 +302,8 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
                                                                          staticGetters:@[]
                                                                          staticSetters:@[]
                                                                       subscriptGetters:@[]
-                                                                      subscriptSetters:@[]]);
+                                                                      subscriptSetters:@[]
+                                                                               imports:@[]]);
         });
     });
 

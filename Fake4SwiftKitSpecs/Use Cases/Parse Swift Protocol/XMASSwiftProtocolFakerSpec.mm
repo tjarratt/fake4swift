@@ -72,7 +72,8 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                               staticGetters:@[]
                                                               staticSetters:@[]
                                                            subscriptGetters:@[]
-                                                           subscriptSetters:@[]];
+                                                           subscriptSetters:@[]
+                                                                    imports:@[@"Fake4SwiftKit"]];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMySomewhatSpecialProtocol" ofType:@"swift"];
@@ -114,7 +115,8 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                               staticGetters:@[]
                                                               staticSetters:@[]
                                                            subscriptGetters:@[]
-                                                           subscriptSetters:@[]];
+                                                           subscriptSetters:@[]
+                                                                    imports:@[@"Fake4SwiftKit"]];
         });
 
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];
