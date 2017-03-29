@@ -20,26 +20,26 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{# getters }}
 *   {{# optional }}
-    fileprivate var _{{ name  }} : {{ type }}
+    fileprivate var _{{ name  }} : {{{ type }}}
 *   {{/ optional }}
 *   {{^ optional }}
-    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var _{{ name  }} : {{{ type }}}?
 *   {{/ optional }}
-    fileprivate var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var set_{{ name }}Args : Array<{{{ type }}}>
 *   {{/ getters }}
 
 *   {{# setters }}
 *   {{# optional }}
-    fileprivate var _{{ name  }} : {{ type }}
+    fileprivate var _{{ name  }} : {{{ type }}}
 *   {{/ optional }}
 *   {{^ optional }}
-    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var _{{ name  }} : {{{ type }}}?
 *   {{/ optional }}
-    fileprivate var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var set_{{ name }}Args : Array<{{{ type }}}>
 *   {{/ setters }}
 
 *   {{# getters }}
-    var {{ name }} : {{ type }} {
+    var {{ name }} : {{{ type }}} {
         get {
 *           {{# optional }}
             return _{{ name }}
@@ -57,7 +57,7 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{/ getters }}
 *   {{# setters }}
-    var {{ name }} : {{ type }} {
+    var {{ name }} : {{{ type }}} {
         get {
 *           {{# optional }}
             return _{{ name }}
@@ -79,7 +79,7 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{{ type }}} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -92,7 +92,7 @@ struct Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{{ type }}} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }

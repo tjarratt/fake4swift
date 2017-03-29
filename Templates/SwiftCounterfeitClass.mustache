@@ -18,26 +18,26 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{# getters }}
 *   {{# optional }}
-    fileprivate var _{{ name  }} : {{ type }}
+    fileprivate var _{{ name  }} : {{{ type }}}
 *   {{/ optional }}
 *   {{^ optional }}
-    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var _{{ name  }} : {{{ type }}}?
 *   {{/ optional }}
-    fileprivate var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var set_{{ name }}Args : Array<{{{ type }}}>
 *   {{/ getters }}
 
 *   {{# setters }}
 *   {{# optional }}
-    fileprivate var _{{ name  }} : {{ type }}
+    fileprivate var _{{ name  }} : {{{ type }}}
 *   {{/ optional }}
 *   {{^ optional }}
-    fileprivate var _{{ name  }} : {{ type }}?
+    fileprivate var _{{ name  }} : {{{ type }}}?
 *   {{/ optional }}
-    fileprivate var set_{{ name }}Args : Array<{{ type }}>
+    fileprivate var set_{{ name }}Args : Array<{{{ type }}}>
 *   {{/ setters }}
 
 *   {{# getters }}
-    var {{ name }} : {{ type }} {
+    var {{ name }} : {{{ type }}} {
         get {
 *           {{# optional }}
             return _{{ name }}
@@ -55,7 +55,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 
 *   {{/ getters }}
 *   {{# setters }}
-    var {{ name }} : {{ type }} {
+    var {{ name }} : {{{ type }}} {
         get {
 *           {{# optional }}
             return _{{ name }}
@@ -77,7 +77,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{{ type }}} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -90,7 +90,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return set_{{ name }}Args.count
     }
 
-    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{ type }} {
+    func set{{ capitalized_name }}Args(forCall index : Int) throws -> {{{ type }}} {
         if index < 0 || index >= set_{{ name }}Args.count {
             throw NSError.init(domain: "swift-generate-fake-domain", code: 1, userInfo: nil)
         }
@@ -108,7 +108,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
 *   {{/ has_arguments }}
 *   {{# has_return_values }}
     func {{ name }}Returns(stubbedValues: ({{{ comma_delimited_return_types }}})) {
-        self.{{ name }}Stub = {({{ named_arguments }}) -> ({{{ comma_delimited_return_types }}}) in
+        self.{{ name }}Stub = {({{{ named_arguments }}}) -> ({{{ comma_delimited_return_types }}}) in
             return stubbedValues
         }
     }
@@ -118,7 +118,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
+    func {{name}}({{{ named_arguments }}}){{throws}}{{{ optional_return_expression }}}{
 *       {{# has_return_values }}
         guard let stub = self.{{ name }}Stub else {
             fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")
@@ -154,7 +154,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    static func {{name}}({{ named_arguments }}){{throws}}{{{ optional_return_expression }}}{
+    static func {{name}}({{{ named_arguments }}}){{throws}}{{{ optional_return_expression }}}{
 *       {{# has_return_values }}
         guard let stub = self.{{ name }}Stub else {
             fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")
