@@ -113,6 +113,15 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
         });
     });
 
+    context(@"when a swift protocol with internal and external labels is selected", ^{
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolMethodEdgeCases"
+                                                                ofType:@"swift"];
+
+        fit(@"should have a load bearing test", ^{
+            expect(fixturePath) should_not be_nil;
+        });
+    });
+
     context(@"when a swift protocol containing unicode is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         NSString *unicodeFixturePath = [[NSBundle mainBundle] pathForResource:@"UnicodeEdgeCases"

@@ -1,4 +1,4 @@
 # general dependencies
-github "groue/GRMustache.swift"
-github "jpsim/SourceKitten"
+github "groue/GRMustache.swift" ~> 2.0.0
+github "jpsim/SourceKitten" ~> 0.17.1
 
