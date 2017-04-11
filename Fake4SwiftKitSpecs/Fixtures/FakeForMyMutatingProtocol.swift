@@ -21,7 +21,7 @@ struct FakeMyMutatingProtocol : MyMutatingProtocol, Equatable {
     func mutableMethodArgs(forCall callIndex: Int) -> (String, String) {
         return self.mutableMethodArgs[callIndex]
     }
-    mutating func mutableMethod(arg: String, arg2: String) -> (String) {
+    mutating func mutableMethod(thisArg arg: String, thatArg arg2: String) -> (String) {
         guard let stub = self.mutableMethodStub else {
             fatalError("Fatal Error: You forgot to stub mutableMethod. Crashing. 💥")
         }

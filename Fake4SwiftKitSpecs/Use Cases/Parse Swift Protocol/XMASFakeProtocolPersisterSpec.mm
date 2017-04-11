@@ -112,7 +112,8 @@ describe(@"XMASFakeProtocolPersister", ^{
 
             it(@"should return an error", ^{
                 NSError *error = nil;
-                [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:&error];
+                FakeProtocolPersistResults *results = [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:&error];
+                results should be_nil;
 
                 error should_not be_nil;
                 error.localizedFailureReason should equal(@"could not burgle the burglars");
@@ -135,7 +136,8 @@ describe(@"XMASFakeProtocolPersister", ^{
                 .and_return(YES);
             fileManager stub_method(@selector(createFileAtPath:contents:attributes:));
 
-            [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:nil];
+            FakeProtocolPersistResults *results = [subject persistFakeForProtocol:protocolDecl nearSourceFile:pathToFixture error:nil];
+            results should_not be_nil;
         });
 
         it(@"should not create a directory", ^{

@@ -34,8 +34,10 @@ describe(@"XMASSwiftProtocolFaker", ^{
                                                                     returnValueTypes:@[]];
             NSArray<MethodParameter *> *doesStuffArgs = @[
                                                           [[MethodParameter alloc] initWithName:@"stuff"
+                                                                                   externalName:@"thisStuff"
                                                                                            type:@"String"],
                                                           [[MethodParameter alloc] initWithName:@"otherStuff"
+                                                                                   externalName:@"thatStuff"
                                                                                            type:@"[String]"],
                                                           ];
             MethodDeclaration *doesStuff = [[MethodDeclaration alloc] initWithName:@"doesStuff"
@@ -92,8 +94,10 @@ describe(@"XMASSwiftProtocolFaker", ^{
         beforeEach(^{
             NSArray<MethodParameter *> *arguments = @[
                                                       [[MethodParameter alloc] initWithName:@"arg"
+                                                                               externalName:@"thisArg"
                                                                                        type:@"String"],
                                                       [[MethodParameter alloc] initWithName:@"arg2"
+                                                                               externalName:@"thatArg"
                                                                                        type:@"String"],
                                                       ];
             MethodDeclaration *mutatingMethod = [[MethodDeclaration alloc] initWithName:@"mutableMethod"
@@ -122,7 +126,9 @@ describe(@"XMASSwiftProtocolFaker", ^{
         NSString *expectedFakePath = [[NSBundle mainBundle] pathForResource:@"FakeForMyMutatingProtocol" ofType:@"swift"];
 
         it(@"creates a struct that implements the protocol", ^{
-            NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath encoding:NSUTF8StringEncoding error:nil];
+            NSString *expectedContents = [NSString stringWithContentsOfFile:expectedFakePath
+                                                                   encoding:NSUTF8StringEncoding
+                                                                      error:nil];
 
             NSError *error;
             NSString *testDouble = [subject fakeForProtocol:protocolDeclaration error:&error];

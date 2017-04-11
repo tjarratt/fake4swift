@@ -56,6 +56,16 @@ import Foundation
         return methodDecl.arguments.map { $0.name + ": " + $0.type }.joined(separator: ", ")
     }
 
+    fileprivate func namedArgumentsWithLabels(_ methodDecl: MethodDeclaration) -> String {
+        return methodDecl.arguments.map {
+            if $0.externalName != $0.name {
+                return $0.externalName + " " + $0.name + ": " + $0.type
+            } else {
+                return $0.name + ": " + $0.type
+            }
+        }.joined(separator: ", ")
+    }
+
     fileprivate func argumentNamesFor(_ methodDecl: MethodDeclaration) -> String {
         return methodDecl.arguments.map { $0.name }.joined(separator: ", ")
     }
@@ -89,6 +99,7 @@ import Foundation
             "name":                         method.name as AnyObject,
             "has_arguments":                method.hasArguments() as AnyObject,
             "named_arguments":              namedArgumentsFor(method) as AnyObject,
+            "named_arguments_with_labels":  namedArgumentsWithLabels(method) as AnyObject,
             "comma_delimited_arg_names":    argumentNamesFor(method) as AnyObject,
             "comma_delimited_arg_types":    argumentTypesFor(method) as AnyObject,
             "throws":                       (method.throwsError ? " throws " : " ") as AnyObject,

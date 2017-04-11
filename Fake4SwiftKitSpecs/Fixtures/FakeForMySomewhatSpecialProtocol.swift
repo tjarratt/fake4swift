@@ -101,7 +101,7 @@ class FakeMySomewhatSpecialProtocol : MySomewhatSpecialProtocol, Equatable {
     func doesStuffArgs(forCall callIndex: Int) -> (String, [String]) {
         return self.doesStuffArgs[callIndex]
     }
-    func doesStuff(stuff: String, otherStuff: [String]) -> ([String], Int) {
+    func doesStuff(thisStuff stuff: String, thatStuff otherStuff: [String]) -> ([String], Int) {
         guard let stub = self.doesStuffStub else {
             fatalError("Fatal Error: You forgot to stub doesStuff. Crashing. 💥")
         }

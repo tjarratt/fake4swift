@@ -118,7 +118,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    func {{name}}({{{ named_arguments }}}){{throws}}{{{ optional_return_expression }}}{
+    func {{name}}({{{ named_arguments_with_labels }}}){{throws}}{{{ optional_return_expression }}}{
 *       {{# has_return_values }}
         guard let stub = self.{{ name }}Stub else {
             fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")
@@ -154,7 +154,7 @@ class Fake{{protocol_name}} : {{protocol_name}}, Equatable {
         return self.{{ name }}Args[callIndex]
     }
 *   {{/ has_arguments }}
-    static func {{name}}({{{ named_arguments }}}){{throws}}{{{ optional_return_expression }}}{
+    static func {{name}}({{{ named_arguments_with_labels }}}){{throws}}{{{ optional_return_expression }}}{
 *       {{# has_return_values }}
         guard let stub = self.{{ name }}Stub else {
             fatalError("Fatal Error: You forgot to stub {{ name }}. Crashing. 💥")

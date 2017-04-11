@@ -1,12 +1,20 @@
 import Foundation
 
 @objc open class MethodParameter : NSObject {
-    open var name : MethodName
-    open var type : ReturnType
+    open let name : MethodName
+    open let externalName: MethodName
+    open let type : ReturnType
 
     init(name: MethodName, type: ReturnType) {
-        self.name = name
         self.type = type
+        self.name = name
+        self.externalName = name
+    }
+
+    init(name: MethodName, externalName: MethodName, type: ReturnType) {
+        self.type = type
+        self.name = name
+        self.externalName = externalName
     }
 }
 

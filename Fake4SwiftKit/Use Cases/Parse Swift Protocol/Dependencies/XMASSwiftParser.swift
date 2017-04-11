@@ -258,20 +258,24 @@ struct XMASSwiftParser {
     func argumentsFromMethodDict(_ dict : [String: SourceKitRepresentable]) -> Array<MethodParameter> {
         var parameters : Array<MethodParameter> = []
 
+        let fullMethodName = dict["key.name"] as! String
+        let externalNames = externalArgNames(from: fullMethodName)
+
         guard let substructure = dict["key.substructure"] as? [SourceKitRepresentable] else {
             return parameters
         }
 
-        for item in substructure {
+        for (index, item) in substructure.enumerated() {
             let innerDict : [String: SourceKitRepresentable] = item as! [String: SourceKitRepresentable]
             if innerDict["key.kind"] as! String != "source.lang.swift.decl.var.parameter" {
                 continue
             }
 
-            parameters.append(MethodParameter.init(
+            parameters.append(MethodParameter(
                 name: innerDict["key.name"] as! String,
+                externalName: externalNames[index],
                 type: innerDict["key.typename"] as! String
-                ))
+            ))
         }
 
         return parameters
@@ -351,7 +355,7 @@ struct XMASSwiftParser {
         let numberOfMatches = regex.numberOfMatches(
             in: funcDeclarationString,
             options: NSRegularExpression.MatchingOptions.anchored,
-            range: NSRange(location: 0, length: funcDeclarationString.characters.count)
+            range: NSRange(location: 0, length: funcDeclarationString.utf16.count)
         )
 
         return numberOfMatches > 0
@@ -370,7 +374,7 @@ struct XMASSwiftParser {
         var regex : NSRegularExpression
         try! regex = NSRegularExpression(pattern: "\\stypealias\\s", options: NSRegularExpression.Options.anchorsMatchLines)
 
-        let rangeOfString = NSRange(location: 0, length: protocolString.characters.count)
+        let rangeOfString = NSRange(location: 0, length: protocolString.utf16.count)
         let matches = regex.matches(in: protocolString, options: [], range: rangeOfString)
         return matches.count > 0
     }
@@ -392,7 +396,7 @@ struct XMASSwiftParser {
         return inheritedProtocols
     }
 
-    private func utf8Substring(string: NSString, start: Int, length: Int) -> String {
+    fileprivate func utf8Substring(string: NSString, start: Int, length: Int) -> String {
         let utf8String = String(string).utf8
 
         let startIndex = utf8String.index(utf8String.startIndex, offsetBy: start)
@@ -400,5 +404,30 @@ struct XMASSwiftParser {
 
         let range = startIndex..<endIndex
         return String(describing: utf8String[range])
+    }
+
+
+    fileprivate func externalArgNames(from string: String) -> [String] {
+        var captureGroups = [String]()
+        let pattern = ".*\\((.*)\\)"
+
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+
+        let matches = regex.matches(in: string, options: [], range: NSRange(location:0, length: string.utf16.count))
+
+        guard let match = matches.first else { fatalError("Aww shucks, couldn't find argument labels to match in \(string)") }
+
+        let lastRangeIndex = match.numberOfRanges - 1
+        guard lastRangeIndex >= 1 else { fatalError("Aww shucks, couldn't find argument labels in \(string)") }
+
+        for i in 1...lastRangeIndex {
+            let capturedGroupIndex = match.rangeAt(i)
+            let matchedString = (string as NSString).substring(with: capturedGroupIndex)
+            captureGroups.append(matchedString)
+        }
+
+        guard captureGroups.count == 1 else { fatalError("Aww shucks, unexpected error parsing argument names from \(string)") }
+
+        return captureGroups.first!.components(separatedBy: ":")
     }
 }

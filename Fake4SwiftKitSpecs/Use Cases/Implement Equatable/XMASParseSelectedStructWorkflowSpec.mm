@@ -62,7 +62,9 @@ describe(@"XMASParseSelectedStructWorkflow", ^{
                 .and_return(NO);
 
             NSError *error = nil;
-            [subject selectedStructInFile:fixturePath error:&error];
+            StructDeclaration *decl = [subject selectedStructInFile:fixturePath error:&error];
+            decl should be_nil;
+
             error should_not be_nil;
             error.localizedFailureReason should equal(@"No struct was selected");
         });

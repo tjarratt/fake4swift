@@ -1,3 +1,3 @@
 protocol MyMutatingProtocol {
-    mutating func mutableMethod(arg: String, arg2: String) -> String
+    mutating func mutableMethod(thisArg: arg: String, thatArg: arg2: String) -> String
 }

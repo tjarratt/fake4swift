@@ -113,6 +113,40 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
         });
     });
 
+    context(@"when a swift protocol with internal and external labels is selected", ^{
+        __block ProtocolDeclaration *protocolDeclaration;
+        NSString *fixturePath = [[NSBundle mainBundle] pathForResource:@"ProtocolMethodEdgeCases"
+                                                                ofType:@"swift"];
+
+        beforeEach(^{
+            fakeSelectedProtocolOracle stub_method(@selector(isProtocolSelected:))
+                .and_return(YES);
+
+            NSError *error = nil;
+            protocolDeclaration = [subject selectedProtocolInFile:fixturePath error:&error];
+            error should be_nil;
+        });
+
+        it(@"should parse the name of the selected protocol", ^{
+            protocolDeclaration.name should equal(@"MyFancyProtocol");
+        });
+
+        it(@"should parse the internal and external labels of its instance methods", ^{
+            NSArray<NSString *> *expectedMethodNames = @[@"canYou"];
+            [protocolDeclaration.instanceMethods valueForKey:@"name"] should equal(expectedMethodNames);
+
+            NSArray<NSString *> *expectedExternalName = @[@[@"doThis", @"forSure"]];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"externalName"] should equal(expectedExternalName);
+
+            NSArray<NSString *> *expectedInternalName = @[@[@"likeIDo", @"bienSur"]];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"name"] should equal(expectedInternalName);
+
+            NSArray<NSString *> *expectedArgumentTypes = @[@[@"Question", @"Answer"]];
+            [[protocolDeclaration.instanceMethods valueForKey:@"arguments"] valueForKey:@"type"] should equal(expectedArgumentTypes);
+        });
+
+    });
+
     context(@"when a swift protocol containing unicode is selected", ^{
         __block ProtocolDeclaration *protocolDeclaration;
         NSString *unicodeFixturePath = [[NSBundle mainBundle] pathForResource:@"UnicodeEdgeCases"
@@ -313,7 +347,9 @@ describe(@"XMASParseSelectedProtocolWorkFlow", ^{
                 .and_return(NO);
 
             NSError *error = nil;
-            [subject selectedProtocolInFile:fixturePath error:&error];
+            ProtocolDeclaration *decl = [subject selectedProtocolInFile:fixturePath error:&error];
+            decl should be_nil;
+
             error should_not be_nil;
             error.localizedFailureReason should equal(@"No protocol was selected");
         });

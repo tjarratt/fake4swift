@@ -19,6 +19,7 @@
 		F70354171C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = F70354151C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F70354181C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F70354161C37BD3F00936B55 /* XMASGenerateFakeForSwiftProtocolUseCase.m */; };
 		F703541A1C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F70354191C37BD4C00936B55 /* XMASGenerateFakeForSwiftProtocolUseCaseSpec.mm */; };
+		F72379591E9D8AE0002559EE /* ProtocolMethodEdgeCases.swift in Copy Fixtures */ = {isa = PBXBuildFile; fileRef = F723793D1E9D8AA7002559EE /* ProtocolMethodEdgeCases.swift */; };
 		F72C17B01C33C366002B7FD9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = F72C17AF1C33C366002B7FD9 /* main.mm */; };
 		F72C17EE1C33C3C2002B7FD9 /* Blindside.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7E0092D1B7FDA8A00B9E6E6 /* Blindside.framework */; };
 		F72C17EF1C33C3CA002B7FD9 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BA625A1B2233D0005B99AF /* Cedar.framework */; };
@@ -386,6 +387,7 @@
 				F7ED4E781E2EFCB600F482FF /* MySpecialStructEquatableExtension.swift in Copy Fixtures */,
 				F7ED4E701E2EFA9F00F482FF /* MySpecialStruct.swift in Copy Fixtures */,
 				F7ED4E741E2EFBAF00F482FF /* ProtocolEdgeCases.swift in Copy Fixtures */,
+				F72379591E9D8AE0002559EE /* ProtocolMethodEdgeCases.swift in Copy Fixtures */,
 				F7ED4E751E2EFBAF00F482FF /* MySpecialStruct+Equatable.swift in Copy Fixtures */,
 			);
 			name = "Copy Fixtures";
@@ -432,6 +434,7 @@
 		F71748FC1C390F4900A1D7EA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F71749121C3A47CE00A1D7EA /* TerminalAlerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalAlerter.swift; sourceTree = "<group>"; };
 		F71749141C3A47FA00A1D7EA /* ArgsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgsParser.swift; sourceTree = "<group>"; };
+		F723793D1E9D8AA7002559EE /* ProtocolMethodEdgeCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolMethodEdgeCases.swift; sourceTree = "<group>"; };
 		F72C17A91C33C366002B7FD9 /* Fake4SwiftKitSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fake4SwiftKitSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72C17AF1C33C366002B7FD9 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		F72C17B61C33C366002B7FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -837,6 +840,7 @@
 				F7ED4E6B1E2EF9F800F482FF /* MySpecialStruct+Equatable.swift */,
 				F7ED4E761E2EFC9A00F482FF /* MySpecialStructEquatableExtension.swift */,
 				F7ED4E721E2EFB8100F482FF /* ProtocolEdgeCases.swift */,
+				F723793D1E9D8AA7002559EE /* ProtocolMethodEdgeCases.swift */,
 				AE9850351E709AFD00C0B67D /* UnicodeEdgeCases.swift */,
 			);
 			path = Fixtures;
